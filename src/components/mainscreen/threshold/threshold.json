@@ -1,0 +1,365 @@
+{
+  "success": true,
+  "rows": [
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Difference vs Vendor",
+      "editCategoryId": 1400,
+      "fromCurrencyId": null,
+      "threshold": 0.803,
+      "thresholdId": 1
+    },
+    {
+      "boundAmount": 9.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Difference vs Vendor",
+      "editCategoryId": 1400,
+      "fromCurrencyId": null,
+      "threshold": 0.717,
+      "thresholdId": 2
+    },
+    {
+      "boundAmount": 18.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Difference vs Vendor",
+      "editCategoryId": 1400,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 3
+    },
+    {
+      "boundAmount": 30.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Difference vs Vendor",
+      "editCategoryId": 1400,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 4
+    },
+    {
+      "boundAmount": 58.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Difference vs Vendor",
+      "editCategoryId": 1400,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 5
+    },
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Difference vs Vendor",
+      "editCategoryId": 1401,
+      "fromCurrencyId": null,
+      "threshold": 0.8,
+      "thresholdId": 9
+    },
+    {
+      "boundAmount": 11.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Difference vs Vendor",
+      "editCategoryId": 1401,
+      "fromCurrencyId": null,
+      "threshold": 0.716,
+      "thresholdId": 10
+    },
+    {
+      "boundAmount": 31.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Difference vs Vendor",
+      "editCategoryId": 1401,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 12
+    },
+    {
+      "boundAmount": 65.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Difference vs Vendor",
+      "editCategoryId": 1401,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 13
+    },
+    {
+      "boundAmount": 121.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Difference vs Vendor",
+      "editCategoryId": 1401,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 11
+    },
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 22.0,
+      "thresholdId": 15
+    },
+    {
+      "boundAmount": 7.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 11.34,
+      "thresholdId": 16
+    },
+    {
+      "boundAmount": 14.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 10.44,
+      "thresholdId": 17
+    },
+    {
+      "boundAmount": 21.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 8.19,
+      "thresholdId": 18
+    },
+    {
+      "boundAmount": 29.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 8.21,
+      "thresholdId": 19
+    },
+    {
+      "boundAmount": 44.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 7.53,
+      "thresholdId": 20
+    },
+    {
+      "boundAmount": 69.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Final - Large Variance vs Previous",
+      "editCategoryId": 1402,
+      "fromCurrencyId": null,
+      "threshold": 7.42,
+      "thresholdId": 21
+    },
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 22.05,
+      "thresholdId": 23
+    },
+    {
+      "boundAmount": 7.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 11.34,
+      "thresholdId": 24
+    },
+    {
+      "boundAmount": 14.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 10.44,
+      "thresholdId": 25
+    },
+    {
+      "boundAmount": 21.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 8.19,
+      "thresholdId": 26
+    },
+    {
+      "boundAmount": 29.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 8.21,
+      "thresholdId": 27
+    },
+    {
+      "boundAmount": 44.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 7.53,
+      "thresholdId": 28
+    },
+    {
+      "boundAmount": 68.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Intraday - Large Variance vs Previous",
+      "editCategoryId": 1403,
+      "fromCurrencyId": null,
+      "threshold": 7.41,
+      "thresholdId": 29
+    },
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 22.06,
+      "thresholdId": 31
+    },
+    {
+      "boundAmount": 7.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 11.34,
+      "thresholdId": 32
+    },
+    {
+      "boundAmount": 14.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 10.44,
+      "thresholdId": 33
+    },
+    {
+      "boundAmount": 21.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 8.19,
+      "thresholdId": 34
+    },
+    {
+      "boundAmount": 29.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 8.21,
+      "thresholdId": 35
+    },
+    {
+      "boundAmount": 44.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 7.53,
+      "thresholdId": 36
+    },
+    {
+      "boundAmount": 68.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Variance vs Previous",
+      "editCategoryId": 1404,
+      "fromCurrencyId": null,
+      "threshold": 7.41,
+      "thresholdId": 37
+    },
+    {
+      "boundAmount": 0.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Difference vs Vendor",
+      "editCategoryId": 1405,
+      "fromCurrencyId": null,
+      "threshold": 0.81,
+      "thresholdId": 39
+    },
+    {
+      "boundAmount": 8.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Difference vs Vendor",
+      "editCategoryId": 1405,
+      "fromCurrencyId": null,
+      "threshold": 0.716,
+      "thresholdId": 40
+    },
+    {
+      "boundAmount": 18.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Difference vs Vendor",
+      "editCategoryId": 1405,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 41
+    },
+    {
+      "boundAmount": 30.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Difference vs Vendor",
+      "editCategoryId": 1405,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 42
+    },
+    {
+      "boundAmount": 58.0,
+      "currency": null,
+      "debtTypeCode": null,
+      "editCategoryDesc": "Stockloan - Large Difference vs Vendor",
+      "editCategoryId": 1405,
+      "fromCurrencyId": null,
+      "threshold": 0.4195,
+      "thresholdId": 43
+    }
+  ]
+}

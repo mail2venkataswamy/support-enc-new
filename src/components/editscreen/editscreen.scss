@@ -1,0 +1,18 @@
+.editDashboard {
+  border: solid 0.1px grey;
+}
+.mainscreenTitleAndToggle .toggle {
+  display: flex;
+  color: white;
+  justify-content: flex-end;
+  flex: 1;
+  position: relative;
+  left: -8px;
+  top: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 2%;
+}
+.mainscreenHeaderTitle {
+  width: 98%;
+}

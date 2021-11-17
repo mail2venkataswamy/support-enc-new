@@ -1,0 +1,24 @@
+.warningWrapper {
+  text-align: center;
+}
+.warningWrapper .okButton {
+  position: relative;
+  top: 11px;
+}
+.warningWrapper .header {
+  border: solid 0.1px grey;
+  background-color: #3385d6;
+  display: flex;
+  color: white;
+}
+.warningWrapper .header .closeIcon {
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+}
+.contentAndStopIconWrapper {
+  display: flex;
+}
+.stopIcon img {
+  width: 25px;
+}

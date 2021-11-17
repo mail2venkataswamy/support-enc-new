@@ -1,0 +1,48 @@
+.priceOverrideModalContentWrapper {
+  width: 500px;
+  text-align: center;
+}
+.priceOverrideModalContentWrapper .headerWrapper {
+  display: flex;
+  border: solid 0.1px grey;
+  background-color: #3385d6;
+  color: white;
+}
+.priceOverrideModalContentWrapper .helpAndCloseIcon {
+  display: flex;
+  flex: 1 1;
+  justify-content: flex-end;
+}
+.priceRollOverContentWrapper {
+  text-align: center;
+  margin: 1em auto;
+}
+.overrideLabelValueWrapper,
+.overrideLabelDatePickerWrapper,
+.priceTypeLabelTypeWrapper {
+  display: flex;
+  width: 100%;
+}
+.overrideValueLabel,
+.overrideDatePickerLabel,
+.priceTypeLabel {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+.overrideValueWrapper,
+.datePickerWrapper,
+.priceTypeValueWrapper {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+.priceRollOverContentWrapper .react-datepicker-wrapper {
+  width: 0%;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+  overflow: visible !important;
+}

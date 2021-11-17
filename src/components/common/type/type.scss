@@ -1,0 +1,27 @@
+.typeWrapper {
+  display: flex;
+}
+.typeWrapper .All,
+.typeWrapper .commonStock,
+.typeWrapper .prefferedStock,
+.typeWrapper .index,
+.typeWrapper .corporateDebt,
+.typeWrapper .fms {
+  padding-right: 23px;
+  min-width: 0;
+}
+
+.rTable {
+  display: table;
+  border-collapse: collapse;
+  /*   width: 100%; */
+}
+.rTableRow {
+  display: table-row;
+  display: table-row-group;
+}
+
+.rTableCell {
+  display: table-cell;
+  text-align: left;
+}

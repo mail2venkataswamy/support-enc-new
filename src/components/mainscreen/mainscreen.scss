@@ -1,0 +1,29 @@
+.maintenance {
+  border: solid 0.1px grey;
+}
+
+.mainscreenTitleAndToggle {
+  display: flex;
+  background-color: #094d91;
+}
+.mainscreenTitleAndToggle .mainscreenHeaderTitle {
+  height: 15px;
+  font-size: 10px;
+  color: white;
+  font-weight: 500;
+}
+.saveCancelPublishDateWrapper {
+  height: 30px;
+}
+.cancelAndSaveButtonWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 13px;
+  right: 10px;
+}
+.publishDateWrapper {
+  position: relative;
+  top: 5px;
+}
