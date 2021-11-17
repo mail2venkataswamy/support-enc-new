@@ -1,0 +1,41 @@
+.maintenanceHeaders .wrapper {
+  display: flex;
+  background-color: #9ecaf7;
+}
+
+.showColumnsPrintRefreshExportWrapper {
+  justify-content: flex-end;
+  flex: 1;
+  display: flex;
+}
+
+#threshold,
+#supendRestart,
+#Publish,
+#PriceRollOverride,
+#review,
+#showAllColumns,
+#refresh,
+#print,
+#export {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+.dataHeadersButtonWrapper {
+  display: flex;
+}
+
+#threshold:hover,
+#supendRestart:hover,
+#Publish:hover,
+#PriceRollOverride:hover,
+#review:hover,
+#showAllColumns:hover,
+#refresh:hover,
+#print:hover,
+#export:hover {
+  background: white;
+  border: solid 0.1px grey;
+  border-radius: 3px;
+}

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import "./warning-modal.scss";
-import stopIcon from "../../../../resources/images/error-image-icon-23.jpg";
+//import stopIcon from "../../../../resources/images/error-image-icon-23.jpg";
 export const Warning = (props) => {
   return (
     <div className="warningWrapper">
@@ -12,9 +12,7 @@ export const Warning = (props) => {
       </div>
       <p></p>
       <div className="contentAndStopIconWrapper">
-        <div className="stopIcon">
-          <img src={stopIcon}></img>
-        </div>
+        <div className="stopIcon"></div>
         <div className="warningMessage">{props.data.warningMessage}</div>
       </div>
 

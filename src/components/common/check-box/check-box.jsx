@@ -18,22 +18,26 @@ const CheckBox = (props) => {
         ""
       )}
       <ul>
-        {props.checkboxData.map((type, index) => {
-          return (
-            <li>
-              <label>
-                <input
-                  key={index}
-                  onClick={props.onCheckbox}
-                  type="checkbox"
-                  checked={type.isChecked}
-                  value={type.value}
-                />
-                {type.label}
-              </label>
-            </li>
-          );
-        })}
+        <div className="listItemWrapper">
+          {props.checkboxData.map((type, index) => {
+            return (
+              <div className={type.list}>
+                <li>
+                  <label>
+                    <input
+                      key={index}
+                      onClick={props.onCheckbox}
+                      type="checkbox"
+                      checked={type.isChecked}
+                      value={type.value}
+                    />
+                    {type.label}
+                  </label>
+                </li>
+              </div>
+            );
+          })}{" "}
+        </div>
       </ul>
     </>
   );

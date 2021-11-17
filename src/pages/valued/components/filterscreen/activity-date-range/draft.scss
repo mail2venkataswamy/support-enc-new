@@ -1,0 +1,21 @@
+.activitydateRangeWrapper .select-container {
+  display: inline-block;
+  position: relative;
+}
+.labelAndHistCurrWrapper {
+  display: inline-block;
+}
+.labelAndHistCurrWrapper .wrapper {
+  display: flex;
+}
+.activitydateRangeWrapper {
+  text-align: center;
+}
+.label {
+  width: 30%;
+}
+.labelAndHistCurrWrapper,
+.dateRangeWrapper {
+  width: 70%;
+  display: inline-block;
+}

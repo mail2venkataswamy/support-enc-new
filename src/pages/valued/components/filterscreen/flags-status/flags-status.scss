@@ -1,0 +1,15 @@
+.labelAndFlaggedWrapper,
+.labelAndReviewNeededWrapper,
+.editedRecordsWrapper {
+  display: flex;
+}
+.flaggedEditLabel,
+.reviewNeededLabel,
+.editedRecordsWrapper label {
+  width: 30%;
+}
+
+.flaggedEditwrapper,
+.reviewNeededWrapper {
+  width: 70%;
+}

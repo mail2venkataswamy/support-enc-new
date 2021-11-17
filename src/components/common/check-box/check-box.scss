@@ -3,3 +3,18 @@ ul {
   position: relative;
   right: 70px;
 }
+.listItemWrapper {
+  display: block;
+  flex-direction: row;
+}
+
+.list2 {
+  display: flex;
+  position: relative;
+  /* flex: 1 1; */
+  /* justify-content: flex-end; */
+
+  left: 150px;
+  /* float: right; */
+  bottom: 60px;
+}

@@ -1,0 +1,15 @@
+.navBarWrapper ul {
+  text-align: center;
+  display: block;
+}
+.navBarWrapper {
+  height: 5px;
+  position: relative;
+  top: -16px;
+}
+
+ul.wrapper {
+  display: flex;
+  position: relative;
+  right: 10px;
+}

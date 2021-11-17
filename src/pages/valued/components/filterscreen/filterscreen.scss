@@ -1,0 +1,22 @@
+.filterPanel {
+  border: solid 0.1px grey;
+  width: 28%;
+}
+.filterTitleAndToggle {
+  display: flex;
+  background-color: #094d91;
+}
+.filterTitleAndToggle .filterHeaderTitle {
+  height: 15px;
+  border: solid 0.1px grey;
+  font-size: 10px;
+  color: white;
+
+  font-weight: 500;
+}
+.filterToggle {
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
+}
