@@ -35,6 +35,8 @@ const SuspendRestartRepoGrid = (props) => {
       gridWidth={800}
       suppressRowClickSelection={true}
       rowSelection="multiple"
+      pagination={true}
+      paginationPageSize={10}
     />
   );
 };

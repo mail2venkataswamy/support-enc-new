@@ -23,3 +23,8 @@
 .modalContentWrapper .listItemWrapper div {
   margin-right: 10px;
 }
+
+.modalContentWrapper .ag-paging-panel {
+  height: 40px !important;
+  justify-content: flex-start !important;
+}

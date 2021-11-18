@@ -35,35 +35,36 @@ const Productinfo = (props) => {
               keySearch={props.data.filterPanelData.cuspinSearchValue}
             ></InputSuggestions>
           </div>
-          <p></p>
-          <div className="isinLabelAndInputWrapper">
-            <div className="isinLabel">ISIN:</div>
-            <div className="isinInputWrapper">
-              <InputSuggestions
-                results={props.data.filterPanelData.isinSuggestionResult}
-                onChange={props.onChangeIsinValue}
-                //cuspinSearchValue={props.data.filterPanelData.cuspinSearchValue}
-                onClick={props.onClickIsinSuggestionItem}
-                value={props.data.filterPanelData.isinValue}
-                keySearch={props.data.filterPanelData.isinSearchValue}
-              ></InputSuggestions>
-            </div>
-          </div>
-          <p></p>
-          <div className="occSymbolLabelAndInputWrapper">
-            <div className="occSymbolLabel">OCC Symbol:</div>
-            <div className="occSymbolInputWrapper">
-              <InputSuggestions
-                results={props.data.filterPanelData.occSymbolSuggestionResult}
-                onChange={props.onChangeOccSymbolValue}
-                onClick={props.onClickOccSymbolSuggestionItem}
-                value={props.data.filterPanelData.occSymbolValue}
-                keySearch={props.data.filterPanelData.occSymbolSearchValue}
-              ></InputSuggestions>
-            </div>
-          </div>
-          <p></p>
         </div>
+        <p></p>
+        <div className="isinLabelAndInputWrapper">
+          <div className="isinLabel">ISIN:</div>
+          <div className="isinInputWrapper">
+            <InputSuggestions
+              results={props.data.filterPanelData.isinSuggestionResult}
+              onChange={props.onChangeIsinValue}
+              //cuspinSearchValue={props.data.filterPanelData.cuspinSearchValue}
+              onClick={props.onClickIsinSuggestionItem}
+              value={props.data.filterPanelData.isinValue}
+              keySearch={props.data.filterPanelData.isinSearchValue}
+            ></InputSuggestions>
+          </div>
+        </div>
+        <p></p>
+        <div className="occSymbolLabelAndInputWrapper">
+          <div className="occSymbolLabel">OCC Symbol:</div>
+          <div className="occSymbolInputWrapper">
+            <InputSuggestions
+              results={props.data.filterPanelData.occSymbolSuggestionResult}
+              onChange={props.onChangeOccSymbolValue}
+              onClick={props.onClickOccSymbolSuggestionItem}
+              value={props.data.filterPanelData.occSymbolValue}
+              keySearch={props.data.filterPanelData.occSymbolSearchValue}
+            ></InputSuggestions>
+          </div>
+        </div>
+        <p></p>
+
         <div className="tierLabelAndValue">
           <div className="label">Tier:</div>
           <Checkbox

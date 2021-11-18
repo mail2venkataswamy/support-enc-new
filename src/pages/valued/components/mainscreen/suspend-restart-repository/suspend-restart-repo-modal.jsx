@@ -5,6 +5,7 @@ import Tier from "../../../../../components/common/tier-level/tier-level.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import SuspendRestartRepoGrid from "./suspend-restart-grid/suspend-restart-grid.jsx";
 import Checkbox from "../../../../../components/common/check-box/check-box.jsx";
+import InputSuggestions from "../../../../../components/common/suggestions/suggestions.jsx";
 
 let vendorOptions = [
   { label: "CURRENT", value: "Current" },
@@ -34,7 +35,19 @@ const SusupendRestartModalContent = (props) => {
         </fieldset>
         <fieldset style={{ width: "33%" }}>
           <legend>Product Symbol</legend>
-          <Dropdown options={vendorOptions}></Dropdown>
+          <div className="cuspinLabelAndInputWrapper">
+            <div className="cuspinLabel">Cusip:</div>
+            <div className="cuspinInputWrapper">
+              {/*  <InputWrapper onChange={props.onChangeCuspinValue}></InputWrapper> */}
+              <InputSuggestions
+              //onChange={props.onChangeCuspinValue}
+              //results={props.data.filterPanelData.cuspinSuggestionResult}
+              //onClick={props.onClickSuggestionItem}
+              //value={props.data.filterPanelData.cuspinValue}
+              //keySearch={props.data.filterPanelData.cuspinSearchValue}
+              ></InputSuggestions>
+            </div>
+          </div>
         </fieldset>
       </div>
 
@@ -97,7 +110,6 @@ const customStyles = {
 const SusupendRestartModal = (props) => {
   return (
     <Modal isOpen={props.isModalOpen} style={customStyles}>
-      {/*       <ModalContent data={props} closeModal={props.closeModal} /> */}
       <SuspendRestartRepo
         closeModal={props.closeModal}
         data={props.data}

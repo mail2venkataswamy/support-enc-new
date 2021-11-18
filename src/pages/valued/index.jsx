@@ -372,7 +372,6 @@ class Valued extends Component {
     }
   };
   onChangeCurrHistValue = (e) => {
-    alert(JSON.stringify(e));
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedCurrHistValue = e.value;
     if (e.value === "CURRENT") {
