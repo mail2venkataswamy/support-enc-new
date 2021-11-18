@@ -38,14 +38,13 @@ const SusupendRestartModalContent = (props) => {
           <div className="cuspinLabelAndInputWrapper">
             <div className="cuspinLabel">Cusip:</div>
             <div className="cuspinInputWrapper">
-              {/*  <InputWrapper onChange={props.onChangeCuspinValue}></InputWrapper> */}
-              <InputSuggestions
-              //onChange={props.onChangeCuspinValue}
-              //results={props.data.filterPanelData.cuspinSuggestionResult}
-              //onClick={props.onClickSuggestionItem}
-              //value={props.data.filterPanelData.cuspinValue}
-              //keySearch={props.data.filterPanelData.cuspinSearchValue}
-              ></InputSuggestions>
+              {/*               <InputSuggestions
+              onChange={props.onChangeCuspinValue}
+              results={props.data.filterPanelData.cuspinSuggestionResult}
+              onClick={props.onClickSuggestionItem}
+              value={props.data.filterPanelData.cuspinValue}
+              keySearch={props.data.filterPanelData.cuspinSearchValue}
+  ></InputSuggestions> */}
             </div>
           </div>
         </fieldset>
