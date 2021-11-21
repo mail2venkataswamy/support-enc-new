@@ -16,7 +16,7 @@ const mainScreen = (props) => {
           props.closePriceRollOverrideWarningModal
         }
         onSelectReview={props.onSelectReview}
-        closeGridMustSelectedModal={props.closeGridMustSelectedModal}
+        toggleGridMustBePopulateddModal={props.toggleGridMustBePopulateddModal}
         closeThresholdModal={props.closeThresholdModal}
         onClickThresholdButton={props.onClickThresholdButton}
         onClickThresholdButton={props.onClickThresholdButton}
@@ -47,6 +47,16 @@ const mainScreen = (props) => {
           props.onSelectSuspendRestartTireCheckbox
         }
         onAllSuspendRestartTireChecked={props.onAllSuspendRestartTireChecked}
+        onBtnExport={props.onBtnExport}
+        onBtPrint={props.onBtPrint}
+        toggleRecordMustSelectedPopupWarningModal={
+          props.toggleRecordMustSelectedPopupWarningModal
+        }
+        onSelectionChanged={props.onSelectionChanged}
+        togglePriceOverrideConfirmModalOpen={
+          props.togglePriceOverrideConfirmModalOpen
+        }
+        onFirstDataRendered={props.onFirstDataRendered}
       ></MaintenanceHeaders>
       {/*      <Mainscreengrid /> */}
       <div className="saveCancelPublishDateWrapper">

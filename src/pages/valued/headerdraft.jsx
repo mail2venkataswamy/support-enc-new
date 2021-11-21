@@ -1,27 +1,20 @@
-import React, { useContext, useState } from "react";
-import ButtonWrapper from "../../../../../components/common/button/button.jsx";
-import WarningModal from "../../../../../components/common/modal/warning/warning-modal.jsx";
-//import { Menu, Dropdown, Button, message, Space, Tooltip } from "antd";
-import Select from "../../../../../components/common/select/select.jsx";
+import React from "react";
 import "./maintenance-headers.scss";
-import Modalpopup from "../../../../../components/common/modal/modal.jsx";
+import ButtonWrapper from "../../../../../Compositions/GlobalConfigurations/Commons/Button/ButtonWrapper.jsx";
+import { WarningModal } from "../../../../../Compositions/GlobalConfigurations/Commons/modal/warning-modal.jsx";
 import { ThresholdModal } from "../threshold/threshold.jsx";
-import { SusupendRestartModal } from "../suspend-restart-repository/suspend-restart-repo-modal.jsx";
+import { SusupendRestartModal } from "../suspend-restart-repository/suspend-restart-repository.jsx";
 import { PublishSecuritiesModal } from "../publish-valued-securities/publish-valued-securities.jsx";
-import Maintenancegrid from "../maintenance-grid/maintenance-grid.jsx";
-import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import PropTypes from "prop-types";
+import Dropdown from "../../../../../Compositions/GlobalConfigurations/Commons/simple-dropdown/dropdown.jsx";
+import Aggrid from "../../../../../Compositions/GlobalConfigurations/Commons/ag-grid/ag-grid.jsx";
 import { PriceRollOverrideModal } from "../price-roll-override/price-roll-override.jsx";
-import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
-import PriceOverridePrompt from "../../../../../components/common/modal/prompt/prompt.jsx";
-const staticCellStyle = { color: "red", "background-color": "yellow" };
-
-const dynamicCellStyle = (params) => {
-  if (params.value === "Police") {
-    //mark police cells as red
-    return { color: "red", backgroundColor: "yellow" };
-  }
-  return null;
+import Modalpopup from "../../../../../Compositions/GlobalConfigurations/Commons/modal/modal.jsx";
+const staticCellStyle = {
+  color: "red",
+  "background-color": "rgb(67, 155, 193)",
 };
+
 function setPrinterFriendly(api) {
   const eGridDiv = document.querySelector("#myGrid");
   eGridDiv.style.height = "";
@@ -220,11 +213,7 @@ class Maintenanceheaders extends React.Component {
           field: "intraDayPriceOverrideId",
           width: 100,
         },
-        {
-          headerName: "Fnl Review Neededtype",
-          filed: "fnlReviewNeededType",
-          width: 80,
-        },
+        { headerName: "Fnl Review Neededtype", width: 80 },
         { headerName: "", field: "fnlReviewNeeded", width: 100 },
         {
           headerName: "S.L Review Needed",
@@ -241,10 +230,37 @@ class Maintenanceheaders extends React.Component {
         // checkboxSelection: isFirstColumn,
         rowSelection: "multiple",
       },
-      selectedGridData: [],
     };
   }
+  //------GR Grid functionalities------
+  onGridReady = (params) => {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  };
 
+  onFirstDataRendered = (params) => {
+    params.api.expandAll();
+  };
+
+  onBtnExport = () => {
+    this.gridApi.exportDataAsCsv();
+  };
+  onBtPrint = () => {
+    const api = this.gridApi;
+    setPrinterFriendly(api);
+    setTimeout(function () {
+      this.print();
+      setNormal(api);
+    }, 2000);
+  };
+  showLessOrColumns = () => {
+    let showAllColumns = this.state.showAllColumns;
+    this.setState({
+      showAllColumns: !showAllColumns,
+    });
+  };
+
+  //-----------------------------------
   render() {
     return (
       <div className="maintenanceHeaders">
@@ -258,7 +274,7 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
                   ? this.props.onClickThresholdButton
-                  : this.props.toggleGridMustBePopulateddModal
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
             <ButtonWrapper
@@ -269,7 +285,7 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
                   ? this.props.onClickSuspendRestartRepoButton
-                  : this.props.toggleGridMustBePopulateddModal
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
             <ButtonWrapper
@@ -280,7 +296,7 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
                   ? this.props.onClickPublishValuedSecuritiesButton
-                  : this.props.toggleGridMustBePopulateddModal
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
             <ButtonWrapper
@@ -290,17 +306,21 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData &&
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
-                  ? this.props.data.maintenanceScreenData.selectedGridRows
-                      .length < 1
-                    ? this.props.toggleRecordMustSelectedPopupWarningModal
-                    : () =>
-                        this.props.onClickPriceRollOverrideButton(
-                          this.props.data.maintenanceScreenData.selectedGridRows
-                        )
-                  : this.props.toggleGridMustBePopulateddModal
+                  ? this.props.onClickPriceRollOverrideButton
+                  : this.props.closePriceRollOverrideWarningModal
               }
             ></ButtonWrapper>
-
+            {/*             <Select
+              id="review"
+              data={this.props.data.maintenanceScreenData}
+              onChange={
+                this.props.data.maintenanceScreenData.maintenanceRowData &&
+                this.props.data.maintenanceScreenData.maintenanceRowData
+                  .length > 0
+                  ? ""
+                  : this.props.onSelectReview
+              }
+            ></Select> */}
             <div id="review">
               <Dropdown
                 id="review"
@@ -310,7 +330,7 @@ class Maintenanceheaders extends React.Component {
                   this.props.data.maintenanceScreenData.maintenanceRowData
                     .length > 0
                     ? ""
-                    : this.props.toggleGridMustBePopulateddModal
+                    : this.props.onSelectReview
                 }
                 selectedValue={
                   this.props.data.maintenanceScreenData.selectedReviewValue
@@ -326,13 +346,7 @@ class Maintenanceheaders extends React.Component {
                   ? "Show All Columns"
                   : "Show Default Columns"
               }
-              onClick={
-                this.props.data.maintenanceScreenData.maintenanceRowData &&
-                this.props.data.maintenanceScreenData.maintenanceRowData
-                  .length > 0
-                  ? this.props.showLessOrColumns
-                  : this.props.toggleGridMustBePopulateddModal
-              }
+              onClick={() => this.showLessOrColumns()}
             ></ButtonWrapper>
             <ButtonWrapper
               id="refresh"
@@ -342,7 +356,7 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
                   ? this.props.onRefreshMaintenanceGridData
-                  : this.props.toggleGridMustBePopulateddModal
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
             <ButtonWrapper
@@ -352,8 +366,8 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData &&
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
-                  ? this.props.onBtPrint
-                  : this.props.toggleGridMustBePopulateddModal
+                  ? this.onBtPrint
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
             <ButtonWrapper
@@ -363,8 +377,8 @@ class Maintenanceheaders extends React.Component {
                 this.props.data.maintenanceScreenData.maintenanceRowData &&
                 this.props.data.maintenanceScreenData.maintenanceRowData
                   .length > 0
-                  ? this.props.onBtnExport
-                  : this.props.toggleGridMustBePopulateddModal
+                  ? this.onBtnExport
+                  : this.props.onSelectReview
               }
             ></ButtonWrapper>
           </div>
@@ -374,8 +388,8 @@ class Maintenanceheaders extends React.Component {
           rowData={this.props.data.maintenanceScreenData.maintenanceRowData}
           colDefsMedalsIncluded={
             this.state.showAllColumns
-              ? this.state.colDefsMedalsIncluded
-              : this.state.lessDefsMedalsIncluded
+              ? this.state.lessDefsMedalsIncluded
+              : this.state.colDefsMedalsIncluded
           }
           defaultColDef={this.state.defaultColDef}
           gridHeight={500}
@@ -384,17 +398,15 @@ class Maintenanceheaders extends React.Component {
           rowSelection="multiple"
           pagination={true}
           enableRangeSelection={true}
-          onGridReady={this.props.onGridReady}
+          onGridReady={this.onGridReady}
           popupParent={this.state.popupParent}
           suppressExcelExport={true}
+          onFirstDataRendered={this.onFirstDataRendered.bind(this)}
           singleClickEdit={true}
           onCellValueChanged={this.props.onCellValueChanged}
           paginationPageSize={10}
-          //getSelectedRowData={this.getSelectedRowData}
-          onSelectionChanged={this.props.onSelectionChanged}
-          onFirstDataRendered={this.props.onFirstDataRendered}
+          getSelectedRowData={this.props.getSelectedRowData}
         />
-        {/*------- Price Roll Override Warning Modal---------*/}
         <WarningModal
           isModalOpen={
             this.props.data.maintenanceScreenData
@@ -406,29 +418,16 @@ class Maintenanceheaders extends React.Component {
               .PriceRollOverrideMModalWarningMessage
           }
         ></WarningModal>
-        {/*------- Grid Must be selected  Modal---------*/}
         <WarningModal
           isModalOpen={
-            this.props.data.maintenanceScreenData.isRecordMustSelectedPopupOpen
+            this.props.data.maintenanceScreenData.openGridMustSelectedModal
           }
-          closeModal={this.props.toggleRecordMustSelectedPopupWarningModal}
-          warningMessage={
-            this.props.data.maintenanceScreenData
-              .RecordMustBeSelectedWarningMessage
-          }
-        ></WarningModal>
-        {/*-------populate Grid Modal---------*/}
-        <WarningModal
-          isModalOpen={
-            this.props.data.maintenanceScreenData.isGridMustPopulatedModalOpen
-          }
-          closeModal={this.props.toggleGridMustBePopulateddModal}
+          closeModal={this.props.closeGridMustSelectedModal}
           warningMessage={
             this.props.data.maintenanceScreenData
               .gridMustBePopulateModalWarningMessage
           }
         ></WarningModal>
-        {/*-------Threshold Modal---------*/}
         <Modalpopup
           isModalOpen={
             this.props.data.maintenanceScreenData.isThresholdModalOpen
@@ -442,7 +441,6 @@ class Maintenanceheaders extends React.Component {
           closeModal={this.props.closeThresholdModal}
           data={this.props.data.maintenanceScreenData}
         />
-        {/*-------Suspend/Restart  Modal---------*/}
         <SusupendRestartModal
           isModalOpen={
             this.props.data.maintenanceScreenData.isSuspendRestartRepoModalOpen
@@ -456,7 +454,7 @@ class Maintenanceheaders extends React.Component {
             this.props.onAllSuspendRestartTireChecked
           }
         />
-        {/*-------Publish Securities Modal---------*/}
+
         <PublishSecuritiesModal
           data={this.props.data.maintenanceScreenData}
           isModalOpen={
@@ -471,7 +469,6 @@ class Maintenanceheaders extends React.Component {
           onResetPublish={this.props.onResetPublish}
           onPublish={this.props.onPublish}
         ></PublishSecuritiesModal>
-        {/*-------Price Roll Override  Modal---------*/}
         <div className="priceRollOverrideModalContainer">
           <PriceRollOverrideModal
             data={this.props.data.maintenanceScreenData}
@@ -485,23 +482,49 @@ class Maintenanceheaders extends React.Component {
             onSavePriceOverrideValue={this.props.onSavePriceOverrideValue}
           ></PriceRollOverrideModal>
         </div>
-        {/*-------Threshold Modal---------*/}
-        <div className="priceRollOverridePrompt">
-          <PriceOverridePrompt
-            isModalOpen={
-              this.props.data.maintenanceScreenData
-                .isPriceOverrideConfirmModalOpen
-            }
-            closeModal={this.props.togglePriceOverrideConfirmModalOpen}
-            warningMessage={
-              this.props.data.maintenanceScreenData
-                .priceOverrideConfirmWarningMessage
-            }
-          ></PriceOverridePrompt>
-        </div>
       </div>
     );
   }
 }
+Maintenanceheaders.propTypes = {
+  closeGridMustSelectedModal: PropTypes.any,
+  closePriceRollOverrideModal: PropTypes.any,
+  closePublishValuedSecuritiesModal: PropTypes.any,
+  closeSuspendRestartRepoModal: PropTypes.any,
+  closeThresholdModal: PropTypes.any,
 
+  data: PropTypes.any,
+  "data.maintenanceScreenData": PropTypes.any,
+  "data.maintenanceScreenData.PriceRollOverrideMModalWarningMessage":
+    PropTypes.any,
+  "data.maintenanceScreenData.gridMustBePopulateModalWarningMessage":
+    PropTypes.any,
+  "data.maintenanceScreenData.isPriceRollOverrideModalOpen": PropTypes.any,
+  "data.maintenanceScreenData.isPublishValuedSecuritiesModalOpen":
+    PropTypes.any,
+  "data.maintenanceScreenData.isSuspendRestartRepoModalOpen": PropTypes.any,
+  "data.maintenanceScreenData.isThresholdModalOpen": PropTypes.any,
+  "data.maintenanceScreenData.openGridMustSelectedModal": PropTypes.any,
+  onClickPriceRollOverrideButton: PropTypes.any,
+  onClickPublishValuedSecuritiesButton: PropTypes.any,
+  onClickSuspendRestartRepoButton: PropTypes.any,
+  onClickThresholdButton: PropTypes.any,
+  onSelectReview: PropTypes.any,
+  onSelectSuspendRestartTireCheckbox: PropTypes.any,
+  onAllSuspendRestartTireChecked: PropTypes.any,
+  onRefreshMaintenanceGridData: PropTypes.any,
+  onAllPublishTireChecked: PropTypes.any,
+  onSelectPublishTireCheckbox: PropTypes.any,
+  onSelectPublishTypeCheckbox: PropTypes.any,
+  onAllPublishTypeChecked: PropTypes.any,
+  onResetPublish: PropTypes.any,
+  onPublish: PropTypes.any,
+  onChangePriceOverrideValue: PropTypes.any,
+  setPriceOverrideTillDate: PropTypes.any,
+  onChangePriceTypeValue: PropTypes.any,
+  onSavePriceOverrideValue: PropTypes.any,
+  closePriceRollOverrideWarningModal: PropTypes.any,
+  onCellValueChanged: PropTypes.any,
+  getSelectedRowData: PropTypes.any,
+};
 export default Maintenanceheaders;

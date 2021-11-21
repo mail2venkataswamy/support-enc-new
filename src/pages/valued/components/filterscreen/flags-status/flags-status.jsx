@@ -7,6 +7,8 @@ const Flagsstatus = (props) => {
     reviewNeededOptions,
     flaggedEditOptions,
     isEditedRecordChecked,
+    selectedFlaggedEditValue,
+    selectedreviewNeededValue,
   } = props.data.filterPanelData;
 
   return (
@@ -21,6 +23,7 @@ const Flagsstatus = (props) => {
               type="single"
               options={flaggedEditOptions}
               onChange={props.onChangeFlaggedEditValue}
+              selectedValue={selectedFlaggedEditValue}
             ></SelectBox>
           </div>
         </div>
@@ -32,6 +35,7 @@ const Flagsstatus = (props) => {
               type="single"
               options={reviewNeededOptions}
               onChange={props.onChangeReviewNeededValue}
+              selectedValue={selectedreviewNeededValue}
             ></SelectBox>
           </div>
         </div>

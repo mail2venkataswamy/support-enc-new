@@ -28,6 +28,8 @@ const Aggrid = (props) => {
         onCellValueChanged={(e) => props.onCellValueChanged(e)}
         paginationPageSize={props.paginationPageSize}
         getSelectedRowData={props.getSelectedRowData}
+        onSelectionChanged={props.onSelectionChanged}
+        onFirstDataRendered={props.onFirstDataRendered}
       ></AgGridReact>
     </div>
   );

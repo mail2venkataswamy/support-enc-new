@@ -5,6 +5,17 @@ import Maintenance from "./components/mainscreen/mainscreen.jsx";
 import EditDashboard from "./components/editscreen/editscreen.jsx";
 import thresholdGridData from "./json/threshold.json";
 import suspendRestartGridData from "./json/suspend-restart.json";
+function setPrinterFriendly(api) {
+  //const eGridDiv = document.querySelector("#myGrid");
+  //eGridDiv.style.height = "";
+  api.setDomLayout("print");
+}
+function setNormal(api) {
+  const eGridDiv = document.querySelector("#myGrid");
+  eGridDiv.style.width = "auto";
+  eGridDiv.style.height = "500px";
+  api.setDomLayout(null);
+}
 
 const getCurrentDateTime = () => {
   let currentdate = new Date();
@@ -29,8 +40,8 @@ class Valued extends Component {
           "A record must be selected to perform this action",
         selectedReviewValue: { label: "Review", value: "review" },
         maintenanceGridData: [],
-        openGridMustSelectedModal: false,
-        gridMustBePopulateModalWarningMessage: "Grid must be selected",
+        isGridMustPopulatedModalOpen: false,
+        gridMustBePopulateModalWarningMessage: "Grid must be populated",
         isThresholdModalOpen: false,
         isSuspendRestartRepoModalOpen: false,
         isPublishValuedSecuritiesModalOpen: false,
@@ -92,6 +103,14 @@ class Valued extends Component {
           { label: "4", value: "four", isChecked: false },
         ],
         isAllSuspendRestartTireChecked: false,
+        selectedGridRowData: [],
+        selectedGridRows: [],
+        isRecordMustSelectedPopupOpen: false,
+        RecordMustBeSelectedWarningMessage:
+          "Record must be selected to override",
+        isPriceOverrideConfirmModalOpen: false,
+        priceOverrideConfirmWarningMessage:
+          "Are you sure to ovveride the value",
       },
       editDashboardData: { showEditDashboardGrid: true },
       filterPanelData: {
@@ -245,7 +264,8 @@ class Valued extends Component {
     this.onChangeCuspinValue = this.onChangeCuspinValue.bind(this);
   }
 
-  onClickPriceRollOverrideButton = () => {
+  onClickPriceRollOverrideButton = (selectedGridRows) => {
+    console.log(selectedGridRows);
     let maintenanceScreenData = this.state.maintenanceScreenData;
     maintenanceScreenData.isPriceRollOverrideModalOpen = !maintenanceScreenData.isPriceRollOverrideModalOpen;
     this.setState({
@@ -294,9 +314,9 @@ class Valued extends Component {
       });
     }
   };
-  closeGridMustSelectedModal = () => {
+  toggleGridMustBePopulateddModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.openGridMustSelectedModal = false;
+    maintenanceScreenData.isGridMustPopulatedModalOpen = !maintenanceScreenData.isGridMustPopulatedModalOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -578,15 +598,18 @@ class Valued extends Component {
     });
   };
   onClickReset = () => {
-    this.getSelectedRowData();
     let filterPanelData = this.state.filterPanelData;
     let intialFilterPanelState = this.state.intialFilterPanelState;
-    //alert(JSON.stringify(intialFilterPanelState));
     let data = { ...filterPanelData, ...intialFilterPanelState };
     console.log("final object is", data);
+    console.log("before", intialFilterPanelState.selectedreviewNeededValue);
+    console.log("after", filterPanelData.selectedreviewNeededValue);
 
-    //this.setState({ filterPanelData: intialFilterPanelState });
-    this.setState({ filterPanelData: data });
+    this.setState(() => {
+      return {
+        filterPanelData: data,
+      };
+    });
   };
   componentDidMount() {
     let filterPanelData = this.state.filterPanelData;
@@ -617,22 +640,355 @@ class Valued extends Component {
       intialFilterPanelState: data,
       filterPanelData,
     });
+
+    let ele = document.getElementsByClassName("ag-paging-panel")[0];
+    var div = document.createElement("div");
+    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
+    ele.append(div);
   }
+
   getFilteredGridData() {
     return [
       {
         "#": "",
+        activityDate: "test",
         cuspin: "test",
+        isin: "test",
+        symbol: "test",
         tier: 1,
         type: 1,
+        marketSymbol: "",
+        micCode: "11",
         currency: "USA",
         thomson_price: 11,
         bloomberg_price: 1234,
-        ice_price: 123,
-        exchange_price: 23,
-        previous_price: 33,
-        final_price: 55,
-        final_price_end_date: "",
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 4455,
+        icePrice: 86,
+        idsiPrice: 23,
+        exchangePrice: 333,
+        previousPrice: 33,
+        finalPrice: 33,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 1,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
       },
       {
         "#": "",
@@ -650,177 +1006,65 @@ class Valued extends Component {
       },
       {
         "#": "",
-        cuspin: "test2",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
         tier: 1,
         type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
+        marketSymbol: "",
+        micCode: "11",
         currency: "USA",
         thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
       },
       {
         "#": "",
-        cuspin: "test2",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
         tier: 1,
         type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
-      },
-      {
-        "#": "",
-        cuspin: "test2",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
+        marketSymbol: "",
+        micCode: "11",
         currency: "USA",
         thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
-      },
-      {
-        "#": "",
-        cuspin: "test2",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
-      },
-      {
-        "#": "",
-        cuspin: "test2",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
-      },
-      {
-        "#": "",
-        cuspin: "test2",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 99,
-        bloomberg_price: 1111,
-        ice_price: 445,
-        exchange_price: 2653,
-        previous_price: 3365,
-        final_price: 56565,
-        final_price_end_date: "",
-      },
-      ,
-      {
-        "#": "",
-        cuspin: "test1",
-        tier: 1,
-        type: 1,
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 11,
-        ice_price: 898,
-        exchange_price: 446,
-        previous_price: 676,
-        final_price: 55,
-        final_price_end_date: "",
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
       },
       {
         "#": "",
@@ -976,23 +1220,28 @@ class Valued extends Component {
       priceRollOverridePriceTypeValue:
         maintenanceScreenData.priceRollOverridePriceTypeValue,
     };
-    alert(JSON.stringify(priceRollOverrideObjecttoSave));
-    console.log(priceRollOverrideObjecttoSave);
 
-    maintenanceScreenData.isPriceRollOverrideModalOpen = false;
+    console.log("price override object", priceRollOverrideObjecttoSave);
+
+    maintenanceScreenData.isPriceOverrideConfirmModalOpen = true;
+
+    this.setState({ maintenanceScreenData });
+  };
+  togglePriceOverrideConfirmModalOpen = (isConfirmed) => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isPriceOverrideConfirmModalOpen = !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
+    maintenanceScreenData.isPriceOverrideConfirmed = isConfirmed;
+    if (maintenanceScreenData.isPriceOverrideConfirmed) {
+      maintenanceScreenData.isPriceRollOverrideModalOpen = false;
+    } else {
+      maintenanceScreenData.isPriceRollOverrideModalOpen = true;
+    }
     this.setState({ maintenanceScreenData });
   };
   //===============AG-GRID=====================================
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-  };
-  getSelectedRowData = () => {
-    alert();
-    let selectedNodes = this.gridApi.getSelectedNodes();
-    let selectedData = selectedNodes.map((node) => node.data);
-    alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
-    return selectedData;
   };
 
   getEditingCells() {
@@ -1050,6 +1299,58 @@ class Valued extends Component {
     maintenanceScreenData.isAllSuspendRestartTireChecked = isAllSuspendRestartTireChecked;
     this.setState({ maintenanceScreenData });
   };
+  //------GR Grid functionalities------
+  onGridReady = (params) => {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  };
+
+  onFirstDataRendered = (params) => {
+    params.api.expandAll();
+  };
+
+  onBtnExport = () => {
+    this.gridApi.exportDataAsCsv();
+  };
+  onBtPrint = () => {
+    const api = this.gridApi;
+    setPrinterFriendly(api);
+    setTimeout(function () {
+      print();
+      setNormal(api);
+    }, 2000);
+  };
+  showLessOrColumns = () => {
+    let showAllColumns = this.state.showAllColumns;
+    this.setState({
+      showAllColumns: !showAllColumns,
+    });
+  };
+  getSelectedRowData = () => {
+    let selectedNodes = this.gridApi.getSelectedNodes();
+    let selectedData = selectedNodes.map((node) => node.data);
+    alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
+    this.setState({
+      selectedGridRowData: selectedData,
+    });
+  };
+  onSelectionChanged = () => {
+    const selectedRows = this.gridApi.getSelectedRows();
+    console.log("Grid Rows selected", selectedRows);
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.selectedGridRows = selectedRows;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  //-----------------------------------
+  toggleRecordMustSelectedPopupWarningModal = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isRecordMustSelectedPopupOpen = !maintenanceScreenData.isRecordMustSelectedPopupOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
   render() {
     let data = this.state;
     return (
@@ -1088,7 +1389,9 @@ class Valued extends Component {
               this.closePriceRollOverrideWarningModal
             }
             onSelectReview={(e) => this.onSelectReview(e)}
-            closeGridMustSelectedModal={this.closeGridMustSelectedModal}
+            toggleGridMustBePopulateddModal={
+              this.toggleGridMustBePopulateddModal
+            }
             closeThresholdModal={this.closeThresholdModal}
             onClickThresholdButton={this.onClickThresholdButton}
             onClickSuspendRestartRepoButton={
@@ -1121,6 +1424,8 @@ class Valued extends Component {
             onSavePriceOverrideValue={this.onSavePriceOverrideValue}
             getSelectedRowData={this.getSelectedRowData}
             onGridReady={this.onGridReady}
+            onBtnExport={this.onBtnExport}
+            onBtPrint={this.onBtPrint}
             onCellValueChanged={this.onCellValueChanged}
             onSelectSuspendRestartTireCheckbox={(e) =>
               this.onSelectSuspendRestartTireCheckbox(e)
@@ -1128,6 +1433,14 @@ class Valued extends Component {
             onAllSuspendRestartTireChecked={(e) =>
               this.onAllSuspendRestartTireChecked(e)
             }
+            toggleRecordMustSelectedPopupWarningModal={
+              this.toggleRecordMustSelectedPopupWarningModal
+            }
+            onSelectionChanged={this.onSelectionChanged}
+            togglePriceOverrideConfirmModalOpen={
+              this.togglePriceOverrideConfirmModalOpen
+            }
+            onFirstDataRendered={this.onFirstDataRendered.bind(this)}
           ></Maintenance>
           <EditDashboard
             toggleEditDashboardGrid={this.toggleEditDashboardGrid}
