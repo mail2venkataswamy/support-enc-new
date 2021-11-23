@@ -22,6 +22,7 @@
     "react-modal": "^3.14.3",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-simple-tabs-component": "^2.1.1",
     "sass-loader": "^11.0.1",
     "scss-loader": "0.0.1",
     "style-loader": "^2.0.0",

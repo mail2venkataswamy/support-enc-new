@@ -4,6 +4,7 @@ import Valued from "./pages/valued/index.jsx";
 import Gov from "./pages/gov/index.jsx";
 //import { Security } from "@okta/okta-react";
 import NavBar from "../src/components/navbar/nav-bar.jsx";
+import Prde from "./pages/prde/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -12,6 +13,7 @@ const AppRouter = () => {
       <Routes>
         <Route exact path="/" element={<Valued />} />
         <Route path="/gov" element={<Gov />} />
+        <Route path="/prde" element={<Prde />} />
       </Routes>
     </BrowserRouter>
   );

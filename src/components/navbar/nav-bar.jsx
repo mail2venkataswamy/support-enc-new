@@ -17,6 +17,11 @@ const NavBar = () => {
             Gov
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/Prde" isActive={true}>
+            PRDE
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
