@@ -1,8 +1,6 @@
-import React, { Component, useReducer } from "react";
-
-import FilterPanel from "./components/filterscreen/filterscreen.jsx";
-import Maintenance from "./components/mainscreen/mainscreen.jsx";
-import EditDashboard from "./components/editscreen/editscreen.jsx";
+import { Component } from "react";
+import React from "react";
+import MyGovContext from "../context/gov-context.jsx";
 import thresholdGridData from "./json/threshold.json";
 import suspendRestartGridData from "./json/suspend-restart.json";
 function setPrinterFriendly(api) {
@@ -16,6 +14,15 @@ function setNormal(api) {
   eGridDiv.style.height = "500px";
   api.setDomLayout(null);
 }
+const staticCellStyle = { color: "red", "background-color": "yellow" };
+
+const dynamicCellStyle = (params) => {
+  if (params.value === "Police") {
+    //mark police cells as red
+    return { color: "red", backgroundColor: "yellow" };
+  }
+  return null;
+};
 
 const getCurrentDateTime = () => {
   let currentdate = new Date();
@@ -29,11 +36,161 @@ const getCurrentDateTime = () => {
   return datetime;
 };
 
-class Valued extends Component {
+class GovProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
       intialFilterPanelState: {},
+      filterPanelData: {
+        cuspinSearchValue: "",
+        cuspinData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        cuspinSuggestionResult: [],
+        cuspinValue: "",
+        isFromAndStDisabled: false,
+        currHistOptions: [
+          { label: "CURRENT", value: "Current" },
+          { label: "HISTORICAL", value: "Historical" },
+        ],
+        selectedCurrHistValue: { label: "CURRENT", value: "Current" },
+        fromDate: new Date(),
+        toDate: new Date(),
+        isinData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        isinSuggestionResult: [],
+        isinValue: "",
+        isinSearchValue: "",
+        occSymbolData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        occSymbolSuggestionResult: [],
+        occSymbolValue: "",
+        occSymbolSearchValue: "",
+        isAllTypeChecked: false,
+        typeData: [
+          { label: "Common Stock", value: "commonStock", isChecked: false },
+          {
+            label: "Preffered Stock",
+            value: "prefferedStock",
+            isChecked: false,
+          },
+          { label: "Index", value: "index", isChecked: false },
+          { label: "Corporate Debt", value: "corporateDebt", isChecked: false },
+          { label: "FMS", value: "fms", isChecked: false },
+        ],
+        tierLevelData: [
+          { label: "1", value: "one", isChecked: false },
+          { label: "2", value: "two", isChecked: false },
+          { label: "3", value: "three", isChecked: false },
+          { label: "4", value: "four", isChecked: false },
+        ],
+        isAllTireChecked: false,
+        flaggedEditOptions: [
+          {
+            label: "Final - Large Difference Vs Vender",
+            value: "Final - Large Difference Vs Vender",
+          },
+          {
+            label: "Final - Large varience Vs previous",
+            value: "Final - Large varience Vs previous",
+          },
+          {
+            label: "Final - Missing or Zero Final Price",
+            value: "Final - Missing or Zero Final Price",
+          },
+        ],
+        selectedFlaggedEditValue: {
+          label: "Final - Large Difference Vs Vender",
+          value: "Final - Large Difference Vs Vender",
+        },
+        reviewNeededOptions: [
+          {
+            label: "Final - Large Difference Vs Vender",
+            value: "Final - Large Difference Vs Vender",
+          },
+          {
+            label: "Final - Large varience Vs previous",
+            value: "Final - Large varience Vs previous",
+          },
+          {
+            label: "Final - Missing or Zero Final Price",
+            value: "Final - Missing or Zero Final Price",
+          },
+        ],
+        selectedreviewNeededValue: {
+          label: "Final - Large Difference Vs Vender",
+          value: "Final - Large Difference Vs Vender",
+        },
+        isEditedRecordChecked: false,
+        editedRecordValue: "",
+        isAllTypeChecked: false,
+        typeData: [
+          { label: "Bills", value: "bills", isChecked: false },
+          { label: "Notes", value: "notes", isChecked: false },
+          { label: "Bonds", value: "bonds", isChecked: false },
+          { label: "STRP", value: "strp", isChecked: false },
+          { label: "TIPS", value: "tips", isChecked: false },
+          { label: "TPST", value: "tpst", isChecked: false },
+        ],
+        currency: [
+          { label: "US Dollar", value: "usDollar", isChecked: false },
+          {
+            label: "Canadian Dollar",
+            value: "canadianDollar",
+            isChecked: false,
+          },
+        ],
+        issueType: [
+          { label: "U.S. Government", value: "usGovernment", isChecked: false },
+          {
+            label: "Canadian Government",
+            value: "canadianGoverenment",
+            isChecked: false,
+          },
+          {
+            label: "Gov. Sponsored Entr.",
+            value: "govSponsorEntr",
+            isChecked: false,
+          },
+        ],
+
+        flagStatusData: [{ label: "All", value: "All" }],
+        selectedFlagStatusValue: { label: "All", value: "All" },
+        fromMaturityDate: new Date(),
+        toMaturityDate: new Date(),
+        isFromMaturityAndToMaturityDisabled: false,
+        isAllIssueTypeChecked: false,
+        isAllCurrencyChecked: false,
+      },
       maintenanceScreenData: {
         isPriceRollOverrideModalOpen: false,
         PriceRollOverrideMModalWarningMessage:
@@ -111,160 +268,208 @@ class Valued extends Component {
         isPriceOverrideConfirmModalOpen: false,
         priceOverrideConfirmWarningMessage:
           "Are you sure to ovveride the value",
+        //------AGGRID state--------------------
+        popupParent: document.body,
+        showAllColumns: true,
+        colDefsMedalsIncluded: [
+          {
+            width: 60,
+            headerCheckboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
+          },
+          { field: "#", width: 60 },
+
+          { headerName: "Activity Date", field: "activityDate", width: 100 },
+          { headerName: "Cuspin", field: "cuspin", width: 100 },
+          { headerName: "ISIN", field: "isin", width: 100 },
+          { headerName: "Symbol", field: "symbol", width: 80 },
+          { headerName: "Tier", field: "tier", width: 80 },
+          { headerName: "Type", field: "type", width: 80 },
+          { headerName: "Market Symbol", field: "marketSymbol", width: 100 },
+          { headerName: "MIC Code", field: "micCode", width: 100 },
+          { headerName: "Currency", field: "currency", width: 80 },
+          { headerName: "Thomson price", field: "thomson_price", width: 100 },
+          {
+            headerName: "Bloomberg Price",
+            field: "bloomberg_price",
+            width: 100,
+          },
+          { headerName: "ICE Price", field: "icePrice", width: 100 },
+          { headerName: "IDSI price", field: "idsiPrice", width: 100 },
+          { headerName: "Exchange Price", field: "exchangePrice", width: 120 },
+          { headerName: "previous_price", field: "previousPrice", width: 120 },
+          {
+            headerName: "Final Price",
+            field: "finalPrice",
+            width: 120,
+            editable: true,
+            cellStyle: staticCellStyle,
+          },
+          {
+            headername: "Final Price End Date",
+            field: "finalPriceEndDate",
+            width: 150,
+          },
+          {
+            headerName: "FInal Price Override ID",
+            field: "finalPriceOverrideId",
+            width: 100,
+          },
+          {
+            headerName: "Final Price Change",
+            field: "finalPriceChange",
+            width: 120,
+          },
+          {
+            headerName: "Stock Loan Price",
+            field: "stockLoanPrice",
+            width: 100,
+          },
+          {
+            headerName: "Stock Loan Price Override ID",
+            field: "stockLoanPriceOverrideId",
+            width: 100,
+          },
+          {
+            headerName: "Intraday Price",
+            field: "intraDayPrice",
+            width: 100,
+          },
+          {
+            headerName: "Intraday Price End Date",
+            field: "intraDayPriceEndDate",
+            width: 100,
+          },
+          {
+            headerName: "Intraday Price Override ID",
+            field: "intraDayPriceOverrideId",
+            width: 99,
+          },
+          {
+            headerName: "Fnl Review Needed",
+            field: "fnlReviewNeeded",
+            width: 100,
+          },
+          {
+            headerName: "Fnl Primary Reviewer UserId",
+            field: "fnlPrimaryReviewerUserId",
+            width: 100,
+          },
+          {
+            headerName: "Fnl Secondary Reviewer UserId",
+            field: "fnlSecondaryReviewerUserId",
+            width: 100,
+          },
+          {
+            headerName: "S.L Review Needed",
+            field: "slReviewNeeded",
+            width: 100,
+          },
+          {
+            headerName: "S.L Primary Reviewer UserId",
+            field: "fnlPrimaryReviewerUserId",
+            width: 100,
+          },
+          {
+            headerName: "S.L Secondary Reviewer UserId",
+            field: "fnlSecondaryReviewerUserId",
+            width: 100,
+          },
+        ],
+        lessDefsMedalsIncluded: [
+          {
+            width: 60,
+            headerCheckboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
+          },
+
+          { headerName: "Cuspin", field: "cuspin", width: 100 },
+          { headerName: "Symbol", field: "symbol", width: 80 },
+          { headerName: "Tier", field: "tier", width: 80 },
+          { headerName: "Type", field: "type", width: 80 },
+          { headerName: "Currency", field: "currency", width: 80 },
+          { headerName: "Thomson price", field: "thomson_price", width: 100 },
+          {
+            headerName: "Bloomberg Price",
+            field: "bloomberg_price",
+            width: 100,
+          },
+          { headerName: "ICE Price", field: "icePrice", width: 100 },
+          { headerName: "IDSI price", field: "idsiPrice", width: 100 },
+          { headerName: "Exchange Price", field: "exchangePrice", width: 120 },
+          { headerName: "previous_price", field: "previousPrice", width: 120 },
+          {
+            headerName: "Final Price",
+            field: "finalPrice",
+            width: 120,
+            editable: true,
+            cellStyle: staticCellStyle,
+          },
+          {
+            headername: "Final Price End Date",
+            field: "finalPriceEndDate",
+            width: 150,
+          },
+          {
+            headerName: "FInal Price Override ID",
+            field: "finalPriceOverrideId",
+            width: 100,
+          },
+          {
+            headerName: "Stock Loan Price",
+            field: "stockLoanPrice",
+            width: 100,
+            editable: true,
+          },
+          {
+            headerName: "Stock Loan Price Override ID",
+            field: "stockLoanPriceOverrideId",
+            width: 100,
+          },
+          {
+            headerName: "Intraday Price",
+            field: "intraDayPrice",
+            width: 100,
+            editable: true,
+          },
+          {
+            headerName: "Intraday Price End Date",
+            field: "intraDayPriceEndDate",
+            width: 100,
+          },
+          {
+            headerName: "Intraday Price Override ID",
+            field: "intraDayPriceOverrideId",
+            width: 100,
+          },
+          {
+            headerName: "Fnl Review Neededtype",
+            filed: "fnlReviewNeededType",
+            width: 80,
+          },
+          { headerName: "", field: "fnlReviewNeeded", width: 100 },
+          {
+            headerName: "S.L Review Needed",
+            field: "slReviewNeeded",
+            width: 100,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+        },
+        selectedGridData: [],
       },
       editDashboardData: { showEditDashboardGrid: true },
-      filterPanelData: {
-        cuspinSearchValue: "",
-        cuspinData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        cuspinSuggestionResult: [],
-        cuspinValue: "",
-        isFromAndStDisabled: false,
-        currHistOptions: [
-          { label: "CURRENT", value: "Current" },
-          { label: "HISTORICAL", value: "Historical" },
-        ],
-        selectedCurrHistValue: { label: "CURRENT", value: "Current" },
-        fromDate: new Date(),
-        toDate: new Date(),
-        isinData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        isinSuggestionResult: [],
-        isinValue: "",
-        isinSearchValue: "",
-        occSymbolData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        occSymbolSuggestionResult: [],
-        occSymbolValue: "",
-        occSymbolSearchValue: "",
-        isAllTypeChecked: false,
-        typeData: [
-          {
-            label: "Common Stock",
-            value: "commonStock",
-            isChecked: false,
-            list: "list1",
-          },
-          {
-            label: "Preffered Stock",
-            value: "prefferedStock",
-            isChecked: false,
-            list: "list1",
-          },
-
-          {
-            label: "Corporate Debt",
-            value: "corporateDebt",
-            isChecked: false,
-            list: "list1",
-          },
-          { label: "Index", value: "index", isChecked: false, list: "list2" },
-          { label: "FMS", value: "fms", isChecked: false, list: "list2" },
-        ],
-        selectClearedOptions: [
-          { label: "BOTH", value: "ClearedAndNonCleared" },
-          { label: "Cleared", value: "Cleared" },
-          { label: "Non Cleared", value: "Non Cleared" },
-        ],
-        selectedClearedValue: { label: "BOTH", value: "ClearedAndNonCleared" },
-        selectCrossMarginOptions: [
-          { label: "BOTH", value: "CrossMarginAndNonCrossMragin" },
-          { label: "Cross Margin Eligible", value: "CrossMargin" },
-          { label: "Non Cross Margin Eligible", value: "NonCrossMargin" },
-        ],
-        selectedCrossMarginValue: {
-          label: "BOTH",
-          value: "CrossMarginAndNonCrossMragin",
-        },
-        selectCurrencyOptions: [
-          { label: "ALL", value: "All" },
-          { label: "USD", value: "USD" },
-          { label: "AUD", value: "Aud" },
-          { label: "CAD", value: "Cad" },
-        ],
-        selectedCurrencyValue: { label: "USD", value: "USD" },
-        tierLevelData: [
-          { label: "1", value: "one", isChecked: false },
-          { label: "2", value: "two", isChecked: false },
-          { label: "3", value: "three", isChecked: false },
-          { label: "4", value: "four", isChecked: false },
-        ],
-        isAllTireChecked: false,
-        flaggedEditOptions: [
-          {
-            label: "Final - Large Difference Vs Vender",
-            value: "Final - Large Difference Vs Vender",
-          },
-          {
-            label: "Final - Large varience Vs previous",
-            value: "Final - Large varience Vs previous",
-          },
-          {
-            label: "Final - Missing or Zero Final Price",
-            value: "Final - Missing or Zero Final Price",
-          },
-        ],
-        selectedFlaggedEditValue: {
-          label: "Final - Large Difference Vs Vender",
-          value: "Final - Large Difference Vs Vender",
-        },
-        reviewNeededOptions: [
-          {
-            label: "Final - Large Difference Vs Vender",
-            value: "Final - Large Difference Vs Vender",
-          },
-          {
-            label: "Final - Large varience Vs previous",
-            value: "Final - Large varience Vs previous",
-          },
-          {
-            label: "Final - Missing or Zero Final Price",
-            value: "Final - Missing or Zero Final Price",
-          },
-        ],
-        selectedreviewNeededValue: {
-          label: "Final - Large Difference Vs Vender",
-          value: "Final - Large Difference Vs Vender",
-        },
-        isEditedRecordChecked: false,
-        editedRecordValue: "",
-      },
     };
-
-    this.onChangeCuspinValue = this.onChangeCuspinValue.bind(this);
   }
-  //=====================Filter Panel Methods====================
-  onChangeCuspinValue(e) {
+  //------------------FilterPanel Methods-------------------------------
+  onChangeCuspinValue = (e) => {
     let data = this.state.filterPanelData.cuspinData;
     let filterPanelData = this.state.filterPanelData;
 
@@ -284,23 +489,11 @@ class Valued extends Component {
     this.setState({
       filterPanelData,
     });
-  }
+  };
   onClickSuggestionItem = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.cuspinValue = selectedValue;
     filterPanelData.cuspinSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onChangeCurrHistValue = (e) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedCurrHistValue = e.value;
-    if (e.value === "CURRENT") {
-      filterPanelData.isFromAndStDisabled = true;
-    } else {
-      filterPanelData.isFromAndStDisabled = false;
-    }
     this.setState({
       filterPanelData,
     });
@@ -437,22 +630,6 @@ class Valued extends Component {
     filterPanelData.isAllTireChecked = isAllTireChecked;
     this.setState({ filterPanelData });
   };
-
-  onChangeClearedValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedClearedValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeCurrencyValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedCurrencyValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeCrossMarginEligibleValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedCrossMarginValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
   onChangeFlaggedEditValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedFlaggedEditValue = selectedValue;
@@ -502,17 +679,102 @@ class Valued extends Component {
   onClickReset = () => {
     let filterPanelData = this.state.filterPanelData;
     let intialFilterPanelState = this.state.intialFilterPanelState;
+    //alert(JSON.stringify(intialFilterPanelState));
     let data = { ...filterPanelData, ...intialFilterPanelState };
     console.log("final object is", data);
-    console.log("before", intialFilterPanelState.selectedreviewNeededValue);
-    console.log("after", filterPanelData.selectedreviewNeededValue);
 
-    this.setState(() => {
-      return {
-        filterPanelData: data,
-      };
+    //this.setState({ filterPanelData: intialFilterPanelState });
+    this.setState({ filterPanelData: data });
+  };
+  onChangeCurrHistValue = (e) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedCurrHistValue = e.value;
+    if (e.value.toLowerCase() === "CURRENT".toLowerCase()) {
+      filterPanelData.isFromAndStDisabled = true;
+    } else {
+      filterPanelData.isFromAndStDisabled = false;
+    }
+    this.setState({
+      filterPanelData,
     });
   };
+  setFromMaturityDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    console.log(filterPanelData.fromMaturityDate);
+    filterPanelData.fromMaturityDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  setToMaturityDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    console.log(filterPanelData.toMaturityDate);
+    filterPanelData.toMaturityDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  onAllCurrencyChecked = (event) => {
+    let currencyData = this.state.filterPanelData.currency;
+    let filterPanelData = this.state.filterPanelData;
+
+    currencyData.forEach((currency) => {
+      return (currency.isChecked = event.target.checked);
+    });
+    filterPanelData.currencyData = currencyData;
+    filterPanelData.isAllCurrencyChecked = !filterPanelData.isAllCurrencyChecked;
+    this.setState({ filterPanelData });
+  };
+  onSelectCurrencyCheckbox = (event) => {
+    let currencyData = this.state.filterPanelData.currency;
+    let filterPanelData = this.state.filterPanelData;
+    let isAllCurrencyChecked = false;
+    let selectionCount = 0;
+    currencyData.forEach((currency) => {
+      if (currency.value === event.target.value)
+        currency.isChecked = event.target.checked;
+
+      if (currency.isChecked) {
+        selectionCount++;
+      }
+      isAllCurrencyChecked =
+        selectionCount === currencyData.length ? true : false;
+    });
+    filterPanelData.currencyData = currencyData;
+    filterPanelData.isAllCurrencyChecked = isAllCurrencyChecked;
+    this.setState({ filterPanelData });
+  };
+  onSelectIssueTypeCheckbox = (event) => {
+    let issueTypeData = this.state.filterPanelData.issueType;
+    let filterPanelData = this.state.filterPanelData;
+    let isAllIssueTypeChecked = false;
+    let selectionCount = 0;
+    issueTypeData.forEach((issue) => {
+      if (issue.value === event.target.value)
+        issue.isChecked = event.target.checked;
+
+      if (issue.isChecked) {
+        selectionCount++;
+      }
+      isAllIssueTypeChecked =
+        selectionCount === issueTypeData.length ? true : false;
+    });
+    filterPanelData.issueTypeData = issueTypeData;
+    filterPanelData.isAllIssueTypeChecked = isAllIssueTypeChecked;
+    this.setState({ filterPanelData });
+  };
+  onAllIssueTypeChecked = (event) => {
+    let issueTypeData = this.state.filterPanelData.issueType;
+    let filterPanelData = this.state.filterPanelData;
+
+    issueTypeData.forEach((issue) => {
+      return (issue.isChecked = event.target.checked);
+    });
+    filterPanelData.issueTypeData = issueTypeData;
+    filterPanelData.isAllissueTypeChecked = !filterPanelData.isAllissueTypeChecked;
+    this.setState({ filterPanelData });
+  };
+
   //========================Maintenance Methods====================================
   onClickPriceRollOverrideButton = (selectedGridRows) => {
     console.log(selectedGridRows);
@@ -1307,9 +1569,10 @@ class Valued extends Component {
     }, 2000);
   };
   showLessOrColumns = () => {
-    let showAllColumns = this.state.showAllColumns;
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.showAllColumns = !maintenanceScreenData.showAllColumns;
     this.setState({
-      showAllColumns: !showAllColumns,
+      maintenanceScreenData,
     });
   };
   getSelectedRowData = () => {
@@ -1352,105 +1615,124 @@ class Valued extends Component {
   };
   //-----------------------------------
 
+  componentDidMount() {
+    let filterPanelData = this.state.filterPanelData;
+
+    let filterObject1 = this.state.filterPanelData;
+    filterPanelData.isFromAndStDisabled = true;
+
+    let filterObject = {
+      selectedCurrHistValue: filterPanelData.selectedCurrHistValue,
+      cuspinValue: filterPanelData.cuspinValue,
+      fromDate: filterPanelData.fromDate,
+      toDate: filterPanelData.toDate,
+      isinValue: filterPanelData.isinValue,
+      occSymbolValue: filterPanelData.occSymbolValue,
+      typeData: filterPanelData.typeData,
+      selectedClearedValue: filterPanelData.selectedClearedValue,
+      selectedCrossMarginValue: filterPanelData.selectedCrossMarginValue,
+      selectedCurrencyValue: filterPanelData.selectedCurrencyValue,
+      tierLevelData: filterPanelData.tierLevelData,
+      selectedFlaggedEditValue: filterPanelData.selectedFlaggedEditValue,
+      selectedreviewNeededValue: filterPanelData.selectedreviewNeededValue,
+      isEditedRecordChecked: filterPanelData.isEditedRecordChecked,
+      editedRecordValue: filterPanelData.editedRecordValue,
+    };
+    let data = { ...filterPanelData, ...filterObject };
+
+    this.setState({
+      intialFilterPanelState: data,
+      filterPanelData,
+    });
+
+    let ele = document.getElementsByClassName("ag-paging-panel")[0];
+    var div = document.createElement("div");
+    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
+    ele.append(div);
+  }
   render() {
-    let data = this.state;
     return (
-      <div id="mainVS">
-        <FilterPanel
-          onChangeCuspinValue={(e) => this.onChangeCuspinValue(e)}
-          data={this.state}
-          onClickSuggestionItem={this.onClickSuggestionItem}
-          onChangeCurrHistValue={(e) => this.onChangeCurrHistValue(e)}
-          setFromDate={(e) => this.setFromDate(e)}
-          setToDate={(e) => this.setToDate(e)}
-          onChangeIsinValue={(e) => this.onChangeIsinValue(e)}
-          onClickIsinSuggestionItem={this.onClickIsinSuggestionItem}
-          onChangeOccSymbolValue={(e) => this.onChangeOccSymbolValue(e)}
-          onClickOccSymbolSuggestionItem={this.onClickOccSymbolSuggestionItem}
-          onSelectTypeCheckbox={(e) => this.onSelectTypeCheckbox(e)}
-          onAllTypeChecked={(e) => this.onAllTypeChecked(e)}
-          onSelectTireCheckbox={(e) => this.onSelectTireCheckbox(e)}
-          onAllTireChecked={(e) => this.onAllTireChecked(e)}
-          onChangeCrossMarginEligibleValue={(e) =>
-            this.onChangeCrossMarginEligibleValue(e)
-          }
-          onChangeCurrencyValue={(e) => this.onChangeCurrencyValue(e)}
-          onChangeClearedValue={(e) => this.onChangeClearedValue(e)}
-          onChangeFlaggedEditValue={(e) => this.onChangeFlaggedEditValue(e)}
-          onChangeReviewNeededValue={(e) => this.onChangeReviewNeededValue(e)}
-          onSelectEditedRecordValue={(e) => this.onSelectEditedRecordValue(e)}
-          onClickFiler={this.onClickFiler}
-          onClickReset={this.onClickReset}
-        />
-        <div id="editMaint">
-          <Maintenance
-            data={data}
-            onClickPriceRollOverrideButton={this.onClickPriceRollOverrideButton}
-            closePriceRollOverrideWarningModal={
-              this.closePriceRollOverrideWarningModal
-            }
-            onSelectReview={(e) => this.onSelectReview(e)}
-            toggleGridMustBePopulateddModal={
-              this.toggleGridMustBePopulateddModal
-            }
-            closeThresholdModal={this.closeThresholdModal}
-            onClickThresholdButton={this.onClickThresholdButton}
-            onClickSuspendRestartRepoButton={
-              this.onClickSuspendRestartRepoButton
-            }
-            closeSuspendRestartRepoModal={this.closeSuspendRestartRepoModal}
-            closePublishValuedSecuritiesModal={
-              this.closePublishValuedSecuritiesModal
-            }
-            onClickPublishValuedSecuritiesButton={
-              this.onClickPublishValuedSecuritiesButton
-            }
-            onRefreshMaintenanceGridData={this.onRefreshMaintenanceGridData}
-            onAllPublishTireChecked={(e) => this.onAllPublishTireChecked(e)}
-            onSelectPublishTireCheckbox={(e) =>
-              this.onSelectPublishTireCheckbox(e)
-            }
-            onSelectPublishTypeCheckbox={(e) =>
-              this.onSelectPublishTypeCheckbox(e)
-            }
-            onAllPublishTypeChecked={(e) => this.onAllPublishTypeChecked(e)}
-            onResetPublish={this.onResetPublish}
-            onPublish={this.onPublish}
-            closePriceRollOverrideModal={this.closePriceRollOverrideModal}
-            onChangePriceOverrideValue={(e) =>
-              this.onChangePriceOverrideValue(e)
-            }
-            setPriceOverrideTillDate={(e) => this.setPriceOverrideTillDate(e)}
-            onChangePriceTypeValue={(e) => this.onChangePriceTypeValue(e)}
-            onSavePriceOverrideValue={this.onSavePriceOverrideValue}
-            getSelectedRowData={this.getSelectedRowData}
-            onGridReady={this.onGridReady}
-            onBtnExport={this.onBtnExport}
-            onBtPrint={this.onBtPrint}
-            onCellValueChanged={this.onCellValueChanged}
-            onSelectSuspendRestartTireCheckbox={(e) =>
-              this.onSelectSuspendRestartTireCheckbox(e)
-            }
-            onAllSuspendRestartTireChecked={(e) =>
-              this.onAllSuspendRestartTireChecked(e)
-            }
-            toggleRecordMustSelectedPopupWarningModal={
-              this.toggleRecordMustSelectedPopupWarningModal
-            }
-            onSelectionChanged={this.onSelectionChanged}
-            togglePriceOverrideConfirmModalOpen={
-              this.togglePriceOverrideConfirmModalOpen
-            }
-            onFirstDataRendered={this.onFirstDataRendered.bind(this)}
-          ></Maintenance>
-          <EditDashboard
-            toggleEditDashboardGrid={this.toggleEditDashboardGrid}
-            data={data}
-          />
-        </div>
-      </div>
+      <MyGovContext.Provider
+        value={{
+          state: this.state,
+          //==================Filter-Panel=========================
+          onSelectEditedRecordValue: this.onSelectEditedRecordValue,
+          onChangeCuspinValue: (e) => this.onChangeCuspinValue(e),
+          onClickSuggestionItem: this.onClickSuggestionItem,
+          onChangeCurrHistValue: (e) => this.onChangeCurrHistValue(e),
+          setFromDate: (e) => this.setFromDate(e),
+          setToDate: (e) => this.setToDate(e),
+          onChangeIsinValue: (e) => this.onChangeIsinValue(e),
+          onClickIsinSuggestionItem: this.onClickIsinSuggestionItem,
+          onChangeOccSymbolValue: (e) => this.onChangeOccSymbolValue(e),
+          onClickOccSymbolSuggestionItem: this.onClickOccSymbolSuggestionItem,
+          onSelectTypeCheckbox: (e) => this.onSelectTypeCheckbox(e),
+          onAllTypeChecked: (e) => this.onAllTypeChecked(e),
+          onSelectTireCheckbox: (e) => this.onSelectTireCheckbox(e),
+          onAllTireChecked: (e) => this.onAllTireChecked(e),
+          onChangeFlaggedEditValue: (e) => this.onChangeFlaggedEditValue(e),
+          onChangeReviewNeededValue: (e) => this.onChangeReviewNeededValue(e),
+          onSelectEditedRecordValue: (e) => this.onSelectEditedRecordValue(e),
+          onClickFiler: this.onClickFiler,
+          onClickReset: this.onClickReset,
+          onAllCurrencyChecked: (e) => this.onAllCurrencyChecked(e),
+          onSelectCurrencyCheckbox: (e) => this.onSelectCurrencyCheckbox(e),
+          onSelectIssueTypeCheckbox: (e) => this.onSelectIssueTypeCheckbox(e),
+          onAllIssueTypeChecked: (e) => this.onAllIssueTypeChecked(e),
+          setFromMaturityDate: (e) => this.setFromMaturityDate(e),
+          setToMaturityDate: (e) => this.setToMaturityDate(e),
+          //=================================================================
+          onClickPriceRollOverrideButton: this.onClickPriceRollOverrideButton,
+          closePriceRollOverrideWarningModal: this
+            .closePriceRollOverrideWarningModal,
+          onSelectReview: (e) => this.onSelectReview(e),
+          toggleGridMustBePopulateddModal: this.toggleGridMustBePopulateddModal,
+          closeThresholdModal: this.closeThresholdModal,
+          onClickThresholdButton: this.onClickThresholdButton,
+          onClickSuspendRestartRepoButton: this.onClickSuspendRestartRepoButton,
+          closeSuspendRestartRepoModal: this.closeSuspendRestartRepoModal,
+          closePublishValuedSecuritiesModal: this
+            .closePublishValuedSecuritiesModal,
+          onClickPublishValuedSecuritiesButton: this
+            .onClickPublishValuedSecuritiesButton,
+          onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          onAllPublishTireChecked: (e) => this.onAllPublishTireChecked(e),
+          onSelectPublishTireCheckbox: (e) =>
+            this.onSelectPublishTireCheckbox(e),
+          onSelectPublishTypeCheckbox: (e) =>
+            this.onSelectPublishTypeCheckbox(e),
+          onAllPublishTypeChecked: (e) => this.onAllPublishTypeChecked(e),
+          onResetPublish: this.onResetPublish,
+          onPublish: this.onPublish,
+          closePriceRollOverrideModal: this.closePriceRollOverrideModal,
+          onChangePriceOverrideValue: (e) => this.onChangePriceOverrideValue(e),
+          setPriceOverrideTillDate: (e) => this.setPriceOverrideTillDate(e),
+          onChangePriceTypeValue: (e) => this.onChangePriceTypeValue(e),
+          onSavePriceOverrideValue: this.onSavePriceOverrideValue,
+          getSelectedRowData: this.getSelectedRowData,
+          onGridReady: this.onGridReady,
+          onBtnExport: this.onBtnExport,
+          onBtPrint: this.onBtPrint,
+          onCellValueChanged: this.onCellValueChanged,
+          onSelectSuspendRestartTireCheckbox: (e) =>
+            this.onSelectSuspendRestartTireCheckbox(e),
+          onAllSuspendRestartTireChecked: (e) =>
+            this.onAllSuspendRestartTireChecked(e),
+          toggleRecordMustSelectedPopupWarningModal: this
+            .toggleRecordMustSelectedPopupWarningModal,
+          onSelectionChanged: this.onSelectionChanged,
+          togglePriceOverrideConfirmModalOpen: this
+            .togglePriceOverrideConfirmModalOpen,
+          onFirstDataRendered: this.onFirstDataRendered,
+          showLessOrColumns: this.showLessOrColumns,
+          //=============Edit Dahsboard==============
+          toggleEditDashboardGrid: this.toggleEditDashboardGrid,
+        }}
+      >
+        {this.props.children}
+      </MyGovContext.Provider>
     );
   }
 }
 
-export default Valued;
+export default GovProvider;

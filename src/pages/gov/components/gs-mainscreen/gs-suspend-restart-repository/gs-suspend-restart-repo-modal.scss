@@ -1,0 +1,30 @@
+.vendorExchangeProductWrapper {
+  display: flex;
+}
+.suspendRestartButtonsWrapper {
+  text-align: center;
+}
+.refreshAndDeleteButtonsWrapper {
+  background-color: #9ecaf7;
+  display: flex;
+}
+.deleteButton {
+  background-color: transparent;
+}
+.refreshButton {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  background-color: transparent;
+}
+.modalContentWrapper .listItemWrapper {
+  display: flex;
+}
+.modalContentWrapper .listItemWrapper div {
+  margin-right: 10px;
+}
+
+.modalContentWrapper .ag-paging-panel {
+  height: 40px !important;
+  justify-content: flex-start !important;
+}

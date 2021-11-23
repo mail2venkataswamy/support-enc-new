@@ -4,10 +4,16 @@ import "./index.css";
 //import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App-New";
+import ValuedProvider from "./components/provider/valued-provider.jsx";
+import GovdProvider from "./components/provider/gov-provider.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App></App>
+    <ValuedProvider>
+      <GovdProvider>
+        <App></App>
+      </GovdProvider>
+    </ValuedProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

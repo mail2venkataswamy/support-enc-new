@@ -1,21 +1,10 @@
-import React, { Component, useReducer } from "react";
+/*import React, { Component, useReducer } from "react";
 
-import FilterPanel from "./components/filterscreen/filterscreen.jsx";
-import Maintenance from "./components/mainscreen/mainscreen.jsx";
+import FilterPanel from "./components/gs-filterscreen/gs-filterscreen.jsx";
+import Maintenance from "./components/gs-mainscreen/gs-mainscreen.jsx";
 import EditDashboard from "./components/editscreen/editscreen.jsx";
 import thresholdGridData from "./json/threshold.json";
 import suspendRestartGridData from "./json/suspend-restart.json";
-function setPrinterFriendly(api) {
-  //const eGridDiv = document.querySelector("#myGrid");
-  //eGridDiv.style.height = "";
-  api.setDomLayout("print");
-}
-function setNormal(api) {
-  const eGridDiv = document.querySelector("#myGrid");
-  eGridDiv.style.width = "auto";
-  eGridDiv.style.height = "500px";
-  api.setDomLayout(null);
-}
 
 const getCurrentDateTime = () => {
   let currentdate = new Date();
@@ -29,7 +18,7 @@ const getCurrentDateTime = () => {
   return datetime;
 };
 
-class Valued extends Component {
+class Gov extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,8 +29,8 @@ class Valued extends Component {
           "A record must be selected to perform this action",
         selectedReviewValue: { label: "Review", value: "review" },
         maintenanceGridData: [],
-        isGridMustPopulatedModalOpen: false,
-        gridMustBePopulateModalWarningMessage: "Grid must be populated",
+        openGridMustSelectedModal: false,
+        gridMustBePopulateModalWarningMessage: "Grid must be selected",
         isThresholdModalOpen: false,
         isSuspendRestartRepoModalOpen: false,
         isPublishValuedSecuritiesModalOpen: false,
@@ -96,21 +85,6 @@ class Valued extends Component {
         edittedRowsData: [],
         thresholdGridData: [],
         suspendRestartGridData: [],
-        suspendRestartTireData: [
-          { label: "1", value: "one", isChecked: false },
-          { label: "2", value: "two", isChecked: false },
-          { label: "3", value: "three", isChecked: false },
-          { label: "4", value: "four", isChecked: false },
-        ],
-        isAllSuspendRestartTireChecked: false,
-        selectedGridRowData: [],
-        selectedGridRows: [],
-        isRecordMustSelectedPopupOpen: false,
-        RecordMustBeSelectedWarningMessage:
-          "Record must be selected to override",
-        isPriceOverrideConfirmModalOpen: false,
-        priceOverrideConfirmWarningMessage:
-          "Are you sure to ovveride the value",
       },
       editDashboardData: { showEditDashboardGrid: true },
       filterPanelData: {
@@ -169,27 +143,15 @@ class Valued extends Component {
         occSymbolSearchValue: "",
         isAllTypeChecked: false,
         typeData: [
-          {
-            label: "Common Stock",
-            value: "commonStock",
-            isChecked: false,
-            list: "list1",
-          },
+          { label: "Common Stock", value: "commonStock", isChecked: false },
           {
             label: "Preffered Stock",
             value: "prefferedStock",
             isChecked: false,
-            list: "list1",
           },
-
-          {
-            label: "Corporate Debt",
-            value: "corporateDebt",
-            isChecked: false,
-            list: "list1",
-          },
-          { label: "Index", value: "index", isChecked: false, list: "list2" },
-          { label: "FMS", value: "fms", isChecked: false, list: "list2" },
+          { label: "Index", value: "index", isChecked: false },
+          { label: "Corporate Debt", value: "corporateDebt", isChecked: false },
+          { label: "FMS", value: "fms", isChecked: false },
         ],
         selectClearedOptions: [
           { label: "BOTH", value: "ClearedAndNonCleared" },
@@ -258,12 +220,48 @@ class Valued extends Component {
         },
         isEditedRecordChecked: false,
         editedRecordValue: "",
+        isAllTypeChecked: false,
+        typeData: [
+          { label: "Bills", value: "bills", isChecked: false },
+          { label: "Notes", value: "notes", isChecked: false },
+          { label: "Bonds", value: "bonds", isChecked: false },
+          { label: "STRP", value: "strp", isChecked: false },
+          { label: "TIPS", value: "tips", isChecked: false },
+          { label: "TPST", value: "tpst", isChecked: false },
+        ],
+        currency: [
+          { label: "US Dollar", value: "usDollar", isChecked: false },
+          {
+            label: "Canadian Dollar",
+            value: "canadianDollar",
+            isChecked: false,
+          },
+        ],
+        issueType: [
+          { label: "U.S. Government", value: "usGovernment", isChecked: false },
+          {
+            label: "Canadian Government",
+            value: "canadianGoverenment",
+            isChecked: false,
+          },
+          {
+            label: "Gov. Sponsored Entr.",
+            value: "govSponsorEntr",
+            isChecked: false,
+          },
+        ],
+
+        flagStatusData: [{ label: "All", value: "All" }],
+        selectedFlagStatusValue: { label: "All", value: "All" },
+        fromMaturityDate: new Date(),
+        toMaturityDate: new Date(),
+        isFromMaturityAndToMaturityDisabled: false,
+        isAllIssueTypeChecked: false,
+        isAllCurrencyChecked: false,
       },
     };
-
-    this.onChangeCuspinValue = this.onChangeCuspinValue.bind(this);
   }
-  //=====================Filter Panel Methods====================
+  //------------------FilterPanel Methods-------------------------------
   onChangeCuspinValue(e) {
     let data = this.state.filterPanelData.cuspinData;
     let filterPanelData = this.state.filterPanelData;
@@ -289,18 +287,6 @@ class Valued extends Component {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.cuspinValue = selectedValue;
     filterPanelData.cuspinSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onChangeCurrHistValue = (e) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedCurrHistValue = e.value;
-    if (e.value === "CURRENT") {
-      filterPanelData.isFromAndStDisabled = true;
-    } else {
-      filterPanelData.isFromAndStDisabled = false;
-    }
     this.setState({
       filterPanelData,
     });
@@ -437,7 +423,6 @@ class Valued extends Component {
     filterPanelData.isAllTireChecked = isAllTireChecked;
     this.setState({ filterPanelData });
   };
-
   onChangeClearedValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedClearedValue = selectedValue;
@@ -502,20 +487,105 @@ class Valued extends Component {
   onClickReset = () => {
     let filterPanelData = this.state.filterPanelData;
     let intialFilterPanelState = this.state.intialFilterPanelState;
+    //alert(JSON.stringify(intialFilterPanelState));
     let data = { ...filterPanelData, ...intialFilterPanelState };
     console.log("final object is", data);
-    console.log("before", intialFilterPanelState.selectedreviewNeededValue);
-    console.log("after", filterPanelData.selectedreviewNeededValue);
 
-    this.setState(() => {
-      return {
-        filterPanelData: data,
-      };
+    //this.setState({ filterPanelData: intialFilterPanelState });
+    this.setState({ filterPanelData: data });
+  };
+  onChangeCurrHistValue = (e) => {
+    alert(JSON.stringify(e));
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedCurrHistValue = e.value;
+    if (e.value === "CURRENT") {
+      filterPanelData.isFromAndStDisabled = true;
+    } else {
+      filterPanelData.isFromAndStDisabled = false;
+    }
+    this.setState({
+      filterPanelData,
     });
   };
-  //========================Maintenance Methods====================================
-  onClickPriceRollOverrideButton = (selectedGridRows) => {
-    console.log(selectedGridRows);
+  setFromMaturityDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    console.log(filterPanelData.fromMaturityDate);
+    filterPanelData.fromMaturityDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  setToMaturityDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    console.log(filterPanelData.toMaturityDate);
+    filterPanelData.toMaturityDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  onAllCurrencyChecked = (event) => {
+    let currencyData = this.state.filterPanelData.currency;
+    let filterPanelData = this.state.filterPanelData;
+
+    currencyData.forEach((currency) => {
+      return (currency.isChecked = event.target.checked);
+    });
+    filterPanelData.currencyData = currencyData;
+    filterPanelData.isAllCurrencyChecked = !filterPanelData.isAllCurrencyChecked;
+    this.setState({ filterPanelData });
+  };
+  onSelectCurrencyCheckbox = (event) => {
+    let currencyData = this.state.filterPanelData.currency;
+    let filterPanelData = this.state.filterPanelData;
+    let isAllCurrencyChecked = false;
+    let selectionCount = 0;
+    currencyData.forEach((currency) => {
+      if (currency.value === event.target.value)
+        currency.isChecked = event.target.checked;
+
+      if (currency.isChecked) {
+        selectionCount++;
+      }
+      isAllCurrencyChecked =
+        selectionCount === currencyData.length ? true : false;
+    });
+    filterPanelData.currencyData = currencyData;
+    filterPanelData.isAllCurrencyChecked = isAllCurrencyChecked;
+    this.setState({ filterPanelData });
+  };
+  onSelectIssueTypeCheckbox = (event) => {
+    let issueTypeData = this.state.filterPanelData.issueType;
+    let filterPanelData = this.state.filterPanelData;
+    let isAllIssueTypeChecked = false;
+    let selectionCount = 0;
+    issueTypeData.forEach((issue) => {
+      if (issue.value === event.target.value)
+        issue.isChecked = event.target.checked;
+
+      if (issue.isChecked) {
+        selectionCount++;
+      }
+      isAllIssueTypeChecked =
+        selectionCount === issueTypeData.length ? true : false;
+    });
+    filterPanelData.issueTypeData = issueTypeData;
+    filterPanelData.isAllIssueTypeChecked = isAllIssueTypeChecked;
+    this.setState({ filterPanelData });
+  };
+  onAllIssueTypeChecked = (event) => {
+    let issueTypeData = this.state.filterPanelData.issueType;
+    let filterPanelData = this.state.filterPanelData;
+
+    issueTypeData.forEach((issue) => {
+      return (issue.isChecked = event.target.checked);
+    });
+    filterPanelData.issueTypeData = issueTypeData;
+    filterPanelData.isAllissueTypeChecked = !filterPanelData.isAllissueTypeChecked;
+    this.setState({ filterPanelData });
+  };
+
+  //---------------------MaintenanceScreen Methods----------------------------------------------
+  onClickPriceRollOverrideButton = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
     maintenanceScreenData.isPriceRollOverrideModalOpen = !maintenanceScreenData.isPriceRollOverrideModalOpen;
     this.setState({
@@ -543,9 +613,9 @@ class Valued extends Component {
       });
     }
   };
-  toggleGridMustBePopulateddModal = () => {
+  closeGridMustSelectedModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isGridMustPopulatedModalOpen = !maintenanceScreenData.isGridMustPopulatedModalOpen;
+    maintenanceScreenData.openGridMustSelectedModal = false;
     this.setState({
       maintenanceScreenData,
     });
@@ -595,18 +665,6 @@ class Valued extends Component {
     this.setState({
       maintenanceScreenData,
     });
-  };
-
-  onRefreshMaintenanceGridData = () => {
-    let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.maintenanceRowData = [];
-    this.setState({
-      maintenanceScreenData,
-    });
-
-    setTimeout(() => {
-      this.loadDataOnRefresh();
-    }, 3000);
   };
   loadDataOnRefresh() {
     this.showLoading();
@@ -735,65 +793,24 @@ class Valued extends Component {
       priceRollOverridePriceTypeValue:
         maintenanceScreenData.priceRollOverridePriceTypeValue,
     };
+    alert(JSON.stringify(priceRollOverrideObjecttoSave));
+    console.log(priceRollOverrideObjecttoSave);
 
-    console.log("price override object", priceRollOverrideObjecttoSave);
-
-    maintenanceScreenData.isPriceOverrideConfirmModalOpen = true;
-
+    maintenanceScreenData.isPriceRollOverrideModalOpen = false;
     this.setState({ maintenanceScreenData });
   };
-  togglePriceOverrideConfirmModalOpen = (isConfirmed) => {
+  onRefreshMaintenanceGridData = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceOverrideConfirmModalOpen = !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
-    maintenanceScreenData.isPriceOverrideConfirmed = isConfirmed;
-    if (maintenanceScreenData.isPriceOverrideConfirmed) {
-      maintenanceScreenData.isPriceRollOverrideModalOpen = false;
-    } else {
-      maintenanceScreenData.isPriceRollOverrideModalOpen = true;
-    }
-    this.setState({ maintenanceScreenData });
-  };
-  onAllSuspendRestartTireChecked = (event) => {
-    alert();
-    let suspendRestartTireData = this.state.maintenanceScreenData
-      .suspendRestartTireData;
-    let maintenanceScreenData = this.state.maintenanceScreenData;
-
-    suspendRestartTireData.forEach((tire) => {
-      return (tire.isChecked = event.target.checked);
-    });
-    maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked = !maintenanceScreenData.isAllSuspendRestartTireChecked;
-    this.setState({ maintenanceScreenData });
-  };
-  onSelectSuspendRestartTireCheckbox = (event) => {
-    let suspendRestartTireData = this.state.maintenanceScreenData
-      .suspendRestartTireData;
-    let maintenanceScreenData = this.state.maintenanceScreenData;
-    let isAllSuspendRestartTireChecked = false;
-    let selectionCount = 0;
-    suspendRestartTireData.forEach((tire) => {
-      if (tire.value === event.target.value)
-        tire.isChecked = event.target.checked;
-
-      if (tire.isChecked) {
-        selectionCount++;
-      }
-      isAllSuspendRestartTireChecked =
-        selectionCount === suspendRestartTireData.length ? true : false;
-    });
-    maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked = isAllSuspendRestartTireChecked;
-    this.setState({ maintenanceScreenData });
-  };
-  toggleRecordMustSelectedPopupWarningModal = () => {
-    let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isRecordMustSelectedPopupOpen = !maintenanceScreenData.isRecordMustSelectedPopupOpen;
+    maintenanceScreenData.maintenanceRowData = [];
     this.setState({
       maintenanceScreenData,
     });
+
+    setTimeout(() => {
+      this.loadDataOnRefresh();
+    }, 3000);
   };
-  //=========================Edit Dashboard Methods======================================
+  //-------------Edit Dashboard Methods---------------------------------
   toggleEditDashboardGrid = () => {
     let editDashboardData = this.state.editDashboardData;
     editDashboardData.showEditDashboardGrid = !this.state.editDashboardData
@@ -811,10 +828,9 @@ class Valued extends Component {
         .setAttribute("style", "transform:rotate(360deg)");
     }
   };
-  //=============================================================================
+  //--------------------------------------------------------------------
   componentDidMount() {
     let filterPanelData = this.state.filterPanelData;
-
     let filterObject1 = this.state.filterPanelData;
     filterPanelData.isFromAndStDisabled = true;
 
@@ -841,355 +857,22 @@ class Valued extends Component {
       intialFilterPanelState: data,
       filterPanelData,
     });
-
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
-    ele.append(div);
   }
-
   getFilteredGridData() {
     return [
       {
         "#": "",
-        activityDate: "test",
         cuspin: "test",
-        isin: "test",
-        symbol: "test",
         tier: 1,
         type: 1,
-        marketSymbol: "",
-        micCode: "11",
         currency: "USA",
         thomson_price: 11,
         bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 4455,
-        icePrice: 86,
-        idsiPrice: 23,
-        exchangePrice: 333,
-        previousPrice: 33,
-        finalPrice: 33,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
+        ice_price: 123,
+        exchange_price: 23,
+        previous_price: 33,
+        final_price: 55,
+        final_price_end_date: "",
       },
       {
         "#": "",
@@ -1207,65 +890,177 @@ class Valued extends Component {
       },
       {
         "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
+        cuspin: "test2",
         tier: 1,
         type: 1,
-        marketSymbol: "",
-        micCode: "11",
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
         currency: "USA",
         thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
       },
       {
         "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
+        cuspin: "test2",
         tier: 1,
         type: 1,
-        marketSymbol: "",
-        micCode: "11",
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
         currency: "USA",
         thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
+      },
+      {
+        "#": "",
+        cuspin: "test2",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
+      },
+      {
+        "#": "",
+        cuspin: "test2",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
+      },
+      {
+        "#": "",
+        cuspin: "test2",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
+      },
+      {
+        "#": "",
+        cuspin: "test2",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 99,
+        bloomberg_price: 1111,
+        ice_price: 445,
+        exchange_price: 2653,
+        previous_price: 3365,
+        final_price: 56565,
+        final_price_end_date: "",
+      },
+      ,
+      {
+        "#": "",
+        cuspin: "test1",
+        tier: 1,
+        type: 1,
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 11,
+        ice_price: 898,
+        exchange_price: 446,
+        previous_price: 676,
+        final_price: 55,
+        final_price_end_date: "",
       },
       {
         "#": "",
@@ -1285,50 +1080,18 @@ class Valued extends Component {
   }
 
   //===============AG-GRID=====================================
-
-  onGridReady = (params) => {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-  };
-
-  onFirstDataRendered = (params) => {
-    params.api.expandAll();
-  };
-
-  onBtnExport = () => {
-    this.gridApi.exportDataAsCsv();
-  };
-  onBtPrint = () => {
-    const api = this.gridApi;
-    setPrinterFriendly(api);
-    setTimeout(function () {
-      print();
-      setNormal(api);
-    }, 2000);
-  };
-  showLessOrColumns = () => {
-    let showAllColumns = this.state.showAllColumns;
-    this.setState({
-      showAllColumns: !showAllColumns,
-    });
-  };
   getSelectedRowData = () => {
     let selectedNodes = this.gridApi.getSelectedNodes();
     let selectedData = selectedNodes.map((node) => node.data);
     alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
-    this.setState({
-      selectedGridRowData: selectedData,
-    });
+    return selectedData;
   };
-  onSelectionChanged = () => {
-    const selectedRows = this.gridApi.getSelectedRows();
-    console.log("Grid Rows selected", selectedRows);
+  onGridReady = (params) => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.selectedGridRows = selectedRows;
-    this.setState({
-      maintenanceScreenData,
-    });
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
   };
+
   getEditingCells() {
     var cellDefs = this.gridApi.getEditingCells();
     console.log(JSON.stringify(cellDefs));
@@ -1350,7 +1113,7 @@ class Valued extends Component {
     this.setState({ maintenanceScreenData });
     console.log("updated  grid rows", maintenanceScreenData.edittedRowsData);
   };
-  //-----------------------------------
+  //============================================================
 
   render() {
     let data = this.state;
@@ -1381,6 +1144,12 @@ class Valued extends Component {
           onSelectEditedRecordValue={(e) => this.onSelectEditedRecordValue(e)}
           onClickFiler={this.onClickFiler}
           onClickReset={this.onClickReset}
+          onAllCurrencyChecked={(e) => this.onAllCurrencyChecked(e)}
+          onSelectCurrencyCheckbox={(e) => this.onSelectCurrencyCheckbox(e)}
+          onSelectIssueTypeCheckbox={(e) => this.onSelectIssueTypeCheckbox(e)}
+          onAllIssueTypeChecked={(e) => this.onAllIssueTypeChecked(e)}
+          setFromMaturityDate={(e) => this.setFromMaturityDate(e)}
+          setToMaturityDate={(e) => this.setToMaturityDate(e)}
         />
         <div id="editMaint">
           <Maintenance
@@ -1390,9 +1159,7 @@ class Valued extends Component {
               this.closePriceRollOverrideWarningModal
             }
             onSelectReview={(e) => this.onSelectReview(e)}
-            toggleGridMustBePopulateddModal={
-              this.toggleGridMustBePopulateddModal
-            }
+            closeGridMustSelectedModal={this.closeGridMustSelectedModal}
             closeThresholdModal={this.closeThresholdModal}
             onClickThresholdButton={this.onClickThresholdButton}
             onClickSuspendRestartRepoButton={
@@ -1425,23 +1192,7 @@ class Valued extends Component {
             onSavePriceOverrideValue={this.onSavePriceOverrideValue}
             getSelectedRowData={this.getSelectedRowData}
             onGridReady={this.onGridReady}
-            onBtnExport={this.onBtnExport}
-            onBtPrint={this.onBtPrint}
             onCellValueChanged={this.onCellValueChanged}
-            onSelectSuspendRestartTireCheckbox={(e) =>
-              this.onSelectSuspendRestartTireCheckbox(e)
-            }
-            onAllSuspendRestartTireChecked={(e) =>
-              this.onAllSuspendRestartTireChecked(e)
-            }
-            toggleRecordMustSelectedPopupWarningModal={
-              this.toggleRecordMustSelectedPopupWarningModal
-            }
-            onSelectionChanged={this.onSelectionChanged}
-            togglePriceOverrideConfirmModalOpen={
-              this.togglePriceOverrideConfirmModalOpen
-            }
-            onFirstDataRendered={this.onFirstDataRendered.bind(this)}
           ></Maintenance>
           <EditDashboard
             toggleEditDashboardGrid={this.toggleEditDashboardGrid}
@@ -1453,4 +1204,4 @@ class Valued extends Component {
   }
 }
 
-export default Valued;
+export default Gov;*/

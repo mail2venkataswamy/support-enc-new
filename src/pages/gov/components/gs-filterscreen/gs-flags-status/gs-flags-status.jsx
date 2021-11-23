@@ -1,16 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import SelectBox from "../../../../../components/common/simple-dropdown/dropdown.jsx";
-import "./flags-status.scss";
-//import ValuedContext from "../../../../../components/context/valued-context.jsx";
+import "./gs-flags-status.scss";
+import GovContext from "../../../../../components/context/gov-context.jsx";
 
-const Flagsstatus = (props) => {
+const Flagsstatus = () => {
+  const context = useContext(GovContext);
   const {
-    reviewNeededOptions,
     flaggedEditOptions,
-    isEditedRecordChecked,
+    onChangeFlaggedEditValue,
     selectedFlaggedEditValue,
+    reviewNeededOptions,
+    onChangeReviewNeededValue,
     selectedreviewNeededValue,
-  } = props.data.filterPanelData;
+    onSelectEditedRecordValue,
+    isEditedRecordChecked,
+  } = {
+    ...context.state.filterPanelData,
+    ...context,
+  };
 
   return (
     <>
@@ -23,19 +30,18 @@ const Flagsstatus = (props) => {
             <SelectBox
               type="single"
               options={flaggedEditOptions}
-              onChange={props.onChangeFlaggedEditValue}
+              onChange={onChangeFlaggedEditValue}
               selectedValue={selectedFlaggedEditValue}
             ></SelectBox>
           </div>
         </div>
-        <p></p>
         <div className="labelAndReviewNeededWrapper">
           <div className="reviewNeededLabel">Review Needed:</div>
           <div className="reviewNeededWrapper">
             <SelectBox
               type="single"
               options={reviewNeededOptions}
-              onChange={props.onChangeReviewNeededValue}
+              onChange={onChangeReviewNeededValue}
               selectedValue={selectedreviewNeededValue}
             ></SelectBox>
           </div>
@@ -46,7 +52,7 @@ const Flagsstatus = (props) => {
               id={"editedRecord"}
               type="checkbox"
               value="editedRecord"
-              onClick={props.onSelectEditedRecordValue}
+              onClick={(e) => onSelectEditedRecordValue(e)}
               checked={isEditedRecordChecked}
             ></input>
             {"Edited Records"}

@@ -1,0 +1,62 @@
+.maintenanceHeaders .wrapper {
+  display: flex;
+  background-color: #9ecaf7;
+}
+
+.showColumnsPrintRefreshExportWrapper {
+  justify-content: flex-end;
+  flex: 1;
+  display: flex;
+}
+
+#threshold,
+#supendRestart,
+#Publish,
+#PriceRollOverride,
+#review,
+#showAllColumns,
+#refresh,
+#print,
+#export {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+#threshold:hover,
+#supendRestart:hover,
+#Publish:hover,
+#PriceRollOverride:hover,
+#review:hover,
+#showAllColumns:hover,
+#refresh:hover,
+#print:hover,
+#export:hover {
+  background: white;
+  border: solid 0.1px grey;
+  border-radius: 3px;
+}
+
+.dataHeadersButtonWrapper {
+  display: flex;
+}
+
+.maintenanceHeaders .Dropdown-control {
+  padding: 0 !important;
+  transition: all 200ms ease;
+  width: 130px !important;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.maintenanceHeaders .Dropdown-control .Dropdown-arrow {
+  position: absolute;
+  right: 44px;
+  top: 7px;
+  width: 0;
+}
+.maintenance .ag-paging-panel {
+  height: 20px;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
