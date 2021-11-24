@@ -3,7 +3,7 @@ import "./gs-filterscreen.scss";
 import ActivityDateRange from "./gs-activity-date-range/gs-activity-date-range.jsx";
 import Productinfo from "./gs-product-info/gs-product-info.jsx";
 import Flagsstatus from "./gs-flags-status/gs-flags-status.jsx";
-import ResetAndButton from "./filter-and-reset/filter-and-reset.jsx";
+import ResetAndButton from "./gs-filter-and-reset/gs-filter-and-reset.jsx";
 
 const filterscreen = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Buttonwrapper from "../../../../../components/common/button/button.jsx";
-import "./filter-and-reset.scss";
+import "./gs-filter-and-reset.scss";
 import GovContext from "../../../../../components/context/gov-context.jsx";
 
 const filterAndReset = () => {

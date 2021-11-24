@@ -6,12 +6,15 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./App-New";
 import ValuedProvider from "./components/provider/valued-provider.jsx";
 import GovdProvider from "./components/provider/gov-provider.jsx";
+import PrdeContext from "./components/provider/prde-provider.jsx";
 
 ReactDOM.render(
   <React.StrictMode>
     <ValuedProvider>
       <GovdProvider>
+      <PrdeContext>
         <App></App>
+      </PrdeContext>
       </GovdProvider>
     </ValuedProvider>
   </React.StrictMode>,

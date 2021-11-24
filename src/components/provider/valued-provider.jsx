@@ -159,7 +159,8 @@ class ValuedProvider extends Component {
     alert(" valued called contect");
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.editedRecordValue = e.target.value;
-    filterPanelData.isEditedRecordChecked = !filterPanelData.isEditedRecordChecked;
+    filterPanelData.isEditedRecordChecked =
+      !filterPanelData.isEditedRecordChecked;
     this.setState({ filterPanelData });
   };
   componentDidMount() {}

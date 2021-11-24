@@ -644,7 +644,8 @@ class GovProvider extends Component {
   onSelectEditedRecordValue = (e) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.editedRecordValue = e.target.value;
-    filterPanelData.isEditedRecordChecked = !filterPanelData.isEditedRecordChecked;
+    filterPanelData.isEditedRecordChecked =
+      !filterPanelData.isEditedRecordChecked;
     this.setState({ filterPanelData });
   };
 
@@ -722,7 +723,8 @@ class GovProvider extends Component {
       return (currency.isChecked = event.target.checked);
     });
     filterPanelData.currencyData = currencyData;
-    filterPanelData.isAllCurrencyChecked = !filterPanelData.isAllCurrencyChecked;
+    filterPanelData.isAllCurrencyChecked =
+      !filterPanelData.isAllCurrencyChecked;
     this.setState({ filterPanelData });
   };
   onSelectCurrencyCheckbox = (event) => {
@@ -771,7 +773,8 @@ class GovProvider extends Component {
       return (issue.isChecked = event.target.checked);
     });
     filterPanelData.issueTypeData = issueTypeData;
-    filterPanelData.isAllissueTypeChecked = !filterPanelData.isAllissueTypeChecked;
+    filterPanelData.isAllissueTypeChecked =
+      !filterPanelData.isAllissueTypeChecked;
     this.setState({ filterPanelData });
   };
 
@@ -779,14 +782,16 @@ class GovProvider extends Component {
   onClickPriceRollOverrideButton = (selectedGridRows) => {
     console.log(selectedGridRows);
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceRollOverrideModalOpen = !maintenanceScreenData.isPriceRollOverrideModalOpen;
+    maintenanceScreenData.isPriceRollOverrideModalOpen =
+      !maintenanceScreenData.isPriceRollOverrideModalOpen;
     this.setState({
       maintenanceScreenData,
     });
   };
   closePriceRollOverrideWarningModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceRollOverrideWarningModalOpen = !maintenanceScreenData.isPriceRollOverrideWarningModalOpen;
+    maintenanceScreenData.isPriceRollOverrideWarningModalOpen =
+      !maintenanceScreenData.isPriceRollOverrideWarningModalOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -807,7 +812,8 @@ class GovProvider extends Component {
   };
   toggleGridMustBePopulateddModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isGridMustPopulatedModalOpen = !maintenanceScreenData.isGridMustPopulatedModalOpen;
+    maintenanceScreenData.isGridMustPopulatedModalOpen =
+      !maintenanceScreenData.isGridMustPopulatedModalOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -894,7 +900,8 @@ class GovProvider extends Component {
       return (tire.isChecked = event.target.checked);
     });
     maintenanceScreenData.publishTireData = publishTireData;
-    maintenanceScreenData.isAllPublishTireChecked = !maintenanceScreenData.isAllPublishTireChecked;
+    maintenanceScreenData.isAllPublishTireChecked =
+      !maintenanceScreenData.isAllPublishTireChecked;
     this.setState({ maintenanceScreenData });
   };
   onSelectPublishTireCheckbox = (event) => {
@@ -943,7 +950,8 @@ class GovProvider extends Component {
       return (type.isChecked = event.target.checked);
     });
     maintenanceScreenData.publishTypeData = publishTypeData;
-    maintenanceScreenData.isAllPublishTypeChecked = !maintenanceScreenData.isAllPublishTypeChecked;
+    maintenanceScreenData.isAllPublishTypeChecked =
+      !maintenanceScreenData.isAllPublishTypeChecked;
     this.setState({ maintenanceScreenData });
   };
   onResetPublish = () => {
@@ -968,9 +976,10 @@ class GovProvider extends Component {
 
   closePriceRollOverrideModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    let isPriceRollOverrideModalOpen = this.state.maintenanceScreenData
-      .isPriceRollOverrideModalOpen;
-    maintenanceScreenData.isPriceRollOverrideModalOpen = !isPriceRollOverrideModalOpen;
+    let isPriceRollOverrideModalOpen =
+      this.state.maintenanceScreenData.isPriceRollOverrideModalOpen;
+    maintenanceScreenData.isPriceRollOverrideModalOpen =
+      !isPriceRollOverrideModalOpen;
     this.setState({ maintenanceScreenData });
   };
   onChangePriceOverrideValue = (e) => {
@@ -1006,7 +1015,8 @@ class GovProvider extends Component {
   };
   togglePriceOverrideConfirmModalOpen = (isConfirmed) => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceOverrideConfirmModalOpen = !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
+    maintenanceScreenData.isPriceOverrideConfirmModalOpen =
+      !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
     maintenanceScreenData.isPriceOverrideConfirmed = isConfirmed;
     if (maintenanceScreenData.isPriceOverrideConfirmed) {
       maintenanceScreenData.isPriceRollOverrideModalOpen = false;
@@ -1017,20 +1027,21 @@ class GovProvider extends Component {
   };
   onAllSuspendRestartTireChecked = (event) => {
     alert();
-    let suspendRestartTireData = this.state.maintenanceScreenData
-      .suspendRestartTireData;
+    let suspendRestartTireData =
+      this.state.maintenanceScreenData.suspendRestartTireData;
     let maintenanceScreenData = this.state.maintenanceScreenData;
 
     suspendRestartTireData.forEach((tire) => {
       return (tire.isChecked = event.target.checked);
     });
     maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked = !maintenanceScreenData.isAllSuspendRestartTireChecked;
+    maintenanceScreenData.isAllSuspendRestartTireChecked =
+      !maintenanceScreenData.isAllSuspendRestartTireChecked;
     this.setState({ maintenanceScreenData });
   };
   onSelectSuspendRestartTireCheckbox = (event) => {
-    let suspendRestartTireData = this.state.maintenanceScreenData
-      .suspendRestartTireData;
+    let suspendRestartTireData =
+      this.state.maintenanceScreenData.suspendRestartTireData;
     let maintenanceScreenData = this.state.maintenanceScreenData;
     let isAllSuspendRestartTireChecked = false;
     let selectionCount = 0;
@@ -1045,12 +1056,14 @@ class GovProvider extends Component {
         selectionCount === suspendRestartTireData.length ? true : false;
     });
     maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked = isAllSuspendRestartTireChecked;
+    maintenanceScreenData.isAllSuspendRestartTireChecked =
+      isAllSuspendRestartTireChecked;
     this.setState({ maintenanceScreenData });
   };
   toggleRecordMustSelectedPopupWarningModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isRecordMustSelectedPopupOpen = !maintenanceScreenData.isRecordMustSelectedPopupOpen;
+    maintenanceScreenData.isRecordMustSelectedPopupOpen =
+      !maintenanceScreenData.isRecordMustSelectedPopupOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -1058,8 +1071,8 @@ class GovProvider extends Component {
   //=========================Edit Dashboard Methods======================================
   toggleEditDashboardGrid = () => {
     let editDashboardData = this.state.editDashboardData;
-    editDashboardData.showEditDashboardGrid = !this.state.editDashboardData
-      .showEditDashboardGrid;
+    editDashboardData.showEditDashboardGrid =
+      !this.state.editDashboardData.showEditDashboardGrid;
     this.setState({
       editDashboardData,
     });
@@ -1074,41 +1087,6 @@ class GovProvider extends Component {
     }
   };
   //=============================================================================
-  componentDidMount() {
-    let filterPanelData = this.state.filterPanelData;
-
-    let filterObject1 = this.state.filterPanelData;
-    filterPanelData.isFromAndStDisabled = true;
-
-    let filterObject = {
-      selectedCurrHistValue: filterPanelData.selectedCurrHistValue,
-      cuspinValue: filterPanelData.cuspinValue,
-      fromDate: filterPanelData.fromDate,
-      toDate: filterPanelData.toDate,
-      isinValue: filterPanelData.isinValue,
-      occSymbolValue: filterPanelData.occSymbolValue,
-      typeData: filterPanelData.typeData,
-      selectedClearedValue: filterPanelData.selectedClearedValue,
-      selectedCrossMarginValue: filterPanelData.selectedCrossMarginValue,
-      selectedCurrencyValue: filterPanelData.selectedCurrencyValue,
-      tierLevelData: filterPanelData.tierLevelData,
-      selectedFlaggedEditValue: filterPanelData.selectedFlaggedEditValue,
-      selectedreviewNeededValue: filterPanelData.selectedreviewNeededValue,
-      isEditedRecordChecked: filterPanelData.isEditedRecordChecked,
-      editedRecordValue: filterPanelData.editedRecordValue,
-    };
-    let data = { ...filterPanelData, ...filterObject };
-
-    this.setState({
-      intialFilterPanelState: data,
-      filterPanelData,
-    });
-
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
-    ele.append(div);
-  }
 
   getFilteredGridData() {
     return [
@@ -1570,7 +1548,8 @@ class GovProvider extends Component {
   };
   showLessOrColumns = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.showAllColumns = !maintenanceScreenData.showAllColumns;
+    maintenanceScreenData.showAllColumns =
+      !maintenanceScreenData.showAllColumns;
     this.setState({
       maintenanceScreenData,
     });
@@ -1645,10 +1624,10 @@ class GovProvider extends Component {
       filterPanelData,
     });
 
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
+    /*     let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
-    ele.append(div);
+    ele.append(div); */
   }
   render() {
     return (
@@ -1683,18 +1662,18 @@ class GovProvider extends Component {
           setToMaturityDate: (e) => this.setToMaturityDate(e),
           //=================================================================
           onClickPriceRollOverrideButton: this.onClickPriceRollOverrideButton,
-          closePriceRollOverrideWarningModal: this
-            .closePriceRollOverrideWarningModal,
+          closePriceRollOverrideWarningModal:
+            this.closePriceRollOverrideWarningModal,
           onSelectReview: (e) => this.onSelectReview(e),
           toggleGridMustBePopulateddModal: this.toggleGridMustBePopulateddModal,
           closeThresholdModal: this.closeThresholdModal,
           onClickThresholdButton: this.onClickThresholdButton,
           onClickSuspendRestartRepoButton: this.onClickSuspendRestartRepoButton,
           closeSuspendRestartRepoModal: this.closeSuspendRestartRepoModal,
-          closePublishValuedSecuritiesModal: this
-            .closePublishValuedSecuritiesModal,
-          onClickPublishValuedSecuritiesButton: this
-            .onClickPublishValuedSecuritiesButton,
+          closePublishValuedSecuritiesModal:
+            this.closePublishValuedSecuritiesModal,
+          onClickPublishValuedSecuritiesButton:
+            this.onClickPublishValuedSecuritiesButton,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onAllPublishTireChecked: (e) => this.onAllPublishTireChecked(e),
           onSelectPublishTireCheckbox: (e) =>
@@ -1718,11 +1697,11 @@ class GovProvider extends Component {
             this.onSelectSuspendRestartTireCheckbox(e),
           onAllSuspendRestartTireChecked: (e) =>
             this.onAllSuspendRestartTireChecked(e),
-          toggleRecordMustSelectedPopupWarningModal: this
-            .toggleRecordMustSelectedPopupWarningModal,
+          toggleRecordMustSelectedPopupWarningModal:
+            this.toggleRecordMustSelectedPopupWarningModal,
           onSelectionChanged: this.onSelectionChanged,
-          togglePriceOverrideConfirmModalOpen: this
-            .togglePriceOverrideConfirmModalOpen,
+          togglePriceOverrideConfirmModalOpen:
+            this.togglePriceOverrideConfirmModalOpen,
           onFirstDataRendered: this.onFirstDataRendered,
           showLessOrColumns: this.showLessOrColumns,
           //=============Edit Dahsboard==============
