@@ -1,0 +1,47 @@
+Protected;
+
+import React from "react";
+import { useRouteMatch, Route, Switch, Link } from "react-router-dom";
+import _404 from "../Compositions/_404";
+import ValuedSecurites from "../Pages/ValuedSecurities";
+import Govt from "../Pages/GovernmentSecurities";
+import "./style.scss";
+import logo from "../../assets/occ-logo.png";
+import PriceRepoDataExport from "../Pages/PriceRepoDataExport";
+
+const Protected = () => {
+  const { path } = useRouteMatch();
+  return (
+    <div id="containerDiv">
+      <div id="nav-div">
+        <img src={logo} id="headerLogo" alt="The OCC" />
+        <ul id="nav-ul">
+          <li className="nav-li">
+            <Link to="/">Valued Securities</Link>
+          </li>
+          <li className="nav-li">
+            <Link to="/govt">Goverment Securities</Link>
+          </li>
+          <li className="nav-li">
+            <Link to="/prde">Price Repo Data Export</Link>
+          </li>
+        </ul>
+      </div>
+      <Switch>
+        <Route exact path={`${path}`}>
+          <ValuedSecurites />
+        </Route>
+        <Route path={`${path}govt`}>
+          <Govt />
+        </Route>
+        <Route path={`${path}prde`}>
+          <PriceRepoDataExport />
+        </Route>
+        <Route path={`${path}*`} component={_404} />
+      </Switch>
+    </div>
+  );
+};
+
+export { Protected };
+
