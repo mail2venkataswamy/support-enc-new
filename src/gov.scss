@@ -1,0 +1,676 @@
+//Edit dashboard css ----------------
+@import "../../../../light.scss";
+.editDashboard {
+  border: none;
+}
+.toggle {
+  display: flex;
+  color: $white;
+  justify-content: flex-end;
+  flex: 1;
+  position: relative;
+  left: -8px;
+  top: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 2%;
+}
+
+.mainscreenTitleAndToggle {
+  display: flex;
+}
+.mainscreenHeaderTitle {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  color: $black;
+  margin: 0px 0px 25px 15px;
+}
+// Style.scss
+#editDashboard {
+  border: 1px solid grey;
+}
+
+//Filter Panel css------------------------------
+//Activity date range css
+
+.activitydateRangeWrapper {
+  margin: 0;
+  /*   text-align: center; */
+  display: block;
+}
+.labelAndHistCurrWrapper {
+  /*   width: 70%;
+    display: inline-block; */
+}
+.labelAndHistCurrWrapper .wrapper {
+  display: flex;
+}
+.dateRangeWrapper {
+  /*  display: inline-block; */
+}
+
+.fromDateLabelAndPickerWrapper,
+.toDateLabelAndPickerWrapper {
+  display: flex;
+}
+.fromDateLabelAndPickerWrapper .label,
+.toDateLabelAndPickerWrapper .label {
+  width: 30%;
+}
+
+.currHistLabel {
+  width: 30%;
+}
+.datePickerWrapper,
+.dropdownWrapper {
+  /*   width: 70%;
+    flex: 0;
+    justify-content: flex-end;
+    display: inline-block; */
+}
+legend {
+  color: blue;
+}
+
+//Date Range picker css ----------------------------
+.fromDateLabelAndPickerWrapper,
+.toDateLabelAndPickerWrapper {
+  display: flex;
+}
+
+.fromDateLabelAndPickerWrapper.label,
+.toDateLabelAndPickerWrapper.label {
+  width: 30%;
+}
+.datePickerWrapper {
+  width: 70%;
+  flex: 0;
+  justify-content: flex-end;
+  display: flex;
+}
+.wrapper {
+  display: flex;
+}
+
+//Filter and reset ------------------------------
+.filterAndResetButtonWrapper {
+  text-align: center;
+  width: 50%;
+  float: right;
+}
+#filter-container {
+  display: inline-block;
+  padding-right: 10px;
+  button {
+    width: 60px;
+    padding: 2px;
+  }
+}
+#reset-container {
+  display: inline-block;
+  button {
+    width: 60px;
+    padding: 2px;
+  }
+}
+// Filter status --------------------------------
+
+.flagStatusFieldset {
+  margin-top: 0px !important;
+  .labelAndFlaggedWrapper,
+  .labelAndReviewNeededWrapper,
+  .editedRecordsWrapper {
+    display: flex;
+  }
+  .flaggedEditLabel,
+  .reviewNeededLabel,
+  .editedRecordsWrapper label {
+    width: 30%;
+  }
+
+  .flaggedEditwrapper,
+  .reviewNeededWrapper {
+    width: 70%;
+  }
+}
+
+.labelAndFlaggedWrapper {
+  padding-top: 12px;
+}
+// input suggestions --------------------------
+.inputSuggestionWrapper ul {
+  position: relative;
+  list-style: none;
+  // float: left;
+  // right: 36px;
+  padding: 5px 10px;
+  .suggestionLiItemWrapper {
+    padding: 3px 0px;
+  }
+}
+//Product info css ----------------------------------
+.prodcutInfoWrapper fieldset {
+  min-width: 0;
+}
+.cuspinLabel {
+  display: inline-block;
+  width: 30%;
+}
+.cuspinInputWrapper {
+  display: inline-block;
+}
+.isinLabelAndInputWrapper,
+.occSymbolLabelAndInputWrapper,
+.cuspinLabelAndInputWrapper {
+  /*   text-align: center; */
+}
+.isinLabel {
+  display: inline-block;
+  width: 30%;
+}
+.isinInputWrapper {
+  display: inline-block;
+}
+
+.occSymbolLabel {
+  display: inline-block;
+  width: 30%;
+}
+.occSymbolInputWrapper {
+  display: inline-block;
+}
+.typeLabelAndValue,
+.tierLabelAndValue,
+.labelAndClearedWrapper,
+.labelAndCrossMarginWrapper,
+.labelAndCurrencyWrapper {
+  display: flex;
+}
+
+.tierLabelAndValue .label,
+.typeLabelAndValue .label,
+.currencyLabel,
+.croddMarginLabel,
+.Clearedlabel {
+  width: 30%;
+}
+.prodcutInfoWrapper fieldset {
+  min-width: 0;
+}
+.cuspinLabel {
+  display: inline-block;
+  width: 30%;
+}
+.cuspinInputWrapper {
+  display: inline-block;
+}
+.isinLabelAndInputWrapper,
+.occSymbolLabelAndInputWrapper,
+.cuspinLabelAndInputWrapper {
+  /*   text-align: center; */
+}
+.isinLabel {
+  display: inline-block;
+  width: 30%;
+}
+.isinInputWrapper {
+  display: inline-block;
+}
+
+.occSymbolLabel {
+  display: inline-block;
+  width: 30%;
+}
+.occSymbolInputWrapper {
+  display: inline-block;
+}
+.typeLabelAndValue,
+.tierLabelAndValue,
+.labelAndClearedWrapper,
+.labelAndCrossMarginWrapper,
+.labelAndCurrencyWrapper {
+  display: flex;
+}
+
+.tierLabelAndValue .label,
+.typeLabelAndValue .label,
+.currencyLabel,
+.crossMarginLabel,
+.Clearedlabel {
+  width: 30%;
+}
+
+.currencyWrapper,
+.clearedwrapper,
+.crossMarginWrapper {
+  width: 70%;
+}
+.tierLabelAndValue {
+  padding-top: 10px;
+  top: 0px !important;
+  margin-top: 0px !important;
+  ul {
+    top: 0px !important;
+  }
+}
+.typeLabelAndValue {
+  padding-top: 10px;
+  top: 0px !important;
+  margin-top: 0px !important;
+  height: 72px;
+  ul {
+    top: -5px !important;
+  }
+}
+.listItemWrapper {
+  margin-top: 0px !important;
+  li {
+    margin-left: 8px !important;
+  }
+}
+
+.tierLabelAndValue .listItemWrapper {
+  display: flex;
+  flex-direction: row;
+}
+.tierLabelAndValue .listItemWrapper div {
+  padding-right: 14px;
+}
+// Tier level css --------------------------------------
+.tierLevelWrapper {
+  display: flex;
+}
+.tierLevelWrapper .All,
+.tierLevelWrapper .one,
+.tierLevelWrapper .two,
+.tierLevelWrapper .three,
+.tierLevelWrapper .four {
+  padding-right: 23px;
+  min-width: 0;
+}
+// type css --------------------------------------
+.typeWrapper {
+  display: flex;
+}
+.typeWrapper .All,
+.typeWrapper .commonStock,
+.typeWrapper .prefferedStock,
+.typeWrapper .index,
+.typeWrapper .corporateDebt,
+.typeWrapper .fms {
+  padding-right: 23px;
+  min-width: 0;
+}
+
+.rTable {
+  display: table;
+  border-collapse: collapse;
+  /*   width: 100%; */
+}
+.rTableRow {
+  display: table-row;
+  display: table-row-group;
+}
+
+.rTableCell {
+  display: table-cell;
+  text-align: left;
+}
+//Main Filter panel css-------------------------------
+@import "../../../../light.scss";
+
+.filterPanel {
+  // border: 1px solid grey;
+  width: 26%;
+  float: left;
+  background: rgb(255, 255, 255);
+  border-radius: 30px;
+  padding: 25px 30px;
+  box-sizing: border-box;
+}
+.left {
+  margin: 0px 30px 0px 20px;
+  height: calc(100% - 90px);
+}
+.filterHeaderTitle {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  color: $black;
+  margin-left: 25%;
+}
+
+//Maintenance css -------------------------
+//Maintenance grid
+@import "../../../../../light.scss";
+.ag-paging-panel {
+  height: 20px !important;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  background-color: $white;
+  color: $ag-grid-header-text-color;
+  text-align: left;
+  font-size: 11px;
+  font-weight: bold;
+  .ag-cell-label-container {
+    width: 75px !important;
+  }
+}
+.ag-theme-alpine .ag-root-wrapper {
+  border: none !important;
+}
+.ag-theme-alpine .ag-header {
+  border: none;
+}
+.ag-theme-alpine .ag-row {
+  font-size: 13px;
+  background-color: $white;
+  color: $black;
+  &:nth-of-type(odd) {
+    background-color: $ag-grid-row-alt-color;
+  }
+}
+
+.ag-theme-alpine
+  .ag-ltr
+  .ag-has-focus
+  .ag-cell-focus:not(.ag-cell-range-selected) {
+  border: none;
+}
+.ag-theme-alpine .ag-ltr .ag-cell-range-single-cell {
+  border: none;
+}
+
+.ag-paging-panel {
+  height: 20px !important;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+
+//maintenance header----------------
+@import "../../../../../light.scss";
+
+.maintenanceHeaders .wrapper {
+  display: flex;
+}
+
+.showColumnsPrintRefreshExportWrapper {
+  justify-content: flex-end;
+  flex: 1;
+  display: flex;
+}
+
+#threshold,
+#supendRestart,
+#Publish,
+#PriceRollOverride,
+#review,
+#showAllColumns,
+#refresh,
+#print,
+#export {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: $maint_header_btn_color;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0px 30px 0px 0px;
+}
+
+.dataHeadersButtonWrapper {
+  display: flex;
+}
+
+#threshold:hover,
+#supendRestart:hover,
+#Publish:hover,
+#PriceRollOverride:hover,
+#review:hover,
+#showAllColumns:hover,
+#refresh:hover,
+#print:hover,
+#export:hover {
+  color: $maint_header_btn_color_hover;
+}
+.maintenanceHeaders .Dropdown-control {
+  padding: 0 !important;
+  transition: all 200ms ease;
+  width: 130px !important;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.maintenanceHeaders .Dropdown-control .Dropdown-arrow {
+  position: absolute;
+  right: 44px;
+  top: 7px;
+  width: 0;
+}
+.ag-paging-panel {
+  height: 20px !important;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+//price-roll-override----------------
+@import "../../../../../light.scss";
+.priceOverrideModalContentWrapper {
+  width: 500px;
+  text-align: center;
+}
+.priceOverrideModalContentWrapper .headerWrapper {
+  display: flex;
+  background-color: $white;
+  color: $black;
+}
+.priceOverrideModalContentWrapper .helpAndCloseIcon {
+  display: flex;
+  flex: 1 1;
+  justify-content: flex-end;
+}
+.priceRollOverContentWrapper {
+  text-align: center;
+  margin: 1em auto;
+}
+.overrideLabelValueWrapper,
+.overrideLabelDatePickerWrapper,
+.priceTypeLabelTypeWrapper {
+  display: flex;
+  width: 100%;
+}
+.overrideValueLabel,
+.overrideDatePickerLabel,
+.priceTypeLabel {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+.overrideValueWrapper,
+.datePickerWrapper,
+.priceTypeValueWrapper {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
+.priceRollOverContentWrapper .react-datepicker-wrapper {
+  width: 0%;
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+  overflow: visible !important;
+}
+.header {
+  font-size: 18px;
+  font-weight: bold;
+}
+//Publish valued----
+.modalContentWrapper ul {
+  display: flex;
+  position: relative;
+  top: 0px !important;
+  //right: 30px;
+}
+.modalContentWrapper li {
+  padding-right: 20px;
+}
+//Suspend restart css-------------
+@import "../../../../../light.scss";
+.vendorExchangeProductWrapper {
+  display: flex;
+}
+.suspendRestartButtonsWrapper {
+  text-align: center;
+}
+.refreshAndDeleteButtonsWrapper {
+  background-color: $white;
+  display: flex;
+}
+.deleteButton {
+}
+.refreshButton {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+.modalContentWrapper .listItemWrapper {
+  display: flex;
+  position: relative;
+  left: 30px;
+}
+.modalContentWrapper .listItemWrapper div {
+  margin-right: 10px;
+}
+//Threshold grid css------
+@import "../../../../../../light.scss";
+.modalContentWrapper {
+  width: 800px;
+}
+.modalContentWrapper .headerWrapper {
+  display: flex;
+  background-color: $white;
+  color: $black;
+}
+.modalContentWrapper .helpAndCloseIcon {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.modalContentWrapper .addAndDeleteButtonsWrapper {
+  background-color: $white;
+  margin-top: 10px;
+  button {
+    margin-left: 5px;
+    padding: 5px;
+  }
+}
+
+.modalContentWrapper .footer {
+  position: relative;
+  bottom: 0px;
+  left: 350px;
+  button {
+    margin: 10px;
+    padding: 5px;
+  }
+}
+.header {
+  font-size: 18px;
+  font-weight: bold;
+}
+//Threshold css-----------------
+@import "../../../../../light.scss";
+.modalContentWrapper {
+  width: 800px;
+}
+.modalContentWrapper .headerWrapper {
+  display: flex;
+  background-color: $white;
+  color: $black;
+}
+.modalContentWrapper .helpAndCloseIcon {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.modalContentWrapper .addAndDeleteButtonsWrapper {
+  background-color: $white;
+  margin-top: 10px;
+  button {
+    margin-left: 5px;
+    padding: 5px;
+  }
+}
+
+.modalContentWrapper .footer {
+  position: relative;
+  bottom: 0px;
+  left: 350px;
+  button {
+    margin: 10px;
+    padding: 5px;
+  }
+}
+.header {
+  font-size: 18px;
+  font-weight: bold;
+}
+// Main Maintenance css----------------------
+.columPrintExportWrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+.maintenance .ag-paging-panel {
+  height: 20px !important;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+.saveCancelPublishDateWrapper {
+  height: 20px;
+}
+.cancelAndSaveButtonWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 13px;
+  right: 10px;
+}
+.publishDateWrapper {
+  position: relative;
+  top: 5px;
+}
+
+//Main Gov screen css --------------
+.columPrintExportWrapper {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+.maintenance .ag-paging-panel {
+  height: 20px !important;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+.saveCancelPublishDateWrapper {
+  height: 20px;
+}
+.cancelAndSaveButtonWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 13px;
+  right: 10px;
+}
+.publishDateWrapper {
+  position: relative;
+  top: 5px;
+}
