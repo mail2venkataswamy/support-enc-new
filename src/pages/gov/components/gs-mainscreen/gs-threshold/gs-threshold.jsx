@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import "./gs-threshold.scss";
 import Thresholdgrid from "./gs-threshold-grid/gs-threshold-grid.jsx";
+
 const ThresholdModalContent = (props) => {
   return (
     <div>

@@ -1,0 +1,22 @@
+.priceOverrideWrapper {
+  width: 60%;
+  .businessDtAndDeliveryClass {
+    width: 50%;
+    .businessDateLabelAndValue,
+    .deliveryClassLabelAndValue {
+      width: 100%;
+      display: flex;
+      .businessDateLabel,
+      .deliveryClassLabel {
+        width: 28%;
+      }
+      .businessDateValue,
+      .deliveryClassValue {
+        width: 70%;
+      }
+    }
+  }
+  .downloadAndResetButtonWrapper {
+    text-align: center;
+  }
+}

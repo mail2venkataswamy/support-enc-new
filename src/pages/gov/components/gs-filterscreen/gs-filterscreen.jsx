@@ -7,9 +7,9 @@ import ResetAndButton from "./gs-filter-and-reset/gs-filter-and-reset.jsx";
 
 const filterscreen = () => {
   return (
-    <div className="filterPanel">
+    <div className="filterPanel left">
       <div className="filterTitleAndToggle">
-        <div className="filterHeaderTitle">Filter Screen</div>
+        <div className="filterHeaderTitle">Goverment Securities</div>
         <div className="filterToggle">{"<<"}</div>
       </div>
       <ActivityDateRange></ActivityDateRange>

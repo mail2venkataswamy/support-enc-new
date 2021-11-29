@@ -1,4 +1,4 @@
-.maintenance {
+/* .maintenance {
   border: solid 0.1px grey;
 }
 
@@ -39,5 +39,169 @@
     position: absolute;
     left: 0;
     top: 0;
+  }
+}
+ */
+@import "../../../../light.scss";
+#mainVS {
+  .maintenance {
+    background: $white;
+    border-radius: 30px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    min-height: 250px;
+    max-height: 500px;
+    .ag-theme-alpine {
+      height: 360px !important;
+    }
+    .mantainanaceTitle {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: $black;
+      margin: 0px 0px 10px 15px;
+    }
+    .mantainanceHeaders {
+      height: 20px;
+    }
+    .mantainanceHeaders {
+      display: flex;
+      position: relative;
+      top: 2px;
+    }
+    .dataHeaderButtonsWrapper {
+      display: flex;
+    }
+    .columPrintExportWrapper {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+    }
+    .Dropdown-root {
+      margin-bottom: 5px;
+    }
+    .Dropdown-control {
+      //border: 0.5px solid $maint_header_btn_color;
+      color: $maint_header_btn_color;
+      &:hover {
+        color: $maint_header_btn_color_hover;
+      }
+    }
+    .Dropdown-menu {
+      .Dropdown-option {
+        &:hover {
+          color: $maint_header_btn_color_hover;
+        }
+      }
+    }
+    .primary {
+      background: $btn_primary;
+      color: $white;
+      border-radius: 16px;
+      border: none;
+      padding: 0px 12px;
+    }
+
+    .secondary {
+      color: $btn_primary;
+      border: none;
+      padding: 8px;
+      background-color: #2199f300;
+    }
+
+    .columPrintExportWrapper {
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+    }
+    .ag-paging-panel {
+      height: 20px !important;
+      justify-content: flex-start !important;
+      background-color: #b4d4f32e !important;
+    }
+    .saveCancelPublishDateWrapper {
+      margin-top: 15px;
+      height: 20px;
+    }
+    .cancelAndSaveButtonWrapper {
+      display: flex;
+      flex: 1;
+      float: right;
+      position: relative;
+      bottom: 13px;
+      right: 10px;
+      width: 25%;
+    }
+    .publishDateWrapper {
+      position: relative;
+      width: 50%;
+      float: left;
+    }
+
+    // mgrid.scss
+
+    .ag-theme-alpine .ag-header-cell {
+      background-color: $white;
+      color: $ag-grid-header-text-color;
+      text-align: left;
+      font-size: 11px;
+      font-weight: bold;
+      .ag-cell-label-container {
+        width: 75px !important;
+      }
+    }
+    .ag-theme-alpine .ag-cell {
+      line-height: 22px !important;
+    }
+    .ag-theme-alpine .ag-root-wrapper {
+      border: none !important;
+    }
+    .ag-theme-alpine .ag-row {
+      font-size: 11px;
+      background-color: $white;
+      color: $black;
+      transform: none !important;
+      height: 22px !important;
+      position: relative;
+      &:nth-of-type(odd) {
+        background-color: $ag-grid-row-alt-color;
+      }
+    }
+
+    .ag-theme-alpine .ag-header {
+      border: none;
+      height: 40px !important;
+      min-height: 40px !important;
+    }
+
+    .ag-theme-alpine
+      .ag-ltr
+      .ag-has-focus
+      .ag-cell-focus:not(.ag-cell-range-selected) {
+      border: none;
+    }
+    .ag-theme-alpine .ag-ltr .ag-cell-range-single-cell {
+      border: none;
+    }
+
+    .ag-paging-panel {
+      height: 20px !important;
+      justify-content: flex-start !important;
+      background-color: $ag-paging-panel-bgColor !important;
+    }
+  }
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #myGrid,
+    #myGrid * {
+      visibility: visible;
+    }
+    #myGrid {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
 }

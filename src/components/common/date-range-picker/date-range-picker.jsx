@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
+import "./date-range-picker.scss";
 
 function duriationOfDates(fromDate, toDate) {
   const date1 = new Date(fromDate);
@@ -35,7 +36,7 @@ const Daterangepicker = (props) => {
   return (
     <>
       <div className="fromDateLabelAndPickerWrapper">
-        <div className="label">From Date</div>
+        <div className="label">{props.fromLabel}</div>
         <div className="datePickerWrapper ">
           <DatePicker
             selected={props.fromDate}
@@ -47,7 +48,7 @@ const Daterangepicker = (props) => {
         </div>
       </div>
       <div className="toDateLabelAndPickerWrapper">
-        <div className="label">To Date</div>
+        <div className="label">{props.toLabel}</div>
         <div className="datePickerWrapper">
           <DatePicker
             selected={props.toDate}

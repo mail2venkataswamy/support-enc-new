@@ -1,15 +1,20 @@
-.labelAndFlaggedWrapper,
-.labelAndReviewNeededWrapper,
-.editedRecordsWrapper {
-  display: flex;
-}
-.flaggedEditLabel,
-.reviewNeededLabel,
-.editedRecordsWrapper label {
-  width: 30%;
-}
+#mainGov {
+  .labelAndFlaggedWrapper,
+  .labelAndReviewNeededWrapper,
+  .editedRecordsWrapper {
+    display: flex;
+  }
+  .flaggedEditLabel,
+  .reviewNeededLabel,
+  .editedRecordsWrapper label {
+    width: 35%;
+  }
 
-.flaggedEditwrapper,
-.reviewNeededWrapper {
-  width: 70%;
+  .flaggedEditwrapper,
+  .reviewNeededWrapper {
+    width: 70%;
+    .Dropdown-control {
+      height: 31px !important;
+    }
+  }
 }

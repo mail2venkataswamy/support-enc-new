@@ -30,6 +30,9 @@ const Aggrid = (props) => {
         getSelectedRowData={props.getSelectedRowData}
         onSelectionChanged={props.onSelectionChanged}
         onFirstDataRendered={props.onFirstDataRendered}
+        getRowStyle={props.getRowStyle}
+        frameworkComponents={{ customTooltip: props.CustomTooltip }}
+        //frameworkComponents={{ customTooltip: CustomTooltip }}
       ></AgGridReact>
     </div>
   );

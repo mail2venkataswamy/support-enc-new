@@ -1,8 +1,9 @@
 import { Component } from "react";
-import React from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import MyGovContext from "../context/gov-context.jsx";
 import thresholdGridData from "./json/threshold.json";
 import suspendRestartGridData from "./json/suspend-restart.json";
+import CustomTooltip from "../../../src/pages/gov/components/gs-mainscreen/gs-custom-tooltip/custom-tooltip.jsx";
 function setPrinterFriendly(api) {
   //const eGridDiv = document.querySelector("#myGrid");
   //eGridDiv.style.height = "";
@@ -22,6 +23,11 @@ const dynamicCellStyle = (params) => {
     return { color: "red", backgroundColor: "yellow" };
   }
   return null;
+};
+const getRowStyle = (params) => {
+  if (params.node.rowIndex === 2) {
+    return { color: "red" };
+  }
 };
 
 const getCurrentDateTime = () => {
@@ -280,8 +286,17 @@ class GovProvider extends Component {
           },
           { field: "#", width: 60 },
 
-          { headerName: "Activity Date", field: "activityDate", width: 100 },
-          { headerName: "Cuspin", field: "cuspin", width: 100 },
+          {
+            headerName: "Activity Date",
+            field: "activityDate",
+            width: 100,
+          },
+          {
+            headerName: "Cuspin",
+            field: "cuspin",
+            width: 100,
+            tooltipField: "cuspin",
+          },
           { headerName: "ISIN", field: "isin", width: 100 },
           { headerName: "Symbol", field: "symbol", width: 80 },
           { headerName: "Tier", field: "tier", width: 80 },
@@ -385,7 +400,12 @@ class GovProvider extends Component {
             checkboxSelection: true,
           },
 
-          { headerName: "Cuspin", field: "cuspin", width: 100 },
+          {
+            headerName: "Cuspin",
+            field: "cuspin",
+            width: 100,
+            tooltipField: "cuspin",
+          },
           { headerName: "Symbol", field: "symbol", width: 80 },
           { headerName: "Tier", field: "tier", width: 80 },
           { headerName: "Type", field: "type", width: 80 },
@@ -462,8 +482,12 @@ class GovProvider extends Component {
           resizable: true,
           filter: true,
           rowSelection: "multiple",
+          tooltipComponent: "customTooltip",
+          tooltipShowDelay: 0,
         },
         selectedGridData: [],
+        getRowStyle: getRowStyle,
+        CustomTooltip: CustomTooltip,
       },
       editDashboardData: { showEditDashboardGrid: true },
     };

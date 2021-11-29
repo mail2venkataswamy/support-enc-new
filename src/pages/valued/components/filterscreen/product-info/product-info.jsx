@@ -36,7 +36,7 @@ const Productinfo = (props) => {
             ></InputSuggestions>
           </div>
         </div>
-        <p></p>
+
         <div className="isinLabelAndInputWrapper">
           <div className="isinLabel">ISIN:</div>
           <div className="isinInputWrapper">
@@ -50,7 +50,7 @@ const Productinfo = (props) => {
             ></InputSuggestions>
           </div>
         </div>
-        <p></p>
+
         <div className="occSymbolLabelAndInputWrapper">
           <div className="occSymbolLabel">OCC Symbol:</div>
           <div className="occSymbolInputWrapper">
@@ -63,7 +63,6 @@ const Productinfo = (props) => {
             ></InputSuggestions>
           </div>
         </div>
-        <p></p>
 
         <div className="tierLabelAndValue">
           <div className="label">Tier:</div>
@@ -74,7 +73,7 @@ const Productinfo = (props) => {
             onAllChecked={props.onAllTireChecked}
           ></Checkbox>
         </div>
-        <p></p>
+
         <div className="typeLabelAndValue">
           <div className="label">Type:</div>
           {/* <Typefilter typeData={typeData}></Typefilter> */}
@@ -85,7 +84,7 @@ const Productinfo = (props) => {
             onAllChecked={props.onAllTypeChecked}
           ></Checkbox>
         </div>
-        <p></p>
+
         <div className="labelAndClearedWrapper">
           <div className="Clearedlabel">Cleared:</div>
           <div className="clearedwrapper">
@@ -97,7 +96,7 @@ const Productinfo = (props) => {
             ></SelectBox>
           </div>
         </div>
-        <p></p>
+
         <div className="labelAndCrossMarginWrapper">
           <div className="crossMarginLabel">Cross Margin Eligible:</div>
           <div className="crossMarginWrapper">
@@ -109,7 +108,7 @@ const Productinfo = (props) => {
             ></SelectBox>
           </div>
         </div>
-        <p></p>
+
         <div className="labelAndCurrencyWrapper">
           <div className="currencyLabel">Currency:</div>
           <div className="currencyWrapper">

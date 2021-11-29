@@ -1,4 +1,4 @@
-.prodcutInfoWrapper fieldset {
+/* .prodcutInfoWrapper fieldset {
   min-width: 0;
 }
 .cuspinLabel {
@@ -8,11 +8,7 @@
 .cuspinInputWrapper {
   display: inline-block;
 }
-.isinLabelAndInputWrapper,
-.occSymbolLabelAndInputWrapper,
-.cuspinLabelAndInputWrapper {
-  /*   text-align: center; */
-}
+
 .isinLabel {
   display: inline-block;
   width: 30%;
@@ -47,4 +43,141 @@
 .clearedwrapper,
 .crossMarginWrapper {
   width: 70%;
+}
+.tierLabelAndValue ul {
+  display: flex;
+}
+.tierLabelAndValue li {
+  margin-right: 10px;
+}
+ */
+#mainGov {
+  .fieldSet {
+    min-width: 0;
+    margin: 25px 0px 0px 0px;
+    legend {
+      padding-top: 12px;
+    }
+  }
+  .cuspinLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .cuspinInputWrapper {
+    display: inline-block;
+  }
+  .isinLabelAndInputWrapper,
+  .occSymbolLabelAndInputWrapper,
+  .cuspinLabelAndInputWrapper {
+    margin: 10px 0px 0px 20px;
+  }
+  .isinLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .isinInputWrapper {
+    display: inline-block;
+  }
+
+  .occSymbolLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .occSymbolInputWrapper {
+    display: inline-block;
+  }
+  .typeLabelAndValue,
+  .tierLabelAndValue,
+  .labelAndClearedWrapper,
+  .labelAndCrossMarginWrapper,
+  .labelAndCurrencyWrapper {
+    display: flex;
+  }
+
+  .tierLabelAndValue .label,
+  .typeLabelAndValue .label,
+  .currencyLabel,
+  .croddMarginLabel,
+  .Clearedlabel {
+    width: 30%;
+  }
+  .prodcutInfoWrapper fieldset {
+    min-width: 0;
+  }
+  .cuspinLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .cuspinInputWrapper {
+    display: inline-block;
+  }
+  .isinLabelAndInputWrapper,
+  .occSymbolLabelAndInputWrapper,
+  .cuspinLabelAndInputWrapper {
+    /*   text-align: center; */
+    margin: 0;
+  }
+  .isinLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .isinInputWrapper {
+    display: inline-block;
+  }
+
+  .occSymbolLabel {
+    display: inline-block;
+    width: 30%;
+  }
+  .occSymbolInputWrapper {
+    display: inline-block;
+  }
+  .typeLabelAndValue,
+  .tierLabelAndValue,
+  .labelAndClearedWrapper,
+  .labelAndCrossMarginWrapper,
+  .labelAndCurrencyWrapper {
+    display: flex;
+  }
+
+  .tierLabelAndValue .label,
+  .typeLabelAndValue .label,
+  .currencyLabel,
+  .crossMarginLabel,
+  .Clearedlabel {
+    width: 30%;
+  }
+
+  .currencyWrapper,
+  .clearedwrapper,
+  .crossMarginWrapper {
+    width: 70%;
+  }
+
+  .tierLabelAndValue .listItemWrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .tierLabelAndValue .listItemWrapper div {
+    padding-right: 14px;
+  }
+
+  .tierLabelAndValue,
+  .typeLabelAndValue {
+    /*  padding-top: 10px; */
+    top: 0px !important;
+  }
+  .tierLabelAndValue ul {
+    list-style: none;
+    position: relative;
+    right: 25px;
+  }
+  .typeLabelAndValue ul {
+    list-style: none;
+    position: relative;
+    right: 25px;
+  }
+  .tierLabelAndValue {
+    margin-top: 5px;
+  }
 }

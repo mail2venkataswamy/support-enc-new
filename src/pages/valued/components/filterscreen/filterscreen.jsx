@@ -7,9 +7,17 @@ import ResetAndButton from "./filter-and-reset/filter-and-reset.jsx";
 
 const filterscreen = (props) => {
   return (
-    <div className="filterPanel">
+    <div className="filterPanel left">
       <div className="filterTitleAndToggle">
+        {/*     <div className="titleIcon">
+        <img
+            className="fpIcon"
+            src={require("../../../../../assets/iconSecurities.svg")}
+            alt="Securities"
+          /> */}
+
         <div className="filterHeaderTitle">Filter Screen</div>
+
         <div className="filterToggle">{"<<"}</div>
       </div>
       <ActivityDateRange

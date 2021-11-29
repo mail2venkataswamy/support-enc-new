@@ -1,6 +1,7 @@
 import React from "react";
-import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import "./activity-date-range.scss";
+import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
+import "./styles.scss";
 //import DatePicker from "react-date-picker";
 import Datepicker from "../../../../../components/common/datepicker/datepicker.jsx";
 import ReactDatePicker from "react-datepicker";

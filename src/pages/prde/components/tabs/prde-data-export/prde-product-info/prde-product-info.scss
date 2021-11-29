@@ -1,0 +1,58 @@
+.piLeftRightSectionWrapper {
+  display: flex;
+  width: 100%;
+  .piLeftSection,
+  .piRightSection {
+    width: 50%;
+
+    .productTypeLabelAndValue,
+    .classificationLabelAndValue,
+    .deliveryClassLabelAndValue,
+    .cuspinLabelAndValue,
+    .symbolToLabelAndValue,
+    .symbolFromLabelAndValue,
+    .isInLabelAndValue,
+    .exchangeLabelAndValue,
+    .vendorLabelAndValue,
+    .callPutLabelAndValue,
+    .strikeFromDateLabelAndValue,
+    .strikePriceFromLabelAndValue,
+    .strikePriceToLabelAndValue,
+    .pricePrecisionLabelAndValue {
+      width: 100%;
+      display: flex;
+      .productTypeLabel,
+      .classificationLabel,
+      .deliveryClassLabel,
+      .cuspinLabel,
+      .symbolToLabel,
+      .symbolFromLabel,
+      .isInLabel,
+      .exchangeLabel,
+      .vendorLabel,
+      .callPutLabel,
+      .strikeDatelabel,
+      .strikePriceFromlabel,
+      .strikePriceToLabel,
+      .pricePrecisionLabel {
+        width: 28%;
+      }
+      .productTypeValue,
+      .classificationValue,
+      .deliveryClassValue,
+      .cuspinValue,
+      .symbolToValue,
+      .symbolFromValue,
+      .isInValue,
+      .exchangeValue,
+      .vendorValue,
+      .callPutValue,
+      .strikeDateValue,
+      .strikePriceFromValue,
+      .strikePriceToValue,
+      .pricePrecisionValue {
+        width: 70%;
+      }
+    }
+  }
+}

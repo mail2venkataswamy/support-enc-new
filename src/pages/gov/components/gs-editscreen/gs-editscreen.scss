@@ -1,9 +1,79 @@
-.editDashboard {
-  border: solid 0.1px grey;
+/* #mainGov {
+  .editDashboard {
+    border: solid 0.1px grey;
+  }
+  .mainscreenTitleAndToggle .toggle {
+    display: flex;
+    color: white;
+    justify-content: flex-end;
+    flex: 1;
+    position: relative;
+    left: -8px;
+    top: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 2%;
+  }
+  .mainscreenHeaderTitle {
+    width: 98%;
+  }
+} */
+
+@import "../../../../light.scss";
+#mainGov {
+  .editDashboard {
+    background: $white;
+    border-radius: 30px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    margin-top: 0.5em;
+    min-height: 100px;
+    max-height: 235px;
+
+    .ag-theme-alpine {
+      height: 150px !important;
+      .ag-body-viewport.ag-layout-normal {
+        overflow-y: hidden;
+      }
+      .ag-row {
+        height: 25px !important;
+        font-size: 11px;
+        transform: none !important;
+        position: relative;
+      }
+      // .ag-center-cols-viewport{
+      //     height: 126px;
+      // }
+    }
+    .ag-theme-alpine .ag-header-row {
+      height: 30px !important;
+    }
+    .mainscreenHeaderTitle {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: $black;
+      margin: 0px 0px 0px 15px;
+    }
+    .ag-root-wrapper-body {
+      .ag-header {
+        min-height: 22px !important;
+      }
+    }
+    .ag-cell {
+      line-height: 22px !important;
+      left: 0px !important;
+      position: relative;
+      width: 150px !important;
+    }
+  }
+  .ag-theme-alpine .ag-root-wrapper {
+    border: none;
+  }
 }
-.mainscreenTitleAndToggle .toggle {
+.toggle {
   display: flex;
-  color: white;
+  color: $white;
   justify-content: flex-end;
   flex: 1;
   position: relative;
@@ -13,6 +83,7 @@
   cursor: pointer;
   width: 2%;
 }
-.mainscreenHeaderTitle {
-  width: 98%;
+
+.mainscreenTitleAndToggle {
+  display: flex;
 }

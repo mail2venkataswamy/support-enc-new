@@ -1,6 +1,7 @@
-.filterPanel {
+/* .filterPanel {
   border: solid 0.1px grey;
   width: 28%;
+  height: 100%;
 }
 .filterTitleAndToggle {
   display: flex;
@@ -19,4 +20,40 @@
   justify-content: flex-end;
   display: flex;
   color: white;
+}
+ */
+@import "../../../../light.scss";
+#mainGov {
+  .filterPanel {
+    // border: 1px solid grey;
+    width: 26%;
+    float: left;
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+    box-sizing: border-box;
+    .filterHeaderTitle {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: $black;
+      margin-left: 3%;
+    }
+    fieldset {
+      border: none;
+    }
+  }
+  .left {
+    margin: 0px 30px 0px 20px;
+    height: calc(100% - 90px);
+    //height: 100% !important;
+  }
+  .filterToggle {
+    flex: 1;
+    justify-content: flex-end;
+    display: flex;
+    color: white;
+  }
+  .filterTitleAndToggle {
+    display: flex;
+  }
 }

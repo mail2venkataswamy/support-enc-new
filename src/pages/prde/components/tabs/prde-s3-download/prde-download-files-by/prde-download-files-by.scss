@@ -1,0 +1,19 @@
+.dowloadFilesWrapper {
+  width: 50%;
+  .deliveryClassLabelAndValue,
+  .businessDateLabelAndValue,
+  .runDateLabelAndValue {
+    width: 100%;
+    display: flex;
+    .deliveryClassLabel,
+    .businessDateLabel,
+    .runDateLabel {
+      width: 28%;
+    }
+    .deliveryClassValue,
+    .businessDateValue,
+    .runDateValue {
+      width: 70%;
+    }
+  }
+}

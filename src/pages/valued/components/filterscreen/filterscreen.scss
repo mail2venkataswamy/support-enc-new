@@ -1,4 +1,4 @@
-.filterPanel {
+/* .filterPanel {
   border: solid 0.1px grey;
   width: 28%;
   height: 100%;
@@ -20,4 +20,45 @@
   justify-content: flex-end;
   display: flex;
   color: white;
+}
+ */
+@import "../../../../light.scss";
+#mainVS {
+  .filterPanel {
+    // border: 1px solid grey;
+    width: 26%;
+    float: left;
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    .filterHeaderTitle {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: $black;
+      margin-left: 3%;
+    }
+  }
+  .left {
+    margin: 0px 30px 0px 20px;
+    height: calc(100% - 90px);
+    //height: 100% !important;
+  }
+  .filterToggle {
+    flex: 1;
+    justify-content: flex-end;
+    display: flex;
+    color: white;
+  }
+  .filterTitleAndToggle {
+    display: flex;
+  }
+  * {
+    padding: 2px 0px 0px 0px;
+    margin: 0;
+  }
+}
+.fieldset {
+  border: none;
 }

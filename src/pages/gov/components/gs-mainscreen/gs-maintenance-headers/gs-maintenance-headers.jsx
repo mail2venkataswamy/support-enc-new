@@ -53,6 +53,8 @@ const Maintenanceheaders = () => {
     isPriceOverrideConfirmModalOpen,
     togglePriceOverrideConfirmModalOpen,
     priceOverrideConfirmWarningMessage,
+    getRowStyle,
+    CustomTooltip,
   } = {
     ...context.state.maintenanceScreenData,
     ...context.state,
@@ -174,6 +176,8 @@ const Maintenanceheaders = () => {
         paginationPageSize={10}
         onSelectionChanged={onSelectionChanged}
         onFirstDataRendered={onFirstDataRendered}
+        getRowStyle={getRowStyle}
+        CustomTooltip={CustomTooltip}
       />
       {/*------- Price Roll Override Warning Modal---------*/}
       <WarningModal

@@ -1,0 +1,13 @@
+.dateRangeAndHistCurrWrapper {
+  width: 50%;
+  .labelAndHistCurrWrapper {
+    display: flex;
+    width: 100%;
+    .currHistLabel {
+      width: 30%;
+    }
+    .currHistValue {
+      width: 70%;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.fromDateLabelAndPickerWrapper,
+.toDateLabelAndPickerWrapper {
+  width: 100%;
+  display: flex;
+  .label {
+    width: 30%;
+  }
+  .datePickerWrapper {
+    width: 70%;
+  }
+}

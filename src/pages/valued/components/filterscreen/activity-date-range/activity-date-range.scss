@@ -1,17 +1,9 @@
-.activitydateRangeWrapper {
+/* .activitydateRangeWrapper {
   margin: 0;
-  /*   text-align: center; */
   display: block;
-}
-.labelAndHistCurrWrapper {
-  /*   width: 70%;
-  display: inline-block; */
 }
 .labelAndHistCurrWrapper .wrapper {
   display: flex;
-}
-.dateRangeWrapper {
-  /*  display: inline-block; */
 }
 
 .fromDateLabelAndPickerWrapper,
@@ -26,10 +18,61 @@
 .currHistLabel {
   width: 30%;
 }
-.datePickerWrapper,
-.dropdownWrapper {
-  /*   width: 70%;
-  flex: 0;
-  justify-content: flex-end;
-  display: inline-block; */
+ */
+
+@import "../../../../../light.scss";
+#mainVS {
+  .fieldSet {
+    font-size: 12px;
+    color: $black;
+    margin: 10px 0px 0px 0px !important;
+    border: none;
+    legend {
+      padding-top: 12px;
+    }
+  }
+  .activitydateRangeWrapper {
+    margin: 10px 0px 0px 20px;
+    /*   text-align: center; */
+    display: block;
+  }
+  .labelAndHistCurrWrapper {
+    /*   width: 70%;
+    display: inline-block; */
+  }
+  .labelAndHistCurrWrapper .wrapper {
+    display: flex;
+  }
+  .dateRangeWrapper {
+    /*  display: inline-block; */
+  }
+
+  .fromDateLabelAndPickerWrapper,
+  .toDateLabelAndPickerWrapper {
+    display: flex;
+    padding: 10px 0px 0px;
+  }
+  .fromDateLabelAndPickerWrapper .label,
+  .toDateLabelAndPickerWrapper .label {
+    width: 30%;
+  }
+
+  .currHistLabel {
+    width: 30%;
+  }
+  .datePickerWrapper,
+  .dropdownWrapper {
+    width: 200px;
+    margin-top: -5px;
+    input {
+      width: 198px;
+    }
+  }
+  legend {
+    color: $fpADRTitleColor;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 20px 0px 0px;
+    text-transform: uppercase;
+  }
 }

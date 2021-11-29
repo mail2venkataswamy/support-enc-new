@@ -65,8 +65,8 @@ const mainScreen = (props) => {
           {props.data.maintenanceScreenData.matenanceDataLastPublishDate}
         </div>
         <div className="cancelAndSaveButtonWrapper">
-          <button>Save</button>
-          <button>Cancel</button>
+          <button className="secondary">Cancel</button>
+          <button className="primary">Save</button>
         </div>
       </div>
     </div>

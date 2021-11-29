@@ -9,14 +9,14 @@ const mainScreen = () => {
   return (
     <div className="maintenance">
       <div className="mainscreenTitleAndToggle">
-        <div className="mainscreenHeaderTitle">Maintenance Screen</div>
+        <div className="mantainanaceTitle">Maintenance Screen</div>
       </div>
       <MaintenanceHeaders></MaintenanceHeaders>
       <div className="saveCancelPublishDateWrapper">
         <div className="publishDateWrapper">Last Published Date:</div>
         <div className="cancelAndSaveButtonWrapper">
-          <button>Save</button>
-          <button>Cancel</button>
+          <button className="secondary">Cancel</button>
+          <button className="primary">Save</button>
         </div>
       </div>
     </div>
