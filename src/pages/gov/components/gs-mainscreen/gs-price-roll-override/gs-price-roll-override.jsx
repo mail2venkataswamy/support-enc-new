@@ -1,51 +1,65 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import "./gs-price-roll-override.scss";
-import Datepicker from "../../../../../components/common/datepicker/datepicker.jsx";
 import RadioButton from "../../../../../components/common/radio-button/radio-button.jsx";
 import GovContext from "../../../../../components/context/gov-context.jsx";
+import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
+import Inputsuggestion from "../../gs-filterscreen/gs-input-suggestions/gs-input-suggestions.jsx";
 
 const PriceRollOverrideModalContent = (props) => {
   const {
     priceTypeData,
-    priceRollOverrideValue,
-    priceRollOverrideTillDate,
     priceRollOverridePriceTypeValue,
-  } = props.data;
+    onChangeSurpressRestartCuspinValue,
+    surpressRestartCuspinSuggestionResult,
+    onClickSurpressRestartSuggestionItem,
+    surpressRestartCuspinValue,
+    surpressRestartCuspinSearchValue,
+    onChangePriceTypeValue,
+    onChangeDebtTypeValue,
+    selectedDebtTypeValue,
+    debtTypeOptions,
+  } = { ...props.data, ...props };
   return (
     <div>
       <fieldset>
         <legend></legend>
         <div className="priceRollOverContentWrapper">
-          <div className="overrideLabelValueWrapper">
-            <div className="overrideValueLabel">Override Value:</div>
-            <div className="overrideValueWrapper">
-              <input
-                type="text"
-                value={priceRollOverrideValue}
-                onChange={props.onChangePriceOverrideValue}
-              ></input>
+          <div className="priceTypeLabelTypeWrapper">
+            <div className="priceTypeLabel"></div>
+            <div className="priceTypeValueWrapper">
+              <RadioButton
+                radioButtonsData={priceTypeData}
+                onChange={onChangePriceTypeValue}
+                value={priceRollOverridePriceTypeValue}
+              ></RadioButton>
             </div>
           </div>
           <p></p>
           <div className="overrideLabelDatePickerWrapper">
-            <div className="overrideDatePickerLabel">Till Date:</div>
+            <div className="overrideDatePickerLabel">Cuspin:</div>
             <div className="datePickerWrapper">
-              <Datepicker
-                setDate={props.setPriceOverrideTillDate}
-                selectedDate={priceRollOverrideTillDate}
-              ></Datepicker>
+              <Inputsuggestion
+                onChange={onChangeSurpressRestartCuspinValue}
+                results={surpressRestartCuspinSuggestionResult}
+                onClick={onClickSurpressRestartSuggestionItem}
+                value={surpressRestartCuspinValue}
+                keySearch={surpressRestartCuspinSearchValue}
+              ></Inputsuggestion>
             </div>
           </div>
           <p></p>
-          <div className="priceTypeLabelTypeWrapper">
-            <div className="priceTypeLabel">Price Type:</div>
-            <div className="priceTypeValueWrapper">
-              <RadioButton
-                radioButtonsData={priceTypeData}
-                onChange={props.onChangePriceTypeValue}
-                value={priceRollOverridePriceTypeValue}
-              ></RadioButton>
+
+          <p></p>
+          <div className="overrideLabelValueWrapper">
+            <div className="overrideValueLabel">Debt Type:</div>
+            <div className="overrideValueWrapper">
+              <Dropdown
+                options={debtTypeOptions}
+                //id={"histCurr"}
+                selectedValue={selectedDebtTypeValue}
+                onChange={onChangeDebtTypeValue}
+              ></Dropdown>
             </div>
           </div>
         </div>
@@ -58,7 +72,7 @@ const PriceRollOverride = (props) => {
   return (
     <div className="priceOverrideModalContentWrapper">
       <div className="headerWrapper">
-        <div className="header">VS Price Roll Override</div>
+        <div className="header">Surpress/Restart Reval Adjustment</div>
         <div className="helpAndCloseIcon">
           <div className="help">?</div>
           <div className="close">X</div>
@@ -70,10 +84,21 @@ const PriceRollOverride = (props) => {
           onChangePriceOverrideValue={props.onChangePriceOverrideValue}
           setPriceOverrideTillDate={props.setPriceOverrideTillDate}
           onChangePriceTypeValue={props.onChangePriceTypeValue}
+          onChangeSurpressRestartCuspinValue={
+            props.onChangeSurpressRestartCuspinValue
+          }
+          onClickSurpressRestartSuggestionItem={
+            props.onClickSurpressRestartSuggestionItem
+          }
+          onChangePriceTypeValue={props.onChangePriceTypeValue}
+          onChangeDebtTypeValue={props.onChangeDebtTypeValue}
         ></PriceRollOverrideModalContent>
       </div>
       <div className="footer">
         <button id="publishButton" onClick={props.onSavePriceOverrideValue}>
+          Save
+        </button>
+        <button id="resetButton" onClick={props.onClikSurpressRestartReset}>
           Save
         </button>
         <button id="cancelButton" onClick={props.closeModal}>
@@ -107,6 +132,15 @@ const PriceRollOverrideModal = () => {
     priceRollOverrideValue,
     priceRollOverrideTillDate,
     priceRollOverridePriceTypeValue,
+    onChangeSurpressRestartCuspinValue,
+    surpressRestartCuspinSuggestionResult,
+    onClickSurpressRestartSuggestionItem,
+    surpressRestartCuspinValue,
+    surpressRestartCuspinSearchValue,
+    onChangeDebtTypeValue,
+    selectedDebtTypeValue,
+    debtTypeOptions,
+    onClikSurpressRestartReset,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -120,11 +154,23 @@ const PriceRollOverrideModal = () => {
           priceRollOverrideValue: priceRollOverrideValue,
           priceRollOverrideTillDate: priceRollOverrideTillDate,
           priceRollOverridePriceTypeValue: priceRollOverridePriceTypeValue,
+          surpressRestartCuspinSuggestionResult:
+            surpressRestartCuspinSuggestionResult,
+          surpressRestartCuspinValue: surpressRestartCuspinValue,
+          surpressRestartCuspinSearchValue: surpressRestartCuspinSearchValue,
+          selectedDebtTypeValue: selectedDebtTypeValue,
+          debtTypeOptions: debtTypeOptions,
         }}
         onChangePriceOverrideValue={onChangePriceOverrideValue}
         setPriceOverrideTillDate={setPriceOverrideTillDate}
         onChangePriceTypeValue={onChangePriceTypeValue}
         onSavePriceOverrideValue={onSavePriceOverrideValue}
+        onChangeSurpressRestartCuspinValue={onChangeSurpressRestartCuspinValue}
+        onClickSurpressRestartSuggestionItem={
+          onClickSurpressRestartSuggestionItem
+        }
+        onChangeDebtTypeValue={onChangeDebtTypeValue}
+        onClikSurpressRestartReset={onClikSurpressRestartReset}
       ></PriceRollOverride>
     </Modal>
   );

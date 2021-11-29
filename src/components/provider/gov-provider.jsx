@@ -218,33 +218,30 @@ class GovProvider extends Component {
         ],
         isAllPublishTypeChecked: false,
         publishTypeData: [
-          { label: "Common Stock", value: "commonStock", isChecked: false },
-          {
-            label: "Preffered Stock",
-            value: "prefferedStock",
-            isChecked: false,
-          },
-          { label: "Index", value: "index", isChecked: false },
-          { label: "Corporate Debt", value: "corporateDebt", isChecked: false },
-          { label: "FMS", value: "fms", isChecked: false },
+          { label: "Bills", value: "bills", isChecked: false },
+          { label: "Notes", value: "notes", isChecked: false },
+          { label: "Bonds", value: "bonds", isChecked: false },
+          { label: "STRP", value: "strp", isChecked: false },
+          { label: "TIPS", value: "tips", isChecked: false },
+          { label: "TPST", value: "tpst", isChecked: false },
         ],
 
         isAllPublishTireChecked: false,
         isPriceRollOverrideModalOpen: false,
         priceTypeData: [
           {
-            for: "priceType",
-            name: "priceType",
-            label: "Final",
+            for: "surpress",
+            name: "surpress",
+            label: "Surpress",
             type: "radio",
-            value: "final",
+            value: "surpress",
           },
           {
-            for: "priceType",
-            name: "priceType",
-            label: "Intraday",
+            for: "restart",
+            name: "restart",
+            label: "Restart",
             type: "radio",
-            value: "intraDay",
+            value: "restart",
           },
         ],
         priceRollOverrideValue: "",
@@ -488,6 +485,24 @@ class GovProvider extends Component {
         selectedGridData: [],
         getRowStyle: getRowStyle,
         CustomTooltip: CustomTooltip,
+        surpressRestartCuspinSearchValue: "",
+        cuspinData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        surpressRestartCuspinSuggestionResult: [],
+        surpressRestartCuspinValue: "",
+        debtTypeOptions: [{ label: "test", value: "test" }],
+        //id={"histCurr"}
+        selectedDebtTypeValue: { label: "test", value: "test" },
       },
       editDashboardData: { showEditDashboardGrid: true },
     };
@@ -1092,7 +1107,51 @@ class GovProvider extends Component {
       maintenanceScreenData,
     });
   };
-  //=========================Edit Dashboard Methods======================================
+
+  onChangeSurpressRestartCuspinValue = (e) => {
+    let data = this.state.maintenanceScreenData.cuspinData;
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    maintenanceScreenData.surpressRestartCuspinSuggestionResult = result;
+    maintenanceScreenData.surpressRestartCuspinSearchValue = e.target.value;
+    maintenanceScreenData.surpressRestartCuspinValue = e.target.value;
+
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  onClickSurpressRestartSuggestionItem = (selectedValue) => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.surpressRestartCuspinValue = selectedValue;
+    maintenanceScreenData.surpressRestartCuspinSearchValue = "";
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  onChangeDebtTypeValue = (selectedValue) => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.selectedDebtTypeValue = selectedValue;
+    this.setState({ maintenanceScreenData });
+  };
+  onClikSurpressRestartReset = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.selectedDebtTypeValue = {
+      label: "test",
+      value: "test",
+    };
+    maintenanceScreenData.surpressRestartCuspinValue = "";
+    this.setState({ maintenanceScreenData });
+  };
+  //=========================Edit Dashboard Methods fuck======================================
   toggleEditDashboardGrid = () => {
     let editDashboardData = this.state.editDashboardData;
     editDashboardData.showEditDashboardGrid =
@@ -1728,6 +1787,13 @@ class GovProvider extends Component {
             this.togglePriceOverrideConfirmModalOpen,
           onFirstDataRendered: this.onFirstDataRendered,
           showLessOrColumns: this.showLessOrColumns,
+          onChangeSurpressRestartCuspinValue: (e) =>
+            this.onChangeSurpressRestartCuspinValue(e),
+          onClickSurpressRestartSuggestionItem: (e) =>
+            this.onClickSurpressRestartSuggestionItem(e),
+
+          onChangeDebtTypeValue: (e) => this.onChangeDebtTypeValue(e),
+          onClikSurpressRestartReset: this.onClikSurpressRestartReset,
           //=============Edit Dahsboard==============
           toggleEditDashboardGrid: this.toggleEditDashboardGrid,
         }}

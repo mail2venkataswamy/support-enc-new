@@ -33,13 +33,13 @@ const SusupendRestartModalContent = (props) => {
           <legend>Exchange</legend>
           <Dropdown options={vendorOptions}></Dropdown>
         </fieldset>
-        <fieldset style={{ width: "33%" }}>
+        {/*         <fieldset style={{ width: "33%" }}>
           <legend>Product Symbol</legend>
           <div className="cuspinLabelAndInputWrapper">
             <div className="cuspinLabel">Cusip:</div>
             <div className="cuspinInputWrapper"></div>
           </div>
-        </fieldset>
+        </fieldset> */}
       </div>
 
       <div className="suspendRestartButtonsWrapper">
@@ -60,7 +60,7 @@ const SuspendRestartRepo = (props) => {
     <div className="modalContentWrapper">
       <div className="headerWrapper">
         <div className="header">
-          Valued Securities Suspend/Restart Repositories
+          Government Securities Suspend/Restart Repositories
         </div>
         <div className="helpAndCloseIcon">
           <div className="help">?</div>
