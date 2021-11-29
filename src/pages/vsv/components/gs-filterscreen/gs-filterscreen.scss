@@ -1,0 +1,64 @@
+/* .filterPanel {
+  border: solid 0.1px grey;
+  width: 28%;
+  height: 100%;
+}
+.filterTitleAndToggle {
+  display: flex;
+  background-color: #094d91;
+}
+.filterTitleAndToggle .filterHeaderTitle {
+  height: 15px;
+  border: solid 0.1px grey;
+  font-size: 10px;
+  color: white;
+
+  font-weight: 500;
+}
+.filterToggle {
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+  color: white;
+}
+ */
+@import "../../../../light.scss";
+#mainVsv {
+  .filterPanel {
+    // border: 1px solid grey;
+    width: 26%;
+    float: left;
+    background: rgb(255, 255, 255);
+    border-radius: 30px;
+    box-sizing: border-box;
+    border: none;
+    .filterHeaderTitle {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: bold;
+      color: $black;
+      margin-left: 3%;
+      border: none;
+    }
+    fieldset {
+      border: none;
+    }
+    .filterToggle {
+      flex: 1;
+      justify-content: flex-end;
+      display: flex;
+      color: white;
+    }
+    .filterTitleAndToggle {
+      display: flex;
+    }
+    .filterTitleAndToggle {
+      background: transparent;
+    }
+  }
+  .left {
+    margin: 0px 30px 0px 20px;
+    height: calc(100% - 90px);
+    //height: 100% !important;
+  }
+}

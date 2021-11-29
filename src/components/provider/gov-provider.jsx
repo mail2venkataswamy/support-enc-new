@@ -15,6 +15,11 @@ function setNormal(api) {
   api.setDomLayout(null);
 }
 const staticCellStyle = { color: "red", "background-color": "yellow" };
+const getRowStyle = (params) => {
+  if (params.node.rowIndex === 2) {
+    return { background: "red" };
+  }
+};
 
 const dynamicCellStyle = (params) => {
   if (params.value === "Police") {
@@ -464,6 +469,7 @@ class GovProvider extends Component {
           rowSelection: "multiple",
         },
         selectedGridData: [],
+        getRowStyle: getRowStyle,
       },
       editDashboardData: { showEditDashboardGrid: true },
     };

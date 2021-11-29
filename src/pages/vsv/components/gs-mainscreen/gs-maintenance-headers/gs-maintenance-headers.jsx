@@ -53,7 +53,6 @@ const Maintenanceheaders = () => {
     isPriceOverrideConfirmModalOpen,
     togglePriceOverrideConfirmModalOpen,
     priceOverrideConfirmWarningMessage,
-    getRowStyle,
   } = {
     ...context.state.maintenanceScreenData,
     ...context.state,
@@ -73,15 +72,6 @@ const Maintenanceheaders = () => {
             }
           ></ButtonWrapper>
           <ButtonWrapper
-            id="supendRestart"
-            label={"Supend/Restart Prices"}
-            onClick={
-              maintenanceRowData && maintenanceRowData.length > 0
-                ? onClickSuspendRestartRepoButton
-                : toggleGridMustBePopulateddModal
-            }
-          ></ButtonWrapper>
-          <ButtonWrapper
             id="Publish"
             label={"Publish"}
             onClick={
@@ -92,28 +82,8 @@ const Maintenanceheaders = () => {
           ></ButtonWrapper>
           <ButtonWrapper
             id="PriceRollOverride"
-            label={"Price Roll Override"}
-            onClick={
-              maintenanceRowData && maintenanceRowData.length > 0
-                ? selectedGridRows.length < 1
-                  ? toggleRecordMustSelectedPopupWarningModal
-                  : () => onClickPriceRollOverrideButton(selectedGridRows)
-                : toggleGridMustBePopulateddModal
-            }
+            label={"Import Vendor Data"}
           ></ButtonWrapper>
-
-          <div id="review">
-            <Dropdown
-              id="review"
-              options={reviewOptions}
-              onChange={
-                maintenanceRowData && maintenanceRowData.length > 0
-                  ? ""
-                  : toggleGridMustBePopulateddModal
-              }
-              selectedValue={selectedReviewValue}
-            ></Dropdown>
-          </div>
         </div>
         <div className="showColumnsPrintRefreshExportWrapper">
           <ButtonWrapper
@@ -175,7 +145,6 @@ const Maintenanceheaders = () => {
         paginationPageSize={10}
         onSelectionChanged={onSelectionChanged}
         onFirstDataRendered={onFirstDataRendered}
-        getRowStyle={getRowStyle}
       />
       {/*------- Price Roll Override Warning Modal---------*/}
       <WarningModal

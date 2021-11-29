@@ -1,0 +1,23 @@
+.modalContentWrapper {
+  width: 800px;
+}
+.modalContentWrapper .headerWrapper {
+  display: flex;
+  border: solid 0.1px grey;
+  background-color: #3385d6;
+  color: white;
+}
+.modalContentWrapper .helpAndCloseIcon {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+.modalContentWrapper .addAndDeleteButtonsWrapper {
+  background-color: #9ecaf7;
+}
+
+.modalContentWrapper .footer {
+  position: absolute;
+  bottom: 0px;
+  left: 350px;
+}

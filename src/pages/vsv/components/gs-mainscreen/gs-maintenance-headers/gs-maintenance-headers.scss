@@ -1,0 +1,178 @@
+/* .maintenanceHeaders .wrapper {
+  display: flex;
+  background-color: #9ecaf7;
+}
+
+.showColumnsPrintRefreshExportWrapper {
+  justify-content: flex-end;
+  flex: 1;
+  display: flex;
+}
+
+#threshold,
+#supendRestart,
+#Publish,
+#PriceRollOverride,
+#review,
+#showAllColumns,
+#refresh,
+#print,
+#export {
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+#threshold:hover,
+#supendRestart:hover,
+#Publish:hover,
+#PriceRollOverride:hover,
+#review:hover,
+#showAllColumns:hover,
+#refresh:hover,
+#print:hover,
+#export:hover {
+  background: white;
+  border: solid 0.1px grey;
+  border-radius: 3px;
+}
+
+.dataHeadersButtonWrapper {
+  display: flex;
+}
+
+.maintenanceHeaders .Dropdown-control {
+  padding: 0 !important;
+  transition: all 200ms ease;
+  width: 130px !important;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.maintenanceHeaders .Dropdown-control .Dropdown-arrow {
+  position: absolute;
+  right: 44px;
+  top: 7px;
+  width: 0;
+}
+.maintenance .ag-paging-panel {
+  height: 20px;
+  justify-content: flex-start !important;
+  background-color: #b4d4f3 !important;
+}
+ */
+@import "../../../../../light.scss";
+#mainVsv {
+  .maintenanceHeaders .wrapper {
+    display: flex;
+  }
+
+  .showColumnsPrintRefreshExportWrapper {
+    justify-content: flex-end;
+    flex: 1;
+    display: flex;
+  }
+
+  #threshold,
+  #supendRestart,
+  #Publish,
+  #PriceRollOverride,
+  #review,
+  #showAllColumns,
+  #refresh,
+  #print,
+  #export {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: $maint_header_btn_color;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 0px 30px 0px 0px;
+  }
+
+  .dataHeadersButtonWrapper {
+    display: flex;
+  }
+
+  #threshold:hover,
+  #supendRestart:hover,
+  #Publish:hover,
+  #PriceRollOverride:hover,
+  #review:hover,
+  #showAllColumns:hover,
+  #refresh:hover,
+  #print:hover,
+  #export:hover {
+    color: $maint_header_btn_color_hover;
+  }
+  .maintenanceHeaders .Dropdown-control {
+    padding: 0 !important;
+    transition: all 200ms ease;
+    width: 130px !important;
+    background-color: transparent;
+    outline: none;
+    border: none;
+  }
+  .maintenanceHeaders .Dropdown-control .Dropdown-arrow {
+    position: absolute;
+    right: 44px;
+    top: 7px;
+    width: 0;
+  }
+  .ag-paging-panel {
+    height: 20px !important;
+    justify-content: flex-start !important;
+    background-color: #b4d4f3 !important;
+  }
+  // Price roll override css-----------------
+  .priceOverrideModalContentWrapper {
+    width: 500px;
+    text-align: center;
+  }
+  .priceOverrideModalContentWrapper .headerWrapper {
+    display: flex;
+    border: solid 0.1px grey;
+    background-color: #3385d6;
+    color: white;
+  }
+  .priceOverrideModalContentWrapper .helpAndCloseIcon {
+    display: flex;
+    flex: 1 1;
+    justify-content: flex-end;
+  }
+  .priceRollOverContentWrapper {
+    text-align: center;
+    margin: 1em auto;
+  }
+  .overrideLabelValueWrapper,
+  .overrideLabelDatePickerWrapper,
+  .priceTypeLabelTypeWrapper {
+    display: flex;
+    width: 100%;
+  }
+  .overrideValueLabel,
+  .overrideDatePickerLabel,
+  .priceTypeLabel {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+  .overrideValueWrapper,
+  .datePickerWrapper,
+  .priceTypeValueWrapper {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+  }
+  .priceRollOverContentWrapper .react-datepicker-wrapper {
+    width: 0%;
+  }
+
+  .ReactModal__Content.ReactModal__Content--after-open {
+    overflow: visible !important;
+  }
+}
