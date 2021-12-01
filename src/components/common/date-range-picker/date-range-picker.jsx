@@ -30,9 +30,6 @@ function getArrayOfDates(fromDate, toDate, numberOfDays = 0) {
 }
 
 const Daterangepicker = (props) => {
-  const [fromDate, setStartDate] = useState(new Date());
-  const [toDate, setEndDate] = useState(new Date());
-
   return (
     <>
       <div className="fromDateLabelAndPickerWrapper">

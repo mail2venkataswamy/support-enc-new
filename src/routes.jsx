@@ -5,6 +5,7 @@ import Gov from "./pages/gov/index.jsx";
 //import { Security } from "@okta/okta-react";
 import NavBar from "../src/components/navbar/nav-bar.jsx";
 import Prde from "./pages/prde/index.jsx";
+import Vsv from "./pages/vsv/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
         <Route exact path="/" element={<Valued />} />
         <Route path="/gov" element={<Gov />} />
         <Route path="/prde" element={<Prde />} />
+        <Route path="/Vsv" element={<Vsv />} />
       </Routes>
     </BrowserRouter>
   );

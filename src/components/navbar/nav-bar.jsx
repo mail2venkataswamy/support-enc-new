@@ -22,6 +22,11 @@ const NavBar = () => {
             PRDE
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/Vsv" isActive={true}>
+            VSV
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
