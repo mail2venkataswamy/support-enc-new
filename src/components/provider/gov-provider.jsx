@@ -16,6 +16,7 @@ function setNormal(api) {
 }
 const staticCellStyle = { color: "red", "background-color": "yellow" };
 const getRowStyle = (params) => {
+  console.log(params.node);
   if (params.node.rowIndex === 2) {
     return { background: "red" };
   }

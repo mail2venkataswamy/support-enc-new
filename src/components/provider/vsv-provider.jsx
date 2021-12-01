@@ -106,21 +106,30 @@ class VsvProvider extends Component {
 
         reviewNeededOptions: [
           {
-            label: "Final - Large Difference Vs Vender",
-            value: "Final - Large Difference Vs Vender",
+            label: "Significant Vendor Difference",
+            value: "Significant Vendor Difference",
           },
           {
-            label: "Final - Large varience Vs previous",
-            value: "Final - Large varience Vs previous",
+            label: "Large Volume Change",
+            value: "Large Volume Change",
           },
           {
-            label: "Final - Missing or Zero Final Price",
-            value: "Final - Missing or Zero Final Price",
+            label: "Missing Or Zero Volume",
+            value: "Missing Or Zero Volume",
+          },
+          {
+            label: "Tier IV to Tier III Change",
+            value: "Tier IV to Tier III Change",
+          },
+          {
+            label: "Less Than 90 Days Average",
+            value: "Less Than 90 Days Average",
           },
         ],
+
         selectedreviewNeededValue: {
-          label: "Final - Large Difference Vs Vender",
-          value: "Final - Large Difference Vs Vender",
+          label: "All",
+          value: "All",
         },
         isEditedRecordChecked: false,
         editedRecordValue: "",
@@ -286,6 +295,7 @@ class VsvProvider extends Component {
           rowSelection: "multiple",
         },
         selectedGridData: [],
+        isImportVendorDataModalOpen: false,
       },
       editDashboardData: { showEditDashboardGrid: true },
     };
@@ -892,6 +902,22 @@ class VsvProvider extends Component {
     let maintenanceScreenData = this.state.maintenanceScreenData;
     maintenanceScreenData.isRecordMustSelectedPopupOpen =
       !maintenanceScreenData.isRecordMustSelectedPopupOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+
+  toggleImportVendorDataModalOpen = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isImportVendorDataModalOpen =
+      !maintenanceScreenData.isImportVendorDataModalOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  onClickImportVendorDataButton = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isImportVendorDataModalOpen = true;
     this.setState({
       maintenanceScreenData,
     });
@@ -1531,6 +1557,9 @@ class VsvProvider extends Component {
             this.togglePriceOverrideConfirmModalOpen,
           onFirstDataRendered: this.onFirstDataRendered,
           showLessOrColumns: this.showLessOrColumns,
+          toggleImportVendorDataModalOpen: this.toggleImportVendorDataModalOpen,
+          onClickImportVendorDataButton: this.onClickImportVendorDataButton,
+
           //=============Edit Dahsboard==============
           toggleEditDashboardGrid: this.toggleEditDashboardGrid,
         }}

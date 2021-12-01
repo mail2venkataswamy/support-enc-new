@@ -2,17 +2,62 @@ import React from "react";
 import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
 const rowData = [
   {
-    valuedSecurityEdits: "test",
+    valuedSecurityEdits: "Large Volume Change",
     tier: 1,
     reviewNeeded: 0,
   },
   {
-    valuedSecurityEdits: "test1",
+    valuedSecurityEdits: "Large Volume Change",
+    tier: 2,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Less Than 90 Days Average",
     tier: 1,
     reviewNeeded: 0,
   },
   {
-    valuedSecurityEdits: "test2",
+    valuedSecurityEdits: "Less Than 90 Days Average",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Missing Or Zero Volume",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Missing Or Zero Volume",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Significant Vendor Difference",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Significant Vendor Difference",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Tier IV to Tier III Change",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Tier IV to Tier III Change",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Total Edited Flages",
+    tier: 1,
+    reviewNeeded: 0,
+  },
+  {
+    valuedSecurityEdits: "Total Edited Flages",
     tier: 1,
     reviewNeeded: 0,
   },
@@ -22,6 +67,7 @@ const colDefsMedalsIncluded = [
     headerName: "Valued Security Edits",
     field: "valuedSecurityEdits",
     width: "auto",
+    rowGroup: true,
   },
   { headerName: "Tier", field: "tier", width: "auto" },
   { headerName: "Review Needed", field: "reviewNeeded", width: "auto" },
@@ -40,7 +86,7 @@ const Maintenancegrid = () => {
       rowData={rowData}
       colDefsMedalsIncluded={colDefsMedalsIncluded}
       defaultColDef={defaultColDef}
-      gridHeight={240}
+      gridHeight={500}
       gridWidth="auto"
       rowSelection="multiple"
     />

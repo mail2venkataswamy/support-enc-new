@@ -11,6 +11,7 @@ import { PriceRollOverrideModal } from "../gs-price-roll-override/gs-price-roll-
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import PriceOverridePrompt from "../../../../../components/common/modal/prompt/prompt.jsx";
 import GovContext from "../../../../../components/context/gov-context.jsx";
+import { ImportVendorDataModal } from "../vsv-import-vendor-data/vsv-import-vendor-data.jsx";
 
 const Maintenanceheaders = () => {
   const context = useContext(GovContext);
@@ -53,6 +54,9 @@ const Maintenanceheaders = () => {
     isPriceOverrideConfirmModalOpen,
     togglePriceOverrideConfirmModalOpen,
     priceOverrideConfirmWarningMessage,
+    isImportVendorDataModalOpen,
+    onClickImportVendorDataButton,
+    toggleImportVendorDataModalOpen,
   } = {
     ...context.state.maintenanceScreenData,
     ...context.state,
@@ -83,6 +87,11 @@ const Maintenanceheaders = () => {
           <ButtonWrapper
             id="PriceRollOverride"
             label={"Import Vendor Data"}
+            onClick={
+              maintenanceRowData && maintenanceRowData.length > 0
+                ? onClickImportVendorDataButton
+                : toggleGridMustBePopulateddModal
+            }
           ></ButtonWrapper>
         </div>
         <div className="showColumnsPrintRefreshExportWrapper">
@@ -176,15 +185,20 @@ const Maintenanceheaders = () => {
       />
       <SusupendRestartModal />
       <PublishSecuritiesModal />
-      <div className="priceRollOverrideModalContainer">
-        <PriceRollOverrideModal />
-      </div>
+      <div className="priceRollOverrideModalContainer"></div>
       <div className="priceRollOverridePrompt">
         <PriceOverridePrompt
           isModalOpen={isPriceOverrideConfirmModalOpen}
           closeModal={togglePriceOverrideConfirmModalOpen}
           warningMessage={priceOverrideConfirmWarningMessage}
         ></PriceOverridePrompt>
+      </div>
+      <div className="importVendorDataModal">
+        <ImportVendorDataModal
+          isModalOpen={isImportVendorDataModalOpen}
+          closeModal={toggleImportVendorDataModalOpen}
+          data={maintenanceScreenData}
+        ></ImportVendorDataModal>
       </div>
     </div>
   );
