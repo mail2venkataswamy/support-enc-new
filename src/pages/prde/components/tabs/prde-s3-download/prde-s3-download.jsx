@@ -1,5 +1,6 @@
 import React from "react";
 import DownloadFilesBy from "./prde-download-files-by/prde-download-files-by";
+import DownloadOptions from "./download-options/download-options.jsx";
 
 const SThreeDownload = () => {
   return (
@@ -10,6 +11,7 @@ const SThreeDownload = () => {
       </fieldset>
       <fieldset className="productInfoWrapper">
         <legend>Download Options </legend>
+        <DownloadOptions></DownloadOptions>
       </fieldset>
       <div className="runAndResetButtonWrapper">
         <button>Download</button>

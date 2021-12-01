@@ -1,5 +1,10 @@
+@import "../../../../../light.scss";
 .priceOverrideWrapper {
   width: 60%;
+  .priceOverrideFieldset {
+    background: $white;
+    border-radius: 30px;
+  }
   .businessDtAndDeliveryClass {
     width: 50%;
     .businessDateLabelAndValue,

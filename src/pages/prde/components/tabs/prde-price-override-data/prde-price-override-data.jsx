@@ -18,7 +18,7 @@ const PriceOverrideData = () => {
   };
   return (
     <div className="priceOverrideWrapper">
-      <fieldset>
+      <fieldset className="priceOverrideFieldset">
         <legend>Price Override Download </legend>
         <div className="businessDtAndDeliveryClass">
           <div className="businessDateLabelAndValue">

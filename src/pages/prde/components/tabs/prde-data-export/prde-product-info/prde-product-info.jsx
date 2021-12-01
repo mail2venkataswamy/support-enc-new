@@ -63,6 +63,18 @@ const ProductInfo = () => {
     isNonClearedOrCrossMarginChecked,
     onSelectFms,
     isFmsChecked,
+
+    strikePriceFromSuggestionResult,
+    onChangeStrikePriceFromValue,
+    onClickStrikePriceFromSuggestionItem,
+    strikePriceFromValue,
+    StrikePriceFromSearchValue,
+
+    strikePriceToSuggestionResult,
+    onChangeStrikePriceToValue,
+    onClickStrikePriceToSuggestionItem,
+    strikePriceToValue,
+    StrikePriceToSearchValue,
   } = {
     ...context.state.dataExport,
     ...context,
@@ -75,7 +87,7 @@ const ProductInfo = () => {
           <div className="productTypeValue">
             <Dropdown
               options={productTypeOptions}
-              value={selectedProductTypeValue}
+              selectedValue={selectedProductTypeValue}
               onChange={onChangeProductTypeValue}
             ></Dropdown>
           </div>
@@ -122,14 +134,14 @@ const ProductInfo = () => {
           <div className="callPutValue">
             <Dropdown
               options={callPutOptions}
-              value={selectedCallPutValue}
+              selectedValue={selectedCallPutValue}
               onChange={onChangeCallPutValue}
             ></Dropdown>
           </div>
         </div>
         <div className="strikePriceFromLabelAndValue">
           <div className="strikePriceFromlabel">
-            Expiration/maturity Date From
+            Expiration/Maturity Date From
           </div>
           <div className="strikePriceFromValue">
             <DatePicker
@@ -145,11 +157,11 @@ const ProductInfo = () => {
           <div className="strikePriceToLabel">Strike Price From</div>
           <div className="strikePriceToValue">
             <Inputsuggestion
-              onChange={onChangeIsInValue}
-              results={isInSuggestionResult}
-              onClick={onClickIsInSuggestionItem}
-              value={isInValue}
-              keySearch={isInSearchValue}
+              onChange={onChangeStrikePriceFromValue}
+              results={strikePriceFromSuggestionResult}
+              onClick={onClickStrikePriceFromSuggestionItem}
+              value={strikePriceFromValue}
+              keySearch={StrikePriceFromSearchValue}
             ></Inputsuggestion>
           </div>
         </div>
@@ -158,7 +170,7 @@ const ProductInfo = () => {
           <div className="pricePrecisionValue">
             <Dropdown
               options={pricePrecisionOptions}
-              value={selectedpricePrecisionValue}
+              selectedValue={selectedpricePrecisionValue}
               onChange={onChangepricePrecisionValue}
             ></Dropdown>
           </div>
@@ -182,7 +194,7 @@ const ProductInfo = () => {
           <div className="classificationValue">
             <Dropdown
               options={piClassificationOptions}
-              value={selectedPiClassificationValue}
+              selectedValue={selectedPiClassificationValue}
               onChange={onChangeClassificationValue}
             ></Dropdown>
           </div>
@@ -228,7 +240,7 @@ const ProductInfo = () => {
           <div className="vendorValue">
             <Dropdown
               options={vendorOptins}
-              value={selectedVendorValue}
+              selectedValue={selectedVendorValue}
               onChange={onChangeVendorValue}
             ></Dropdown>
           </div>
@@ -250,11 +262,11 @@ const ProductInfo = () => {
           <div className="strikePriceToLabel">Strike Price To</div>
           <div className="strikePriceToValue">
             <Inputsuggestion
-              onChange={onChangeIsInValue}
-              results={isInSuggestionResult}
-              onClick={onClickIsInSuggestionItem}
-              value={isInValue}
-              keySearch={isInSearchValue}
+              onChange={onChangeStrikePriceToValue}
+              results={strikePriceToSuggestionResult}
+              onClick={onClickStrikePriceToSuggestionItem}
+              value={strikePriceToValue}
+              keySearch={StrikePriceToSearchValue}
             ></Inputsuggestion>
           </div>
         </div>

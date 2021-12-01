@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useState } from "react";
 import "./custom-tooltip.scss";
 
 const FunctionalCustomTooltip = (params) => {
-  if (params.rowIndex === 2) {
+  if (params.node.data.tier === 0) {
     params.reactContainer.classList.add("custom-tooltip");
 
     const data = params.api.getDisplayedRowAtIndex(params.rowIndex).data;

@@ -25,7 +25,10 @@ const dynamicCellStyle = (params) => {
   return null;
 };
 const getRowStyle = (params) => {
-  if (params.node.rowIndex === 2) {
+  /*   if (params.node.rowIndex === 2) {
+    return { color: "red" };
+  } */
+  if (params.node.data.tier === 0) {
     return { color: "red" };
   }
 };
@@ -275,6 +278,7 @@ class GovProvider extends Component {
         popupParent: document.body,
         showAllColumns: true,
         colDefsMedalsIncluded: [
+          //Default columns
           {
             width: 60,
             headerCheckboxSelection: true,
@@ -286,107 +290,172 @@ class GovProvider extends Component {
           {
             headerName: "Activity Date",
             field: "activityDate",
-            width: 100,
+            width: "auto",
+            tooltipField: "activityDate",
           },
           {
-            headerName: "Cuspin",
+            headerName: "Reval Adj Flag",
+            field: "revalAdjFlag",
+            width: 100,
+            tooltipField: "revalAdjFlag",
+          },
+          {
+            headerName: "Cusip",
             field: "cuspin",
             width: 100,
             tooltipField: "cuspin",
           },
-          { headerName: "ISIN", field: "isin", width: 100 },
-          { headerName: "Symbol", field: "symbol", width: 80 },
-          { headerName: "Tier", field: "tier", width: 80 },
-          { headerName: "Type", field: "type", width: 80 },
-          { headerName: "Market Symbol", field: "marketSymbol", width: 100 },
-          { headerName: "MIC Code", field: "micCode", width: 100 },
-          { headerName: "Currency", field: "currency", width: 80 },
-          { headerName: "Thomson price", field: "thomson_price", width: 100 },
+          {
+            headerName: "Tier",
+            field: "tier",
+            width: 80,
+            tooltipField: "tier",
+          },
+          {
+            headerName: "Type",
+            field: "type",
+            width: 80,
+            tooltipField: "type",
+          },
+          {
+            headerName: "Currency",
+            field: "currency",
+            width: 80,
+            tooltipField: "currency",
+          },
+          {
+            headerName: "Issuer Type",
+            field: "issuerType",
+            width: 80,
+            tooltipField: "issuerType",
+          },
+          {
+            headerName: "Maturity Date",
+            field: "maturityDate",
+            width: 100,
+            tooltipField: "maturityDate",
+          },
           {
             headerName: "Bloomberg Price",
             field: "bloomberg_price",
-            width: 100,
+            width: "auto",
+            tooltipField: "bloomberg_price",
           },
-          { headerName: "ICE Price", field: "icePrice", width: 100 },
-          { headerName: "IDSI price", field: "idsiPrice", width: 100 },
-          { headerName: "Exchange Price", field: "exchangePrice", width: 120 },
-          { headerName: "previous_price", field: "previousPrice", width: 120 },
+          {
+            headerName: "ICE Price",
+            field: "icePrice",
+            width: 100,
+            tooltipField: "icePrice",
+          },
+          {
+            headerName: "IDSI price",
+            field: "idsiPrice",
+            width: 100,
+            tooltipField: "idsiPrice",
+          },
+          {
+            headerName: "Acured Interest",
+            field: "acuredInterest",
+            width: 120,
+            tooltipField: "acuredInterest",
+          },
+          {
+            headerName: "Previous price",
+            field: "previousPrice",
+            width: 120,
+            tooltipField: "previousPrice",
+          },
+          {
+            headerName: "PPrevious Price Dirty",
+            field: "previousPriceDirty",
+            width: 120,
+            tooltipField: "previousPriceDirty",
+          },
+          {
+            headerName: "Previous Price Adjusted Dirty",
+            field: "previousPriceAdjustedDirty",
+            width: 120,
+            tooltipField: "previousPriceAdjustedDirty",
+          },
           {
             headerName: "Final Price",
             field: "finalPrice",
             width: 120,
             editable: true,
             cellStyle: staticCellStyle,
+            tooltipField: "finalPrice",
           },
           {
-            headername: "Final Price End Date",
-            field: "finalPriceEndDate",
-            width: 150,
-          },
-          {
-            headerName: "FInal Price Override ID",
+            headername: "Final Price Override ID",
             field: "finalPriceOverrideId",
             width: 100,
+            tooltipField: "finalPriceOverrideId",
           },
           {
             headerName: "Final Price Change",
             field: "finalPriceChange",
             width: 120,
+            tooltipField: "finalPriceChange",
           },
           {
-            headerName: "Stock Loan Price",
-            field: "stockLoanPrice",
+            headerName: "Final Price Dirty",
+            field: "finalPriceDirty",
             width: 100,
+            tooltipField: "finalPriceDirty",
           },
           {
-            headerName: "Stock Loan Price Override ID",
-            field: "stockLoanPriceOverrideId",
+            headerName: "Final Price Adjusted Dirty",
+            field: "finalPriceAdjustedDirty",
             width: 100,
+            tooltipField: "finalPriceAdjustedDirty",
           },
           {
             headerName: "Intraday Price",
             field: "intraDayPrice",
             width: 100,
-          },
-          {
-            headerName: "Intraday Price End Date",
-            field: "intraDayPriceEndDate",
-            width: 100,
+            tooltipField: "intraDayPrice",
           },
           {
             headerName: "Intraday Price Override ID",
-            field: "intraDayPriceOverrideId",
+            field: "intradayPriceOverrideId",
             width: 99,
+            tooltipField: "intradayPriceOverrideId",
+          },
+          {
+            headerName: "Intraday Price Dirty",
+            field: "intradayPriceDirty",
+            width: 100,
+            tooltipField: "intradayPriceDirty",
+          },
+          {
+            headerName: "Intraday Price Adjusted Dirty",
+            field: "intradayPriceAdjustedDirty",
+            width: 100,
+            tooltipField: "intradayPriceAdjustedDirty",
+          },
+          {
+            headerName: "Conversation Factor",
+            field: "conversationFcator",
+            width: 100,
+            tooltipField: "conversationFcator",
           },
           {
             headerName: "Fnl Review Needed",
             field: "fnlReviewNeeded",
             width: 100,
+            tooltipField: "fnlReviewNeeded",
           },
           {
             headerName: "Fnl Primary Reviewer UserId",
             field: "fnlPrimaryReviewerUserId",
             width: 100,
+            tooltipField: "fnlPrimaryReviewerUserId",
           },
           {
             headerName: "Fnl Secondary Reviewer UserId",
             field: "fnlSecondaryReviewerUserId",
             width: 100,
-          },
-          {
-            headerName: "S.L Review Needed",
-            field: "slReviewNeeded",
-            width: 100,
-          },
-          {
-            headerName: "S.L Primary Reviewer UserId",
-            field: "fnlPrimaryReviewerUserId",
-            width: 100,
-          },
-          {
-            headerName: "S.L Secondary Reviewer UserId",
-            field: "fnlSecondaryReviewerUserId",
-            width: 100,
+            tooltipField: "fnlSecondaryReviewerUserId",
           },
         ],
         lessDefsMedalsIncluded: [
@@ -398,79 +467,132 @@ class GovProvider extends Component {
           },
 
           {
-            headerName: "Cuspin",
+            headerName: "Cusip",
             field: "cuspin",
             width: 100,
             tooltipField: "cuspin",
           },
-          { headerName: "Symbol", field: "symbol", width: 80 },
-          { headerName: "Tier", field: "tier", width: 80 },
-          { headerName: "Type", field: "type", width: 80 },
-          { headerName: "Currency", field: "currency", width: 80 },
-          { headerName: "Thomson price", field: "thomson_price", width: 100 },
+          {
+            headerName: "Tier",
+            field: "tier",
+            width: 80,
+            tooltipField: "tier",
+          },
+          {
+            headerName: "Type",
+            field: "type",
+            width: 80,
+            tooltipField: "field",
+          },
+          {
+            headerName: "Maturity Date",
+            field: "maturityDate",
+            width: 100,
+            tooltipField: "maturityDate",
+          },
           {
             headerName: "Bloomberg Price",
             field: "bloomberg_price",
             width: 100,
+            tooltipField: "bloomberg_price",
           },
-          { headerName: "ICE Price", field: "icePrice", width: 100 },
-          { headerName: "IDSI price", field: "idsiPrice", width: 100 },
-          { headerName: "Exchange Price", field: "exchangePrice", width: 120 },
-          { headerName: "previous_price", field: "previousPrice", width: 120 },
+          {
+            headerName: "ICE Price",
+            field: "icePrice",
+            width: 100,
+            tooltipField: "icePrice",
+          },
+          {
+            headerName: "IDSI price",
+            field: "idsiPrice",
+            width: 100,
+            tooltipField: "idsiPrice",
+          },
+          {
+            headerName: "Acured Interest",
+            field: "acuredInterest",
+            width: 120,
+            tooltipField: "acuredInterest",
+          },
+          {
+            headerName: "Previous price",
+            field: "previousPrice",
+            width: 120,
+            tooltipField: "previousPrice",
+          },
+          {
+            headerName: "Previous Price Dirty",
+            field: "previousPriceDirty",
+            width: 120,
+            tooltipField: "previousPriceDirty",
+          },
+          {
+            headerName: "Previous Price Adjusted Dirty",
+            field: "previousPriceAdjustedDirty",
+            width: 120,
+            tooltipField: "previousPriceAdjustedDirty",
+          },
           {
             headerName: "Final Price",
             field: "finalPrice",
             width: 120,
             editable: true,
             cellStyle: staticCellStyle,
+            tooltipField: "finalPrice",
           },
           {
-            headername: "Final Price End Date",
-            field: "finalPriceEndDate",
-            width: 150,
-          },
-          {
-            headerName: "FInal Price Override ID",
-            field: "finalPriceOverrideId",
+            headername: "Final Price Override ID",
+            field: "finalPriceOverrideID",
             width: 100,
+            tooltipField: "finalPriceOverrideID",
           },
           {
-            headerName: "Stock Loan Price",
-            field: "stockLoanPrice",
+            headerName: "Final Price Dirty",
+            field: "finalPriceDirty",
             width: 100,
-            editable: true,
+            tooltipField: "finalPriceDirty",
           },
           {
-            headerName: "Stock Loan Price Override ID",
-            field: "stockLoanPriceOverrideId",
+            headerName: "Final Price Adjusted Dirty",
+            field: "finalPriceAdjustedDirty",
             width: 100,
+            tooltipField: "finalPriceAdjustedDirty",
           },
           {
             headerName: "Intraday Price",
             field: "intraDayPrice",
             width: 100,
-            editable: true,
-          },
-          {
-            headerName: "Intraday Price End Date",
-            field: "intraDayPriceEndDate",
-            width: 100,
+            tooltipField: "intraDayPrice",
           },
           {
             headerName: "Intraday Price Override ID",
             field: "intraDayPriceOverrideId",
-            width: 100,
+            width: 99,
+            tooltipField: "intraDayPriceOverrideId",
           },
           {
-            headerName: "Fnl Review Neededtype",
-            filed: "fnlReviewNeededType",
-            width: 80,
-          },
-          { headerName: "", field: "fnlReviewNeeded", width: 100 },
-          {
-            headerName: "S.L Review Needed",
-            field: "slReviewNeeded",
+            headerName: "Intraday Price Dirty",
+            field: "intradayPriceDirty",
             width: 100,
+            tooltipField: "intradayPriceAdjustedDirty",
+          },
+          {
+            headerName: "Intraday Price Adjusted Dirty",
+            field: "intradayPriceAdjustedDirty",
+            width: 100,
+            tooltipField: "intradayPriceAdjustedDirty",
+          },
+          {
+            headerName: "Conversation Factor",
+            field: "conversationFactor",
+            width: 100,
+            tooltipField: "conversationFactor",
+          },
+          {
+            headerName: "Fnl Review Needed",
+            field: "fnlReviewNeeded",
+            width: 100,
+            tooltipField: "fnlReviewNeeded",
           },
         ],
         defaultColDef: {
@@ -481,6 +603,8 @@ class GovProvider extends Component {
           rowSelection: "multiple",
           tooltipComponent: "customTooltip",
           tooltipShowDelay: 0,
+          width: 200,
+          flex: 0,
         },
         selectedGridData: [],
         getRowStyle: getRowStyle,
@@ -1210,7 +1334,7 @@ class GovProvider extends Component {
         cuspin: "test",
         isin: "test",
         symbol: "test",
-        tier: 1,
+        tier: 0,
         type: 1,
         marketSymbol: "",
         micCode: "11",
@@ -1241,7 +1365,38 @@ class GovProvider extends Component {
         cuspin: "test",
         isin: "test",
         symbol: "test",
-        tier: 1,
+        tier: 0,
+        type: 1,
+        marketSymbol: "",
+        micCode: "11",
+        currency: "USA",
+        thomson_price: 11,
+        bloomberg_price: 1234,
+        icePrice: 123,
+        idsiPrice: 23,
+        exchangePrice: 23,
+        previousPrice: 33,
+        finalPrice: 55,
+        finalPriceEndDate: "",
+        finalPriceOverrideId: 23,
+        stockLoanPrice: 77,
+        stockLoanPriceOverrideId: 78,
+        intraDayPrice: 887,
+        intraDayPriceEndDate: "",
+        intraDayPriceOverrideId: 887,
+        fnlReviewNeeded: "",
+        fnlPrimaryReviewerUserId: "test",
+        fnlSecondaryReviewerUserId: "test",
+        fnlReviewNeededType: 9,
+        slReviewNeeded: 1,
+      },
+      {
+        "#": "",
+        activityDate: "test",
+        cuspin: "test",
+        isin: "test",
+        symbol: "test",
+        tier: 0,
         type: 1,
         marketSymbol: "",
         micCode: "11",
@@ -1303,38 +1458,7 @@ class GovProvider extends Component {
         cuspin: "test",
         isin: "test",
         symbol: "test",
-        tier: 1,
-        type: 1,
-        marketSymbol: "",
-        micCode: "11",
-        currency: "USA",
-        thomson_price: 11,
-        bloomberg_price: 1234,
-        icePrice: 123,
-        idsiPrice: 23,
-        exchangePrice: 23,
-        previousPrice: 33,
-        finalPrice: 55,
-        finalPriceEndDate: "",
-        finalPriceOverrideId: 23,
-        stockLoanPrice: 77,
-        stockLoanPriceOverrideId: 78,
-        intraDayPrice: 887,
-        intraDayPriceEndDate: "",
-        intraDayPriceOverrideId: 887,
-        fnlReviewNeeded: "",
-        fnlPrimaryReviewerUserId: "test",
-        fnlSecondaryReviewerUserId: "test",
-        fnlReviewNeededType: 9,
-        slReviewNeeded: 1,
-      },
-      {
-        "#": "",
-        activityDate: "test",
-        cuspin: "test",
-        isin: "test",
-        symbol: "test",
-        tier: 1,
+        tier: 0,
         type: 1,
         marketSymbol: "",
         micCode: "11",
@@ -1679,8 +1803,6 @@ class GovProvider extends Component {
 
   componentDidMount() {
     let filterPanelData = this.state.filterPanelData;
-
-    let filterObject1 = this.state.filterPanelData;
     filterPanelData.isFromAndStDisabled = true;
 
     let filterObject = {
@@ -1707,10 +1829,10 @@ class GovProvider extends Component {
       filterPanelData,
     });
 
-    /*     let ele = document.getElementsByClassName("ag-paging-panel")[0];
+    let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
-    ele.append(div); */
+    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
+    ele.append(div);
   }
   render() {
     return (

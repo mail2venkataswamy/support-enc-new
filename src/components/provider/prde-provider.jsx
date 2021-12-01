@@ -29,6 +29,7 @@ class PrdeProvider extends React.Component {
           Component: sThreeDownload,
         },
       ],
+      initialDataExport: {},
       dataExport: {
         isFromAndStDisabled: false,
         currHistOptions: [
@@ -132,10 +133,38 @@ class PrdeProvider extends React.Component {
         ],
         isInSuggestionResult: [],
         isInValue: "",
-
-        vendorOptins: [{ label: "one", value: "one" }],
+        vendorOptins: [
+          { label: "IDSI", value: "idsi" },
+          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
+          {
+            label: "Markit Financial Information Services",
+            value: "Markit Financial Information Services",
+          },
+          {
+            label: "Miami International Securities Exchange",
+            value: "Miami International Securities Exchange",
+          },
+          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
+          { label: "Fidessa Group plc", value: "Fidessa Group plc" },
+          { label: "CE DATA SERVICES", value: "CE DATA SERVICES" },
+          { label: "Exchange Files", value: "Exchange Files" },
+          { label: "BBG/IDC Vendor Group", value: "BBG/IDC Vendor Group" },
+          { label: "SunGard ORM", value: "SunGard ORM" },
+          {
+            label: "Customized Options Pricing Service",
+            value: "Customized Options Pricing Service",
+          },
+          { label: "Bloomberg Polarlake", value: "Bloomberg Polarlake" },
+          { label: "CBOE Indicative Price", value: "CBOE Indicative Price" },
+          { label: "GTreasury SS, LLC", value: "GTreasury SS, LLC" },
+          { label: "Baton Systems Inc.", value: "Baton Systems Inc." },
+        ],
         selectedVendorValue: { label: "default", value: "default" },
-        callPutOptions: [{ label: "one", value: "one" }],
+        callPutOptions: [
+          { label: "Call", value: "call" },
+          { label: "Put", value: "put" },
+        ],
+
         selectedCallPutValue: { label: "default", value: "default" },
         strikePriceToDate: new Date(),
         strikePriceFromDate: new Date(),
@@ -143,6 +172,36 @@ class PrdeProvider extends React.Component {
         selectedpricePrecisionValue: { label: 1, value: 1 },
         isNonClearedOrCrossMarginChecked: false,
         isFmsChecked: false,
+        strikePriceFromData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        strikePriceToData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        strikePriceFromSuggestionResult: [],
+        strikePriceFromValue: "",
+        StrikePriceFromSearchValue: "",
+        strikePriceToSuggestionResult: [],
+        strikePriceToValue: "",
+        StrikePriceToSearchValue: "",
       },
       exportResult: {
         exportResultRowData: [
@@ -204,13 +263,37 @@ class PrdeProvider extends React.Component {
         deliveryClassOptions: [{ label: "one", value: "one" }],
         deliveryClassValue: { label: "default", value: "default" },
         runDate: new Date(),
+        optionsDeliveryClassData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        optionsDeliveryClassSuggestionResult: [],
+        optionsDeliveryClassValue: "",
+        optionsDeliveryClassSearchValue: "",
       },
     };
   }
   //---------------Data Export Methods---------------
+  onDataExportClickReset = () => {
+    let dataExport = this.state.dataExport;
+    let initialDataExport = this.state.initialDataExport;
+    let data = { ...dataExport, ...initialDataExport };
+
+    this.setState({
+      dataExport: data,
+    });
+  };
   onChangeCurrHistValue = (e) => {
     let dataExport = this.state.dataExport;
-    dataExport.selectedCurrHistValue = e.value;
+    dataExport.selectedCurrHistValue = e;
     if (e.value.toLowerCase() === "CURRENT".toLowerCase()) {
       dataExport.isFromAndStDisabled = true;
     } else {
@@ -418,6 +501,7 @@ class PrdeProvider extends React.Component {
   };
 
   onChangeVendorValue = (selectedValue) => {
+    alert(selectedValue.label);
     let dataExport = this.state.dataExport;
     dataExport.selectedVendorValue = selectedValue;
     this.setState({ dataExport });
@@ -443,9 +527,8 @@ class PrdeProvider extends React.Component {
   };
 
   setstrikePriceFromDate = (date) => {
-    const valueOfInput = date.format();
     let dataExport = this.state.dataExport;
-    dataExport.strikePriceFromDate = valueOfInput;
+    dataExport.strikePriceFromDate = date;
     this.setState({
       dataExport,
     });
@@ -479,6 +562,65 @@ class PrdeProvider extends React.Component {
     priceOverrideData.PriceOverideDeliveryClassValue = selectedValue;
     this.setState({ priceOverrideData });
   };
+  onClickStrikePriceFromSuggestionItem = (selectedValue) => {
+    let dataExport = this.state.dataExport;
+    dataExport.strikePriceFromValue = selectedValue;
+    dataExport.StrikePriceFromSearchValue = "";
+    this.setState({
+      dataExport,
+    });
+  };
+  onChangeStrikePriceFromValue = (e) => {
+    let data = this.state.dataExport.strikePriceFromData;
+    let dataExport = this.state.dataExport;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    dataExport.strikePriceFromSuggestionResult = result;
+    dataExport.StrikePriceFromSearchValue = e.target.value;
+    dataExport.strikePriceFromValue = e.target.value;
+
+    this.setState({
+      dataExport,
+    });
+  };
+  onClickStrikePriceToSuggestionItem = (selectedValue) => {
+    let dataExport = this.state.dataExport;
+    dataExport.strikePriceToValue = selectedValue;
+    dataExport.StrikePriceToSearchValue = "";
+    this.setState({
+      dataExport,
+    });
+  };
+  onChangeStrikePriceToValue = (e) => {
+    let data = this.state.dataExport.strikePriceToData;
+    let dataExport = this.state.dataExport;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    dataExport.strikePriceToSuggestionResult = result;
+    dataExport.StrikePriceToSearchValue = e.target.value;
+    dataExport.strikePriceToValue = e.target.value;
+
+    this.setState({
+      dataExport,
+    });
+  };
+
   //-------------------Sthree download------------------------------
   onChangeDeliveryClassValue = (selectedValue) => {
     let sThreeDownload = this.state.sThreeDownload;
@@ -500,8 +642,68 @@ class PrdeProvider extends React.Component {
     });
   };
 
+  onChangeOptionsDeliveryClassValue = (e) => {
+    let data = this.state.sThreeDownload.optionsDeliveryClassData;
+    let sThreeDownload = this.state.sThreeDownload;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+
+    sThreeDownload.optionsDeliveryClassSuggestionResult = result;
+    sThreeDownload.optionsDeliveryClassSearchValue = e.target.value;
+    sThreeDownload.optionsDeliveryClassValue = e.target.value;
+
+    this.setState({
+      sThreeDownload,
+    });
+  };
+  onClickOptionsDeliveryClassSuggestionItem = (selectedValue) => {
+    let sThreeDownload = this.state.sThreeDownload;
+    sThreeDownload.optionsDeliveryClassValue = selectedValue;
+    sThreeDownload.optionsDeliveryClassSearchValue = "";
+    this.setState({
+      sThreeDownload,
+    });
+  };
+
   componentDidMount() {
     let dataExport = this.state.dataExport;
+    dataExport.isFromAndStDisabled = true;
+    let filterObject = {
+      fromDate: dataExport.fromDate,
+      toDate: dataExport.toDate,
+      selectedCurrHistValue: dataExport.selectedCurrHistValue,
+      selectedProductTypeValue: dataExport.selectedProductTypeValue,
+      selectedPiClassificationValue: dataExport.selectedPiClassificationValue,
+      symbolFromValue: dataExport.symbolFromValue,
+      symbolToValue: dataExport.symbolToValue,
+      cuspinValue: dataExport.cuspinValue,
+      deliveryClassValue: dataExport.deliveryClassValue,
+      exchangeValue: dataExport.exchangeValue,
+      isInValue: dataExport.isInValue,
+      onChangeCallPutValue: dataExport.selectedCallPutValue,
+      selectedVendorValue: dataExport.selectedVendorValue,
+      strikePriceFromDate: dataExport.strikePriceFromDate,
+      strikePriceToDate: dataExport.strikePriceToDate,
+      selectedpricePrecisionValue: dataExport.selectedpricePrecisionValue,
+      isFmsChecked: dataExport.isFmsChecked,
+      isNonClearedOrCrossMarginChecked:
+        dataExport.isNonClearedOrCrossMarginChecked,
+      strikePriceFromDate: dataExport.strikePriceFromDate,
+      strikePriceToDate: dataExport.strikePriceToDate,
+    };
+
+    let data = { ...dataExport, ...filterObject };
+
+    this.setState({
+      initialDataExport: data,
+    });
   }
 
   render() {
@@ -542,6 +744,18 @@ class PrdeProvider extends React.Component {
           onChangePriceOverideDeliveryClassValue: (e) =>
             this.onChangePriceOverideDeliveryClassValue(e),
           setRunDate: (e) => this.setRunDate(e),
+          onDataExportClickReset: this.onDataExportClickReset,
+          onChangeStrikePriceFromValue: (e) =>
+            this.onChangeStrikePriceFromValue(e),
+          onClickStrikePriceFromSuggestionItem: (e) =>
+            this.onClickStrikePriceFromSuggestionItem(e),
+          onChangeStrikePriceToValue: (e) => this.onChangeStrikePriceToValue(e),
+          onClickStrikePriceToSuggestionItem: (e) =>
+            this.onClickStrikePriceToSuggestionItem(e),
+          onChangeOptionsDeliveryClassValue: (e) =>
+            this.onChangeOptionsDeliveryClassValue(e),
+          onClickOptionsDeliveryClassSuggestionItem: (e) =>
+            this.onClickOptionsDeliveryClassSuggestionItem(e),
 
           //=======================
         }}

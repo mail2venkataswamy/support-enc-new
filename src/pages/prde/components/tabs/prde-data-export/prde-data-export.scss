@@ -1,6 +1,23 @@
-.dataExportWrapper {
-  width: 80%;
-  .runAndResetButtonWrapper {
-    text-align: center;
+@import "../../../../../light.scss";
+.priceRepoDataExportContainer {
+  .dataExportWrapper {
+    width: 80%;
+    .runAndResetButtonWrapper {
+      text-align: center;
+    }
+    .productInfoWrapper,
+    .dateWrapper {
+      background: $white;
+      border-radius: 30px;
+    }
+  }
+  legend {
+    color: #7c8da6;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 20px 0px 0px;
+    text-transform: uppercase;
+  }
+  fieldset {
   }
 }

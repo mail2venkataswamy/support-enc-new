@@ -31,17 +31,21 @@ const DateRange = () => {
           ></Dropdown>
         </div>
       </div>
-      <div className="dateRangeWrapper">
-        <Daterangepicker
-          isFromAndStDisabled={isFromAndStDisabled}
-          toDate={toDate}
-          fromDate={fromDate}
-          setFromDate={setFromDate}
-          setToDate={setToDate}
-          toLabel="To Date"
-          fromLabel="From Date"
-        ></Daterangepicker>
-      </div>
+      {isFromAndStDisabled ? (
+        ""
+      ) : (
+        <div className="dateRangeWrapper">
+          <Daterangepicker
+            isFromAndStDisabled={isFromAndStDisabled}
+            toDate={toDate}
+            fromDate={fromDate}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
+            toLabel="To Date"
+            fromLabel="From Date"
+          ></Daterangepicker>
+        </div>
+      )}
     </div>
   );
 };
