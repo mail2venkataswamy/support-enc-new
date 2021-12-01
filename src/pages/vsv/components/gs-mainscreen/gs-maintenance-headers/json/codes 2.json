@@ -1,0 +1,11 @@
+{
+  "numRows": 6,
+  "rows": [
+    { "description": "Bill", "value": "BILL" },
+    { "description": "Bond", "value": "BOND" },
+    { "description": "Note", "value": "NOTE" },
+    { "description": "STRP", "value": "STRP" },
+    { "description": "TIPS", "value": "TIPS" },
+    { "description": "TPST", "value": "TPST" }
+  ]
+}
