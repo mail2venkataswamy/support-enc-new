@@ -154,6 +154,7 @@ const Maintenanceheaders = () => {
         paginationPageSize={10}
         onSelectionChanged={onSelectionChanged}
         onFirstDataRendered={onFirstDataRendered}
+        suppressSizeToFit={true}
       />
       {/*------- Price Roll Override Warning Modal---------*/}
       <WarningModal

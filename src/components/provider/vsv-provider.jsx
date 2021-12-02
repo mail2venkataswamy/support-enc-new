@@ -224,7 +224,7 @@ class VsvProvider extends Component {
             headerCheckboxSelectionFilteredOnly: true,
             checkboxSelection: true,
           },
-          { field: "#", width: 60 },
+          { field: "#", width: 60, suppressSizeToFit: true },
 
           { headerName: "Cuspin", field: "cuspin", width: 100 },
           { headerName: "Symbol", field: "symbol", width: 100 },
@@ -235,6 +235,7 @@ class VsvProvider extends Component {
             headerName: "Bloomberg Volume",
             field: "bloombergVolume",
             width: 200,
+            suppressSizeToFit: true,
           },
           {
             headerName: "Previous Volume",
@@ -1387,6 +1388,7 @@ class VsvProvider extends Component {
 
   onFirstDataRendered = (params) => {
     params.api.expandAll();
+    params.api.sizeColumnsToFit();
   };
 
   onBtnExport = () => {

@@ -1,24 +1,3 @@
-/* #mainVsv {
-  .editDashboard {
-    border: solid 0.1px grey;
-  }
-  .mainscreenTitleAndToggle .toggle {
-    display: flex;
-    color: white;
-    justify-content: flex-end;
-    flex: 1;
-    position: relative;
-    left: -8px;
-    top: 2px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 2%;
-  }
-  .mainscreenHeaderTitle {
-    width: 98%;
-  }
-} */
-
 @import "../../../../light.scss";
 #mainVsv {
   .editDashboard {
@@ -27,19 +6,16 @@
     padding: 5px 20px;
     box-sizing: border-box;
     margin-top: 0.5em;
-    min-height: 100px;
-    max-height: 235px;
+    height: 228px;
     border: none;
     .ag-theme-alpine {
-      height: 150px !important;
+      height: 201px !important;
       .ag-body-viewport.ag-layout-normal {
-        overflow-y: hidden;
+        overflow-y: scroll;
       }
       .ag-row {
         height: 25px !important;
         font-size: 11px;
-        transform: none !important;
-        position: relative;
       }
       // .ag-center-cols-viewport{
       //     height: 126px;
@@ -64,7 +40,6 @@
       line-height: 22px !important;
       left: 0px !important;
       position: relative;
-      width: 150px !important;
     }
     .mainscreenTitleAndToggle {
       background: $white;
