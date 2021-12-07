@@ -18,6 +18,7 @@ const Productinfo = (props) => {
     selectedCurrencyValue,
     selectedCrossMarginValue,
     selectedClearedValue,
+    isCorporateActionChecked,
   } = props.data.filterPanelData;
   return (
     <div className="prodcutInfoWrapper">
@@ -118,6 +119,17 @@ const Productinfo = (props) => {
               onChange={props.onChangeCurrencyValue}
               selectedValue={selectedCurrencyValue}
             ></SelectBox>
+          </div>
+        </div>
+        <div className="vsCorporateActionWrapper">
+          <div className="vsCorporateActionLabel">Corporate Action:</div>
+          <div className="vsCorporateActionValue">
+            <input
+              type="checkbox"
+              checked={isCorporateActionChecked}
+              onChange={props.onChangeCorporateAction}
+              value="corporateAction"
+            ></input>
           </div>
         </div>
       </fieldset>

@@ -1,13 +1,24 @@
 #mainVS,
 #mainGov,
-#mainVsv {
+#mainVsv,
+#mainPrs {
   display: flex;
   height: 768px;
+  fieldset {
+    border: none;
+    margin-top: 7px;
+    padding-left: 12px;
+  }
 }
-#editMaint {
-  width: 70%;
+#editMaint,
+#prsEditMaint {
+  width: 98%;
   height: 100%;
 }
 h2 {
   color: #000;
+}
+* {
+  margin: 0;
+  padding: 0;
 }

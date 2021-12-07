@@ -11,6 +11,10 @@ const DownloadOptions = () => {
     onClickOptionsDeliveryClassSuggestionItem,
     optionsDeliveryClassValue,
     optionsDeliveryClassSearchValue,
+    isOverrideChecked,
+    isCyclesChecked,
+    onChangeOverride,
+    onChangeCycles,
   } = {
     ...context,
     ...context.state.sThreeDownload,
@@ -46,7 +50,11 @@ const DownloadOptions = () => {
         <div className="deliveryClassValue">
           <label>
             Override:
-            <input type="checkbox"></input>
+            <input
+              type="checkbox"
+              onChange={onChangeOverride}
+              checked={isOverrideChecked}
+            ></input>
           </label>
         </div>
       </div>
@@ -55,7 +63,11 @@ const DownloadOptions = () => {
         <div className="deliveryClassValue">
           <label>
             All Cycles:
-            <input type="checkbox"></input>
+            <input
+              type="checkbox"
+              onChange={onChangeCycles}
+              checked={isCyclesChecked}
+            ></input>
           </label>
         </div>
       </div>

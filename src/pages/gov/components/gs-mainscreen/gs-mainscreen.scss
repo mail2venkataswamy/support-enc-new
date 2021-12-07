@@ -163,12 +163,6 @@
       border: none !important;
     }
     .ag-theme-alpine .ag-row {
-      font-size: 11px;
-      background-color: $white;
-      color: $black;
-      transform: none !important;
-      height: 22px !important;
-      position: relative;
       &:nth-of-type(odd) {
         background-color: $ag-grid-row-alt-color;
       }

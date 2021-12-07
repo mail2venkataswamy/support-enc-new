@@ -4,7 +4,11 @@ import "./prde-input-suggestions.scss";
 const InputSuggestion = (props) => {
   return (
     <div className="inputSuggestionWrapper">
-      <input onChange={props.onChange} value={props.value}></input>
+      <input
+        onChange={props.onChange}
+        value={props.value}
+        disabled={props.disabled}
+      ></input>
       <Suggestions
         results={props.results}
         keySearch={props.keySearch}

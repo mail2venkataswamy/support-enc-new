@@ -10,7 +10,7 @@ const Datepicker = (props) => {
       onChange={props.setDate}
       selectsStart
       //includeDates={getArrayOfDates(props.fromDate, props.toDate, -30)}
-      //disabled={props.isFromAndStDisabled}
+      disabled={props.disabled}
     />
   );
 };

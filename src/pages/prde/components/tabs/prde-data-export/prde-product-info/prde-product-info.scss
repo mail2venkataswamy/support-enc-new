@@ -1,6 +1,8 @@
 .piLeftRightSectionWrapper {
   display: flex;
   width: 100%;
+  margin-top: 7px;
+  margin-left: 12px;
   .piLeftSection,
   .piRightSection {
     width: 50%;
@@ -54,5 +56,13 @@
         width: 70%;
       }
     }
+  }
+}
+.priceRepoDataExportContainer {
+  .dateRangeAndHistCurrWrapper .labelAndHistCurrWrapper {
+    display: flex;
+    width: 100%;
+    margin-top: 0px;
+    margin-left: 0px;
   }
 }

@@ -1,12 +1,13 @@
-.filterAndResetButtonWrapper {
-  text-align: center;
-  position: relative;
-  top: 247px;
-}
-#filter-container {
-  display: inline-block;
-  padding-right: 10px;
-}
-#reset-container {
-  display: inline-block;
+#MainVsv {
+  .filterAndResetButtonWrapper {
+    text-align: center;
+    position: relative;
+  }
+  #filter-container {
+    display: inline-block;
+    padding-right: 10px;
+  }
+  #reset-container {
+    display: inline-block;
+  }
 }

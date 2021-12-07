@@ -1,0 +1,14 @@
+#mainPrs {
+  .labelAndProductTypeWrapper,
+  .labelAndEditCatNameWrapper {
+    display: flex;
+  }
+  .productTypeLabel,
+  .editCatNameLabel {
+    width: 30%;
+  }
+  .productTypeDropdownWrapper,
+  .editCatNameDropdownWrapper {
+    width: 50%;
+  }
+}

@@ -1,0 +1,14 @@
+#mainPrs {
+  .prsSymbolLabelAndInputWrapper,
+  .prsCuspinLabelAndInputWrapper {
+    display: flex;
+  }
+  .prsSymbolLabel,
+  .prsCuspinLabel {
+    width: 30%;
+  }
+  .prsSymbolInputWrapper,
+  .prsCuspinInputWrapper {
+    width: 50%;
+  }
+}

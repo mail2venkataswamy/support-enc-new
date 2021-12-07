@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useState } from "react";
 import "./gs-editscreen.scss";
 import Editdashboardgrid from "./edit-dashboard-grid/gs-edit-dashboard-grid.jsx";
-import GovContext from "../../../../components/context/gov-context.jsx";
 
 const Editscreen = () => {
-  const context = useContext(GovContext);
+  const [isEditCatDashboardVisible, toggleEditcatDashboard] = useState(true);
   return (
     <div className="editDashboard">
       <div className="mainscreenTitleAndToggle">
@@ -13,16 +11,12 @@ const Editscreen = () => {
         <div
           id="toggle"
           className="toggle"
-          onClick={context.toggleEditDashboardGrid}
+          onClick={() => toggleEditcatDashboard(!isEditCatDashboardVisible)}
         >
           ^
         </div>
       </div>
-      {context.state.editDashboardData.showEditDashboardGrid ? (
-        <Editdashboardgrid />
-      ) : (
-        ""
-      )}
+      {isEditCatDashboardVisible ? <Editdashboardgrid /> : <div></div>}
     </div>
   );
 };

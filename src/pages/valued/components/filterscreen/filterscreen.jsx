@@ -17,8 +17,6 @@ const filterscreen = (props) => {
           /> */}
 
         <div className="filterHeaderTitle">Filter Screen</div>
-
-        <div className="filterToggle">{"<<"}</div>
       </div>
       <ActivityDateRange
         data={props.data}
@@ -43,7 +41,23 @@ const filterscreen = (props) => {
         }
         onChangeCurrencyValue={props.onChangeCurrencyValue}
         onChangeClearedValue={props.onChangeClearedValue}
+        onChangeCorporateAction={props.onChangeCorporateAction}
       ></Productinfo>
+      <fieldset>
+        <legend>Eligibility</legend>
+        <div className="vsEligibilityWrapper">
+          <div className="vsEligibilityLabel">RBH:</div>
+          <div className="vsEligibilityValue">
+            <input
+              type="checkbox"
+              value="rbhEligible"
+              checked={props.data.filterPanelData.isVsfRbhChecked}
+              onChange={props.onChangeRbh}
+            ></input>
+          </div>
+        </div>
+      </fieldset>
+
       <Flagsstatus
         data={props.data}
         onChangeFlaggedEditValue={props.onChangeFlaggedEditValue}

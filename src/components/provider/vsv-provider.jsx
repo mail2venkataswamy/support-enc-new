@@ -3,6 +3,7 @@ import React from "react";
 import MyGovContext from "../context/gov-context.jsx";
 import thresholdGridData from "./json/threshold.json";
 import suspendRestartGridData from "./json/suspend-restart.json";
+import { AutoComplete } from "antd";
 function setPrinterFriendly(api) {
   //const eGridDiv = document.querySelector("#myGrid");
   //eGridDiv.style.height = "";
@@ -223,34 +224,41 @@ class VsvProvider extends Component {
             headerCheckboxSelection: true,
             headerCheckboxSelectionFilteredOnly: true,
             checkboxSelection: true,
+            flex: 0,
           },
-          { field: "#", width: 60, suppressSizeToFit: true },
+          { field: "#", width: 60, suppressSizeToFit: true, flex: 0 },
 
-          { headerName: "Cuspin", field: "cuspin", width: 100 },
-          { headerName: "Symbol", field: "symbol", width: 100 },
-          { headerName: "Tier", field: "tier", width: 100 },
-          { headerName: "Type", field: "type", width: 100 },
+          { headerName: "Cuspin", field: "cuspin", width: 100, flex: 0 },
+          { headerName: "Symbol", field: "symbol", width: 100, flex: 0 },
+          { headerName: "Tier", field: "tier", width: 100, flex: 0 },
+          { headerName: "Type", field: "type", width: 100, flex: 0 },
 
           {
             headerName: "Bloomberg Volume",
             field: "bloombergVolume",
-            width: 200,
-            suppressSizeToFit: true,
+
+            headerClass: "bloombergVolumeHeaderClass",
+            //suppressSizeToFit: true,
+            width: "auto",
+            flex: 0,
           },
           {
             headerName: "Previous Volume",
             field: "previousVolume",
-            width: 150,
+            width: "auto",
+            flex: 0,
           },
           {
             headerName: "Final Volume",
             field: "finalVolume",
-            width: 150,
+            width: "auto",
+            flex: 0,
           },
           {
             headerName: "Final Volume Override ID",
             field: "finalVolumeOverrideId",
-            width: 200,
+            width: "auto",
+            flex: 0,
           },
         ],
         lessDefsMedalsIncluded: [
@@ -259,33 +267,38 @@ class VsvProvider extends Component {
             headerCheckboxSelection: true,
             headerCheckboxSelectionFilteredOnly: true,
             checkboxSelection: true,
+            flex: 0,
           },
-          { field: "#", width: 60 },
-
-          { headerName: "Cuspin", field: "cuspin", width: 100 },
-          { headerName: "Symbol", field: "symbol", width: 100 },
-          { headerName: "Tier", field: "tier", width: 100 },
-          { headerName: "Type", field: "type", width: 100 },
+          { field: "#", width: 60, flex: 0 },
+          { headerName: "Cuspin", field: "cuspin", width: 100, flex: 0 },
+          { headerName: "Symbol", field: "symbol", width: 100, flex: 0 },
+          { headerName: "Tier", field: "tier", width: 100, flex: 0 },
+          { headerName: "Type", field: "type", width: 100, flex: 0 },
 
           {
             headerName: "Bloomberg Volume",
             field: "bloombergVolume",
-            width: 150,
+            width: "auto",
+            flex: 0,
+            headerClass: "bloombergVolumeHeaderClass",
           },
           {
             headerName: "Previous Volume",
             field: "previousVolume",
-            width: 150,
+            width: "auto",
+            flex: 0,
           },
           {
             headerName: "Final Volume",
             field: "finalVolume",
-            width: 150,
+            width: "auto",
+            flex: 0,
           },
           {
             headerName: "Final Volume Override ID",
             field: "finalVolumeOverrideId",
             width: "auto",
+            flex: 0,
           },
         ],
         defaultColDef: {
@@ -294,6 +307,7 @@ class VsvProvider extends Component {
           resizable: true,
           filter: true,
           rowSelection: "multiple",
+          flex: 1,
         },
         selectedGridData: [],
         isImportVendorDataModalOpen: false,
@@ -522,7 +536,7 @@ class VsvProvider extends Component {
   };
   onChangeCurrHistValue = (e) => {
     let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedCurrHistValue = e.value;
+    filterPanelData.selectedCurrHistValue = e;
     if (e.value.toLowerCase() === "CURRENT".toLowerCase()) {
       filterPanelData.isFromAndStDisabled = true;
     } else {
@@ -1472,7 +1486,7 @@ class VsvProvider extends Component {
       intialFilterPanelState: data,
       filterPanelData,
     });
-
+    /* 
     let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div = document.createElement("div");
     var sumOfRecords = document.createElement("div");
@@ -1480,7 +1494,7 @@ class VsvProvider extends Component {
     sumOfRecords.innerHTML = `Total number of records: ${this.state.maintenanceScreenData.maintenanceRowData.length}`;
     sumOfRecords.className = "sumOfRecWrapper";
     ele.append(div);
-    ele.append(sumOfRecords);
+    ele.append(sumOfRecords); */
   }
   render() {
     return (

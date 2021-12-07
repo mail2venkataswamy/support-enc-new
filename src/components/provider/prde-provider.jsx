@@ -4,6 +4,7 @@ import DataExport from "../../pages/prde/components/tabs/prde-data-export/prde-d
 import ExportResults from "../../../src/pages/prde/components/tabs/prde-export-results/prde-export-results.jsx";
 import PriceOverideData from "../../../src/pages/prde/components/tabs/prde-price-override-data/prde-price-override-data";
 import sThreeDownload from "../../../src/pages/prde/components/tabs/prde-s3-download/prde-s3-download.jsx";
+import { Switch } from "antd";
 const FileName = () => {
   return <a>hi</a>;
 };
@@ -30,6 +31,8 @@ class PrdeProvider extends React.Component {
         },
       ],
       initialDataExport: {},
+      initialPriceOverrideData: {},
+      initialSThreeData: {},
       dataExport: {
         isFromAndStDisabled: false,
         currHistOptions: [
@@ -39,10 +42,19 @@ class PrdeProvider extends React.Component {
         selectedCurrHistValue: { label: "CURRENT", value: "Current" },
         fromDate: new Date(),
         toDate: new Date(),
-        selectedProductTypeValue: { label: "EQUITY", value: "equity" },
-        productTypeOptions: [{ label: "EQUITY", value: "equity" }],
+        selectedProductTypeValue: { label: "Select", value: "Select" },
+        productTypeOptions: [
+          { label: "Equity", value: "equity" },
+          { label: "Currency", value: "currency" },
+          { label: "Debt", value: "debt" },
+          { label: "Future", value: "future" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "Money Markey Mutual Funds", value: "mmmf" },
+          { label: "Option", value: "option" },
+          { label: "Warrant", value: "warrant" },
+        ],
         piClassificationOptions: [{ label: "one", value: "one" }],
-        selectedPiClassificationValue: { label: "default", value: "default" },
+        selectedPiClassificationValue: { label: "Select", value: "Select" },
         symbolFromSearchValue: "",
         symbolFromData: [
           { id: 1, value: "AA001200" },
@@ -202,6 +214,14 @@ class PrdeProvider extends React.Component {
         strikePriceToSuggestionResult: [],
         strikePriceToValue: "",
         StrikePriceToSearchValue: "",
+        isCallPutDisabled: true,
+        isMaturityFromDateDisabled: true,
+        isMarutiryToDateDisabled: true,
+        //isSymbolFromDisabled: true,
+        //isSymbolToDisabled: true,
+        isStrikePriceFromDisabled: true,
+        isStrikePriceToDisabled: true,
+        isClasificationDisabled: true,
       },
       exportResult: {
         exportResultRowData: [
@@ -278,6 +298,8 @@ class PrdeProvider extends React.Component {
         optionsDeliveryClassSuggestionResult: [],
         optionsDeliveryClassValue: "",
         optionsDeliveryClassSearchValue: "",
+        isOverrideChecked: false,
+        isCyclesChecked: false,
       },
     };
   }
@@ -291,6 +313,7 @@ class PrdeProvider extends React.Component {
       dataExport: data,
     });
   };
+
   onChangeCurrHistValue = (e) => {
     let dataExport = this.state.dataExport;
     dataExport.selectedCurrHistValue = e;
@@ -510,6 +533,80 @@ class PrdeProvider extends React.Component {
     let dataExport = this.state.dataExport;
     dataExport.selectedCallPutValue = selectedValue;
     this.setState({ dataExport });
+    switch (selectedValue.value.toLowerCase()) {
+      case "equity":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = true;
+        dataExport.isMarutiryToDateDisabled = true;
+        dataExport.isMaturityFromDateDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+        break;
+      case "currency":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = true;
+        dataExport.isMarutiryToDateDisabled = true;
+        dataExport.isMaturityFromDateDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+        break;
+      case "indexOrOther":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = true;
+        dataExport.isMarutiryToDateDisabled = true;
+        dataExport.isMaturityFromDateDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+        break;
+      case "mmf":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = true;
+        dataExport.isMarutiryToDateDisabled = true;
+        dataExport.isMaturityFromDateDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+        break;
+      case "warrant":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = true;
+        dataExport.isMarutiryToDateDisabled = true;
+        dataExport.isMaturityFromDateDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+
+        break;
+      case "option":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isCallPutDisabled = false;
+        dataExport.isMarutiryToDateDisabled = false;
+        dataExport.isMaturityFromDateDisabled = false;
+        dataExport.isStrikePriceFromDisabled = false;
+        dataExport.isStrikePriceToDisabled = false;
+
+        break;
+      case "debt":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isMarutiryToDateDisabled = false;
+        dataExport.isMaturityFromDateDisabled = false;
+
+        dataExport.isCallPutDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+        break;
+      case "future":
+        dataExport.isClasificationDisabled = false;
+        dataExport.isMarutiryToDateDisabled = false;
+        dataExport.isMaturityFromDateDisabled = false;
+
+        dataExport.isCallPutDisabled = true;
+        dataExport.isStrikePriceFromDisabled = true;
+        dataExport.isStrikePriceToDisabled = true;
+
+        break;
+      default:
+        return null;
+    }
+    this.setState({ dataExport });
   };
 
   onChangeClassificationValue = (selectedValue) => {
@@ -549,7 +646,7 @@ class PrdeProvider extends React.Component {
     dataExport.isFmsChecked = e.target.value;
     this.setState({ dataExport });
   };
-  setBusinessDate = (date) => {
+  setPriceOverrideBusinessDate = (date) => {
     let priceOverrideData = this.state.priceOverrideData;
     priceOverrideData.businessDate = date;
     this.setState({
@@ -622,7 +719,7 @@ class PrdeProvider extends React.Component {
   };
 
   //-------------------Sthree download------------------------------
-  onChangeDeliveryClassValue = (selectedValue) => {
+  onChangeDeliveryClassExchangeFilesValue = (selectedValue) => {
     let sThreeDownload = this.state.sThreeDownload;
     sThreeDownload.deliveryClassValue = selectedValue;
     this.setState({ sThreeDownload });
@@ -671,9 +768,27 @@ class PrdeProvider extends React.Component {
       sThreeDownload,
     });
   };
-
+  onClickPriceOverrideDataReset = () => {
+    let priceOverrideData = this.state.dataExport;
+    let initialPriceOverrideData = this.state.initialPriceOverrideData;
+    let data = { ...priceOverrideData, ...initialPriceOverrideData };
+    this.setState({
+      priceOverrideData: data,
+    });
+  };
+  onClickSThreeDowloadReset = () => {
+    let sThreeDownload = this.state.sThreeDownload;
+    let initialSThreeData = this.state.initialSThreeData;
+    let data = { ...sThreeDownload, ...initialSThreeData };
+    this.setState({
+      sThreeDownload: data,
+    });
+  };
   componentDidMount() {
     let dataExport = this.state.dataExport;
+    let priceOverrideData = this.state.priceOverrideData;
+    let sThreeDownload = this.state.sThreeDownload;
+
     dataExport.isFromAndStDisabled = true;
     let filterObject = {
       fromDate: dataExport.fromDate,
@@ -699,12 +814,45 @@ class PrdeProvider extends React.Component {
       strikePriceToDate: dataExport.strikePriceToDate,
     };
 
-    let data = { ...dataExport, ...filterObject };
+    //initialPriceOverrideData
+    let priceOverrideObject = {
+      businessDate: priceOverrideData.businessDate,
+      PriceOverideDeliveryClassValue:
+        priceOverrideData.PriceOverideDeliveryClassValue,
+    };
+    let sThreeDownloadObject = {
+      deliveryClassValue: sThreeDownload.deliveryClassValue,
+      businessDate: sThreeDownload.businessDate,
+      runDate: sThreeDownload.runDate,
+      optionsDeliveryClassValue: sThreeDownload.optionsDeliveryClassValue,
+      isCyclesChecked: sThreeDownload.isCyclesChecked,
+      isOverrideChecked: sThreeDownload.isOverrideChecked,
+    };
+
+    let dataExportState = { ...dataExport, ...filterObject };
+    let priceDataState = { ...priceOverrideData, ...priceOverrideObject };
+    let s3DataState = { ...sThreeDownload, ...sThreeDownloadObject };
 
     this.setState({
-      initialDataExport: data,
+      initialDataExport: dataExportState,
+      initialPriceOverrideData: priceDataState,
+      initialSThreeData: s3DataState,
     });
   }
+  onChangeOverride = (e) => {
+    let s3DownloaData = this.state.sThreeDownload;
+    s3DownloaData.isOverrideChecked = e.target.value;
+    this.setState({
+      s3DownloaData,
+    });
+  };
+  onChangeCycles = (e) => {
+    let s3DownloaData = this.state.sThreeDownload;
+    s3DownloaData.isCyclesChecked = e.target.value;
+    this.setState({
+      s3DownloaData,
+    });
+  };
 
   render() {
     return (
@@ -741,6 +889,8 @@ class PrdeProvider extends React.Component {
             this.onSelectNonClearedOrCrossMarginValue(e),
           onSelectFms: (e) => this.onSelectFms(e),
           setBusinessDate: (e) => this.setBusinessDate(e),
+          setPriceOverrideBusinessDate: (e) =>
+            this.setPriceOverrideBusinessDate(e),
           onChangePriceOverideDeliveryClassValue: (e) =>
             this.onChangePriceOverideDeliveryClassValue(e),
           setRunDate: (e) => this.setRunDate(e),
@@ -756,6 +906,13 @@ class PrdeProvider extends React.Component {
             this.onChangeOptionsDeliveryClassValue(e),
           onClickOptionsDeliveryClassSuggestionItem: (e) =>
             this.onClickOptionsDeliveryClassSuggestionItem(e),
+          onClickPriceOverrideDataReset: this.onClickPriceOverrideDataReset,
+          onClickSThreeDowloadReset: this.onClickSThreeDowloadReset,
+          onChangeDeliveryClassExchangeFilesValue: (e) =>
+            this.onChangeDeliveryClassExchangeFilesValue(e),
+          onChangeProductTypeValue: (e) => this.onChangeProductTypeValue(e),
+          onChangeOverride: (e) => this.onChangeOverride(e),
+          onChangeCycles: (e) => this.onChangeCycles(e),
 
           //=======================
         }}

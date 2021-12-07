@@ -89,6 +89,7 @@ const Maintenancegrid = () => {
       gridHeight={500}
       gridWidth="auto"
       rowSelection="multiple"
+      rowHeight={25}
     />
   );
 };

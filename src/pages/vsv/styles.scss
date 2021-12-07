@@ -1,0 +1,35 @@
+.vsvFilterPanelToggle {
+  position: relative;
+  position: relative;
+  right: 55px;
+  top: 20px;
+  cursor: pointer;
+  height: 30px;
+  width: 1px;
+}
+.vsvFilterPanelToggle p {
+  color: #6fabce;
+  font-weight: bold;
+}
+.vsvFilterPanelUnToggle {
+  position: relative;
+  top: 20px;
+  width: 15px;
+  height: 647px;
+  background: #99bccf;
+}
+.vsvFilterPanelUnToggleWrapper {
+  height: 100%;
+  width: 20px;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+}
+.vsvFilterPanelUnToggle p {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.bloombergVolumeHeaderClass {
+  color: red;
+}

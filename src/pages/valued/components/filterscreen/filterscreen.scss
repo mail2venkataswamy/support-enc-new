@@ -54,11 +54,10 @@
   .filterTitleAndToggle {
     display: flex;
   }
-  * {
-    padding: 2px 0px 0px 0px;
-    margin: 0;
-  }
 }
-.fieldset {
+fieldset {
   border: none;
+}
+.vsEligibilityWrapper {
+  display: flex;
 }

@@ -111,11 +111,7 @@
   .cuspinInputWrapper {
     display: inline-block;
   }
-  .isinLabelAndInputWrapper,
-  .occSymbolLabelAndInputWrapper,
-  .cuspinLabelAndInputWrapper {
-    /*   text-align: center; */
-  }
+
   .isinLabel {
     display: inline-block;
     width: 30%;
@@ -135,7 +131,8 @@
   .tierLabelAndValue,
   .labelAndClearedWrapper,
   .labelAndCrossMarginWrapper,
-  .labelAndCurrencyWrapper {
+  .labelAndCurrencyWrapper,
+  .vsCorporateActionWrapper {
     display: flex;
   }
 
@@ -146,11 +143,16 @@
   .Clearedlabel {
     width: 30%;
   }
-
+  .vsCorporateActionLabel {
+    width: 50%;
+  }
   .currencyWrapper,
   .clearedwrapper,
   .crossMarginWrapper {
     width: 70%;
+  }
+  .vsCorporateActionValue {
+    width: 50%;
   }
 
   .tierLabelAndValue .listItemWrapper {
@@ -163,8 +165,11 @@
 
   .tierLabelAndValue,
   .typeLabelAndValue {
-    padding-top: 10px;
     top: 0px !important;
     margin-top: 0px !important;
+  }
+  .tierLabelAndValue ul,
+  .typeLabelAndValue ul {
+    right: 30px;
   }
 }

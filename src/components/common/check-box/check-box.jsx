@@ -4,7 +4,9 @@ import "./check-box.scss";
 const CheckBox = (props) => {
   return (
     <>
-      {props.checkboxData && props.checkboxData.length > 0 ? (
+      {props.checkboxData &&
+      props.checkboxData.length > 0 &&
+      props.checkboxData[0].label.toLowerCase() === "All".toLowerCase() ? (
         <label>
           <input
             type="checkbox"
@@ -17,6 +19,7 @@ const CheckBox = (props) => {
       ) : (
         ""
       )}
+      <div className="listItemWrapper"></div>
       <ul>
         <div className="listItemWrapper">
           {props.checkboxData.map((type, index) => {

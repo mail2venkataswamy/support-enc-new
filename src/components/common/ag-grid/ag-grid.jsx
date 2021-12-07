@@ -33,6 +33,7 @@ const Aggrid = (props) => {
         getRowStyle={props.getRowStyle}
         frameworkComponents={{ customTooltip: props.CustomTooltip }}
         //frameworkComponents={{ customTooltip: CustomTooltip }}
+        rowHeight={props.rowHeight}
       ></AgGridReact>
     </div>
   );

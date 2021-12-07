@@ -4,6 +4,7 @@ import prdeContext from "../../../../../../components/context/prde-context.jsx";
 import "./prde-product-info.scss";
 import Inputsuggestion from "./prde-input-suggestions/prde-input-suggestions.jsx";
 import DatePicker from "../../../../../../components/common/datepicker/datepicker.jsx";
+import { PropertyKeys } from "ag-grid-community";
 //import DatePicker from "react-datepicker";
 //import "react-datepicker/dist/react-datepicker.css";
 
@@ -75,6 +76,14 @@ const ProductInfo = () => {
     onClickStrikePriceToSuggestionItem,
     strikePriceToValue,
     StrikePriceToSearchValue,
+    isCallPutDisabled,
+    isMaturityFromDateDisabled,
+    isMarutiryToDateDisabled,
+    //isSymbolFromDisabled,
+    //isSymbolToDisabled,
+    isStrikePriceFromDisabled,
+    isStrikePriceToDisabled,
+    isClasificationDisabled,
   } = {
     ...context.state.dataExport,
     ...context,
@@ -101,6 +110,7 @@ const ProductInfo = () => {
               onClick={onClickSymbolFromSuggestionItem}
               value={symbolFromValue}
               keySearch={symbolFromSearchValue}
+              //disabled={isSymbolFromDisabled}
             ></Inputsuggestion>
           </div>
         </div>
@@ -136,6 +146,7 @@ const ProductInfo = () => {
               options={callPutOptions}
               selectedValue={selectedCallPutValue}
               onChange={onChangeCallPutValue}
+              disabled={isCallPutDisabled}
             ></Dropdown>
           </div>
         </div>
@@ -149,7 +160,7 @@ const ProductInfo = () => {
               setDate={setstrikePriceFromDate}
               selectsStart
               //includeDates={getArrayOfDates(props.fromDate, props.toDate, -30)}
-              //disabled={props.isFromAndStDisabled}
+              disabled={isMaturityFromDateDisabled}
             />
           </div>
         </div>
@@ -162,6 +173,7 @@ const ProductInfo = () => {
               onClick={onClickStrikePriceFromSuggestionItem}
               value={strikePriceFromValue}
               keySearch={StrikePriceFromSearchValue}
+              disabled={isStrikePriceFromDisabled}
             ></Inputsuggestion>
           </div>
         </div>
@@ -196,6 +208,7 @@ const ProductInfo = () => {
               options={piClassificationOptions}
               selectedValue={selectedPiClassificationValue}
               onChange={onChangeClassificationValue}
+              disabled={isClasificationDisabled}
             ></Dropdown>
           </div>
         </div>
@@ -208,6 +221,7 @@ const ProductInfo = () => {
               onClick={onClickSymbolToSuggestionItem}
               value={symbolToValue}
               keySearch={symbolToSearchValue}
+              //disabled={isSymbolToDisabled}
             ></Inputsuggestion>
           </div>
         </div>
@@ -255,6 +269,7 @@ const ProductInfo = () => {
               //selectsEnd
               //includeDates={getArrayOfDates(props.fromDate, props.toDate)}
               //disabled={props.isFromAndStDisabled}
+              disabled={isMarutiryToDateDisabled}
             />
           </div>
         </div>
@@ -267,6 +282,7 @@ const ProductInfo = () => {
               onClick={onClickStrikePriceToSuggestionItem}
               value={strikePriceToValue}
               keySearch={StrikePriceToSearchValue}
+              disabled={isStrikePriceToDisabled}
             ></Inputsuggestion>
           </div>
         </div>

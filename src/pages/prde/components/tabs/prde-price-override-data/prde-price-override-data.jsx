@@ -8,10 +8,11 @@ const PriceOverrideData = () => {
   const context = useContext(prdeContext);
   const {
     businessDate,
-    setBusinessDate,
+    setPriceOverrideBusinessDate,
     deliveryClassOptions,
     PriceOverideDeliveryClassValue,
     onChangePriceOverideDeliveryClassValue,
+    onClickPriceOverrideDataReset,
   } = {
     ...context.state.priceOverrideData,
     ...context,
@@ -26,7 +27,7 @@ const PriceOverrideData = () => {
             <div className="businessDateValue">
               <DatePicker
                 selectedDate={businessDate}
-                setDate={setBusinessDate}
+                setDate={setPriceOverrideBusinessDate}
                 selectsStart
                 //includeDates={getArrayOfDates(props.fromDate, props.toDate, -30)}
                 //disabled={props.isFromAndStDisabled}
@@ -47,7 +48,7 @@ const PriceOverrideData = () => {
       </fieldset>
       <div className="downloadAndResetButtonWrapper">
         <button>Download</button>
-        <button>RESET</button>
+        <button onClick={onClickPriceOverrideDataReset}>RESET</button>
       </div>
     </div>
   );

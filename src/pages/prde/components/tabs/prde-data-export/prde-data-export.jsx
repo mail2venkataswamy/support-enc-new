@@ -18,6 +18,7 @@ const DataExport = () => {
       </fieldset>
       <div className="runAndResetButtonWrapper">
         <button>RUN</button>
+        <button>EXPORT ALL</button>
         <button onClick={context.onDataExportClickReset}>RESET</button>
       </div>
     </div>

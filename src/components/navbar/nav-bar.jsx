@@ -27,6 +27,11 @@ const NavBar = () => {
             VSV
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/prs" isActive={true}>
+            PRS
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

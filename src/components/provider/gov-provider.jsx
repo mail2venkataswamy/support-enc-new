@@ -25,9 +25,6 @@ const dynamicCellStyle = (params) => {
   return null;
 };
 const getRowStyle = (params) => {
-  /*   if (params.node.rowIndex === 2) {
-    return { color: "red" };
-  } */
   if (params.node.data.tier === 0) {
     return { color: "red" };
   }
@@ -604,7 +601,7 @@ class GovProvider extends Component {
           tooltipComponent: "customTooltip",
           tooltipShowDelay: 0,
           width: 200,
-          flex: 0,
+          flex: 1,
         },
         selectedGridData: [],
         getRowStyle: getRowStyle,

@@ -15,6 +15,7 @@ const SimpleDropdown = (props) => {
           : defaultOption
       }
       placeholder="Select an option"
+      disabled={props.disabled}
     />
   );
 };

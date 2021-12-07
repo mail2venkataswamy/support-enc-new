@@ -7,8 +7,6 @@ import { ThresholdModal } from "../gs-threshold/gs-threshold.jsx";
 import { SusupendRestartModal } from "../gs-suspend-restart-repository/gs-suspend-restart-repo-modal.jsx";
 import { PublishSecuritiesModal } from "../gs-publish-valued-securities/gs-publish-valued-securities.jsx";
 import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
-import { PriceRollOverrideModal } from "../gs-price-roll-override/gs-price-roll-override.jsx";
-import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import PriceOverridePrompt from "../../../../../components/common/modal/prompt/prompt.jsx";
 import GovContext from "../../../../../components/context/gov-context.jsx";
 import { ImportVendorDataModal } from "../vsv-import-vendor-data/vsv-import-vendor-data.jsx";
@@ -140,7 +138,7 @@ const Maintenanceheaders = () => {
           showAllColumns ? colDefsMedalsIncluded : lessDefsMedalsIncluded
         }
         defaultColDef={defaultColDef}
-        gridHeight={500}
+        gridHeight={360}
         gridWidth="auto"
         suppressRowClickSelection={true}
         rowSelection="multiple"
@@ -154,6 +152,7 @@ const Maintenanceheaders = () => {
         paginationPageSize={10}
         onSelectionChanged={onSelectionChanged}
         onFirstDataRendered={onFirstDataRendered}
+        rowHeight={25}
       />
       {/*------- Price Roll Override Warning Modal---------*/}
       <WarningModal
