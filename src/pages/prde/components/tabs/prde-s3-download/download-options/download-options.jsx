@@ -15,6 +15,10 @@ const DownloadOptions = () => {
     isCyclesChecked,
     onChangeOverride,
     onChangeCycles,
+    onChangeTimeValue,
+    timeValue,
+    cycleIdValue,
+    onChangeCycleIdValue,
   } = {
     ...context,
     ...context.state.sThreeDownload,
@@ -36,13 +40,21 @@ const DownloadOptions = () => {
       <div className="deliveryClassLabelAndValue">
         <div className="deliveryClassLabel">Cycle Id:</div>
         <div className="deliveryClassValue">
-          <input type="text"></input>
+          <input
+            type="text"
+            value={cycleIdValue}
+            onChange={onChangeCycleIdValue}
+          ></input>
         </div>
       </div>
       <div className="deliveryClassLabelAndValue">
         <div className="deliveryClassLabel">Time:</div>
         <div className="deliveryClassValue">
-          <input type="text"></input>
+          <input
+            type="text"
+            value={timeValue}
+            onChange={onChangeTimeValue}
+          ></input>
         </div>
       </div>
       <div className="deliveryClassLabelAndValue">

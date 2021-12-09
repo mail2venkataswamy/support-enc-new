@@ -15,7 +15,7 @@ const Vsv = () => {
           <div
             onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
             className="vsvFilterPanelToggle"
-            title="Show Filter Panel"
+            title="Hide Filter Panel"
           >
             <p>{"<<"}</p>
           </div>
@@ -26,6 +26,7 @@ const Vsv = () => {
           onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
         >
           <div className="vsvFilterPanelUnToggle" title="Show Filter Panel">
+            <div className="toggleIndicator">{">"}</div>
             <p>FILTER PANEL</p>
           </div>
         </div>

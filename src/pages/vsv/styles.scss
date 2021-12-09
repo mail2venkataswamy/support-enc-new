@@ -28,8 +28,14 @@
 .vsvFilterPanelUnToggle p {
   writing-mode: vertical-rl;
   text-orientation: mixed;
+  position: relative;
+  right: 3px;
+  top: 20px;
 }
 
-.bloombergVolumeHeaderClass {
-  color: red;
+.toggleIndicator {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  /* color: white; */
 }

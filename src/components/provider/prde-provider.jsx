@@ -300,6 +300,8 @@ class PrdeProvider extends React.Component {
         optionsDeliveryClassSearchValue: "",
         isOverrideChecked: false,
         isCyclesChecked: false,
+        timeValue: "",
+        cycleIdValue: "",
       },
     };
   }
@@ -827,6 +829,8 @@ class PrdeProvider extends React.Component {
       optionsDeliveryClassValue: sThreeDownload.optionsDeliveryClassValue,
       isCyclesChecked: sThreeDownload.isCyclesChecked,
       isOverrideChecked: sThreeDownload.isOverrideChecked,
+      cycleIdValue: sThreeDownload.cycleIdValue,
+      timeValue: sThreeDownload.timeValue,
     };
 
     let dataExportState = { ...dataExport, ...filterObject };
@@ -853,7 +857,20 @@ class PrdeProvider extends React.Component {
       s3DownloaData,
     });
   };
-
+  onChangeCycleIdValue = (e) => {
+    let s3DownloaData = this.state.sThreeDownload;
+    s3DownloaData.cycleIdValue = e.target.value;
+    this.setState({
+      s3DownloaData,
+    });
+  };
+  onChangeTimeValue = (e) => {
+    let s3DownloaData = this.state.sThreeDownload;
+    s3DownloaData.timeValue = e.target.value;
+    this.setState({
+      s3DownloaData,
+    });
+  };
   render() {
     return (
       <MyContext.Provider
@@ -913,6 +930,8 @@ class PrdeProvider extends React.Component {
           onChangeProductTypeValue: (e) => this.onChangeProductTypeValue(e),
           onChangeOverride: (e) => this.onChangeOverride(e),
           onChangeCycles: (e) => this.onChangeCycles(e),
+          onChangeCycleIdValue: (e) => this.onChangeCycleIdValue(e),
+          onChangeTimeValue: (e) => this.onChangeTimeValue(e),
 
           //=======================
         }}

@@ -135,6 +135,12 @@
   .vsCorporateActionWrapper {
     display: flex;
   }
+  .vsCorporateActionLabel {
+    width: 50%;
+  }
+  .vsCorporateActionValue {
+    width: 50%;
+  }
 
   .tierLabelAndValue .label,
   .typeLabelAndValue .label,
@@ -143,16 +149,11 @@
   .Clearedlabel {
     width: 30%;
   }
-  .vsCorporateActionLabel {
-    width: 50%;
-  }
+
   .currencyWrapper,
   .clearedwrapper,
   .crossMarginWrapper {
     width: 70%;
-  }
-  .vsCorporateActionValue {
-    width: 50%;
   }
 
   .tierLabelAndValue .listItemWrapper {

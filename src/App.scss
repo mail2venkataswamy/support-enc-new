@@ -22,3 +22,9 @@ h2 {
   margin: 0;
   padding: 0;
 }
+.Dropdown-disabled,
+input:disabled {
+  cursor: default;
+  background: #ccc;
+  border-color: rgba(118, 118, 118, 0.3);
+}

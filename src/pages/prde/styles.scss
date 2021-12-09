@@ -3,3 +3,9 @@
 .tabsContainer {
   padding-left: 70px;
 }
+.Dropdown-disabled,
+input:disabled {
+  cursor: default;
+  background: #ccc;
+  border-color: rgba(118, 118, 118, 0.3);
+}
