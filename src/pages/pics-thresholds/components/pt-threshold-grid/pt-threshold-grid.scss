@@ -1,0 +1,39 @@
+.ptGridHeader {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-left: 3%;
+  border: none;
+  margin: 13px !important;
+}
+.ptGridTitle {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 3%;
+  margin: 13px !important;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: #439bc1;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+.ptHeaderActions {
+  display: flex;
+  .ptRighttHeaderSection {
+    justify-content: flex-end;
+    flex: 1;
+    display: flex;
+  }
+  button {
+    background: transparent;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #439bc1 !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+  }
+}

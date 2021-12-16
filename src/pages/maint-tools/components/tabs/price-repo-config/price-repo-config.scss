@@ -1,0 +1,16 @@
+.priceRepoConfigWrapper {
+  width: 98%;
+  margin-top: -12px;
+  .ag-theme-alpine .ag-paging-panel > div {
+    justify-content: flex-end;
+    flex: 1;
+  }
+  .noOfRecs {
+    justify-content: flex-end;
+    display: flex;
+    flex: 1;
+  }
+  /*   .ag-header-row.ag-header-row-column {
+    height: 31px !important;
+  } */
+}

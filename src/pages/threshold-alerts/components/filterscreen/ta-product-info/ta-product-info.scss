@@ -1,0 +1,23 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .atProductTypeLabelAndValue,
+  .atCuspinLabelAndValue,
+  .atSymbolToLabelAndValue {
+    width: 100%;
+    display: flex;
+  }
+  .atProductTypeLabel,
+  .atCuspinLabel,
+  .atSymbolToLabel {
+    width: 30%;
+  }
+  .atProductTypeValue,
+  .atCuspinValue,
+  .atSymbolToValue {
+    width: 60%;
+  }
+  .atCuspinLabelAndValue input,
+  .atSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

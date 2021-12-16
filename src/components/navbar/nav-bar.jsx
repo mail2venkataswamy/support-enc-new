@@ -32,6 +32,21 @@ const NavBar = () => {
             PRS
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/mt" isActive={true}>
+            MT
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/ta" isActive={true}>
+            TA
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/pt" isActive={true}>
+            PT
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

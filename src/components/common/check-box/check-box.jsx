@@ -1,5 +1,6 @@
 import React from "react";
 import "./check-box.scss";
+import PropTypes from "prop-types";
 
 const CheckBox = (props) => {
   return (
@@ -46,4 +47,10 @@ const CheckBox = (props) => {
   );
 };
 
+CheckBox.propTypes = {
+  checkboxData: PropTypes.array,
+};
+CheckBox.defaultProps = {
+  checkboxData: [],
+};
 export default CheckBox;

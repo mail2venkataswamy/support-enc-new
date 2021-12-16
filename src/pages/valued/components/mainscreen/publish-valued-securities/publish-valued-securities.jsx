@@ -49,7 +49,7 @@ const PublishSecuritiesModalContent = (props) => {
 
 const PublishSecurities = (props) => {
   return (
-    <div className="modalContentWrapper">
+    <div className="vsPublishModalContentWrapper">
       <div className="headerWrapper">
         <div className="header">
           Valued Securities Suspend/Restart Repositories

@@ -28,3 +28,17 @@ input:disabled {
   background: #ccc;
   border-color: rgba(118, 118, 118, 0.3);
 }
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #myGrid,
+  #myGrid * {
+    visibility: visible;
+  }
+  #myGrid {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

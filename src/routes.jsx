@@ -7,6 +7,9 @@ import NavBar from "../src/components/navbar/nav-bar.jsx";
 import Prde from "./pages/prde/index.jsx";
 import Vsv from "./pages/vsv/index.jsx";
 import Prs from "./pages/prs/index.js";
+import Mt from "./pages/maint-tools/index.jsx";
+import Ta from "./pages/threshold-alerts/index.jsx";
+import Pt from "./pages/pics-thresholds/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -18,6 +21,9 @@ const AppRouter = () => {
         <Route path="/prde" element={<Prde />} />
         <Route path="/Vsv" element={<Vsv />} />
         <Route path="/prs" element={<Prs />} />
+        <Route path="/Mt" element={<Mt />} />
+        <Route path="/ta" element={<Ta />} />
+        <Route path="/pt" element={<Pt />} />
       </Routes>
     </BrowserRouter>
   );

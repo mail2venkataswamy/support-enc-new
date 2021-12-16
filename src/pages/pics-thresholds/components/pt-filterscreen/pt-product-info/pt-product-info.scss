@@ -1,0 +1,23 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .ptProductTypeLabelAndValue,
+  .ptCuspinLabelAndValue,
+  .ptSymbolToLabelAndValue {
+    width: 100%;
+    display: flex;
+  }
+  .ptProductTypeLabel,
+  .ptCuspinLabel,
+  .ptSymbolToLabel {
+    width: 30%;
+  }
+  .ptProductTypeValue,
+  .ptCuspinValue,
+  .ptSymbolToValue {
+    width: 60%;
+  }
+  .ptCuspinLabelAndValue input,
+  .ptSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

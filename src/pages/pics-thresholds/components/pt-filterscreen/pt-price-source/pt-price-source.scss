@@ -1,0 +1,17 @@
+.priceSourceWrapper {
+  padding-left: 15px !important;
+
+  .ptVendorLabelAndValueWrapper,
+  .ptExchangeLabelAndValueWrapper {
+    width: 100%;
+    display: flex;
+  }
+  .ptVendorLabel,
+  .ptExchangeLabel {
+    width: 30%;
+  }
+  .ptExchangeValue,
+  .ptVendorValue {
+    width: 60%;
+  }
+}

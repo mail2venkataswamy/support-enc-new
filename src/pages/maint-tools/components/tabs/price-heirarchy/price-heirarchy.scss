@@ -1,0 +1,30 @@
+.saveAndCancelWrapper {
+  text-align: right;
+  width: 98%;
+  border: solid 0.5px grey;
+  background: #fff;
+  button.mtCancel {
+    margin-left: 11px;
+  }
+}
+.refreshAndPrintWrapper {
+  text-align: right;
+  margin-right: 5px;
+  button.mtRefresh {
+    margin-right: 9px;
+  }
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #myGrid,
+    #myGrid * {
+      visibility: visible;
+    }
+    #myGrid {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
