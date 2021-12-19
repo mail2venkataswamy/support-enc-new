@@ -1,11 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import "./pt-threshold-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/pics-threshold-context.jsx";
+import { PicsDisableModal } from "./pics-disable-modal/pics-disable-modal.jsx";
+import { AddThresholdsModal } from "./pt-add-thresholds/pt-add-thresholds.jsx";
+import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
+  const [isWarningModalOpen, toggleWarningModal] = useState(false);
   const {
     priceSystemAlertStateRowData,
     colDefs,
@@ -14,6 +18,9 @@ const ThresholdGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
+    isDisablePicsModalOpen,
+    toggleDisablePicsModal,
+    toggleAddThresholdsModal,
   } = {
     ...context.state.gridScreenData,
     ...context,
@@ -27,19 +34,61 @@ const ThresholdGrid = () => {
     ele.append(div);
     ele.append(div1);
   }, []);
+  let isGridPopulated =
+    priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
   return (
     <>
       <div className="ptGridHeader">Pics Thresholds</div>
       <div className="ptHeaderActions">
         <div className="ptLeftHeaderSection">
-          <button>Add</button>
-          <button>Delete</button>
-          <button>PICS disable</button>
+          <button onClick={toggleAddThresholdsModal}>Add</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? ""
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Delete
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? toggleDisablePicsModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            PICS disable
+          </button>
         </div>
         <div className="ptRighttHeaderSection">
-          <button onClick={onRefreshMaintenanceGridData}>Refresh</button>
-          <button onClick={onBtPrint}>Print</button>
-          <button onClick={onBtnExport}>Export</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? onRefreshMaintenanceGridData
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Refresh
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? onBtPrint
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Print
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? onBtnExport
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Export
+          </button>
         </div>
       </div>
       <div className="ptGridWrapper"></div>
@@ -56,6 +105,16 @@ const ThresholdGrid = () => {
         headerHeight={33}
         onGridReady={onGridReady}
       />
+      <PicsDisableModal
+        isDisablePicsModalOpen={isDisablePicsModalOpen}
+        toggleDisablePicsModal={toggleDisablePicsModal}
+      ></PicsDisableModal>
+      <AddThresholdsModal></AddThresholdsModal>
+      <WarningModal
+        warningMessage="Grid must be populated"
+        isModalOpen={isWarningModalOpen}
+        closeModal={toggleWarningModal}
+      ></WarningModal>
     </>
   );
 };

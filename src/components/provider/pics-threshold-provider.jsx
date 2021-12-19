@@ -15,6 +15,8 @@ class PicsThresholdProvider extends Component {
     super(props);
     this.state = {
       initialPanelState: {},
+      initialPicsThresholdDate: {},
+      initialAddThresholdsData: {},
       filterPanelData: {
         vendorOptins: [
           { label: "IDSI", value: "idsi" },
@@ -156,10 +158,144 @@ class PicsThresholdProvider extends Component {
           rowSelection: "multiple",
           flex: 1,
         },
+        disableFromDate: new Date(),
+        disableFromTimeOptions: [
+          { label: "01:00", value: "01:00" },
+          { label: "02:00", value: "02:00" },
+        ],
+        disableToDate: new Date(),
+        disableToTimeOptions: [
+          { label: "01:00", value: "01:00" },
+          { label: "02:00", value: "02:00" },
+        ],
+        selectedToTime: { label: "00:00", value: "00:00" },
+        selectedFromTime: { label: "00:00", value: "00:00" },
+        isDisablePicsModalOpen: false,
+        selectedGridRowData: [],
+      },
+      addThresholdsData: {
+        isAddThresholdsModalOpen: false,
+        vendorOptins: [
+          { label: "IDSI", value: "idsi" },
+          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
+          {
+            label: "Markit Financial Information Services",
+            value: "Markit Financial Information Services",
+          },
+          {
+            label: "Miami International Securities Exchange",
+            value: "Miami International Securities Exchange",
+          },
+          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
+          { label: "Fidessa Group plc", value: "Fidessa Group plc" },
+          { label: "CE DATA SERVICES", value: "CE DATA SERVICES" },
+          { label: "Exchange Files", value: "Exchange Files" },
+          { label: "BBG/IDC Vendor Group", value: "BBG/IDC Vendor Group" },
+          { label: "SunGard ORM", value: "SunGard ORM" },
+          {
+            label: "Customized Options Pricing Service",
+            value: "Customized Options Pricing Service",
+          },
+          { label: "Bloomberg Polarlake", value: "Bloomberg Polarlake" },
+          { label: "CBOE Indicative Price", value: "CBOE Indicative Price" },
+          { label: "GTreasury SS, LLC", value: "GTreasury SS, LLC" },
+          { label: "Baton Systems Inc.", value: "Baton Systems Inc." },
+        ],
+        selectedVendorValue: { label: "All", value: "all" },
+        exchangeOptions: [],
+        selectedExchangeValue: { label: "All", value: "all" },
+        symbolToSearchValue: "",
+        symbolToData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        symbolToSuggestionResult: [],
+        symbolToValue: "",
+        cuspinSearchValue: "",
+        cuspinData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        cuspinSuggestionResult: [],
+        cuspinValue: "",
+        selectedProductTypeValue: { label: "Select", value: "Select" },
+        productTypeOptions: [
+          { label: "Equity", value: "equity" },
+          { label: "Currency", value: "currency" },
+          { label: "Debt", value: "debt" },
+          { label: "Future", value: "future" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "Money Markey Mutual Funds", value: "mmmf" },
+          { label: "Option", value: "option" },
+          { label: "Warrant", value: "warrant" },
+        ],
+        changeCountOptions: [
+          { label: "Y", value: "Y" },
+          { label: "N", value: "N" },
+        ],
+        selectedChangeCountValue: { label: "Y", value: "Y" },
+        preMarketThresholdValue: "",
+        postMarketThresholdValue: "",
+        MarketThresholdValue: "",
       },
     };
   }
-
+  onChangeDisableFromDate = (date) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.disableFromDate);
+    gridScreenData.disableFromDate = date;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableFromTime = (time) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.selectedFromTime);
+    gridScreenData.selectedFromTime = time;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableToDate = (date) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.disableToDate);
+    gridScreenData.disableToDate = date;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableToTime = (time) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.selectedToTime);
+    gridScreenData.selectedToTime = time;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  toggleDisablePicsModal = () => {
+    let gridScreenData = this.state.gridScreenData;
+    gridScreenData.isDisablePicsModalOpen =
+      !gridScreenData.isDisablePicsModalOpen;
+    this.setState({
+      gridScreenData,
+    });
+  };
   onChangeExchangeValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedExchangeValue = selectedValue;
@@ -274,9 +410,33 @@ class PicsThresholdProvider extends Component {
       symbolToValue: filterPanelData.symbolToValue,
     };
     let data = { ...filterPanelData, ...filterObject };
+    let gridScreenData = this.state.gridScreenData;
+    let addThresholdsData = this.state.addThresholdsData;
+    //let initialPicsThresholdDate = this.state.initialPicsThresholdDate;
+    let obj = {
+      selectedToTime: gridScreenData.selectedToTime,
+      selectedFromTime: gridScreenData.selectedFromTime,
+      disableFromDate: gridScreenData.disableFromDate,
+      disableToDate: gridScreenData.disableToDate,
+    };
+    let tempAddThresholdsObj = {
+      selectedVendorValue: addThresholdsData.selectedVendorValue,
+      selectedExchangeValue: addThresholdsData.selectedExchangeValue,
+      selectedProductTypeValue: addThresholdsData.selectedProductTypeValue,
+      cuspinValue: addThresholdsData.cuspinValue,
+      symbolToValue: addThresholdsData.symbolToValue,
+      selectedChangeCountValue: addThresholdsData.selectedChangeCountValue,
+      preMarketThresholdValue: addThresholdsData.preMarketThresholdValue,
+      postMarketThresholdValue: addThresholdsData.postMarketThresholdValue,
+      MarketThresholdValue: addThresholdsData.MarketThresholdValue,
+    };
+    let picsDisableData = { ...gridScreenData, ...obj };
+    let addThresholdData = { ...addThresholdsData, ...tempAddThresholdsObj };
 
     this.setState({
       initialPanelState: data,
+      initialPicsThresholdDate: picsDisableData,
+      initialAddThresholdsData: addThresholdData,
     });
   }
   onClickFiler = () => {
@@ -340,6 +500,186 @@ class PicsThresholdProvider extends Component {
       },
     ];
   }
+  onResetDisablePics = () => {
+    let gridScreenData = this.state.gridScreenData;
+    let initialPicsThresholdDate = this.state.initialPicsThresholdDate;
+    let data = { ...gridScreenData, ...initialPicsThresholdDate };
+    data.isDisablePicsModalOpen = true;
+    this.setState({
+      gridScreenData: data,
+    });
+  };
+  getSelectedRowData = () => {
+    let selectedNodes = this.gridApi.getSelectedNodes();
+    let selectedData = selectedNodes.map((node) => node.data);
+    alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
+    this.setState({
+      selectedGridRowData: selectedData,
+    });
+  };
+  /*   onSelectionChanged = () => {
+    const selectedRows = this.gridApi.getSelectedRows();
+    console.log("Grid Rows selected", selectedRows);
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.selectedGridRows = selectedRows;
+    this.setState({
+      maintenanceScreenData,
+    });
+  }; */
+  //================Add Threshold Methods=========
+  onChangeAddExchangeValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedExchangeValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangeAddVendorValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedVendorValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangeAddCuspinValue = (e) => {
+    let data = this.state.addThresholdsData.cuspinData;
+    let addThresholdsData = this.state.addThresholdsData;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    addThresholdsData.cuspinSuggestionResult = result;
+    addThresholdsData.cuspinSearchValue = e.target.value;
+    addThresholdsData.cuspinValue = e.target.value;
+
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onClickAddCuspinSuggestionItem = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.cuspinValue = selectedValue;
+    addThresholdsData.cuspinSearchValue = "";
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onChangeAddSymbolToValue = (e) => {
+    let data = this.state.addThresholdsData.symbolToData;
+    let addThresholdsData = this.state.addThresholdsData;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    addThresholdsData.symbolToSuggestionResult = result;
+    addThresholdsData.symbolToSearchValue = e.target.value;
+    addThresholdsData.symbolToValue = e.target.value;
+
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onClickAddSymbolToSuggestionItem = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.symbolToValue = selectedValue;
+    addThresholdsData.symbolToSearchValue = "";
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  toggleAddThresholdsModal = () => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.isAddThresholdsModalOpen =
+      !addThresholdsData.isAddThresholdsModalOpen;
+    this.setState({
+      addThresholdsData,
+    });
+  };
+
+  //selectedValue = { selectedCountValue };
+  onChangeAddCountValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedChangeCountValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangePreMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.preMarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
+  onChangeMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.MarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
+  onChangePostMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.postMarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
+
+  onResetAddThresholds = () => {
+    let addThresholdsData = this.state.addThresholdsData;
+    let initialAddThresholdsData = this.state.initialAddThresholdsData;
+    let data = { ...addThresholdsData, ...initialAddThresholdsData };
+    data.isAddThresholdsModalOpen = true;
+    this.setState({
+      addThresholdsData: data,
+    });
+  };
+  onChangeAddProductTypeValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedProductTypeValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onSaveAddThresholds = () => {
+    let addThresholdsData = this.state.addThresholdsData;
+    let gridScreenData = this.state.gridScreenData;
+
+    let itemToSave = {
+      vendor: addThresholdsData.selectedVendorValue.value,
+      exchange: addThresholdsData.selectedExchangeValue.value,
+      productType: addThresholdsData.selectedProductTypeValue.value,
+      cusip: addThresholdsData.cuspinValue,
+      symbol: addThresholdsData.symbolToValue,
+      changeCount: addThresholdsData.selectedChangeCountValue.value,
+      preMarketThresholds: addThresholdsData.preMarketThresholdValue,
+      postMarketThresholds: addThresholdsData.postMarketThresholdValue,
+      marketThresholds: addThresholdsData.MarketThresholdValue,
+    };
+    gridScreenData.priceSystemAlertStateRowData = [
+      ...gridScreenData.priceSystemAlertStateRowData,
+      itemToSave,
+    ];
+    addThresholdsData.isAddThresholdsModalOpen =
+      !addThresholdsData.isAddThresholdsModalOpen;
+    addThresholdsData.selectedVendorValue = { label: "All", value: "all" };
+    addThresholdsData.selectedExchangeValue = { label: "All", value: "all" };
+    addThresholdsData.selectedProductTypeValue = {
+      label: "Select",
+      value: "select",
+    };
+    addThresholdsData.cuspinValue = "";
+    addThresholdsData.symbolToValue = "";
+    addThresholdsData.selectedChangeCountValue = { label: "Y", value: "Y" };
+    addThresholdsData.preMarketThresholdValue = "";
+    addThresholdsData.postMarketThresholdValue = "";
+    addThresholdsData.MarketThresholdValue = "";
+
+    this.setState({
+      gridScreenData,
+      addThresholdsData,
+    });
+  };
+  //==========================================
   render() {
     return (
       <MyContext.Provider
@@ -353,6 +693,7 @@ class PicsThresholdProvider extends Component {
           onChangeSymbolToValue: (e) => this.onChangeSymbolToValue(e),
           onClickSymbolToSuggestionItem: (e) =>
             this.onClickSymbolToSuggestionItem(e),
+
           onGridReady: this.onGridReady,
           onBtPrint: this.onBtPrint,
           onBtnExport: this.onBtnExport,
@@ -361,6 +702,32 @@ class PicsThresholdProvider extends Component {
           onClickReset: this.onClickReset,
           onClickFiler: this.onClickFiler,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          onChangeDisableFromDate: (e) => this.onChangeDisableFromDate(e),
+          onChangeDisableFromTime: (e) => this.onChangeDisableFromTime(e),
+          onChangeDisableToDate: (e) => this.onChangeDisableToDate(e),
+          onChangeDisableToTime: (e) => this.onChangeDisableToTime(e),
+          toggleDisablePicsModal: this.toggleDisablePicsModal,
+          onResetDisablePics: this.onResetDisablePics,
+
+          onChangeAddExchangeValue: (e) => this.onChangeAddExchangeValue(e),
+          onChangeAddVendorValue: (e) => this.onChangeAddVendorValue(e),
+          onChangeAddCuspinValue: (e) => this.onChangeAddCuspinValue(e),
+          onClickAddCuspinSuggestionItem: (e) =>
+            this.onClickAddCuspinSuggestionItem(e),
+          onChangeAddSymbolToValue: (e) => this.onChangeAddSymbolToValue(e),
+          onClickAddSymbolToSuggestionItem: (e) =>
+            this.onClickAddSymbolToSuggestionItem(e),
+          toggleAddThresholdsModal: this.toggleAddThresholdsModal,
+          onChangeAddCountValue: this.onChangeAddCountValue,
+          onChangePreMarketThreshold: (e) => this.onChangePreMarketThreshold(e),
+          onChangeMarketThreshold: (e) => this.onChangeMarketThreshold(e),
+          onChangePostMarketThreshold: (e) =>
+            this.onChangePostMarketThreshold(e),
+          onResetAddThresholds: this.onResetAddThresholds,
+          onChangeAddProductTypeValue: (e) =>
+            this.onChangeAddProductTypeValue(e),
+          onSaveAddThresholds: (e) => this.onSaveAddThresholds(e),
+          getSelectedRowData: this.getSelectedRowData,
         }}
       >
         {this.props.children}

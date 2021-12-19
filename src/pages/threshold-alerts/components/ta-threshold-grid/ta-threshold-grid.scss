@@ -20,13 +20,17 @@
   cursor: pointer;
   font-size: 13px;
 }
-
-.ag-theme-alpine .ag-paging-panel > div {
-  justify-content: flex-end;
-  flex: 1;
-}
-.noOfRecs {
-  justify-content: flex-end;
-  display: flex;
-  flex: 1;
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #myGrid,
+  #myGrid * {
+    visibility: visible;
+  }
+  #myGrid {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }

@@ -1,6 +1,15 @@
 import React, { Component } from "react";
 
 import MyContext from "../context/threshold-alerts-context.jsx";
+function setPrinterFriendly(api) {
+  api.setDomLayout("print");
+}
+function setNormal(api) {
+  const eGridDiv = document.querySelector("#myGrid");
+  eGridDiv.style.width = "auto";
+  eGridDiv.style.height = "615px";
+  api.setDomLayout(null);
+}
 
 class ThresholdAlertProvider extends Component {
   constructor(props) {
@@ -224,26 +233,8 @@ class ThresholdAlertProvider extends Component {
   }
   onClickFiler = () => {
     let gridScreenData = this.state.gridScreenData;
-    let priceSystemAlertStateRowData = [
-      {
-        vendor: "test1",
-        exchange: "test",
-        productType: "test2",
-        symbol: "test3",
-        cusip: "test1",
-        lastPriceUpdatedStamp: "test",
-        lastPriceAlertStamp: "test",
-      },
-      {
-        vendor: "test1",
-        exchange: "test",
-        productType: "test2",
-        symbol: "test3",
-        cusip: "test1",
-        lastPriceUpdatedStamp: "test",
-        lastPriceAlertStamp: "test",
-      },
-    ];
+    let priceSystemAlertStateRowData = this.getFilteredGridData();
+
     gridScreenData.priceSystemAlertStateRowData = priceSystemAlertStateRowData;
     this.setState({
       gridScreenData,
@@ -298,6 +289,19 @@ class ThresholdAlertProvider extends Component {
       },
     ];
   }
+  onGridReady = (params) => {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  };
+
+  onBtPrint = () => {
+    const api = this.gridApi;
+    setPrinterFriendly(api);
+    setTimeout(function () {
+      print();
+      setNormal(api);
+    }, 2000);
+  };
 
   render() {
     return (
@@ -315,6 +319,9 @@ class ThresholdAlertProvider extends Component {
           onChangeProductTypeValue: (e) => this.onChangeProductTypeValue(e),
           onClickReset: this.onClickReset,
           onClickFiler: this.onClickFiler,
+          onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          onBtPrint: this.onBtPrint,
+          onGridReady: this.onGridReady,
         }}
       >
         {this.props.children}

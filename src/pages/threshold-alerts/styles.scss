@@ -126,3 +126,17 @@
     /* color: white; */
   }
 }
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #myGrid,
+  #myGrid * {
+    visibility: visible;
+  }
+  #myGrid {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

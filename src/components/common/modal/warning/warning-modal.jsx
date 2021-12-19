@@ -6,17 +6,14 @@ import "./warning-modal.scss";
 export const Warning = (props) => {
   return (
     <div className="warningWrapper">
-      <div className="header">
-        <div className="headerCode">COMM0032</div>
-        <div className="closeIcon">X</div>
-      </div>
+      <div className="header"></div>
       <p></p>
       <div className="contentAndStopIconWrapper">
         <div className="stopIcon"></div>
         <div className="warningMessage">{props.data.warningMessage}</div>
       </div>
 
-      <button className="okButton" onClick={props.closeModal}>
+      <button className="okButton" onClick={() => props.closeModal(false)}>
         OK
       </button>
     </div>
