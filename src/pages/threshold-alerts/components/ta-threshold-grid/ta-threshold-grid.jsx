@@ -69,7 +69,6 @@ const ThresholdGrid = () => {
         rowHeight={22}
         headerHeight={33}
         onGridReady={onGridReady}
-        getSelectedRowData={getSelectedRowData}
       />
       <WarningModal
         warningMessage="Grid must be populated"

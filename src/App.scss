@@ -42,3 +42,11 @@ input:disabled {
     top: 0;
   }
 }
+.ag-theme-alpine .ag-cell,
+.ag-theme-alpine .ag-full-width-row .ag-cell-wrapper.ag-row-group {
+  padding-left: 0px;
+}
+.ag-theme-alpine .ag-header-cell,
+.ag-theme-alpine .ag-header-group-cell {
+  padding-left: 0px;
+}

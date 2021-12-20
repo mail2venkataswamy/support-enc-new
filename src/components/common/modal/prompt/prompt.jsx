@@ -11,7 +11,7 @@ export const Warning = (props) => {
         <div className="warningMessage">{props.data.warningMessage}</div>
       </div>
       <div className="okAndCancelButtonWrapper">
-        <button className="okButton" onClick={() => props.closeModal(true)}>
+        <button className="okButton" onClick={() => props.onConfirm(true)}>
           OK
         </button>
         <button
@@ -43,7 +43,11 @@ const WarningModal = (props) => {
       style={customStyles}
       contentLabel="Warning"
     >
-      <Warning data={props} closeModal={props.closeModal} />
+      <Warning
+        data={props}
+        closeModal={props.closeModal}
+        onConfirm={props.onConfirm}
+      />
     </Modal>
   );
 };

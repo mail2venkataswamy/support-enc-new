@@ -103,50 +103,50 @@ class PicsThresholdProvider extends Component {
           {
             headerName: "Vendor",
             field: "vendor",
-            width: 100,
+            width: 80,
             flex: 0,
           },
-          { headerName: "Exchange", field: "exchange", width: 110, flex: 0 },
+          { headerName: "Exchange", field: "exchange", width: 90, flex: 0 },
           {
             headerName: "Product Type",
             field: "productType",
-            width: 140,
+            width: 120,
             flex: 0,
           },
           {
             headerName: "Symbol",
             field: "symbol",
-            width: 100,
+            width: 80,
             flex: 0,
           },
           {
             headerName: "Cusip",
             field: "cusip",
-            width: 100,
+            width: 70,
             flex: 0,
           },
           {
             headerName: "Pre Market Thresholds (secs)",
             field: "preMarketThresholds",
-            width: 220,
+            width: 170,
             flex: 0,
           },
           {
             headerName: "Market Thresholds (secs)",
             field: "marketThresholds",
-            width: "auto",
+            width: 150,
             flex: 0,
           },
           {
             headerName: "Post Thresholds (secs)",
             field: "postMarketThresholds",
-            width: "auto",
+            width: 140,
             flex: 0,
           },
           {
             headerName: "Change Count",
             field: "changeCount",
-            width: 140,
+            width: 120,
             flex: 0,
           },
         ],
@@ -172,6 +172,8 @@ class PicsThresholdProvider extends Component {
         selectedFromTime: { label: "00:00", value: "00:00" },
         isDisablePicsModalOpen: false,
         selectedGridRowData: [],
+        selectedGridRows: [],
+        isDeleteGridRecordPromptModalOpen: false,
       },
       addThresholdsData: {
         isAddThresholdsModalOpen: false,
@@ -477,6 +479,7 @@ class PicsThresholdProvider extends Component {
   getFilteredGridData() {
     return [
       {
+        id: 1,
         vendor: "test1",
         exchange: "test",
         productType: "test2",
@@ -488,6 +491,7 @@ class PicsThresholdProvider extends Component {
         changeCount: "test",
       },
       {
+        id: 2,
         vendor: "test1",
         exchange: "test",
         productType: "test2",
@@ -510,22 +514,25 @@ class PicsThresholdProvider extends Component {
     });
   };
   getSelectedRowData = () => {
+    alert();
+    let gridScreenData = this.state.gridScreenData;
     let selectedNodes = this.gridApi.getSelectedNodes();
     let selectedData = selectedNodes.map((node) => node.data);
     alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
+    gridScreenData.selectedGridRowData = selectedData;
     this.setState({
-      selectedGridRowData: selectedData,
+      gridScreenData,
     });
   };
-  /*   onSelectionChanged = () => {
+  onSelectionChanged = () => {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log("Grid Rows selected", selectedRows);
-    let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.selectedGridRows = selectedRows;
+    let gridScreenData = this.state.gridScreenData;
+    gridScreenData.selectedGridRows = selectedRows;
     this.setState({
-      maintenanceScreenData,
+      gridScreenData,
     });
-  }; */
+  };
   //================Add Threshold Methods=========
   onChangeAddExchangeValue = (selectedValue) => {
     let addThresholdsData = this.state.addThresholdsData;
@@ -680,6 +687,27 @@ class PicsThresholdProvider extends Component {
     });
   };
   //==========================================
+  onDeleteSelectedRecords = (isConfirmed) => {
+    let gridScreenData = this.state.gridScreenData;
+    gridScreenData.isDeleteGridRecordPromptModalOpen = false;
+
+    gridScreenData.priceSystemAlertStateRowData =
+      gridScreenData.priceSystemAlertStateRowData.filter(
+        (row) => !gridScreenData.selectedGridRows.includes(row)
+      );
+    this.setState({
+      gridScreenData,
+    });
+  };
+  toggleDeletePromptModal = (isConfirmed) => {
+    let gridScreenData = this.state.gridScreenData;
+    gridScreenData.isDeleteGridRecordPromptModalOpen =
+      !gridScreenData.isDeleteGridRecordPromptModalOpen;
+    this.setState({
+      gridScreenData,
+    });
+  };
+
   render() {
     return (
       <MyContext.Provider
@@ -728,6 +756,9 @@ class PicsThresholdProvider extends Component {
             this.onChangeAddProductTypeValue(e),
           onSaveAddThresholds: (e) => this.onSaveAddThresholds(e),
           getSelectedRowData: this.getSelectedRowData,
+          onSelectionChanged: this.onSelectionChanged,
+          onDeleteSelectedRecords: this.onDeleteSelectedRecords,
+          toggleDeletePromptModal: this.toggleDeletePromptModal,
         }}
       >
         {this.props.children}

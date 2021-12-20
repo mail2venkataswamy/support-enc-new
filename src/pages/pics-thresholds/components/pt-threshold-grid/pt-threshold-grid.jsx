@@ -6,10 +6,15 @@ import myContext from "../../../../components/context/pics-threshold-context.jsx
 import { PicsDisableModal } from "./pics-disable-modal/pics-disable-modal.jsx";
 import { AddThresholdsModal } from "./pt-add-thresholds/pt-add-thresholds.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
+import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
+  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
+    useState(false);
+  //const [, togglePromptModal] = useState(false);
+
   const {
     priceSystemAlertStateRowData,
     colDefs,
@@ -21,6 +26,12 @@ const ThresholdGrid = () => {
     isDisablePicsModalOpen,
     toggleDisablePicsModal,
     toggleAddThresholdsModal,
+    selectedGridRows,
+    getSelectedRowData,
+    onSelectionChanged,
+    onDeleteSelectedRecords,
+    isDeleteGridRecordPromptModalOpen,
+    toggleDeletePromptModal,
   } = {
     ...context.state.gridScreenData,
     ...context,
@@ -45,7 +56,12 @@ const ThresholdGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? ""
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleDeletePromptModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -104,6 +120,8 @@ const ThresholdGrid = () => {
         rowHeight={22}
         headerHeight={33}
         onGridReady={onGridReady}
+        getSelectedRowData={getSelectedRowData}
+        onSelectionChanged={onSelectionChanged}
       />
       <PicsDisableModal
         isDisablePicsModalOpen={isDisablePicsModalOpen}
@@ -115,6 +133,17 @@ const ThresholdGrid = () => {
         isModalOpen={isWarningModalOpen}
         closeModal={toggleWarningModal}
       ></WarningModal>
+      <WarningModal
+        warningMessage="Record must be selected"
+        isModalOpen={isRecordMustBeselectedModalOpen}
+        closeModal={toggleRecordMustBeSelectedModal}
+      ></WarningModal>
+      <RecordMustBeSelected
+        isModalOpen={isDeleteGridRecordPromptModalOpen}
+        closeModal={toggleDeletePromptModal}
+        onConfirm={onDeleteSelectedRecords}
+        warningMessage="Are you sure to delete the record?"
+      ></RecordMustBeSelected>
     </>
   );
 };
