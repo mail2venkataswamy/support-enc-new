@@ -7,6 +7,7 @@ import "./styles.scss";
 
 const Vsv = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
+  const [isEditDashboardVisble, toggleEditDashBoard] = useState(true);
   return (
     <div id="mainVsv">
       {isFilterPanelVisble ? (
@@ -33,10 +34,47 @@ const Vsv = () => {
       )}
       <div id="editMaint">
         <Maintenance />
-        {true ? <EditDashboard /> : <></>}
+        {isEditDashboardVisble ? (
+          <>
+            <div
+              className="editDashboardToggle"
+              //onClick={() => toggleEditDashBoard(!isEditDashboardVisble)}
+            >
+              <p onClick={() => toggleEditDashBoard(!isEditDashboardVisble)}>
+                {"^"}
+              </p>
+            </div>
+            <EditDashboard />
+          </>
+        ) : (
+          <div
+            className="editDashboardUntoggle"
+            onClick={() => toggleEditDashBoard(!isEditDashboardVisble)}
+          >
+            Edit Dashboard
+            <div className="mtToggleIndicator">{"v"}</div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
+
+/*
+maintenanceHeaders {
+    height: 89%;
+}
+div#myGrid {
+  height:100%
+}
+#mainVsv .maintenance {
+
+height: 89%;
+
+}
+#editMaint, #prsEditMaint {
+    height: 100%;
+}
+*/
 
 export default Vsv;

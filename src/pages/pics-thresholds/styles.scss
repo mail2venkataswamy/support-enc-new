@@ -7,7 +7,6 @@
     border: none;
   }
   #ptFilterscreen {
-    border: solid 1px green;
     width: 30%;
     float: left;
     background: white;
@@ -135,6 +134,13 @@
   }
   .ag-header-cell-text {
     white-space: normal;
+  }
+  .ag-theme-alpine .ag-rich-select-list {
+    height: 47px;
+    min-width: 100px;
+  }
+  .ag-popup-editor.ag-ltr.ag-popup-child {
+    width: 100px;
   }
 }
 @media print {

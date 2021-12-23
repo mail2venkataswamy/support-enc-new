@@ -11,10 +11,8 @@ const Editscreen = () => {
         <div
           id="toggle"
           className="toggle"
-          onClick={() => toggleEditcatDashboard(!isEditCatDashboardVisible)}
-        >
-          ^
-        </div>
+          //onClick={() => toggleEditcatDashboard(!isEditCatDashboardVisible)}
+        ></div>
       </div>
       {isEditCatDashboardVisible ? <Editdashboardgrid /> : <div></div>}
     </div>

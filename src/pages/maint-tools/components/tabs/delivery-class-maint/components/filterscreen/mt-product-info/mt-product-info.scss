@@ -1,0 +1,20 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .mtTargetDeliveryClassLabelAndValue,
+  .mtAllTargetDeliveryClassLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .mtTargetDeliveryClassLabel,
+  .mtAllTargetDeliveryClassLabel {
+    width: 30%;
+  }
+  .mtTargetDeliveryClassValue {
+    width: 60%;
+  }
+  .mtCuspinLabelAndValue input,
+  .mtSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

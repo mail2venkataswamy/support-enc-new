@@ -32,6 +32,7 @@ const ThresholdGrid = () => {
     onDeleteSelectedRecords,
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
+    onCellValueChanged,
   } = {
     ...context.state.gridScreenData,
     ...context,
@@ -122,6 +123,7 @@ const ThresholdGrid = () => {
         onGridReady={onGridReady}
         getSelectedRowData={getSelectedRowData}
         onSelectionChanged={onSelectionChanged}
+        onCellValueChanged={onCellValueChanged}
       />
       <PicsDisableModal
         isDisablePicsModalOpen={isDisablePicsModalOpen}

@@ -138,7 +138,7 @@ const Maintenanceheaders = () => {
           showAllColumns ? colDefsMedalsIncluded : lessDefsMedalsIncluded
         }
         defaultColDef={defaultColDef}
-        gridHeight={360}
+        gridHeight="95%"
         gridWidth="auto"
         suppressRowClickSelection={true}
         rowSelection="multiple"

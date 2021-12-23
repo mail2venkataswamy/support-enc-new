@@ -10,6 +10,8 @@ function setNormal(api) {
   eGridDiv.style.height = "630px";
   api.setDomLayout(null);
 }
+const staticCellStyle = { "background-color": "yellow" };
+
 class PicsThresholdProvider extends Component {
   constructor(props) {
     super(props);
@@ -101,6 +103,20 @@ class PicsThresholdProvider extends Component {
             flex: 0,
           },
           {
+            headerName: "Enable",
+            field: "enable",
+            width: 80,
+            flex: 0,
+            //cellRenderer: "EnableCellRenderer",
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+              values: ["Y", "N"],
+              //cellRenderer: "EnableCellRenderer",
+            },
+            editable: true,
+            cellStyle: staticCellStyle,
+          },
+          {
             headerName: "Vendor",
             field: "vendor",
             width: 80,
@@ -130,24 +146,38 @@ class PicsThresholdProvider extends Component {
             field: "preMarketThresholds",
             width: 170,
             flex: 0,
+            editable: true,
+            cellStyle: staticCellStyle,
           },
           {
             headerName: "Market Thresholds (secs)",
             field: "marketThresholds",
             width: 150,
             flex: 0,
+            editable: true,
+            cellStyle: staticCellStyle,
           },
           {
             headerName: "Post Thresholds (secs)",
             field: "postMarketThresholds",
             width: 140,
             flex: 0,
+            editable: true,
+            cellStyle: staticCellStyle,
           },
           {
             headerName: "Change Count",
             field: "changeCount",
             width: 120,
             flex: 0,
+            //cellRenderer: "EnableCellRenderer",
+            cellEditor: "agRichSelectCellEditor",
+            cellEditorParams: {
+              values: ["Y", "N"],
+              //cellRenderer: "EnableCellRenderer",
+            },
+            editable: true,
+            cellStyle: staticCellStyle,
           },
         ],
         defaultColDef: {
@@ -158,6 +188,7 @@ class PicsThresholdProvider extends Component {
           rowSelection: "multiple",
           flex: 1,
         },
+
         disableFromDate: new Date(),
         disableFromTimeOptions: [
           { label: "01:00", value: "01:00" },
@@ -480,6 +511,7 @@ class PicsThresholdProvider extends Component {
     return [
       {
         id: 1,
+        enable: "Y",
         vendor: "test1",
         exchange: "test",
         productType: "test2",
@@ -488,10 +520,11 @@ class PicsThresholdProvider extends Component {
         preMarketThresholds: "test2",
         marketThresholds: "test",
         postMarketThresholds: "test",
-        changeCount: "test",
+        changeCount: "Y",
       },
       {
         id: 2,
+        enable: "N",
         vendor: "test1",
         exchange: "test",
         productType: "test2",
@@ -500,7 +533,7 @@ class PicsThresholdProvider extends Component {
         preMarketThresholds: "test2",
         marketThresholds: "test",
         postMarketThresholds: "test",
-        changeCount: "test",
+        changeCount: "N",
       },
     ];
   }
@@ -532,6 +565,9 @@ class PicsThresholdProvider extends Component {
     this.setState({
       gridScreenData,
     });
+  };
+  onCellValueChanged = (params) => {
+    const colId = params.column.getId();
   };
   //================Add Threshold Methods=========
   onChangeAddExchangeValue = (selectedValue) => {
@@ -759,6 +795,7 @@ class PicsThresholdProvider extends Component {
           onSelectionChanged: this.onSelectionChanged,
           onDeleteSelectedRecords: this.onDeleteSelectedRecords,
           toggleDeletePromptModal: this.toggleDeletePromptModal,
+          onCellValueChanged: this.onCellValueChanged,
         }}
       >
         {this.props.children}
