@@ -1,0 +1,90 @@
+@import "../../../../../light.scss";
+.veprAddThresholdsModalContentWrapper {
+  width: 560px;
+  .priceSourceWrapper {
+    padding-left: 15px !important;
+
+    .veprVendorLabelAndValueWrapper,
+    .veprExchangeLabelAndValueWrapper,
+    .veprLpafLabelAndValueWrapper {
+      width: 100%;
+      display: flex;
+    }
+    .veprVendorLabel,
+    .veprExchangeLabel,
+    .veprLpafLabel {
+      width: 30%;
+    }
+    .veprExchangeValue,
+    .veprVendorValue,
+    .veprLpafValue {
+      width: 60%;
+    }
+    .veprLpafValue input {
+      width: 100%;
+    }
+  }
+  .productWrapper {
+    padding-left: 15px !important;
+    margin-top: 20px;
+    .veprProductTypeLabelAndValue,
+    .veprCuspinLabelAndValue,
+    .veprSymbolToLabelAndValue {
+      width: 100%;
+      display: flex;
+    }
+    .veprProductTypeLabel,
+    .veprCuspinLabel,
+    .veprSymbolToLabel {
+      width: 30%;
+    }
+    .veprProductTypeValue,
+    .veprCuspinValue,
+    .veprSymbolToValue {
+      width: 60%;
+    }
+    .veprCuspinLabelAndValue input,
+    .veprSymbolToLabelAndValue input {
+      width: 100%;
+    }
+  }
+
+  .footer {
+    text-align: center;
+    padding-top: 15px;
+  }
+  .header {
+    color: $black;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  button {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    border: 0.1em solid #ffffff;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 300;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  textarea {
+    resize: none;
+  }
+  textarea.ta10em {
+    height: 10em;
+  }
+  legend {
+    color: #7c8da6;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  * {
+    margin-top: 1px;
+    padding-top: 1px;
+  }
+}

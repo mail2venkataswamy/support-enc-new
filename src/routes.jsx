@@ -10,6 +10,8 @@ import Prs from "./pages/prs/index.js";
 import Mt from "./pages/maint-tools/index.jsx";
 import Ta from "./pages/threshold-alerts/index.jsx";
 import Pt from "./pages/pics-thresholds/index.jsx";
+import Pra from "./pages/pra/index.jsx";
+import Vepr from "./pages/vepr/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -24,6 +26,8 @@ const AppRouter = () => {
         <Route path="/Mt" element={<Mt />} />
         <Route path="/ta" element={<Ta />} />
         <Route path="/pt" element={<Pt />} />
+        <Route path="/pra" element={<Pra />} />
+        <Route path="/vepr" element={<Vepr />} />
       </Routes>
     </BrowserRouter>
   );

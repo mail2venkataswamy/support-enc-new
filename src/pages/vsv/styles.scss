@@ -17,6 +17,7 @@
   width: 15px;
   height: 647px;
   background: #99bccf;
+  border-radius: 4px;
 }
 .vsvFilterPanelUnToggleWrapper {
   height: 100%;
@@ -35,7 +36,6 @@
 
 .mtToggleIndicator {
   text-align: center;
-
   font-weight: bold;
   /* color: white; */
   font-size: 18px;
@@ -53,6 +53,7 @@
   margin-left: 10px;
   text-align: center;
   display: flex;
+  border-radius: 30px;
 }
 .editDashboardToggle {
   height: 0px;

@@ -1,0 +1,14 @@
+.veprFilterAndResetButtonWrapper {
+  text-align: center;
+  position: absolute;
+  display: flex;
+  bottom: 13px;
+  left: 30%;
+}
+#veprFilter-container {
+  display: inline-block;
+  margin-right: 10px !important;
+}
+#veprReset-container {
+  display: inline-block;
+}

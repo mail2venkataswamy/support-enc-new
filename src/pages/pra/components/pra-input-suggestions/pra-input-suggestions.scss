@@ -1,0 +1,23 @@
+/* .inputSuggestionWrapper ul {
+  position: relative;
+  list-style: none;
+  float: left;
+  right: 36px;
+}
+ */
+@import "../../../../light.scss";
+#mainGov {
+  .inputSuggestionWrapper ul {
+    position: relative;
+    list-style: none;
+    padding: 5px 10px;
+    .suggestionLiItemWrapper {
+      padding: 3px 0px;
+      div {
+        &:hover {
+          color: $maint_header_btn_color_hover;
+        }
+      }
+    }
+  }
+}

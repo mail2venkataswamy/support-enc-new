@@ -1,0 +1,18 @@
+.priceSourceWrapper {
+  padding-left: 15px !important;
+
+  .veprVendorLabelAndValueWrapper,
+  .veprExchangeLabelAndValueWrapper {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .veprVendorLabel,
+  .veprExchangeLabel {
+    width: 30%;
+  }
+  .veprExchangeValue,
+  .veprVendorValue {
+    width: 60%;
+  }
+}

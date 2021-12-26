@@ -1,0 +1,39 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .veprProductTypeLabelAndValue,
+  .veprCuspinLabelAndValue,
+  .veprSymbolToLabelAndValue,
+  .isInLabelAndValue,
+  .expMaturityDateLabelAndValue,
+  .callPutLabelAndValue,
+  .strikePriceToLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .veprProductTypeLabel,
+  .veprCuspinLabel,
+  .veprSymbolToLabel,
+  .isInLabel,
+  .expMaturityDateLabel,
+  .callPutLabel,
+  .strikePriceToLabel {
+    width: 30%;
+  }
+  .veprProductTypeValue,
+  .veprCuspinValue,
+  .veprSymbolToValue,
+  .isInValue,
+  .expMaturityDateValue,
+  .callPutValue,
+  .strikePriceToValue {
+    width: 60%;
+    input {
+      width: 100%;
+    }
+  }
+  .veprCuspinLabelAndValue input,
+  .veprSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

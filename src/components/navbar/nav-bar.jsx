@@ -6,45 +6,55 @@ const NavBar = () => {
   return (
     <div className="navBarWrapper">
       <ul className="wrapper">
-        <li>
+        <li className="pages">
           <NavLink isActive={true} exact to="/">
             Valued
           </NavLink>
         </li>
         {""}
-        <li>
+        <li className="pages">
           <NavLink to="/Gov" isActive={true}>
             Gov
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/Prde" isActive={true}>
             PRDE
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/Vsv" isActive={true}>
             VSV
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/prs" isActive={true}>
             PRS
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/mt" isActive={true}>
             MT
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/ta" isActive={true}>
             TA
           </NavLink>
         </li>
-        <li>
+        <li className="pages">
           <NavLink to="/pt" isActive={true}>
             PT
+          </NavLink>
+        </li>
+        <li className="pages">
+          <NavLink to="/pra" isActive={true}>
+            PRA
+          </NavLink>
+        </li>
+        <li className="pages">
+          <NavLink to="/vepr" isActive={true}>
+            VEPR
           </NavLink>
         </li>
       </ul>
