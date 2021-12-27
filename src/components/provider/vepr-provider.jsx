@@ -576,7 +576,6 @@ class VeprProvider extends Component {
     });
   };
   getSelectedRowData = () => {
-    alert();
     let gridScreenData = this.state.gridScreenData;
     let selectedNodes = this.gridApi.getSelectedNodes();
     let selectedData = selectedNodes.map((node) => node.data);

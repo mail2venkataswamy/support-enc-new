@@ -4,10 +4,7 @@ import DataExport from "../../pages/prde/components/tabs/prde-data-export/prde-d
 import ExportResults from "../../../src/pages/prde/components/tabs/prde-export-results/prde-export-results.jsx";
 import PriceOverideData from "../../../src/pages/prde/components/tabs/prde-price-override-data/prde-price-override-data";
 import sThreeDownload from "../../../src/pages/prde/components/tabs/prde-s3-download/prde-s3-download.jsx";
-import { Switch } from "antd";
-const FileName = () => {
-  return <a>hi</a>;
-};
+
 class PrdeProvider extends React.Component {
   constructor(props) {
     super(props);
@@ -932,8 +929,6 @@ class PrdeProvider extends React.Component {
           onChangeCycles: (e) => this.onChangeCycles(e),
           onChangeCycleIdValue: (e) => this.onChangeCycleIdValue(e),
           onChangeTimeValue: (e) => this.onChangeTimeValue(e),
-
-          //=======================
         }}
       >
         {this.props.children}
@@ -941,5 +936,4 @@ class PrdeProvider extends React.Component {
     );
   }
 }
-
 export default PrdeProvider;
