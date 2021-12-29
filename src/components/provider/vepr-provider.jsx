@@ -67,9 +67,14 @@ class VeprProvider extends Component {
         cuspinValue: "",
         selectedProductTypeValue: { label: "Select", value: "Select" },
         productTypeOptions: [
+          { label: "Currency", value: "currency" },
+          { label: "Equity", value: "equity" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "OTC Options", value: "otcOptions" },
           { label: "Debt", value: "debt" },
           { label: "Future", value: "future" },
           { label: "Option", value: "option" },
+          { label: "Warrant", value: "warrant" },
         ],
         isFilterScreenVisible: true,
         classificationOptions: [
@@ -100,8 +105,8 @@ class VeprProvider extends Component {
         ],
 
         selectedCallPutValue: { label: "default", value: "default" },
-        isCallPutDisabled: true,
-        isMaturityFromDateDisabled: true,
+        isCallPutDisabled: false,
+        isMaturityFromDateDisabled: false,
         exspirationOrMaturityDate: new Date(),
         strikePriceData: [
           { id: 1, value: "AA001200" },
@@ -118,6 +123,8 @@ class VeprProvider extends Component {
         strikePriceFromSuggestionResult: [],
         strikePriceFromValue: "",
         StrikePriceFromSearchValue: "",
+        endDate: new Date(),
+        startDate: new Date(),
       },
       gridScreenData: {
         priceSystemAlertStateRowData: [],
@@ -446,6 +453,11 @@ class VeprProvider extends Component {
   onChangeProductTypeValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedProductTypeValue = selectedValue;
+    if (selectedValue.value !== "option") {
+      filterPanelData.isCallPutDisabled = true;
+    } else {
+      filterPanelData.isCallPutDisabled = false;
+    }
     this.setState({ filterPanelData });
   };
   onChangeClassificationValue = (selectedValue) => {
@@ -848,6 +860,20 @@ class VeprProvider extends Component {
       filterPanelData,
     });
   };
+  setStartDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.startDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  setEndDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.endDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
   render() {
     return (
       <MyContext.Provider
@@ -913,6 +939,8 @@ class VeprProvider extends Component {
             this.onChangeStrikePriceFromValue(e),
           onClickStrikePriceFromSuggestionItem: (e) =>
             this.onClickStrikePriceFromSuggestionItem(e),
+          setStartDate: (e) => this.setStartDate(e),
+          setEndDate: (e) => this.setEndDate(e),
         }}
       >
         {this.props.children}

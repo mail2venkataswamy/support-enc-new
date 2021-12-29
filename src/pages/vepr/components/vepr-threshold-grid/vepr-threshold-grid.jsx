@@ -131,8 +131,8 @@ const ThresholdGrid = () => {
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
       <div className="veprSaveAndCancelWrapper">
-        <button className="mtSave">Save</button>
-        <button className="mtCancel">Cancel</button>
+        <button className="mtSave primary">Save</button>
+        <button className="mtCancel secondary">Cancel</button>
       </div>
     </>
   );

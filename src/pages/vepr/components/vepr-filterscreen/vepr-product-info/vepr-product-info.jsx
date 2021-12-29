@@ -40,6 +40,7 @@ const ProductInfo = () => {
     onClickStrikePriceFromSuggestionItem,
     strikePriceFromValue,
     StrikePriceFromSearchValue,
+    isCallPutDisabled,
   } = {
     ...context.state.filterPanelData,
     ...context,
@@ -126,7 +127,7 @@ const ProductInfo = () => {
               options={callPutOptions}
               selectedValue={selectedCallPutValue}
               onChange={onChangeCallPutValue}
-              //disabled={isCallPutDisabled}
+              disabled={isCallPutDisabled}
             ></Dropdown>
           </div>
         </div>

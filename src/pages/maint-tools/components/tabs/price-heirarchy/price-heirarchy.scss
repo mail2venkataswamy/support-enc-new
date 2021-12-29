@@ -1,18 +1,36 @@
-.saveAndCancelWrapper {
-  text-align: right;
+.priceHeirarchyConfigWrapper {
   width: 98%;
-  border: solid 0.5px grey;
-
+  margin-top: -12px;
   background: #fff;
-  button.mtCancel {
-    margin-left: 11px;
+  border-radius: 30px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+
+  .saveAndCancelWrapper {
+    text-align: right;
+    width: 100%;
+    border: none;
+
+    background: #fff;
+    button.mtCancel {
+      margin-left: 11px;
+    }
   }
-}
-.refreshAndPrintWrapper {
-  text-align: right;
-  margin-right: 5px;
-  button.mtRefresh {
-    margin-right: 9px;
+  .refreshAndPrintWrapper {
+    text-align: right;
+    margin-right: 5px;
+    button.mtRefresh {
+      margin-right: 9px;
+    }
+    button {
+      background: transparent;
+      outline: none;
+      border: none;
+      color: #439bc1 !important;
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 13px;
+    }
   }
   @media print {
     body * {

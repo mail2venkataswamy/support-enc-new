@@ -66,6 +66,9 @@
     justify-content: flex-end;
     flex: 1;
   }
+  .ag-theme-alpine .ag-root-wrapper {
+    border: none !important;
+  }
   .noOfRecs {
     justify-content: flex-end;
     display: flex;

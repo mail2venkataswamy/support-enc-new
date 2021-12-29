@@ -44,11 +44,12 @@ const PriceRepoConfig = () => {
           rowHeight={22}
           headerHeight={33}
         />
+
+        <AddNewConfigModal
+          toggleAddNewConfigModal={toggleAddNewConfigModal}
+          isAddNewConfigModalOpen={isAddNewConfigModalOpen}
+        />
       </div>
-      <AddNewConfigModal
-        toggleAddNewConfigModal={toggleAddNewConfigModal}
-        isAddNewConfigModalOpen={isAddNewConfigModalOpen}
-      />
     </>
   );
 };

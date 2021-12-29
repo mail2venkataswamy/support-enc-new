@@ -1,3 +1,5 @@
+@import "./light.scss";
+@import "./dark.scss";
 #mainVS,
 #mainGov,
 #mainVsv,
@@ -49,4 +51,37 @@ input:disabled {
 .ag-theme-alpine .ag-header-cell,
 .ag-theme-alpine .ag-header-group-cell {
   padding-left: 0px;
+}
+.ag-theme-alpine .ag-root-wrapper {
+  border: none !important;
+}
+.ag-theme-alpine .ag-row:nth-of-type(odd) {
+  background-color: #f3f3f3;
+}
+button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.primary {
+  background: $btn_primary !important;
+  color: $white !important;
+  border-radius: 16px !important;
+  border: none !important;
+  padding: 0px 12px !important;
+}
+.secondary {
+  color: $btn_primary !important;
+  border: none !important;
+  padding: 8px !important;
+  background-color: #2199f300 !important;
 }

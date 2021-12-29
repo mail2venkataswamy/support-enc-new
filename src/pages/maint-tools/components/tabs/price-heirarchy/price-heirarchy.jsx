@@ -28,7 +28,7 @@ const PriceHierarchy = () => {
 
   return (
     <>
-      <div className="priceRepoConfigWrapper">
+      <div className="priceHeirarchyConfigWrapper">
         <div className="refreshAndPrintWrapper">
           <button className="mtRefresh">Refresh</button>
           <button className="mtPrint" onClick={onBtPrint}>
@@ -50,10 +50,11 @@ const PriceHierarchy = () => {
           headerHeight={33}
           onCellValueChanged={onCellValueChanged}
         />
-      </div>
-      <div className="saveAndCancelWrapper">
-        <button className="mtSave">Save</button>
-        <button className="mtCancel">Cancel</button>
+
+        <div className="saveAndCancelWrapper">
+          <button className="mtSave primary">Save</button>
+          <button className="mtCancel secondary">Cancel</button>
+        </div>
       </div>
     </>
   );
