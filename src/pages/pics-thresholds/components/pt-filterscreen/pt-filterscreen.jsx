@@ -11,9 +11,6 @@ const Filterscreen = () => {
     <>
       <div className="ptFilterscreenHeaderWrapper">
         <div className="ptFilterscreenTitle">Pics Threshold Filter</div>
-        {/*         <div className="ptToggle" onClick={onToggleFilterScreen}>
-          {"<<"}
-        </div> */}
       </div>
       <PriceSource></PriceSource>
       <ProductInfo></ProductInfo>
