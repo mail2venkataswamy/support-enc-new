@@ -1,0 +1,18 @@
+.viDiWrapper {
+  padding-left: 15px !important;
+
+  .viDumpVendorLabelAndValueWrapper,
+  .viDumpExchangeLabelAndValueWrapper {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .viDumpVendorLabel,
+  .viDumpExchangeLabel {
+    width: 30%;
+  }
+  .viDumpExchangeValue,
+  .viDumpVendorValue {
+    width: 60%;
+  }
+}

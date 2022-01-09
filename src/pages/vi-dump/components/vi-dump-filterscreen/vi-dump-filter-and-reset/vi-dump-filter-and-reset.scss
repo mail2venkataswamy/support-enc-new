@@ -1,0 +1,14 @@
+.viDumpFilterAndResetButtonWrapper {
+  text-align: center;
+  position: absolute;
+  display: flex;
+  bottom: 13px;
+  left: 30%;
+}
+#viDumpFilter-container {
+  display: inline-block;
+  margin-right: 10px !important;
+}
+#viDumpReset-container {
+  display: inline-block;
+}

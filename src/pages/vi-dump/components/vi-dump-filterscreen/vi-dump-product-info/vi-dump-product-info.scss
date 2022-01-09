@@ -1,0 +1,24 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .viDumpProductTypeLabelAndValue,
+  .viDumpCuspinLabelAndValue,
+  .viDumpSymbolToLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .viDumpProductTypeLabel,
+  .viDumpCuspinLabel,
+  .viDumpSymbolToLabel {
+    width: 30%;
+  }
+  .viDumpProductTypeValue,
+  .viDumpCuspinValue,
+  .viDumpSymbolToValue {
+    width: 60%;
+  }
+  .viDumpCuspinLabelAndValue input,
+  .viDumpSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}
