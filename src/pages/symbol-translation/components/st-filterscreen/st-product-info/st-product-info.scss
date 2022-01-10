@@ -1,0 +1,45 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .stProductTypeLabelAndValue,
+  .stCuspinLabelAndValue,
+  .stSymbolToLabelAndValue,
+  .isInLabelAndValue,
+  .expMaturityDateLabelAndValue,
+  .callPutLabelAndValue,
+  .strikePriceToLabelAndValue,
+  .stVendorLabelAndValueWrapper,
+  .stExchangeLabelAndValueWrapper {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .stProductTypeLabel,
+  .stCuspinLabel,
+  .stSymbolToLabel,
+  .isInLabel,
+  .expMaturityDateLabel,
+  .callPutLabel,
+  .strikePriceToLabel,
+  .stVendorLabel,
+  .stExchangeLabel {
+    width: 30%;
+  }
+  .stProductTypeValue,
+  .stCuspinValue,
+  .stSymbolToValue,
+  .isInValue,
+  .expMaturityDateValue,
+  .callPutValue,
+  .strikePriceToValue,
+  .stExchangeValue,
+  .stVendorValue {
+    width: 60%;
+    input {
+      width: 100%;
+    }
+  }
+  .stCuspinLabelAndValue input,
+  .stSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

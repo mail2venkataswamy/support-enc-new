@@ -13,6 +13,7 @@ import Pt from "./pages/pics-thresholds/index.jsx";
 import Pra from "./pages/pra/index.jsx";
 import Vepr from "./pages/vepr/index.jsx";
 import ViDump from "./pages/vi-dump/index.jsx";
+import St from "./pages/symbol-translation/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
         <Route path="/pra" element={<Pra />} />
         <Route path="/vepr" element={<Vepr />} />
         <Route path="/viDump" element={<ViDump />} />
+        <Route path="/st" element={<St />} />
       </Routes>
     </BrowserRouter>
   );

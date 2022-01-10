@@ -62,6 +62,11 @@ const NavBar = () => {
             VIDUMP
           </NavLink>
         </li>
+        <li className="pages">
+          <NavLink to="/st" isActive={true}>
+            ST
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
