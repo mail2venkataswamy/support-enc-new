@@ -5,6 +5,7 @@ import myContext from "../../../../components/context/vepr-context.jsx";
 import { AddThresholdsModal } from "./vepr-add-thresholds/vepr-add-thresholds.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
+import { ModifyPriceRestriction } from "./modify-price-restriction/modify-price-restriction.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
@@ -28,6 +29,7 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
+    toggleModifyPriceResModal,
   } = {
     ...context.state.gridScreenData,
     ...context,
@@ -51,6 +53,7 @@ const ThresholdGrid = () => {
       <div className="veprHeaderActions">
         <div className="veprLeftHeaderSection">
           <button onClick={toggleAddThresholdsModal}>Add</button>
+          <button onClick={toggleModifyPriceResModal}>Modify</button>
           <button
             onClick={
               isGridPopulated
@@ -114,6 +117,7 @@ const ThresholdGrid = () => {
         onCellValueChanged={onCellValueChanged}
       />
       <AddThresholdsModal></AddThresholdsModal>
+      <ModifyPriceRestriction></ModifyPriceRestriction>
       <WarningModal
         warningMessage="Grid must be populated"
         isModalOpen={isWarningModalOpen}

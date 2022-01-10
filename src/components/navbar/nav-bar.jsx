@@ -57,6 +57,11 @@ const NavBar = () => {
             VEPR
           </NavLink>
         </li>
+        <li className="pages">
+          <NavLink to="/viDump" isActive={true}>
+            VIDUMP
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

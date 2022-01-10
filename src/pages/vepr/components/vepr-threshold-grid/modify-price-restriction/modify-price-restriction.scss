@@ -1,60 +1,11 @@
 @import "../../../../../light.scss";
-.veprAddThresholdsModalContentWrapper {
-  width: 1250px;
-  .addNewPriceRestrictionWrapper {
-    .veprProductWrapper {
-      padding-left: 15px !important;
-      display: flex;
-      .sectionOne {
-        width: 33%;
-        .veprLabelAndValue {
-          display: flex;
-          .veprLabel {
-            width: 35%;
-          }
-          .veprValue {
-            width: 60%;
-          }
-        }
-      }
-      .sectionTwo {
-        width: 33%;
-        .veprLabelAndValue {
-          display: flex;
-          .veprLabel {
-            width: 35%;
-          }
-          .veprValue {
-            width: 60%;
-          }
-        }
-      }
-      .sectionThree {
-        width: 33%;
-        .veprLabelAndValue {
-          display: flex;
-          .veprLabel {
-            width: 35%;
-          }
-          .veprValue {
-            width: 60%;
-          }
-        }
-      }
-      input {
-        width: 100%;
-      }
-    }
-    .okAndClearButton {
-      text-align: center;
-    }
-  }
-  .veprPriceSourceWrapper {
+.veprModifyPriceResModalContentWrapper {
+  width: 900px;
+  .veprProductWrapper {
     padding-left: 15px !important;
-    margin-top: 20px;
     display: flex;
     .sectionOne {
-      width: 33%;
+      width: 50%;
       .veprLabelAndValue {
         display: flex;
         .veprLabel {
@@ -66,7 +17,40 @@
       }
     }
     .sectionTwo {
-      width: 10%;
+      width: 50%;
+      .veprLabelAndValue {
+        display: flex;
+        .veprLabel {
+          width: 35%;
+        }
+        .veprValue {
+          width: 60%;
+        }
+      }
+    }
+    input {
+      width: 100%;
+    }
+  }
+
+  .veprPriceSourceWrapper {
+    padding-left: 15px !important;
+    margin-top: 20px;
+    display: flex;
+    .sectionOne {
+      width: 50%;
+      .veprLabelAndValue {
+        display: flex;
+        .veprLabel {
+          width: 35%;
+        }
+        .veprValue {
+          width: 60%;
+        }
+      }
+    }
+    .sectionTwo {
+      width: 50%;
       .veprLabelAndValue {
         display: flex;
         .veprLabel {
@@ -81,10 +65,6 @@
         cursor: pointer;
         //display: table-caption;
       }
-    }
-    .sectionThree {
-      width: 40%;
-      margin-left: 100px;
     }
   }
   .veprResDateWrapper {

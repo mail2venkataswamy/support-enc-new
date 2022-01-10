@@ -12,6 +12,7 @@ import Ta from "./pages/threshold-alerts/index.jsx";
 import Pt from "./pages/pics-thresholds/index.jsx";
 import Pra from "./pages/pra/index.jsx";
 import Vepr from "./pages/vepr/index.jsx";
+import ViDump from "./pages/vi-dump/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
         <Route path="/pt" element={<Pt />} />
         <Route path="/pra" element={<Pra />} />
         <Route path="/vepr" element={<Vepr />} />
+        <Route path="/viDump" element={<ViDump />} />
       </Routes>
     </BrowserRouter>
   );

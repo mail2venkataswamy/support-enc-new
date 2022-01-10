@@ -1,0 +1,17 @@
+.multiSelectBoxItemsWrapper {
+  border: solid 0.5px grey;
+  max-height: 150px;
+  min-height: 150px;
+  width: 300px;
+  overflow: scroll;
+  .option {
+    border-bottom: solid 0.5px grey;
+    margin-left: 2px;
+  }
+  .selected {
+    background: rgb(221, 221, 221);
+  }
+  :last-child {
+    border: none;
+  }
+}
