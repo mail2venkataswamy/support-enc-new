@@ -17,9 +17,7 @@ class StProvider extends Component {
     super(props);
     this.state = {
       initialPanelState: {},
-      initialPicsSymbolTranslationDate: {},
-      initialAddSymbolTranslationsData: {},
-      initialModifyPriceResData: {},
+      initialAddThresholdsData: {},
       filterPanelData: {
         vendorOptins: [
           { label: "IDSI", value: "idsi" },
@@ -51,38 +49,6 @@ class StProvider extends Component {
         ],
         symbolToSuggestionResult: [],
         symbolToValue: "",
-        vendorExchangeSymbolSearchValue: "",
-        vendorExchangeSymbolData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        vendorExchangeSymbolSuggestionResult: [],
-        vendorExchangeSymbolValue: "",
-
-        exchangeSearchValue: "",
-        exchangeData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        exchangeSuggestionResult: [],
-        exchangeValue: "",
-
         cuspinSearchValue: "",
         cuspinData: [
           { id: 1, value: "AA001200" },
@@ -132,6 +98,32 @@ class StProvider extends Component {
         ],
         isInSuggestionResult: [],
         isInValue: "",
+        callPutOptions: [
+          { label: "Call", value: "call" },
+          { label: "Put", value: "put" },
+        ],
+
+        selectedCallPutValue: { label: "default", value: "default" },
+        isCallPutDisabled: false,
+        isMaturityFromDateDisabled: false,
+        exspirationOrMaturityDate: new Date(),
+        strikePriceData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        strikePriceFromSuggestionResult: [],
+        strikePriceFromValue: "",
+        StrikePriceFromSearchValue: "",
+        endDate: new Date(),
+        startDate: new Date(),
       },
       gridScreenData: {
         priceSystemAlertStateRowData: [],
@@ -152,19 +144,19 @@ class StProvider extends Component {
           {
             headerName: "Product Type",
             field: "productType",
-            width: 110,
+            width: 120,
             flex: 0,
           },
           {
             headerName: "Classification",
             field: "classification",
-            width: 120,
+            width: 130,
             flex: 0,
           },
           {
             headerName: "OCC Symbol",
             field: "occSymbol",
-            width: 110,
+            width: 100,
             flex: 0,
           },
           {
@@ -183,19 +175,19 @@ class StProvider extends Component {
           {
             headerName: "Cusip",
             field: "cusip",
-            width: 70,
+            width: 100,
             flex: 0,
           },
           {
             headerName: "ISIN",
             field: "isIN",
-            width: 70,
+            width: 100,
             flex: 0,
           },
           {
             headerName: "Vendor Product ID",
             field: "vendorProductId",
-            width: 103,
+            width: 90,
             flex: 0,
           },
         ],
@@ -208,26 +200,24 @@ class StProvider extends Component {
           flex: 1,
         },
 
+        disableFromDate: new Date(),
+        disableFromTimeOptions: [
+          { label: "01:00", value: "01:00" },
+          { label: "02:00", value: "02:00" },
+        ],
+        disableToDate: new Date(),
+        disableToTimeOptions: [
+          { label: "01:00", value: "01:00" },
+          { label: "02:00", value: "02:00" },
+        ],
+        selectedToTime: { label: "00:00", value: "00:00" },
+        selectedFromTime: { label: "00:00", value: "00:00" },
+        isDisablePicsModalOpen: false,
         selectedGridRowData: [],
         selectedGridRows: [],
         isDeleteGridRecordPromptModalOpen: false,
       },
-      addSymbolTranslationsData: {
-        vendorExchangeSymbolSearchValue: "",
-        vendorExchangeSymbolData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        vendorExchangeSymbolSuggestionResult: [],
-        vendorExchangeSymbolValue: "",
+      addThresholdsData: {
         exchangeItemsData: [
           {
             label: "test",
@@ -287,7 +277,7 @@ class StProvider extends Component {
           { label: "test16", value: "test16", isSelected: false },
         ],
         exchangeItemsResult: [],
-        isAddSymbolTranslationsModalOpen: false,
+        isAddThresholdsModalOpen: false,
         isEditableModalPopupOpen: false,
         vendorOptins: [
           { label: "IDSI", value: "idsi" },
@@ -364,6 +354,14 @@ class StProvider extends Component {
           { label: "Option", value: "option" },
           { label: "Warrant", value: "warrant" },
         ],
+        changeCountOptions: [
+          { label: "Y", value: "Y" },
+          { label: "N", value: "N" },
+        ],
+        selectedChangeCountValue: { label: "Y", value: "Y" },
+        preMarketThresholdValue: "",
+        postMarketThresholdValue: "",
+        MarketThresholdValue: "",
         classificationOptions: [
           { label: "Equity", value: "equity" },
           { label: "Currency", value: "currency" },
@@ -371,6 +369,8 @@ class StProvider extends Component {
           { label: "Index/Other", value: "indexOrOther" },
         ],
         selectedClassificationValue: { label: "Select", value: "Select" },
+        selectedLpafValue: "",
+        expOrMaturityDate: new Date(),
         isInSearchValue: "",
         isInData: [
           { id: 1, value: "AA001200" },
@@ -386,6 +386,43 @@ class StProvider extends Component {
         ],
         isInSuggestionResult: [],
         isInValue: "",
+        callPutOptions: [
+          { label: "Call", value: "call" },
+          { label: "Put", value: "put" },
+        ],
+
+        selectedCallPutValue: { label: "default", value: "default" },
+        isCallPutDisabled: false,
+        strikePriceLowSearchValue: "",
+        strikePriceLowData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        strikePriceLowSuggestionResult: [],
+        strikePriceLowValue: "",
+        strikePriceHighSearchValue: "",
+        strikePriceHighData: [
+          { id: 1, value: "AA001200" },
+          { id: 2, value: "AA001201" },
+          { id: 3, value: "AA001202" },
+          { id: 4, value: "AA001203" },
+          { id: 5, value: "AB001204" },
+          { id: 6, value: "BB001205" },
+          { id: 7, value: "BA001206" },
+          { id: 8, value: "CC001207" },
+          { id: 9, value: "BC001208" },
+          { id: 10, value: "CA001209" },
+        ],
+        strikePriceHighSuggestionResult: [],
+        strikePriceHighValue: "",
         exchangeTypeValue: "",
         exchangeTypeData: [
           {
@@ -405,11 +442,124 @@ class StProvider extends Component {
             className: "usExchangesOnly",
           },
         ],
+        restrictionStDate: new Date(),
+        restrictionEndDate: new Date(),
         vendorExchangeRowData: [],
+        colDefs: [
+          {
+            width: 60,
+            headerCheckboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
+            flex: 0,
+          },
+
+          {
+            headerName: "#",
+            field: "#",
+            width: 40,
+            flex: 0,
+          },
+          {
+            headerName: "Vendor",
+            field: "vendor",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Exchange",
+            field: "exchange",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Product Type",
+            field: "productType",
+            width: 170,
+            flex: 0,
+          },
+          {
+            headerName: "Classification",
+            field: "classification",
+            width: 170,
+            flex: 0,
+          },
+          {
+            headerName: "Symbol",
+            field: "symbol",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Cusip",
+            field: "cusip",
+            width: 120,
+            flex: 0,
+          },
+          {
+            headerName: "ISIN",
+            field: "isIn",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Start D",
+            field: "stDate",
+            width: 140,
+            flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
       },
     };
   }
-
+  onChangeDisableFromDate = (date) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.disableFromDate);
+    gridScreenData.disableFromDate = date;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableFromTime = (time) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.selectedFromTime);
+    gridScreenData.selectedFromTime = time;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableToDate = (date) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.disableToDate);
+    gridScreenData.disableToDate = date;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onChangeDisableToTime = (time) => {
+    let gridScreenData = this.state.gridScreenData;
+    console.log(gridScreenData.selectedToTime);
+    gridScreenData.selectedToTime = time;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  toggleDisablePicsModal = () => {
+    let gridScreenData = this.state.gridScreenData;
+    gridScreenData.isDisablePicsModalOpen =
+      !gridScreenData.isDisablePicsModalOpen;
+    this.setState({
+      gridScreenData,
+    });
+  };
   onChangeExchangeValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedExchangeValue = selectedValue;
@@ -478,95 +628,6 @@ class StProvider extends Component {
       filterPanelData,
     });
   };
-  onChangeVendorExchangeSymbolValue = (e) => {
-    let data = this.state.filterPanelData.vendorExchangeSymbolData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.vendorExchangeSymbolSuggestionResult = result;
-    filterPanelData.vendorExchangeSymbolSearchValue = e.target.value;
-    filterPanelData.vendorExchangeSymbolValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickVendorExchangeSymbolSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.vendorExchangeSymbolValue = selectedValue;
-    filterPanelData.vendorExchangeSymbolSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-
-  onChangeAddStVendorExchangeSymbolValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.vendorExchangeSymbolData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addSymbolTranslationsData.vendorExchangeSymbolSuggestionResult = result;
-    addSymbolTranslationsData.vendorExchangeSymbolSearchValue = e.target.value;
-    addSymbolTranslationsData.vendorExchangeSymbolValue = e.target.value;
-
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onClickAddStVendorExchangeSymbolSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.vendorExchangeSymbolValue = selectedValue;
-    addSymbolTranslationsData.vendorExchangeSymbolSearchValue = "";
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-
-  onChangeExchangeValue = (e) => {
-    let data = this.state.filterPanelData.exchangeData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.exchangeSuggestionResult = result;
-    filterPanelData.exchangeSearchValue = e.target.value;
-    filterPanelData.exchangeValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickExchangeSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.exchangeValue = selectedValue;
-    filterPanelData.exchangeSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
 
   onGridReady = (params) => {
     this.gridApi = params.api;
@@ -613,9 +674,9 @@ class StProvider extends Component {
     this.setState({ filterPanelData });
   };
   onChangeAddClassificationValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedClassificationValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedClassificationValue = selectedValue;
+    this.setState({ addThresholdsData });
   };
 
   componentDidMount() {
@@ -632,32 +693,60 @@ class StProvider extends Component {
       selectedCallPutValue: filterPanelData.selectedCallPutValue,
       strikePriceFromValue: filterPanelData.strikePriceFromValue,
     };
-    let panelData = { ...filterPanelData, ...filterObject };
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+    let data = { ...filterPanelData, ...filterObject };
+    let gridScreenData = this.state.gridScreenData;
+    let addThresholdsData = this.state.addThresholdsData;
+    let modifyPriceResData = this.state.modifyPriceResData;
 
-    let tempAddSymbolTranslationsObj = {
-      selectedVendorValue: addSymbolTranslationsData.selectedVendorValue,
-      selectedExchangeValue: addSymbolTranslationsData.selectedExchangeValue,
-      selectedProductTypeValue:
-        addSymbolTranslationsData.selectedProductTypeValue,
-      cuspinValue: addSymbolTranslationsData.cuspinValue,
-      symbolToValue: addSymbolTranslationsData.symbolToValue,
+    let obj = {
+      selectedToTime: gridScreenData.selectedToTime,
+      selectedFromTime: gridScreenData.selectedFromTime,
+      disableFromDate: gridScreenData.disableFromDate,
+      disableToDate: gridScreenData.disableToDate,
+    };
+    let tempAddThresholdsObj = {
+      selectedVendorValue: addThresholdsData.selectedVendorValue,
+      selectedExchangeValue: addThresholdsData.selectedExchangeValue,
+      selectedProductTypeValue: addThresholdsData.selectedProductTypeValue,
+      cuspinValue: addThresholdsData.cuspinValue,
+      symbolToValue: addThresholdsData.symbolToValue,
+      selectedChangeCountValue: addThresholdsData.selectedChangeCountValue,
+      preMarketThresholdValue: addThresholdsData.preMarketThresholdValue,
+      postMarketThresholdValue: addThresholdsData.postMarketThresholdValue,
+      MarketThresholdValue: addThresholdsData.MarketThresholdValue,
       selectedClassificationValue:
-        addSymbolTranslationsData.selectedClassificationValue,
-      exchangeItemsResult: addSymbolTranslationsData.exchangeItemsData,
+        addThresholdsData.selectedClassificationValue,
+      exchangeItemsResult: addThresholdsData.exchangeItemsData,
     };
-    let addSymbolTranslationData = {
-      ...addSymbolTranslationsData,
-      ...tempAddSymbolTranslationsObj,
+    let tempAddModifyPriceResObj = {
+      selectedVendorValue: addThresholdsData.selectedVendorValue,
+      selectedExchangeValue: addThresholdsData.selectedExchangeValue,
+      selectedProductTypeValue: addThresholdsData.selectedProductTypeValue,
+      cuspinValue: addThresholdsData.cuspinValue,
+      symbolToValue: addThresholdsData.symbolToValue,
+      selectedChangeCountValue: addThresholdsData.selectedChangeCountValue,
+      preMarketThresholdValue: addThresholdsData.preMarketThresholdValue,
+      postMarketThresholdValue: addThresholdsData.postMarketThresholdValue,
+      MarketThresholdValue: addThresholdsData.MarketThresholdValue,
+      selectedClassificationValue:
+        addThresholdsData.selectedClassificationValue,
+    };
+    let picsDisableData = { ...gridScreenData, ...obj };
+    let addThresholdData = { ...addThresholdsData, ...tempAddThresholdsObj };
+    let modifyPriceRestrictionData = {
+      ...modifyPriceResData,
+      ...tempAddModifyPriceResObj,
     };
 
-    let exChangeData = addSymbolTranslationsData.exchangeItemsData;
-    addSymbolTranslationsData.exchangeItemsResult = exChangeData;
+    let exChangeData = addThresholdsData.exchangeItemsData;
+    addThresholdsData.exchangeItemsResult = exChangeData;
 
     this.setState({
-      initialPanelState: panelData,
-      initialAddSymbolTranslationsData: addSymbolTranslationData,
-      addSymbolTranslationsData,
+      initialPanelState: data,
+      initialPicsThresholdDate: picsDisableData,
+      initialAddThresholdsData: addThresholdData,
+      initialModifyPriceResData: modifyPriceRestrictionData,
+      addThresholdsData,
     });
   }
   onClickFiler = () => {
@@ -723,6 +812,15 @@ class StProvider extends Component {
       },
     ];
   }
+  onResetDisablePics = () => {
+    let gridScreenData = this.state.gridScreenData;
+    let initialPicsThresholdDate = this.state.initialPicsThresholdDate;
+    let data = { ...gridScreenData, ...initialPicsThresholdDate };
+    data.isDisablePicsModalOpen = true;
+    this.setState({
+      gridScreenData: data,
+    });
+  };
   getSelectedRowData = () => {
     let gridScreenData = this.state.gridScreenData;
     let selectedNodes = this.gridApi.getSelectedNodes();
@@ -745,7 +843,28 @@ class StProvider extends Component {
   onCellValueChanged = (params) => {
     const colId = params.column.getId();
   };
-  //================Add SymbolTranslation Methods=========
+  //================Add Threshold Methods=========
+
+  onChangeAddCountValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedChangeCountValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangePreMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.preMarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
+  onChangeMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.MarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
+  onChangePostMarketThreshold = (e) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.postMarketThresholdValue = e.target.value;
+    this.setState({ addThresholdsData });
+  };
 
   //==========================================
   onDeleteSelectedRecords = () => {
@@ -769,10 +888,10 @@ class StProvider extends Component {
     });
   };
   onChanglpafValue = (e) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedLpafValue = e.target.value;
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedLpafValue = e.target.value;
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   onChangeIsInValue = (e) => {
@@ -804,6 +923,19 @@ class StProvider extends Component {
       filterPanelData,
     });
   };
+
+  onChangeCallPutValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedCallPutValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  setExpirationMaturityDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.exspirationOrMaturityDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
   onClickStrikePriceFromSuggestionItem = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.strikePriceFromValue = selectedValue;
@@ -812,20 +944,9 @@ class StProvider extends Component {
       filterPanelData,
     });
   };
-  //===========Add New Price Methods========
-  onChangeAddExchangeValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedExchangeValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
-  };
-  onChangeAddVendorValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedVendorValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
-  };
-  onChangeAddCuspinValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.cuspinData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+  onChangeStrikePriceFromValue = (e) => {
+    let data = this.state.filterPanelData.strikePriceData;
+    let filterPanelData = this.state.filterPanelData;
 
     let result =
       e.target.value &&
@@ -836,25 +957,71 @@ class StProvider extends Component {
           .includes(e.target.value.trim().toLowerCase());
       });
     console.log(result);
-    addSymbolTranslationsData.cuspinSuggestionResult = result;
-    addSymbolTranslationsData.cuspinSearchValue = e.target.value;
-    addSymbolTranslationsData.cuspinValue = e.target.value;
+    filterPanelData.strikePriceFromSuggestionResult = result;
+    filterPanelData.StrikePriceFromSearchValue = e.target.value;
+    filterPanelData.strikePriceFromValue = e.target.value;
 
     this.setState({
-      addSymbolTranslationsData,
+      filterPanelData,
+    });
+  };
+  setStartDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.startDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  setEndDate = (date) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.endDate = date;
+    this.setState({
+      filterPanelData,
+    });
+  };
+  //===========Add New Price Methods========
+  onChangeAddExchangeValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedExchangeValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangeAddVendorValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedVendorValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
+  onChangeAddCuspinValue = (e) => {
+    let data = this.state.addThresholdsData.cuspinData;
+    let addThresholdsData = this.state.addThresholdsData;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    addThresholdsData.cuspinSuggestionResult = result;
+    addThresholdsData.cuspinSearchValue = e.target.value;
+    addThresholdsData.cuspinValue = e.target.value;
+
+    this.setState({
+      addThresholdsData,
     });
   };
   onClickAddCuspinSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.cuspinValue = selectedValue;
-    addSymbolTranslationsData.cuspinSearchValue = "";
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.cuspinValue = selectedValue;
+    addThresholdsData.cuspinSearchValue = "";
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   onChangeAddSymbolToValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.symbolToData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+    let data = this.state.addThresholdsData.symbolToData;
+    let addThresholdsData = this.state.addThresholdsData;
 
     let result =
       e.target.value &&
@@ -865,104 +1032,88 @@ class StProvider extends Component {
           .includes(e.target.value.trim().toLowerCase());
       });
     console.log(result);
-    addSymbolTranslationsData.symbolToSuggestionResult = result;
-    addSymbolTranslationsData.symbolToSearchValue = e.target.value;
-    addSymbolTranslationsData.symbolToValue = e.target.value;
+    addThresholdsData.symbolToSuggestionResult = result;
+    addThresholdsData.symbolToSearchValue = e.target.value;
+    addThresholdsData.symbolToValue = e.target.value;
 
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   onClickAddSymbolToSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.symbolToValue = selectedValue;
-    addSymbolTranslationsData.symbolToSearchValue = "";
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.symbolToValue = selectedValue;
+    addThresholdsData.symbolToSearchValue = "";
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   toggleAddStModal = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.isEditableModalPopupOpen = false;
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.isAddThresholdsModalOpen =
+      !addThresholdsData.isAddThresholdsModalOpen;
+    addThresholdsData.isEditableModalPopupOpen = false;
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
-  onResetAddSymbolTranslations = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let initialAddSymbolTranslationsData =
-      this.state.initialAddSymbolTranslationsData;
-    let data = {
-      ...addSymbolTranslationsData,
-      ...initialAddSymbolTranslationsData,
-    };
-    data.isAddSymbolTranslationsModalOpen = true;
+  onResetAddThresholds = () => {
+    let addThresholdsData = this.state.addThresholdsData;
+    let initialAddThresholdsData = this.state.initialAddThresholdsData;
+    let data = { ...addThresholdsData, ...initialAddThresholdsData };
+    data.isAddThresholdsModalOpen = true;
     this.setState({
-      addSymbolTranslationsData: data,
+      addThresholdsData: data,
     });
   };
   onChangeAddProductTypeValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedProductTypeValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedProductTypeValue = selectedValue;
+    this.setState({ addThresholdsData });
   };
-  onSaveAddSymbolTranslations = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+  onSaveAddThresholds = () => {
+    let addThresholdsData = this.state.addThresholdsData;
     let gridScreenData = this.state.gridScreenData;
 
     let itemToSave = {
-      vendor: addSymbolTranslationsData.selectedVendorValue.value,
-      exchange: addSymbolTranslationsData.selectedExchangeValue.value,
-      productType: addSymbolTranslationsData.selectedProductTypeValue.value,
-      cusip: addSymbolTranslationsData.cuspinValue,
-      symbol: addSymbolTranslationsData.symbolToValue,
-      changeCount: addSymbolTranslationsData.selectedChangeCountValue.value,
-      preMarketSymbolTranslations:
-        addSymbolTranslationsData.preMarketSymbolTranslationValue,
-      postMarketSymbolTranslations:
-        addSymbolTranslationsData.postMarketSymbolTranslationValue,
-      marketSymbolTranslations:
-        addSymbolTranslationsData.MarketSymbolTranslationValue,
-      priceAdjustor: addSymbolTranslationsData.selectedLpafValue,
+      vendor: addThresholdsData.selectedVendorValue.value,
+      exchange: addThresholdsData.selectedExchangeValue.value,
+      productType: addThresholdsData.selectedProductTypeValue.value,
+      cusip: addThresholdsData.cuspinValue,
+      symbol: addThresholdsData.symbolToValue,
+      changeCount: addThresholdsData.selectedChangeCountValue.value,
+      preMarketThresholds: addThresholdsData.preMarketThresholdValue,
+      postMarketThresholds: addThresholdsData.postMarketThresholdValue,
+      marketThresholds: addThresholdsData.MarketThresholdValue,
+      priceAdjustor: addThresholdsData.selectedLpafValue,
     };
     gridScreenData.priceSystemAlertStateRowData = [
       ...gridScreenData.priceSystemAlertStateRowData,
       itemToSave,
     ];
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.selectedVendorValue = {
-      label: "All",
-      value: "all",
-    };
-    addSymbolTranslationsData.selectedExchangeValue = {
-      label: "All",
-      value: "all",
-    };
-    addSymbolTranslationsData.selectedProductTypeValue = {
+    addThresholdsData.isAddThresholdsModalOpen =
+      !addThresholdsData.isAddThresholdsModalOpen;
+    addThresholdsData.selectedVendorValue = { label: "All", value: "all" };
+    addThresholdsData.selectedExchangeValue = { label: "All", value: "all" };
+    addThresholdsData.selectedProductTypeValue = {
       label: "Select",
       value: "select",
     };
-    addSymbolTranslationsData.cuspinValue = "";
-    addSymbolTranslationsData.symbolToValue = "";
-    addSymbolTranslationsData.selectedChangeCountValue = {
-      label: "Y",
-      value: "Y",
-    };
-    addSymbolTranslationsData.preMarketSymbolTranslationValue = "";
-    addSymbolTranslationsData.postMarketSymbolTranslationValue = "";
-    addSymbolTranslationsData.MarketSymbolTranslationValue = "";
+    addThresholdsData.cuspinValue = "";
+    addThresholdsData.symbolToValue = "";
+    addThresholdsData.selectedChangeCountValue = { label: "Y", value: "Y" };
+    addThresholdsData.preMarketThresholdValue = "";
+    addThresholdsData.postMarketThresholdValue = "";
+    addThresholdsData.MarketThresholdValue = "";
 
     this.setState({
       gridScreenData,
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   onChangeAddPriceResIsInValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.isInData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+    let data = this.state.addThresholdsData.isInData;
+    let addThresholdsData = this.state.addThresholdsData;
 
     let result =
       e.target.value &&
@@ -973,65 +1124,148 @@ class StProvider extends Component {
           .includes(e.target.value.trim().toLowerCase());
       });
     console.log(result);
-    addSymbolTranslationsData.isInSuggestionResult = result;
-    addSymbolTranslationsData.isInSearchValue = e.target.value;
-    addSymbolTranslationsData.isInValue = e.target.value;
+    addThresholdsData.isInSuggestionResult = result;
+    addThresholdsData.isInSearchValue = e.target.value;
+    addThresholdsData.isInValue = e.target.value;
 
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
   onClickAddPriceResIsInSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isInValue = selectedValue;
-    addSymbolTranslationsData.isInSearchValue = "";
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.isInValue = selectedValue;
+    addThresholdsData.isInSearchValue = "";
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
+  onChangeStrikePriceLowValue = (e) => {
+    let data = this.state.addThresholdsData.strikePriceLowData;
+    let addThresholdsData = this.state.addThresholdsData;
 
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    addThresholdsData.strikePriceLowSuggestionResult = result;
+    addThresholdsData.strikePriceLowSearchValue = e.target.value;
+    addThresholdsData.strikePriceLowValue = e.target.value;
+
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onClickStrikePriceLowSuggestionItem = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.strikePriceLowValue = selectedValue;
+    addThresholdsData.strikePriceLowSearchValue = "";
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onChangeStrikePriceHighValue = (e) => {
+    let data = this.state.addThresholdsData.strikePriceHighData;
+    let addThresholdsData = this.state.addThresholdsData;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    console.log(result);
+    addThresholdsData.strikePriceHighSuggestionResult = result;
+    addThresholdsData.strikePriceHighSearchValue = e.target.value;
+    addThresholdsData.strikePriceHighValue = e.target.value;
+
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onClickStrikePriceHighSuggestionItem = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.strikePriceHighValue = selectedValue;
+    addThresholdsData.strikePriceHighSearchValue = "";
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  setAddExpOrMaturityDate = (date) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.expOrMaturityDate = date;
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  onChangeAddPriceResCallPutValue = (selectedValue) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.selectedCallPutValue = selectedValue;
+    this.setState({ addThresholdsData });
+  };
   onChangeExchangeCat = (e) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let exChangeData = this.state.addSymbolTranslationsData.exchangeItemsData;
-    addSymbolTranslationsData.exchangeTypeValue = e.target.value;
+    let addThresholdsData = this.state.addThresholdsData;
+    let exChangeData = this.state.addThresholdsData.exchangeItemsData;
+    addThresholdsData.exchangeTypeValue = e.target.value;
     if (e.target.value.toLowerCase() === "usOnly".toLowerCase()) {
-      addSymbolTranslationsData.exchangeItemsResult = [];
+      addThresholdsData.exchangeItemsResult = [];
       for (const item of exChangeData) {
         if (
           item.exchange &&
           item.exchange.toLowerCase() === "usOnly".toLowerCase()
         ) {
-          addSymbolTranslationsData.exchangeItemsResult.push(item);
+          addThresholdsData.exchangeItemsResult.push(item);
         }
       }
     } else {
-      addSymbolTranslationsData.exchangeItemsResult = exChangeData;
+      addThresholdsData.exchangeItemsResult = exChangeData;
     }
-    this.setState({ addSymbolTranslationsData });
+    this.setState({ addThresholdsData });
+  };
+  setRestrictionStDate = (date) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.restrictionStDate = date;
+    this.setState({
+      addThresholdsData,
+    });
+  };
+  setRestrictionEndDate = (date) => {
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.restrictionEndDate = date;
+    this.setState({
+      addThresholdsData,
+    });
   };
   onSelectDeSelectExchangesOption = (selectedItem) => {
     console.log("selected item", selectedItem);
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let options = this.state.addSymbolTranslationsData.exchangeItemsData;
+    let addThresholdsData = this.state.addThresholdsData;
+    let options = this.state.addThresholdsData.exchangeItemsData;
     for (const option of options) {
       if (selectedItem.value === option.value) {
         option.isSelected = !option.isSelected;
       }
     }
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
-    console.log(this.state.addSymbolTranslationsData.exchangeItemsData);
+    console.log(this.state.addThresholdsData.exchangeItemsData);
   };
   //==========MOdify Price Res Methods===================
   toggleModifyStModal = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.isEditableModalPopupOpen = true;
+    let addThresholdsData = this.state.addThresholdsData;
+    addThresholdsData.isAddThresholdsModalOpen =
+      !addThresholdsData.isAddThresholdsModalOpen;
+    addThresholdsData.isEditableModalPopupOpen = true;
     let editObject = {};
     this.setState({
-      addSymbolTranslationsData,
+      addThresholdsData,
     });
   };
 
@@ -1048,6 +1282,7 @@ class StProvider extends Component {
           onChangeSymbolToValue: (e) => this.onChangeSymbolToValue(e),
           onClickSymbolToSuggestionItem: (e) =>
             this.onClickSymbolToSuggestionItem(e),
+
           onGridReady: this.onGridReady,
           onBtPrint: this.onBtPrint,
           onBtnExport: this.onBtnExport,
@@ -1056,6 +1291,13 @@ class StProvider extends Component {
           onClickReset: this.onClickReset,
           onClickFiler: this.onClickFiler,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          onChangeDisableFromDate: (e) => this.onChangeDisableFromDate(e),
+          onChangeDisableFromTime: (e) => this.onChangeDisableFromTime(e),
+          onChangeDisableToDate: (e) => this.onChangeDisableToDate(e),
+          onChangeDisableToTime: (e) => this.onChangeDisableToTime(e),
+          toggleDisablePicsModal: this.toggleDisablePicsModal,
+          onResetDisablePics: this.onResetDisablePics,
+
           onChangeAddExchangeValue: (e) => this.onChangeAddExchangeValue(e),
           onChangeAddVendorValue: (e) => this.onChangeAddVendorValue(e),
           onChangeAddCuspinValue: (e) => this.onChangeAddCuspinValue(e),
@@ -1065,13 +1307,15 @@ class StProvider extends Component {
           onClickAddSymbolToSuggestionItem: (e) =>
             this.onClickAddSymbolToSuggestionItem(e),
           toggleAddStModal: this.toggleAddStModal,
-          onChangePreMarketSymbolTranslation: (e) =>
-            this.onChangePreMarketSymbolTranslation(e),
-          onResetAddSymbolTranslations: this.onResetAddSymbolTranslations,
+          onChangeAddCountValue: this.onChangeAddCountValue,
+          onChangePreMarketThreshold: (e) => this.onChangePreMarketThreshold(e),
+          onChangeMarketThreshold: (e) => this.onChangeMarketThreshold(e),
+          onChangePostMarketThreshold: (e) =>
+            this.onChangePostMarketThreshold(e),
+          onResetAddThresholds: this.onResetAddThresholds,
           onChangeAddProductTypeValue: (e) =>
             this.onChangeAddProductTypeValue(e),
-          onSaveAddSymbolTranslations: (e) =>
-            this.onSaveAddSymbolTranslations(e),
+          onSaveAddThresholds: (e) => this.onSaveAddThresholds(e),
           getSelectedRowData: this.getSelectedRowData,
           onSelectionChanged: this.onSelectionChanged,
           onDeleteSelectedRecords: this.onDeleteSelectedRecords,
@@ -1084,26 +1328,35 @@ class StProvider extends Component {
           onChanglpafValue: (e) => this.onChanglpafValue(e),
           onClickIsInSuggestionItem: (e) => this.onClickIsInSuggestionItem(e),
           onChangeIsInValue: (e) => this.onChangeIsInValue(e),
+          onChangeCallPutValue: (e) => this.onChangeCallPutValue(e),
+          setExpirationMaturityDate: (e) => this.setExpirationMaturityDate(e),
+          onChangeStrikePriceFromValue: (e) =>
+            this.onChangeStrikePriceFromValue(e),
+          onClickStrikePriceFromSuggestionItem: (e) =>
+            this.onClickStrikePriceFromSuggestionItem(e),
+          setStartDate: (e) => this.setStartDate(e),
+          setEndDate: (e) => this.setEndDate(e),
+          setAddExpOrMaturityDate: (e) => this.setAddExpOrMaturityDate(e),
           onChangeAddPriceResIsInValue: (e) =>
             this.onChangeAddPriceResIsInValue(e),
           onClickAddPriceResIsInSuggestionItem: (e) =>
             this.onClickAddPriceResIsInSuggestionItem(e),
+          onClickStrikePriceLowSuggestionItem: (e) =>
+            this.onClickStrikePriceLowSuggestionItem(e),
+          onClickStrikePriceHighSuggestionItem: (e) =>
+            this.onClickStrikePriceHighSuggestionItem(e),
+          onChangeStrikePriceHighValue: (e) =>
+            this.onChangeStrikePriceHighValue(e),
+          onChangeStrikePriceLowValue: (e) =>
+            this.onChangeStrikePriceLowValue(e),
+          onChangeAddPriceResCallPutValue: (e) =>
+            this.onChangeAddPriceResCallPutValue(e),
           onChangeExchangeCat: (e) => this.onChangeExchangeCat(e),
+          setRestrictionStDate: (e) => this.setRestrictionStDate(e),
+          setRestrictionEndDate: (e) => this.setRestrictionEndDate(e),
           toggleModifyStModal: this.toggleModifyStModal,
           onSelectDeSelectExchangesOption: (e) =>
             this.onSelectDeSelectExchangesOption(e),
-          onChangeVendorExchangeSymbolValue: (e) =>
-            this.onChangeVendorExchangeSymbolValue(e),
-          onClickVendorExchangeSymbolSuggestionItem: (e) =>
-            this.onClickVendorExchangeSymbolSuggestionItem(e),
-
-          onClickExchangeSuggestionItem: (e) =>
-            this.onClickExchangeSuggestionItem(e),
-          onChangeExchangeValue: (e) => this.onChangeExchangeValue(e),
-          onChangeAddStVendorExchangeSymbolValue: (e) =>
-            this.onChangeAddStVendorExchangeSymbolValue(e),
-          onClickAddStVendorExchangeSymbolSuggestionItem: (e) =>
-            this.onClickAddStVendorExchangeSymbolSuggestionItem(e),
         }}
       >
         {this.props.children}

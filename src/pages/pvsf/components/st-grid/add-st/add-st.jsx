@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import "./add-st.scss";
-import myContext from "../../../../../components/context/st-context.jsx";
+import myContext from "../../../../../components/context/pvsf-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown";
 import Inputsuggestion from "../../st-input-suggestions/st-input-suggestions";
 const AddSymbolTranslationsModalContent = () => {

@@ -6,7 +6,7 @@ import { AddOrModifySt } from "./add-st/add-st.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 
-const SymbolTranslationGrid = () => {
+const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
   const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
@@ -138,4 +138,4 @@ const SymbolTranslationGrid = () => {
   );
 };
 
-export default SymbolTranslationGrid;
+export default ThresholdGrid;

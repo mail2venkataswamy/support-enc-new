@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.scss";
 import FilterPanel from "./components/st-filterscreen/st-filterscreen.jsx";
 import StGrid from "./components/st-grid/st-grid.jsx";
-import StProvider from "../../components/provider/st-provider.jsx";
+import StProvider from "../../components/provider/pvsf-provider.jsx";
 
 const vepr = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);

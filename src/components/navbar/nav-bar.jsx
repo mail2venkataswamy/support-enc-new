@@ -67,6 +67,11 @@ const NavBar = () => {
             ST
           </NavLink>
         </li>
+        <li className="pages">
+          <NavLink to="/pvsf" isActive={true}>
+            PVSF
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

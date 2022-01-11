@@ -4,7 +4,7 @@ import "./add-st.scss";
 import myContext from "../../../../../components/context/st-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown";
 import Inputsuggestion from "../../st-input-suggestions/st-input-suggestions";
-const AddSymbolTranslationsModalContent = () => {
+const AddThresholdsModalContent = () => {
   const context = useContext(myContext);
 
   const {
@@ -32,13 +32,8 @@ const AddSymbolTranslationsModalContent = () => {
     isInSuggestionResult,
     isInValue,
     isInSearchValue,
-    onChangeAddStVendorExchangeSymbolValue,
-    vendorExchangeSymbolSuggestionResult,
-    onClickAddStVendorExchangeSymbolSuggestionItem,
-    vendorExchangeSymbolValue,
-    vendorExchangeSymbolSearchValue,
   } = {
-    ...context.state.addSymbolTranslationsData,
+    ...context.state.addThresholdsData,
     ...context,
   };
 
@@ -55,54 +50,6 @@ const AddSymbolTranslationsModalContent = () => {
         </div>
       </div>
       <div className="stLabelAndValue">
-        <div className="stLabel">Classification:</div>
-        <div className="stValue">
-          <Dropdown
-            options={classificationOptions}
-            selectedValue={selectedClassificationValue}
-            onChange={onChangeAddClassificationValue}
-          ></Dropdown>
-        </div>
-      </div>
-      <div className="stLabelAndValue">
-        <div className="stLabel">OCC Symbol:</div>
-        <div className="stValue">
-          <Inputsuggestion
-            onChange={onChangeAddSymbolToValue}
-            results={symbolToSuggestionResult}
-            onClick={onClickAddSymbolToSuggestionItem}
-            value={symbolToValue}
-            keySearch={symbolToSearchValue}
-            //disabled={isSymbolToDisabled}
-          ></Inputsuggestion>
-        </div>
-      </div>
-      <div className="stLabelAndValue">
-        <div className="stLabel">Vendor / Exchange Symbol:</div>
-        <div className="stValue">
-          <Inputsuggestion
-            onChange={onChangeAddStVendorExchangeSymbolValue}
-            results={vendorExchangeSymbolSuggestionResult}
-            onClick={onClickAddStVendorExchangeSymbolSuggestionItem}
-            value={vendorExchangeSymbolValue}
-            keySearch={vendorExchangeSymbolSearchValue}
-            //disabled={isSymbolToDisabled}
-          ></Inputsuggestion>
-        </div>
-      </div>
-      <div className="stLabelAndValue">
-        <div className="stLabel">Vendor Name:</div>
-        <div className="stValue">
-          <Dropdown
-            type="single"
-            options={vendorOptins}
-            onChange={onChangeAddVendorValue}
-            selectedValue={selectedVendorValue}
-          ></Dropdown>
-        </div>
-      </div>
-
-      <div className="stLabelAndValue">
         <div className="stLabel">Cusip:</div>
         <div className="stValue">
           <Inputsuggestion
@@ -114,7 +61,16 @@ const AddSymbolTranslationsModalContent = () => {
           ></Inputsuggestion>
         </div>
       </div>
-
+      <div className="stLabelAndValue">
+        <div className="stLabel">Classification:</div>
+        <div className="stValue">
+          <Dropdown
+            options={classificationOptions}
+            selectedValue={selectedClassificationValue}
+            onChange={onChangeAddClassificationValue}
+          ></Dropdown>
+        </div>
+      </div>
       <div className="stLabelAndValue">
         <div className="stLabel">ISIN:</div>
         <div className="stValue">
@@ -127,24 +83,48 @@ const AddSymbolTranslationsModalContent = () => {
           ></Inputsuggestion>
         </div>
       </div>
+      <div className="stLabelAndValue">
+        <div className="stLabel">Symbol:</div>
+        <div className="stValue">
+          <Inputsuggestion
+            onChange={onChangeAddSymbolToValue}
+            results={symbolToSuggestionResult}
+            onClick={onClickAddSymbolToSuggestionItem}
+            value={symbolToValue}
+            keySearch={symbolToSearchValue}
+            //disabled={isSymbolToDisabled}
+          ></Inputsuggestion>
+        </div>
+      </div>
+      <div className="stLabelAndValue">
+        <div className="stLabel">Vendor:</div>
+        <div className="stValue">
+          <Dropdown
+            type="single"
+            options={vendorOptins}
+            onChange={onChangeAddVendorValue}
+            selectedValue={selectedVendorValue}
+          ></Dropdown>
+        </div>
+      </div>
     </>
   );
 };
 
-const AddSymbolTranslations = () => {
+const AddThresholds = () => {
   const context = useContext(myContext);
 
   const {
-    onSaveAddSymbolTranslations,
-    onResetAddSymbolTranslations,
+    onSaveAddThresholds,
+    onResetAddThresholds,
     toggleAddStModal,
     isEditableModalPopupOpen,
   } = {
     ...context,
-    ...context.state.addSymbolTranslationsData,
+    ...context.state.addThresholdsData,
   };
   return (
-    <div className="stAddSymbolTranslationsModalContentWrapper">
+    <div className="stAddThresholdsModalContentWrapper">
       <div className="headerWrapper">
         <div className="header">
           {isEditableModalPopupOpen
@@ -153,13 +133,13 @@ const AddSymbolTranslations = () => {
         </div>
       </div>
       <div className="body">
-        <AddSymbolTranslationsModalContent></AddSymbolTranslationsModalContent>
+        <AddThresholdsModalContent></AddThresholdsModalContent>
       </div>
       <div className="footer">
-        <button id="saveButton" onClick={onSaveAddSymbolTranslations}>
+        <button id="saveButton" onClick={onSaveAddThresholds}>
           Save
         </button>
-        <button id="resetButton" onClick={onResetAddSymbolTranslations}>
+        <button id="resetButton" onClick={onResetAddThresholds}>
           Reset
         </button>
         <button id="cancelButton" onClick={toggleAddStModal}>
@@ -183,12 +163,12 @@ const customStyles = {
 const AddOrModifySt = () => {
   const context = useContext(myContext);
 
-  const { isAddSymbolTranslationsModalOpen } = {
-    ...context.state.addSymbolTranslationsData,
+  const { isAddThresholdsModalOpen } = {
+    ...context.state.addThresholdsData,
   };
   return (
-    <Modal isOpen={isAddSymbolTranslationsModalOpen} style={customStyles}>
-      <AddSymbolTranslations></AddSymbolTranslations>
+    <Modal isOpen={isAddThresholdsModalOpen} style={customStyles}>
+      <AddThresholds></AddThresholds>
     </Modal>
   );
 };

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import StContext from "../../../../../components/context/st-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import Inputsuggestion from "../../st-input-suggestions/st-input-suggestions.jsx";
+import DatePicker from "../../../../../components/common/datepicker/datepicker.jsx";
 import "./st-product-info.scss";
 
 const ProductInfo = () => {
@@ -31,16 +32,9 @@ const ProductInfo = () => {
     vendorOptins,
     onChangeVendorValue,
     selectedVendorValue,
-    onChangeVendorExchangeSymbolValue,
-    onClickVendorExchangeSymbolSuggestionItem,
-    vendorExchangeSymbolSuggestionResult,
-    vendorExchangeSymbolValue,
-    vendorExchangeSymbolSearchValue,
+    exchangeOptions,
     onChangeExchangeValue,
-    exchangeSuggestionResult,
-    onClickExchangeSuggestionItem,
-    exchangeValue,
-    exchangeSearchValue,
+    selectedExchangeValue,
   } = {
     ...context.state.filterPanelData,
     ...context,
@@ -82,19 +76,6 @@ const ProductInfo = () => {
             ></Inputsuggestion>
           </div>
         </div>
-        <div className="stSymbolToLabelAndValue">
-          <div className="stSymbolToLabel">Vendor/ Exchange Symbol:</div>
-          <div className="stSymbolToValue">
-            <Inputsuggestion
-              onChange={onChangeVendorExchangeSymbolValue}
-              results={vendorExchangeSymbolSuggestionResult}
-              onClick={onClickVendorExchangeSymbolSuggestionItem}
-              value={vendorExchangeSymbolValue}
-              keySearch={vendorExchangeSymbolSearchValue}
-              //disabled={isSymbolToDisabled}
-            ></Inputsuggestion>
-          </div>
-        </div>
 
         <div className="stVendorLabelAndValueWrapper">
           <div className="stVendorLabel">Vendor Name:</div>
@@ -110,14 +91,12 @@ const ProductInfo = () => {
         <div className="stExchangeLabelAndValueWrapper">
           <div className="stExchangeLabel">Exchange:</div>
           <div className="stExchangeValue">
-            <Inputsuggestion
+            <Dropdown
+              type="single"
+              options={exchangeOptions}
               onChange={onChangeExchangeValue}
-              results={exchangeSuggestionResult}
-              onClick={onClickExchangeSuggestionItem}
-              value={exchangeValue}
-              keySearch={exchangeSearchValue}
-              //disabled={isSymbolToDisabled}
-            ></Inputsuggestion>
+              selectedValue={selectedExchangeValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="stCuspinLabelAndValue">

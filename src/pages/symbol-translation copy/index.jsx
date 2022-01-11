@@ -33,7 +33,7 @@ const vepr = () => {
             </div>
           </div>
         )}
-        <div id="stSymbolTranslationGrid">
+        <div id="stThresholdGrid">
           <StGrid />
         </div>
       </div>

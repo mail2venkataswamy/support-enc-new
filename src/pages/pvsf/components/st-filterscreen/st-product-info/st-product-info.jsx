@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import StContext from "../../../../../components/context/st-context.jsx";
+import PvsfContext from "../../../../../components/context/pvsf-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import Inputsuggestion from "../../st-input-suggestions/st-input-suggestions.jsx";
 import "./st-product-info.scss";
 
 const ProductInfo = () => {
-  const context = useContext(StContext);
+  const context = useContext(PvsfContext);
   const {
     productTypeOptions,
     selectedProductTypeValue,
