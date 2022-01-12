@@ -12,6 +12,10 @@ const MultiSelectBox = (props) => {
               option.isSelected ? "selected" : "unSelected"
             }`}
             onClick={() => props.toggleSelection(option)}
+            onKeyDown={() => props.toggleSelection(option)}
+            role="button"
+            tabIndex={0}
+            id="option"
           >
             {option.label}
           </div>

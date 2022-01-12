@@ -8,15 +8,15 @@ const vepr = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
   return (
     <StProvider>
-      <div id="mainSt">
+      <div id="mainPvsf">
         {isFilterPanelVisble ? (
           <>
-            <div id="stFilterscreen" className="left">
+            <div id="pvsfFilterscreen" className="left">
               <FilterPanel />
             </div>
             <div
               onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
-              className="stFilterPanelToggle"
+              className="pvsfFilterPanelToggle"
               title="Hide Filter Panel"
             >
               <p>{"<<"}</p>
@@ -24,16 +24,16 @@ const vepr = () => {
           </>
         ) : (
           <div
-            className="stFilterPanelUnToggleWrapper"
+            className="pvsfFilterPanelUnToggleWrapper"
             onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
           >
-            <div className="stFilterPanelUnToggle" title="Show Filter Panel">
+            <div className="pvsfFilterPanelUnToggle" title="Show Filter Panel">
               <div className="toggleIndicator">{">"}</div>
               <p>FILTER PANEL</p>
             </div>
           </div>
         )}
-        <div id="stSymbolTranslationGrid">
+        <div id="pvsfSymbolTranslationGrid">
           <StGrid />
         </div>
       </div>

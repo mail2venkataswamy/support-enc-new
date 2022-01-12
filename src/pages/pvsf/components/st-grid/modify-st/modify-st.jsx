@@ -164,9 +164,9 @@ const AddSymbolTranslationsModalContent = () => {
 const AddSymbolTranslations = () => {
   const context = useContext(myContext);
   const {
-    onSaveAddPrimaryVendorSelectoions,
-    onResetAddPrimaryVendorSelectoions,
-    toggleAddPrimaryVendorSelectoionModal,
+    onSaveModifyPrimaryVendorSelectoions,
+    onResetModifyPrimaryVendorSelectoions,
+    toggleModifyPrimaryVendorSelectoionModal,
     isEditableModalPopupOpen,
   } = {
     ...context,
@@ -185,15 +185,18 @@ const AddSymbolTranslations = () => {
         <AddSymbolTranslationsModalContent></AddSymbolTranslationsModalContent>
       </div>
       <div className="footer">
-        <button id="saveButton" onClick={onSaveAddPrimaryVendorSelectoions}>
+        <button id="saveButton" onClick={onSaveModifyPrimaryVendorSelectoions}>
           Save
         </button>
-        <button id="resetButton" onClick={onResetAddPrimaryVendorSelectoions}>
+        <button
+          id="resetButton"
+          onClick={onResetModifyPrimaryVendorSelectoions}
+        >
           Reset
         </button>
         <button
           id="cancelButton"
-          onClick={toggleAddPrimaryVendorSelectoionModal}
+          onClick={toggleModifyPrimaryVendorSelectoionModal}
         >
           Cancel
         </button>
@@ -212,17 +215,20 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 };
-const AddOrModifySt = () => {
+const ModifySt = () => {
   const context = useContext(myContext);
 
-  const { isAddPrimaryVendorSelectoionsModalOpen } = {
-    ...context.state.addPrimaryVendorSelectoionsData,
+  const { isModifyPrimaryVendorSelectoionsModalOpen } = {
+    ...context.state.modifyPrimaryVendorSelectoionsData,
   };
   return (
-    <Modal isOpen={isAddPrimaryVendorSelectoionsModalOpen} style={customStyles}>
+    <Modal
+      isOpen={isModifyPrimaryVendorSelectoionsModalOpen}
+      style={customStyles}
+    >
       <AddSymbolTranslations></AddSymbolTranslations>
     </Modal>
   );
 };
 
-export { AddOrModifySt as AddOrModifySt };
+export { ModifySt as ModifySt };

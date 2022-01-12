@@ -20,7 +20,7 @@ const SymbolTranslationGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    toggleAddStModal,
+    toggleAddPrimaryVendorSelectoionModal,
     selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
@@ -28,7 +28,7 @@ const SymbolTranslationGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
-    toggleModifyStModal,
+    toggleModifyPvsfModal,
   } = {
     ...context.state.gridScreenData,
     ...context,
@@ -46,11 +46,11 @@ const SymbolTranslationGrid = () => {
     priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
   return (
     <>
-      <div className="stGridHeader">Symbol Translation Grid</div>
-      <div className="stHeaderActions">
-        <div className="stLeftHeaderSection">
-          <button onClick={toggleAddStModal}>Add</button>
-          <button onClick={toggleModifyStModal}>Modify</button>
+      <div className="pvsfGridHeader">Primary Vendor Selection Grid</div>
+      <div className="pvsfHeaderActions">
+        <div className="pvsfLeftHeaderSection">
+          <button onClick={toggleAddPrimaryVendorSelectoionModal}>Add</button>
+          <button onClick={toggleModifyPvsfModal}>Modify</button>
           <button
             onClick={
               isGridPopulated
@@ -66,7 +66,7 @@ const SymbolTranslationGrid = () => {
             Delete
           </button>
         </div>
-        <div className="stRighttHeaderSection">
+        <div className="pvsfRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -96,7 +96,7 @@ const SymbolTranslationGrid = () => {
           </button>
         </div>
       </div>
-      <div className="stGridWrapper"></div>
+      <div className="pvsfGridWrapper"></div>
       <Aggrid
         rowData={priceSystemAlertStateRowData}
         colDefsMedalsIncluded={colDefs}
@@ -130,7 +130,7 @@ const SymbolTranslationGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="stSaveAndCancelWrapper">
+      <div className="pvsfSaveAndCancelWrapper">
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>

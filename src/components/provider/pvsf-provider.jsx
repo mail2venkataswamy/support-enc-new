@@ -16,9 +16,9 @@ class StProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      editObject: {},
       initialPanelState: {},
-      initialPicsSymbolTranslationDate: {},
-      initialAddSymbolTranslationsData: {},
+      initialAddPrimaryVendorSelectoionsData: {},
       initialModifyPriceResData: {},
       filterPanelData: {
         vendorOptins: [
@@ -29,75 +29,6 @@ class StProvider extends Component {
           { label: "ICE Data Services", value: "iceDataServices" },
         ],
         selectedVendorValue: { label: "All", value: "all" },
-        exchangeOptions: [
-          { label: "CBOE Cboe options Exchange", value: "cboe" },
-          { label: "CBT Chicago Board of Trade", value: "CBT" },
-          { label: "CME Chicago Mercantile Exchange", value: "CME" },
-          { label: "CMPST Composite Exchange", value: "CMPST" },
-        ],
-        selectedExchangeValue: { label: "All", value: "all" },
-        symbolToSearchValue: "",
-        symbolToData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        symbolToSuggestionResult: [],
-        symbolToValue: "",
-        vendorExchangeSymbolSearchValue: "",
-        vendorExchangeSymbolData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        vendorExchangeSymbolSuggestionResult: [],
-        vendorExchangeSymbolValue: "",
-
-        exchangeSearchValue: "",
-        exchangeData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        exchangeSuggestionResult: [],
-        exchangeValue: "",
-
-        cuspinSearchValue: "",
-        cuspinData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        cuspinSuggestionResult: [],
-        cuspinValue: "",
         selectedProductTypeValue: { label: "Select", value: "Select" },
         productTypeOptions: [
           { label: "Currency", value: "currency" },
@@ -117,21 +48,61 @@ class StProvider extends Component {
           { label: "Index/Other", value: "indexOrOther" },
         ],
         selectedClassificationValue: { label: "Select", value: "Select" },
-        isInSearchValue: "",
-        isInData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
+        subClassificationOptions: [
+          { label: "Flex", value: "flex" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "Not Cleared", value: "notCleared" },
+          { label: "Standard", value: "standard" },
         ],
-        isInSuggestionResult: [],
-        isInValue: "",
+        selectedSubClassificationValue: { label: "Select", value: "Select" },
+        securityTypeOptions: [
+          { label: "1", value: 1 },
+          { label: "2", value: 2 },
+          { label: "3", value: 3 },
+          { label: "4", value: 4 },
+        ],
+        selectedSecurityTypeValue: { label: "Select", value: "Select" },
+        applicationOptions: [
+          { label: "SOSA", value: "sosa" },
+          { label: "Stock Loan", value: "stockLoan" },
+          { label: "VS 3M Avg Vol", value: "vs3mAvgVol" },
+        ],
+        selectedApplicationValue: { label: "Select", value: "Select" },
+        cycleOptions: [
+          { label: "Intra-Day and Final", value: "intraDayAndFinal" },
+          { label: "End of Day", value: "endOfDay" },
+          { label: "Intra Day", value: "intraDay" },
+        ],
+        selectedCycleValue: { label: "Select", value: "Select" },
+        primaryVendorOptions: [
+          { label: "IDSI", value: "idsi" },
+          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
+          {
+            label: "Markit Financial Information Services",
+            value: "Markit Financial Information Services",
+          },
+          {
+            label: "Miami International Securities Exchange",
+            value: "Miami International Securities Exchange",
+          },
+          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
+          { label: "Fidessa Group plc", value: "Fidessa Group plc" },
+          { label: "CE DATA SERVICES", value: "CE DATA SERVICES" },
+          { label: "Exchange Files", value: "Exchange Files" },
+          { label: "BBG/IDC Vendor Group", value: "BBG/IDC Vendor Group" },
+          { label: "SunGard ORM", value: "SunGard ORM" },
+          {
+            label: "Customized Options Pricing Service",
+            value: "Customized Options Pricing Service",
+          },
+          { label: "Bloomberg Polarlake", value: "Bloomberg Polarlake" },
+          { label: "CBOE Indicative Price", value: "CBOE Indicative Price" },
+          { label: "GTreasury SS, LLC", value: "GTreasury SS, LLC" },
+          { label: "Baton Systems Inc.", value: "Baton Systems Inc." },
+        ],
+        selectedPrimaryVendorValue: { label: "Select", value: "Select" },
+        selectedSecondaryVendorValue: { label: "Select", value: "Select" },
+        selectedTeritaryVendorValue: { label: "Select", value: "Select" },
       },
       gridScreenData: {
         priceSystemAlertStateRowData: [],
@@ -162,40 +133,46 @@ class StProvider extends Component {
             flex: 0,
           },
           {
-            headerName: "OCC Symbol",
-            field: "occSymbol",
-            width: 110,
+            headerName: "Sub Classification",
+            field: "subClassification",
+            width: 120,
+            flex: 0,
+          },
+
+          {
+            headerName: "Security Type",
+            field: "securityType",
+            width: 100,
             flex: 0,
           },
           {
-            headerName: "Vendor Exchange Symbol",
-            field: "vendorExchangeSymbol",
-            width: 150,
+            headerName: "Application",
+            field: "application",
+            width: 100,
             flex: 0,
           },
           {
-            headerName: "Vendor Name",
-            field: "vendorName",
-            width: 90,
-            flex: 0,
-          },
-          { headerName: "Exchange", field: "exchange", width: 90, flex: 0 },
-          {
-            headerName: "Cusip",
-            field: "cusip",
-            width: 70,
+            headerName: "Cycle",
+            field: "cycle",
+            width: 120,
             flex: 0,
           },
           {
-            headerName: "ISIN",
-            field: "isIN",
-            width: 70,
+            headerName: "Primary Vendor",
+            field: "primaryVendor",
+            width: 120,
             flex: 0,
           },
           {
-            headerName: "Vendor Product ID",
-            field: "vendorProductId",
-            width: 103,
+            headerName: "Secondary Vendor",
+            field: "secondaryVendor",
+            width: 120,
+            flex: 0,
+          },
+          {
+            headerName: "Teritary Vendor",
+            field: "teritaryVendor",
+            width: 120,
             flex: 0,
           },
         ],
@@ -212,84 +189,63 @@ class StProvider extends Component {
         selectedGridRows: [],
         isDeleteGridRecordPromptModalOpen: false,
       },
-      addSymbolTranslationsData: {
-        vendorExchangeSymbolSearchValue: "",
-        vendorExchangeSymbolData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        vendorExchangeSymbolSuggestionResult: [],
-        vendorExchangeSymbolValue: "",
-        exchangeItemsData: [
-          {
-            label: "test",
-            value: "test",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test1",
-            value: "test1",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test2",
-            value: "test2",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test3",
-            value: "test3",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test4",
-            value: "test4",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test5",
-            value: "test5",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          {
-            label: "test6",
-            value: "test6",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          { label: "test7", value: "test7", isSelected: false },
-          { label: "test8", value: "test8", isSelected: false },
-          { label: "test9", value: "test9", isSelected: false },
-          { label: "test10", value: "test10", isSelected: false },
-          { label: "test11", value: "test11", isSelected: false },
-          {
-            label: "test13",
-            value: "test13",
-            isSelected: false,
-            exchange: "usOnly",
-          },
-          { label: "test14", value: "test14", isSelected: false },
-          { label: "test15", value: "test15", isSelected: false },
-          { label: "test16", value: "test16", isSelected: false },
-        ],
-        exchangeItemsResult: [],
-        isAddSymbolTranslationsModalOpen: false,
-        isEditableModalPopupOpen: false,
+      addPrimaryVendorSelectoionsData: {
+        isAddPrimaryVendorSelectoionsModalOpen: false,
+        isModifyPrimaryVendorSelectoionsModalOpen: false,
         vendorOptins: [
+          { label: "IDSI", value: "idsi" },
+          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
+          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
+          { label: "Exchange Files", value: "Exchange Files" },
+          { label: "ICE Data Services", value: "iceDataServices" },
+        ],
+        selectedVendorValue: { label: "All", value: "all" },
+        selectedProductTypeValue: { label: "Select", value: "Select" },
+        productTypeOptions: [
+          { label: "Currency", value: "currency" },
+          { label: "Equity", value: "equity" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "OTC Options", value: "otcOptions" },
+          { label: "Debt", value: "debt" },
+          { label: "Future", value: "future" },
+          { label: "Option", value: "option" },
+          { label: "Warrant", value: "warrant" },
+        ],
+        isFilterScreenVisible: true,
+        classificationOptions: [
+          { label: "Equity", value: "equity" },
+          { label: "Currency", value: "currency" },
+          { label: "Future", value: "future" },
+          { label: "Index/Other", value: "indexOrOther" },
+        ],
+        selectedClassificationValue: { label: "Select", value: "Select" },
+        subClassificationOptions: [
+          { label: "Flex", value: "flex" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "Not Cleared", value: "notCleared" },
+          { label: "Standard", value: "standard" },
+        ],
+        selectedSubClassificationValue: { label: "Select", value: "Select" },
+        securityTypeOptions: [
+          { label: "1", value: 1 },
+          { label: "2", value: 2 },
+          { label: "3", value: 3 },
+          { label: "4", value: 4 },
+        ],
+        selectedSecurityTypeValue: { label: "Select", value: "Select" },
+        applicationOptions: [
+          { label: "SOSA", value: "sosa" },
+          { label: "Stock Loan", value: "stockLoan" },
+          { label: "VS 3M Avg Vol", value: "vs3mAvgVol" },
+        ],
+        selectedApplicationValue: { label: "Select", value: "Select" },
+        cycleOptions: [
+          { label: "Intra-Day and Final", value: "intraDayAndFinal" },
+          { label: "End of Day", value: "endOfDay" },
+          { label: "Intra Day", value: "intraDay" },
+        ],
+        selectedCycleValue: { label: "Select", value: "Select" },
+        primaryVendorOptions: [
           { label: "IDSI", value: "idsi" },
           { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
           {
@@ -315,259 +271,13 @@ class StProvider extends Component {
           { label: "GTreasury SS, LLC", value: "GTreasury SS, LLC" },
           { label: "Baton Systems Inc.", value: "Baton Systems Inc." },
         ],
-        selectedVendorValue: { label: "All", value: "all" },
-        exchangeOptions: [
-          { label: "CBOE Cboe options Exchange", value: "cboe" },
-          { label: "CBT Chicago Board of Trade", value: "CBT" },
-          { label: "CME Chicago Mercantile Exchange", value: "CME" },
-          { label: "CMPST Composite Exchange", value: "CMPST" },
-        ],
-        selectedExchangeValue: { label: "All", value: "all" },
-        symbolToSearchValue: "",
-        symbolToData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        symbolToSuggestionResult: [],
-        symbolToValue: "",
-        cuspinSearchValue: "",
-        cuspinData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        cuspinSuggestionResult: [],
-        cuspinValue: "",
-        selectedProductTypeValue: { label: "Select", value: "Select" },
-        productTypeOptions: [
-          { label: "Equity", value: "equity" },
-          { label: "Currency", value: "currency" },
-          { label: "Debt", value: "debt" },
-          { label: "Future", value: "future" },
-          { label: "Index/Other", value: "indexOrOther" },
-          { label: "Money Markey Mutual Funds", value: "mmmf" },
-          { label: "Option", value: "option" },
-          { label: "Warrant", value: "warrant" },
-        ],
-        classificationOptions: [
-          { label: "Equity", value: "equity" },
-          { label: "Currency", value: "currency" },
-          { label: "Future", value: "future" },
-          { label: "Index/Other", value: "indexOrOther" },
-        ],
-        selectedClassificationValue: { label: "Select", value: "Select" },
-        isInSearchValue: "",
-        isInData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        isInSuggestionResult: [],
-        isInValue: "",
-        exchangeTypeValue: "",
-        exchangeTypeData: [
-          {
-            for: "exchangeTypeData",
-            name: "exchangeTypeData",
-            label: "All Exchanges",
-            type: "radio",
-            value: "allExchanges",
-            className: "allExchangesData",
-          },
-          {
-            for: "exchangeTypeData",
-            name: "exchangeTypeData",
-            label: "US Exchanges Only",
-            type: "radio",
-            value: "usOnly",
-            className: "usExchangesOnly",
-          },
-        ],
-        vendorExchangeRowData: [],
+        selectedPrimaryVendorValue: { label: "Select", value: "Select" },
+        selectedSecondaryVendorValue: { label: "Select", value: "Select" },
+        selectedTeritaryVendorValue: { label: "Select", value: "Select" },
       },
     };
   }
-
-  onChangeExchangeValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedExchangeValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeVendorValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedVendorValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeCuspinValue = (e) => {
-    let data = this.state.filterPanelData.cuspinData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.cuspinSuggestionResult = result;
-    filterPanelData.cuspinSearchValue = e.target.value;
-    filterPanelData.cuspinValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickCuspinSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.cuspinValue = selectedValue;
-    filterPanelData.cuspinSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onChangeSymbolToValue = (e) => {
-    let data = this.state.filterPanelData.symbolToData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.symbolToSuggestionResult = result;
-    filterPanelData.symbolToSearchValue = e.target.value;
-    filterPanelData.symbolToValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickSymbolToSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.symbolToValue = selectedValue;
-    filterPanelData.symbolToSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onChangeVendorExchangeSymbolValue = (e) => {
-    let data = this.state.filterPanelData.vendorExchangeSymbolData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.vendorExchangeSymbolSuggestionResult = result;
-    filterPanelData.vendorExchangeSymbolSearchValue = e.target.value;
-    filterPanelData.vendorExchangeSymbolValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickVendorExchangeSymbolSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.vendorExchangeSymbolValue = selectedValue;
-    filterPanelData.vendorExchangeSymbolSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-
-  onChangeAddStVendorExchangeSymbolValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.vendorExchangeSymbolData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addSymbolTranslationsData.vendorExchangeSymbolSuggestionResult = result;
-    addSymbolTranslationsData.vendorExchangeSymbolSearchValue = e.target.value;
-    addSymbolTranslationsData.vendorExchangeSymbolValue = e.target.value;
-
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onClickAddStVendorExchangeSymbolSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.vendorExchangeSymbolValue = selectedValue;
-    addSymbolTranslationsData.vendorExchangeSymbolSearchValue = "";
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-
-  onChangeExchangeValue = (e) => {
-    let data = this.state.filterPanelData.exchangeData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.exchangeSuggestionResult = result;
-    filterPanelData.exchangeSearchValue = e.target.value;
-    filterPanelData.exchangeValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickExchangeSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.exchangeValue = selectedValue;
-    filterPanelData.exchangeSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-
+  //==================Grid Methods=================
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -584,90 +294,7 @@ class StProvider extends Component {
   onBtnExport = () => {
     this.gridApi.exportDataAsCsv();
   };
-  onToggleFilterScreen = () => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.isFilterScreenVisible =
-      !filterPanelData.isFilterScreenVisible;
-    this.setState({ filterPanelData });
-  };
-  onClickReset = () => {
-    let filterPanelData = this.state.filterPanelData;
-    let initialPanelState = this.state.initialPanelState;
-    let data = { ...filterPanelData, ...initialPanelState };
-    console.log("final object is", data);
-    this.setState({ filterPanelData: data });
-  };
-  onChangeProductTypeValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedProductTypeValue = selectedValue;
-    if (selectedValue.value !== "option") {
-      filterPanelData.isCallPutDisabled = true;
-    } else {
-      filterPanelData.isCallPutDisabled = false;
-    }
-    this.setState({ filterPanelData });
-  };
-  onChangeClassificationValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedClassificationValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeAddClassificationValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedClassificationValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
-  };
 
-  componentDidMount() {
-    let filterPanelData = this.state.filterPanelData;
-
-    let filterObject = {
-      selectedVendorValue: filterPanelData.selectedVendorValue,
-      selectedExchangeValue: filterPanelData.selectedExchangeValue,
-      selectedProductTypeValue: filterPanelData.selectedProductTypeValue,
-      cuspinValue: filterPanelData.cuspinValue,
-      symbolToValue: filterPanelData.symbolToValue,
-      isInValue: filterPanelData.isInValue,
-      exspirationOrMaturityDate: filterPanelData.exspirationOrMaturityDate,
-      selectedCallPutValue: filterPanelData.selectedCallPutValue,
-      strikePriceFromValue: filterPanelData.strikePriceFromValue,
-    };
-    let panelData = { ...filterPanelData, ...filterObject };
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let tempAddSymbolTranslationsObj = {
-      selectedVendorValue: addSymbolTranslationsData.selectedVendorValue,
-      selectedExchangeValue: addSymbolTranslationsData.selectedExchangeValue,
-      selectedProductTypeValue:
-        addSymbolTranslationsData.selectedProductTypeValue,
-      cuspinValue: addSymbolTranslationsData.cuspinValue,
-      symbolToValue: addSymbolTranslationsData.symbolToValue,
-      selectedClassificationValue:
-        addSymbolTranslationsData.selectedClassificationValue,
-      exchangeItemsResult: addSymbolTranslationsData.exchangeItemsData,
-    };
-    let addSymbolTranslationData = {
-      ...addSymbolTranslationsData,
-      ...tempAddSymbolTranslationsObj,
-    };
-
-    let exChangeData = addSymbolTranslationsData.exchangeItemsData;
-    addSymbolTranslationsData.exchangeItemsResult = exChangeData;
-
-    this.setState({
-      initialPanelState: panelData,
-      initialAddSymbolTranslationsData: addSymbolTranslationData,
-      addSymbolTranslationsData,
-    });
-  }
-  onClickFiler = () => {
-    let gridScreenData = this.state.gridScreenData;
-    let priceSystemAlertStateRowData = this.getFilteredGridData();
-    gridScreenData.priceSystemAlertStateRowData = priceSystemAlertStateRowData;
-    this.setState({
-      gridScreenData,
-    });
-  };
   onRefreshMaintenanceGridData = () => {
     let gridScreenData = this.state.gridScreenData;
     gridScreenData.priceSystemAlertStateRowData = [];
@@ -699,27 +326,27 @@ class StProvider extends Component {
     return [
       {
         id: 1,
-        productType: "test2",
-        classification: "test2",
-        occSymbol: "test3",
-        vendorExchangeSymbol: "tetv",
-        vendorName: "test1",
-        exchange: "test",
-        cusip: "test1",
-        isIN: "test",
-        vendorProductId: "123",
+        productType: "Currency",
+        classification: "Future",
+        subClassification: "Flex",
+        securityType: "1",
+        application: "Stock Loan",
+        cycle: "Intra Day",
+        primaryVendor: "IDSI",
+        secondaryVendor: "IDSI",
+        teritaryVendor: "IDSI",
       },
       {
         id: 2,
-        productType: "test2",
-        classification: "test2",
-        occSymbol: "test3",
-        vendorExchangeSymbol: "tetv",
-        vendorName: "test1",
-        exchange: "test",
-        cusip: "test1",
-        isIN: "test",
-        vendorProductId: "123",
+        productType: "Debt",
+        classification: "Currency",
+        subClassification: "Standard",
+        securityType: "2",
+        application: "SOSA",
+        cycle: "End of Day",
+        primaryVendor: "Exchange Files",
+        secondaryVendor: "Exchange Files",
+        teritaryVendor: "Exchange Files",
       },
     ];
   }
@@ -744,10 +371,8 @@ class StProvider extends Component {
   };
   onCellValueChanged = (params) => {
     const colId = params.column.getId();
+    console.log(colId);
   };
-  //================Add SymbolTranslation Methods=========
-
-  //==========================================
   onDeleteSelectedRecords = () => {
     let gridScreenData = this.state.gridScreenData;
     gridScreenData.isDeleteGridRecordPromptModalOpen = false;
@@ -760,6 +385,74 @@ class StProvider extends Component {
       gridScreenData,
     });
   };
+  //================Filter Panel Methods=========
+  onChangeProductTypeValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedProductTypeValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeClassificationValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedClassificationValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeSubClassificationValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedSubClassificationValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeSecurityTypeValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedSecurityTypeValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeApplicationValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedApplicationValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeCycleValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedCycleValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangePrimaryVendorValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedPrimaryVendorValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeSecondaryVendorValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedSecondaryVendorValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onChangeTeritaryVendorValue = (selectedValue) => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.selectedTeritaryVendorValue = selectedValue;
+    this.setState({ filterPanelData });
+  };
+  onClickFiler = () => {
+    let gridScreenData = this.state.gridScreenData;
+    let priceSystemAlertStateRowData = this.getFilteredGridData();
+    gridScreenData.priceSystemAlertStateRowData = priceSystemAlertStateRowData;
+    this.setState({
+      gridScreenData,
+    });
+  };
+  onToggleFilterScreen = () => {
+    let filterPanelData = this.state.filterPanelData;
+    filterPanelData.isFilterScreenVisible =
+      !filterPanelData.isFilterScreenVisible;
+    this.setState({ filterPanelData });
+  };
+  onClickReset = () => {
+    let filterPanelData = this.state.filterPanelData;
+    let initialPanelState = this.state.initialPanelState;
+    let data = { ...filterPanelData, ...initialPanelState };
+    console.log("final object is", data);
+    this.setState({ filterPanelData: data });
+  };
+
   toggleDeletePromptModal = () => {
     let gridScreenData = this.state.gridScreenData;
     gridScreenData.isDeleteGridRecordPromptModalOpen =
@@ -768,286 +461,248 @@ class StProvider extends Component {
       gridScreenData,
     });
   };
-  onChanglpafValue = (e) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedLpafValue = e.target.value;
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onChangeIsInValue = (e) => {
-    let data = this.state.filterPanelData.isInData;
-    let filterPanelData = this.state.filterPanelData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.isInSuggestionResult = result;
-    filterPanelData.isInSearchValue = e.target.value;
-    filterPanelData.isInValue = e.target.value;
-
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickIsInSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.isInValue = selectedValue;
-    filterPanelData.isInSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  onClickStrikePriceFromSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.strikePriceFromValue = selectedValue;
-    filterPanelData.StrikePriceFromSearchValue = "";
-    this.setState({
-      filterPanelData,
-    });
-  };
-  //===========Add New Price Methods========
-  onChangeAddExchangeValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedExchangeValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
-  };
-  onChangeAddVendorValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedVendorValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
-  };
-  onChangeAddCuspinValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.cuspinData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addSymbolTranslationsData.cuspinSuggestionResult = result;
-    addSymbolTranslationsData.cuspinSearchValue = e.target.value;
-    addSymbolTranslationsData.cuspinValue = e.target.value;
-
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onClickAddCuspinSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.cuspinValue = selectedValue;
-    addSymbolTranslationsData.cuspinSearchValue = "";
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onChangeAddSymbolToValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.symbolToData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addSymbolTranslationsData.symbolToSuggestionResult = result;
-    addSymbolTranslationsData.symbolToSearchValue = e.target.value;
-    addSymbolTranslationsData.symbolToValue = e.target.value;
-
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onClickAddSymbolToSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.symbolToValue = selectedValue;
-    addSymbolTranslationsData.symbolToSearchValue = "";
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  toggleAddStModal = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.isEditableModalPopupOpen = false;
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onResetAddSymbolTranslations = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let initialAddSymbolTranslationsData =
-      this.state.initialAddSymbolTranslationsData;
-    let data = {
-      ...addSymbolTranslationsData,
-      ...initialAddSymbolTranslationsData,
-    };
-    data.isAddSymbolTranslationsModalOpen = true;
-    this.setState({
-      addSymbolTranslationsData: data,
-    });
-  };
+  //===========Add Primary Vendor Selection Methods===
   onChangeAddProductTypeValue = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.selectedProductTypeValue = selectedValue;
-    this.setState({ addSymbolTranslationsData });
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedProductTypeValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
   };
-  onSaveAddSymbolTranslations = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
+  onChangeAddClassificationValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedClassificationValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddSubClassificationValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedSubClassificationValue =
+      selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddSecurityTypeValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedSecurityTypeValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddApplicationValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedApplicationValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddCycleValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedCycleValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddPrimaryVendorValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedPrimaryVendorValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddSecondaryVendorValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedSecondaryVendorValue =
+      selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+  onChangeAddTeritaryVendorValue = (selectedValue) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.selectedTeritaryVendorValue = selectedValue;
+    this.setState({ addPrimaryVendorSelectoionsData });
+  };
+
+  //===========Modify Methods========
+  toggleAddPrimaryVendorSelectoionModal = () => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    let initialAddPrimaryVendorSelectoionsData =
+      this.state.initialAddPrimaryVendorSelectoionsData;
+    let resetObject = {
+      selectedProductTypeValue:
+        initialAddPrimaryVendorSelectoionsData.selectedProductTypeValue,
+      selectedClassificationValue:
+        initialAddPrimaryVendorSelectoionsData.selectedClassificationValue,
+      selectedSubClassificationValue:
+        initialAddPrimaryVendorSelectoionsData.selectedSubClassificationValue,
+      selectedSecurityTypeValue:
+        initialAddPrimaryVendorSelectoionsData.selectedSecurityTypeValue,
+      selectedApplicationValue:
+        initialAddPrimaryVendorSelectoionsData.selectedApplicationValue,
+      selectedCycleValue:
+        initialAddPrimaryVendorSelectoionsData.selectedCycleValue,
+      selectedPrimaryVendorValue:
+        initialAddPrimaryVendorSelectoionsData.selectedPrimaryVendorValue,
+      selectedSecondaryVendorValue:
+        initialAddPrimaryVendorSelectoionsData.selectedSecondaryVendorValue,
+      selectedTeritaryVendorValue:
+        initialAddPrimaryVendorSelectoionsData.selectedTeritaryVendorValue,
+    };
+    addPrimaryVendorSelectoionsData = {
+      ...addPrimaryVendorSelectoionsData,
+      ...resetObject,
+    };
+    addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen =
+      !addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen;
+    addPrimaryVendorSelectoionsData.isModifyPrimaryVendorSelectoionsModalOpen = false;
+
+    this.setState({
+      addPrimaryVendorSelectoionsData,
+    });
+  };
+  onResetAddPrimaryVendorSelectoions = () => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    let initialAddPrimaryVendorSelectoionsData =
+      this.state.initialAddPrimaryVendorSelectoionsData;
+
+    let data = {
+      ...addPrimaryVendorSelectoionsData,
+      ...(addPrimaryVendorSelectoionsData.isModifyPrimaryVendorSelectoionsModalOpen
+        ? this.state.editObject
+        : initialAddPrimaryVendorSelectoionsData),
+    };
+    data.isAddPrimaryVendorSelectoionsModalOpen = true;
+
+    this.setState({
+      addPrimaryVendorSelectoionsData: data,
+    });
+  };
+  onSaveAddPrimaryVendorSelectoions = () => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
     let gridScreenData = this.state.gridScreenData;
 
     let itemToSave = {
-      vendor: addSymbolTranslationsData.selectedVendorValue.value,
-      exchange: addSymbolTranslationsData.selectedExchangeValue.value,
-      productType: addSymbolTranslationsData.selectedProductTypeValue.value,
-      cusip: addSymbolTranslationsData.cuspinValue,
-      symbol: addSymbolTranslationsData.symbolToValue,
-      changeCount: addSymbolTranslationsData.selectedChangeCountValue.value,
-      preMarketSymbolTranslations:
-        addSymbolTranslationsData.preMarketSymbolTranslationValue,
-      postMarketSymbolTranslations:
-        addSymbolTranslationsData.postMarketSymbolTranslationValue,
-      marketSymbolTranslations:
-        addSymbolTranslationsData.MarketSymbolTranslationValue,
-      priceAdjustor: addSymbolTranslationsData.selectedLpafValue,
+      productType:
+        addPrimaryVendorSelectoionsData.selectedProductTypeValue.label,
+      classification:
+        addPrimaryVendorSelectoionsData.selectedClassificationValue.label,
+      subClassification:
+        addPrimaryVendorSelectoionsData.selectedSubClassificationValue.label,
+      securityType:
+        addPrimaryVendorSelectoionsData.selectedSecurityTypeValue.label,
+      application:
+        addPrimaryVendorSelectoionsData.selectedApplicationValue.label,
+      cycle: addPrimaryVendorSelectoionsData.selectedCycleValue.label,
+      primaryVendor:
+        addPrimaryVendorSelectoionsData.selectedPrimaryVendorValue.label,
+      secondaryVendor:
+        addPrimaryVendorSelectoionsData.selectedSecondaryVendorValue.label,
+      teritaryVendor:
+        addPrimaryVendorSelectoionsData.selectedTeritaryVendorValue.label,
     };
     gridScreenData.priceSystemAlertStateRowData = [
       ...gridScreenData.priceSystemAlertStateRowData,
       itemToSave,
     ];
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.selectedVendorValue = {
-      label: "All",
-      value: "all",
-    };
-    addSymbolTranslationsData.selectedExchangeValue = {
-      label: "All",
-      value: "all",
-    };
-    addSymbolTranslationsData.selectedProductTypeValue = {
-      label: "Select",
-      value: "select",
-    };
-    addSymbolTranslationsData.cuspinValue = "";
-    addSymbolTranslationsData.symbolToValue = "";
-    addSymbolTranslationsData.selectedChangeCountValue = {
-      label: "Y",
-      value: "Y",
-    };
-    addSymbolTranslationsData.preMarketSymbolTranslationValue = "";
-    addSymbolTranslationsData.postMarketSymbolTranslationValue = "";
-    addSymbolTranslationsData.MarketSymbolTranslationValue = "";
+    addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen =
+      !addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen;
+    addPrimaryVendorSelectoionsData.isModifyPrimaryVendorSelectoionsModalOpen = false;
 
     this.setState({
       gridScreenData,
-      addSymbolTranslationsData,
+      addPrimaryVendorSelectoionsData,
     });
   };
-  onChangeAddPriceResIsInValue = (e) => {
-    let data = this.state.addSymbolTranslationsData.isInData;
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addSymbolTranslationsData.isInSuggestionResult = result;
-    addSymbolTranslationsData.isInSearchValue = e.target.value;
-    addSymbolTranslationsData.isInValue = e.target.value;
-
-    this.setState({
-      addSymbolTranslationsData,
-    });
-  };
-  onClickAddPriceResIsInSuggestionItem = (selectedValue) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isInValue = selectedValue;
-    addSymbolTranslationsData.isInSearchValue = "";
-    this.setState({
-      addSymbolTranslationsData,
-    });
+  //==========MOdify Methods===================
+  getObject = (options, objLabel) => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    let selectedGridRow = this.state.gridScreenData.selectedGridRows;
+    let obj =
+      addPrimaryVendorSelectoionsData[options] &&
+      addPrimaryVendorSelectoionsData[options].find(
+        (option) =>
+          option.label.toLowerCase() ===
+          selectedGridRow[selectedGridRow.length - 1][objLabel].toLowerCase()
+      );
+    return obj;
   };
 
-  onChangeExchangeCat = (e) => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let exChangeData = this.state.addSymbolTranslationsData.exchangeItemsData;
-    addSymbolTranslationsData.exchangeTypeValue = e.target.value;
-    if (e.target.value.toLowerCase() === "usOnly".toLowerCase()) {
-      addSymbolTranslationsData.exchangeItemsResult = [];
-      for (const item of exChangeData) {
-        if (
-          item.exchange &&
-          item.exchange.toLowerCase() === "usOnly".toLowerCase()
-        ) {
-          addSymbolTranslationsData.exchangeItemsResult.push(item);
-        }
-      }
-    } else {
-      addSymbolTranslationsData.exchangeItemsResult = exChangeData;
-    }
-    this.setState({ addSymbolTranslationsData });
-  };
-  onSelectDeSelectExchangesOption = (selectedItem) => {
-    console.log("selected item", selectedItem);
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    let options = this.state.addSymbolTranslationsData.exchangeItemsData;
-    for (const option of options) {
-      if (selectedItem.value === option.value) {
-        option.isSelected = !option.isSelected;
-      }
-    }
+  toggleModifyPvsfModal = () => {
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+    addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen =
+      !addPrimaryVendorSelectoionsData.isAddPrimaryVendorSelectoionsModalOpen;
+    addPrimaryVendorSelectoionsData.isModifyPrimaryVendorSelectoionsModalOpen =
+      !addPrimaryVendorSelectoionsData.isModifyPrimaryVendorSelectoionsModalOpen;
+
+    let editObject = {
+      selectedProductTypeValue: this.getObject(
+        "productTypeOptions",
+        "productType"
+      ),
+      selectedClassificationValue: this.getObject(
+        "classificationOptions",
+        "classification"
+      ),
+      selectedSubClassificationValue: this.getObject(
+        "subClassificationOptions",
+        "subClassification"
+      ),
+      selectedSecurityTypeValue: this.getObject(
+        "securityTypeOptions",
+        "securityType"
+      ),
+      selectedApplicationValue: this.getObject(
+        "applicationOptions",
+        "application"
+      ),
+
+      selectedCycleValue: this.getObject("cycleOptions", "cycle"),
+      selectedPrimaryVendorValue: this.getObject(
+        "primaryVendorOptions",
+        "primaryVendor"
+      ),
+      selectedSecondaryVendorValue: this.getObject(
+        "primaryVendorOptions",
+        "secondaryVendor"
+      ),
+      selectedTeritaryVendorValue: this.getObject(
+        "primaryVendorOptions",
+        "teritaryVendor"
+      ),
+    };
+    addPrimaryVendorSelectoionsData = {
+      ...addPrimaryVendorSelectoionsData,
+      ...editObject,
+    };
+
     this.setState({
-      addSymbolTranslationsData,
-    });
-    console.log(this.state.addSymbolTranslationsData.exchangeItemsData);
-  };
-  //==========MOdify Price Res Methods===================
-  toggleModifyStModal = () => {
-    let addSymbolTranslationsData = this.state.addSymbolTranslationsData;
-    addSymbolTranslationsData.isAddSymbolTranslationsModalOpen =
-      !addSymbolTranslationsData.isAddSymbolTranslationsModalOpen;
-    addSymbolTranslationsData.isEditableModalPopupOpen = true;
-    let editObject = {};
-    this.setState({
-      addSymbolTranslationsData,
+      addPrimaryVendorSelectoionsData,
+      editObject,
     });
   };
 
+  componentDidMount() {
+    let filterPanelData = this.state.filterPanelData;
+
+    let initialPanelState = { ...filterPanelData };
+    let addPrimaryVendorSelectoionsData =
+      this.state.addPrimaryVendorSelectoionsData;
+
+    let initialAddPrimaryVendorSelectoionsData = {
+      ...addPrimaryVendorSelectoionsData,
+    };
+
+    this.setState({
+      initialPanelState,
+      initialAddPrimaryVendorSelectoionsData,
+    });
+  }
   render() {
     return (
       <MyContext.Provider
         value={{
           state: this.state,
-          onChangeExchangeValue: (e) => this.onChangeExchangeValue(e),
-          onChangeVendorValue: (e) => this.onChangeVendorValue(e),
-          onChangeCuspinValue: (e) => this.onChangeCuspinValue(e),
-          onClickCuspinSuggestionItem: (e) =>
-            this.onClickCuspinSuggestionItem(e),
-          onChangeSymbolToValue: (e) => this.onChangeSymbolToValue(e),
-          onClickSymbolToSuggestionItem: (e) =>
-            this.onClickSymbolToSuggestionItem(e),
           onGridReady: this.onGridReady,
           onBtPrint: this.onBtPrint,
           onBtnExport: this.onBtnExport,
@@ -1056,22 +711,13 @@ class StProvider extends Component {
           onClickReset: this.onClickReset,
           onClickFiler: this.onClickFiler,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
-          onChangeAddExchangeValue: (e) => this.onChangeAddExchangeValue(e),
-          onChangeAddVendorValue: (e) => this.onChangeAddVendorValue(e),
-          onChangeAddCuspinValue: (e) => this.onChangeAddCuspinValue(e),
-          onClickAddCuspinSuggestionItem: (e) =>
-            this.onClickAddCuspinSuggestionItem(e),
-          onChangeAddSymbolToValue: (e) => this.onChangeAddSymbolToValue(e),
-          onClickAddSymbolToSuggestionItem: (e) =>
-            this.onClickAddSymbolToSuggestionItem(e),
-          toggleAddStModal: this.toggleAddStModal,
-          onChangePreMarketSymbolTranslation: (e) =>
-            this.onChangePreMarketSymbolTranslation(e),
-          onResetAddSymbolTranslations: this.onResetAddSymbolTranslations,
-          onChangeAddProductTypeValue: (e) =>
-            this.onChangeAddProductTypeValue(e),
-          onSaveAddSymbolTranslations: (e) =>
-            this.onSaveAddSymbolTranslations(e),
+          toggleAddPrimaryVendorSelectoionModal:
+            this.toggleAddPrimaryVendorSelectoionModal,
+          onResetAddPrimaryVendorSelectoions:
+            this.onResetAddPrimaryVendorSelectoions,
+
+          onSaveAddPrimaryVendorSelectoions: (e) =>
+            this.onSaveAddPrimaryVendorSelectoions(e),
           getSelectedRowData: this.getSelectedRowData,
           onSelectionChanged: this.onSelectionChanged,
           onDeleteSelectedRecords: this.onDeleteSelectedRecords,
@@ -1079,31 +725,35 @@ class StProvider extends Component {
           onCellValueChanged: this.onCellValueChanged,
           onChangeClassificationValue: (e) =>
             this.onChangeClassificationValue(e),
+          toggleModifyPvsfModal: this.toggleModifyPvsfModal,
+          onChangeSubClassificationValue: (e) =>
+            this.onChangeSubClassificationValue(e),
+          onChangeSecurityTypeValue: (e) => this.onChangeSecurityTypeValue(e),
+          onChangeApplicationValue: (e) => this.onChangeApplicationValue(e),
+          onChangeCycleValue: (e) => this.onChangeCycleValue(e),
+          onChangePrimaryVendorValue: (e) => this.onChangePrimaryVendorValue(e),
+          onChangeSecondaryVendorValue: (e) =>
+            this.onChangeSecondaryVendorValue(e),
+          onChangeTeritaryVendorValue: (e) =>
+            this.onChangeTeritaryVendorValue(e),
+
+          onChangeAddProductTypeValue: (e) =>
+            this.onChangeAddProductTypeValue(e),
           onChangeAddClassificationValue: (e) =>
             this.onChangeAddClassificationValue(e),
-          onChanglpafValue: (e) => this.onChanglpafValue(e),
-          onClickIsInSuggestionItem: (e) => this.onClickIsInSuggestionItem(e),
-          onChangeIsInValue: (e) => this.onChangeIsInValue(e),
-          onChangeAddPriceResIsInValue: (e) =>
-            this.onChangeAddPriceResIsInValue(e),
-          onClickAddPriceResIsInSuggestionItem: (e) =>
-            this.onClickAddPriceResIsInSuggestionItem(e),
-          onChangeExchangeCat: (e) => this.onChangeExchangeCat(e),
-          toggleModifyStModal: this.toggleModifyStModal,
-          onSelectDeSelectExchangesOption: (e) =>
-            this.onSelectDeSelectExchangesOption(e),
-          onChangeVendorExchangeSymbolValue: (e) =>
-            this.onChangeVendorExchangeSymbolValue(e),
-          onClickVendorExchangeSymbolSuggestionItem: (e) =>
-            this.onClickVendorExchangeSymbolSuggestionItem(e),
-
-          onClickExchangeSuggestionItem: (e) =>
-            this.onClickExchangeSuggestionItem(e),
-          onChangeExchangeValue: (e) => this.onChangeExchangeValue(e),
-          onChangeAddStVendorExchangeSymbolValue: (e) =>
-            this.onChangeAddStVendorExchangeSymbolValue(e),
-          onClickAddStVendorExchangeSymbolSuggestionItem: (e) =>
-            this.onClickAddStVendorExchangeSymbolSuggestionItem(e),
+          onChangeAddSubClassificationValue: (e) =>
+            this.onChangeAddSubClassificationValue(e),
+          onChangeAddSecurityTypeValue: (e) =>
+            this.onChangeAddSecurityTypeValue(e),
+          onChangeAddApplicationValue: (e) =>
+            this.onChangeAddApplicationValue(e),
+          onChangeAddCycleValue: (e) => this.onChangeAddCycleValue(e),
+          onChangeAddPrimaryVendorValue: (e) =>
+            this.onChangeAddPrimaryVendorValue(e),
+          onChangeAddSecondaryVendorValue: (e) =>
+            this.onChangeAddSecondaryVendorValue(e),
+          onChangeAddTeritaryVendorValue: (e) =>
+            this.onChangeAddTeritaryVendorValue(e),
         }}
       >
         {this.props.children}

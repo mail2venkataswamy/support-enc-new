@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import PvsfContext from "../../../../../components/context/pvsf-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
-import Inputsuggestion from "../../st-input-suggestions/st-input-suggestions.jsx";
 import "./st-product-info.scss";
 
 const ProductInfo = () => {
@@ -10,48 +9,39 @@ const ProductInfo = () => {
     productTypeOptions,
     selectedProductTypeValue,
     onChangeProductTypeValue,
-    cuspinValue,
-    cuspinSearchValue,
-    cuspinSuggestionResult,
-    onClickCuspinSuggestionItem,
-    onChangeCuspinValue,
-    onChangeSymbolToValue,
-    onClickSymbolToSuggestionItem,
-    symbolToSuggestionResult,
-    symbolToValue,
-    symbolToSearchValue,
     classificationOptions,
     selectedClassificationValue,
     onChangeClassificationValue,
-    onChangeIsInValue,
-    isInSearchValue,
-    isInSuggestionResult,
-    isInValue,
-    onClickIsInSuggestionItem,
-    vendorOptins,
-    onChangeVendorValue,
-    selectedVendorValue,
-    onChangeVendorExchangeSymbolValue,
-    onClickVendorExchangeSymbolSuggestionItem,
-    vendorExchangeSymbolSuggestionResult,
-    vendorExchangeSymbolValue,
-    vendorExchangeSymbolSearchValue,
-    onChangeExchangeValue,
-    exchangeSuggestionResult,
-    onClickExchangeSuggestionItem,
-    exchangeValue,
-    exchangeSearchValue,
+    subClassificationOptions,
+    selectedSubClassificationValue,
+    onChangeSubClassificationValue,
+    securityTypeOptions,
+    selectedSecurityTypeValue,
+    onChangeSecurityTypeValue,
+    applicationOptions,
+    selectedApplicationValue,
+    onChangeApplicationValue,
+    cycleOptions,
+    selectedCycleValue,
+    onChangeCycleValue,
+    primaryVendorOptions,
+    selectedPrimaryVendorValue,
+    selectedSecondaryVendorValue,
+    selectedTeritaryVendorValue,
+    onChangePrimaryVendorValue,
+    onChangeSecondaryVendorValue,
+    onChangeTeritaryVendorValue,
   } = {
     ...context.state.filterPanelData,
     ...context,
   };
   return (
     <>
-      <fieldset className="productWrapper">
+      <fieldset className="pvsfProductWrapper">
         <legend>Product</legend>
-        <div className="stProductTypeLabelAndValue">
-          <div className="stProductTypeLabel">Product Type:</div>
-          <div className="stProductTypeValue">
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Product Type:</div>
+          <div className="pvsfValue">
             <Dropdown
               options={productTypeOptions}
               selectedValue={selectedProductTypeValue}
@@ -59,9 +49,9 @@ const ProductInfo = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="stProductTypeLabelAndValue">
-          <div className="stProductTypeLabel">Classification:</div>
-          <div className="stProductTypeValue">
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Classification:</div>
+          <div className="pvsfValue">
             <Dropdown
               options={classificationOptions}
               selectedValue={selectedClassificationValue}
@@ -69,79 +59,80 @@ const ProductInfo = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="stSymbolToLabelAndValue">
-          <div className="stSymbolToLabel">OCC Symbol:</div>
-          <div className="stSymbolToValue">
-            <Inputsuggestion
-              onChange={onChangeSymbolToValue}
-              results={symbolToSuggestionResult}
-              onClick={onClickSymbolToSuggestionItem}
-              value={symbolToValue}
-              keySearch={symbolToSearchValue}
-              //disabled={isSymbolToDisabled}
-            ></Inputsuggestion>
-          </div>
-        </div>
-        <div className="stSymbolToLabelAndValue">
-          <div className="stSymbolToLabel">Vendor/ Exchange Symbol:</div>
-          <div className="stSymbolToValue">
-            <Inputsuggestion
-              onChange={onChangeVendorExchangeSymbolValue}
-              results={vendorExchangeSymbolSuggestionResult}
-              onClick={onClickVendorExchangeSymbolSuggestionItem}
-              value={vendorExchangeSymbolValue}
-              keySearch={vendorExchangeSymbolSearchValue}
-              //disabled={isSymbolToDisabled}
-            ></Inputsuggestion>
-          </div>
-        </div>
-
-        <div className="stVendorLabelAndValueWrapper">
-          <div className="stVendorLabel">Vendor Name:</div>
-          <div className="stVendorValue">
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Sub Classification:</div>
+          <div className="pvsfValue">
             <Dropdown
-              type="single"
-              options={vendorOptins}
-              onChange={onChangeVendorValue}
-              selectedValue={selectedVendorValue}
+              options={subClassificationOptions}
+              selectedValue={selectedSubClassificationValue}
+              onChange={onChangeSubClassificationValue}
             ></Dropdown>
           </div>
         </div>
-        <div className="stExchangeLabelAndValueWrapper">
-          <div className="stExchangeLabel">Exchange:</div>
-          <div className="stExchangeValue">
-            <Inputsuggestion
-              onChange={onChangeExchangeValue}
-              results={exchangeSuggestionResult}
-              onClick={onClickExchangeSuggestionItem}
-              value={exchangeValue}
-              keySearch={exchangeSearchValue}
-              //disabled={isSymbolToDisabled}
-            ></Inputsuggestion>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Security Type:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={securityTypeOptions}
+              selectedValue={selectedSecurityTypeValue}
+              onChange={onChangeSecurityTypeValue}
+            ></Dropdown>
           </div>
         </div>
-        <div className="stCuspinLabelAndValue">
-          <div className="stCuspinLabel">Cusip:</div>
-          <div className="stCuspinValue">
-            <Inputsuggestion
-              onChange={onChangeCuspinValue}
-              results={cuspinSuggestionResult}
-              onClick={onClickCuspinSuggestionItem}
-              value={cuspinValue}
-              keySearch={cuspinSearchValue}
-            ></Inputsuggestion>
+      </fieldset>
+      <fieldset className="pvsfProductWrapper">
+        <legend>Applications & Run Time:</legend>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Application:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={applicationOptions}
+              selectedValue={selectedApplicationValue}
+              onChange={onChangeApplicationValue}
+            ></Dropdown>
           </div>
         </div>
-        <div className="isInLabelAndValue">
-          <div className="isInLabel">ISIN:</div>
-          <div className="isInValue">
-            <Inputsuggestion
-              onChange={onChangeIsInValue}
-              results={isInSuggestionResult}
-              onClick={onClickIsInSuggestionItem}
-              value={isInValue}
-              keySearch={isInSearchValue}
-            ></Inputsuggestion>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Cycle:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={cycleOptions}
+              selectedValue={selectedCycleValue}
+              onChange={onChangeCycleValue}
+            ></Dropdown>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset className="pvsfProductWrapper">
+        <legend>Price Source:</legend>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Primary Vendor:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={primaryVendorOptions}
+              selectedValue={selectedPrimaryVendorValue}
+              onChange={onChangePrimaryVendorValue}
+            ></Dropdown>
+          </div>
+        </div>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Secondary Vendor:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={primaryVendorOptions}
+              selectedValue={selectedSecondaryVendorValue}
+              onChange={onChangeSecondaryVendorValue}
+            ></Dropdown>
+          </div>
+        </div>
+        <div className="pvsfLabelAndValue">
+          <div className="pvsfLabel">Teritary Vendor:</div>
+          <div className="pvsfValue">
+            <Dropdown
+              options={primaryVendorOptions}
+              selectedValue={selectedTeritaryVendorValue}
+              onChange={onChangeTeritaryVendorValue}
+            ></Dropdown>
           </div>
         </div>
       </fieldset>

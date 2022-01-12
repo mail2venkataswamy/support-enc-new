@@ -5,8 +5,10 @@ import ProductInfo from "./st-product-info/st-product-info.jsx";
 const Filterscreen = () => {
   return (
     <>
-      <div className="stFilterscreenHeaderWrapper">
-        <div className="stFilterscreenTitle">Symbol Translation Filter:</div>
+      <div className="pvsfFilterscreenHeaderWrapper">
+        <div className="pvsfFilterscreenTitle">
+          Primary Vendor Selection Filter:
+        </div>
       </div>
       <ProductInfo></ProductInfo>
       <FilterAndReset></FilterAndReset>

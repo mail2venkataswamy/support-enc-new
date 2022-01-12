@@ -1,4 +1,4 @@
-.stGridHeader {
+.pvsfGridHeader {
   font-size: 14px;
   font-weight: bold;
   color: #000;
@@ -6,7 +6,7 @@
   border: none;
   margin: 13px !important;
 }
-.stGridTitle {
+.pvsfGridTitle {
   font-size: 12px;
   font-weight: bold;
   margin-left: 3%;
@@ -19,9 +19,9 @@
   cursor: pointer;
   font-size: 13px;
 }
-.stHeaderActions {
+.pvsfHeaderActions {
   display: flex;
-  .stRighttHeaderSection {
+  .pvsfRighttHeaderSection {
     justify-content: flex-end;
     flex: 1;
     display: flex;
@@ -37,7 +37,7 @@
     font-size: 13px;
   }
 }
-.stSaveAndCancelWrapper {
+.pvsfSaveAndCancelWrapper {
   text-align: right;
   width: 100%;
   border: none;
