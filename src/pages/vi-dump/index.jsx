@@ -18,6 +18,10 @@ const ViDump = () => {
               onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
               className="viDumpFilterPanelToggle"
               title="Hide Filter Panel"
+              onKeyDown={() => toggleFilterPanel(!isFilterPanelVisble)}
+              role="button"
+              tabIndex={0}
+              id="praFilterPanelToggle"
             >
               <p>{"<<"}</p>
             </div>
