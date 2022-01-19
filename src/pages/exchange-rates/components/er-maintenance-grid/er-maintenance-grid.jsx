@@ -47,7 +47,7 @@ const SymbolTranslationGrid = () => {
   }, []);
   let isGridPopulated = maintenanceGridData && maintenanceGridData.length > 0;
   return (
-    <>
+    <div className="erMaintGridWrapper">
       <div className="erGridHeader">Maintenance Grid</div>
       <div className="erHeaderActions">
         <div className="erLeftHeaderSection">
@@ -130,7 +130,7 @@ const SymbolTranslationGrid = () => {
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>
-    </>
+    </div>
   );
 };
 

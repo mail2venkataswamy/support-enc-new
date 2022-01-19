@@ -3,6 +3,7 @@ import "./styles.scss";
 import FilterPanel from "./components/er-filterscreen/er-filterscreen.jsx";
 import MaintenanceGrid from "./components/er-maintenance-grid/er-maintenance-grid.jsx";
 import ErProvider from "../../components/provider/exchange-rates-provider.jsx";
+import EditCatDashboardGrid from "./components/er-edit-cat-dashboard-grid/er-edit-cat-dashboard-grid.jsx";
 
 const ExchangeRates = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
@@ -35,6 +36,7 @@ const ExchangeRates = () => {
         )}
         <div id="erGrid">
           <MaintenanceGrid></MaintenanceGrid>
+          <EditCatDashboardGrid></EditCatDashboardGrid>
         </div>
       </div>
     </ErProvider>

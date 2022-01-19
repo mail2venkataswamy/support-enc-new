@@ -14,16 +14,27 @@
     box-sizing: border-box;
     border: none;
     position: relative;
-    height: 87%;
+    height: 88%;
   }
   #erGrid {
     width: 98%;
-    height: 60%;
-    background: $white;
-    border-radius: 30px;
-    padding: 5px 20px;
-    box-sizing: border-box;
-    border: none;
+    height: 88%;
+    .erMaintGridWrapper{
+      height: 75%;
+      background: $white;
+      border-radius: 30px;
+      padding: 5px 20px;
+      box-sizing: border-box;
+      border: none;
+    }
+    .er-editDashboard{
+      height: 25%;
+      background: $white;
+      border-radius: 30px;
+      padding: 5px 20px;
+      box-sizing: border-box;
+      border: none;
+    }
   }
   .left {
     margin: 0px 30px 0px 20px;
