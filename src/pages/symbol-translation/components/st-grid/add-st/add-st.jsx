@@ -43,7 +43,7 @@ const AddSymbolTranslationsModalContent = () => {
   };
 
   return (
-    <>
+    <div>
       <div className="stLabelAndValue">
         <div className="stLabel">Product Type:</div>
         <div className="stValue">
@@ -127,7 +127,7 @@ const AddSymbolTranslationsModalContent = () => {
           ></Inputsuggestion>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

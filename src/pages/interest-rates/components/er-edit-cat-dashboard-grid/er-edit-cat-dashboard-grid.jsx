@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import "./er-edit-cat-dashboard-grid.scss";
 import Editdashboardgrid from "./grid/grid.jsx";
-import MyContext from "../../../../components/context/exchange-rates-context.jsx";
+import MyContext from "../../../../components/context/interest-rates-context.jsx";
 
 const Editscreen = () => {
   const [isEditCatDashboardVisible, toggleEditcatDashboard] = useState(true);
@@ -11,13 +11,13 @@ const Editscreen = () => {
     ...context,
   };
   return (
-    <div className="er-editDashboard">
-      <div className="er-mainscreenTitleAndToggle">
-        <div className="er-mainscreenHeaderTitle">Edit Category Dashboard</div>
+    <div className="ir-editDashboard">
+      <div className="ir-mainscreenTitleAndToggle">
+        <div className="ir-mainscreenHeaderTitle">Edit Category Dashboard</div>
 
         <div
-          id="er-toggle"
-          className="er-toggle"
+          id="ir-toggle"
+          className="ir-toggle"
           //onClick={() => toggleEditcatDashboard(!isEditCatDashboardVisible)}
         ></div>
       </div>

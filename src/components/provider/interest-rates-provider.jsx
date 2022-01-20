@@ -1,6 +1,6 @@
 import { Component } from "react";
 import React from "react";
-import MyContext from "../context/exchange-rates-context.jsx";
+import MyContext from "../context/interest-rates-context.jsx";
 import thresholdGridData from "./json/threshold.json";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
@@ -40,16 +40,16 @@ class ErProvider extends Component {
       filterPanelData: {
         fromDate: new Date(),
         toDate: new Date(),
-        fromCurrencyOptions: [
+        interestForOptions: [
           { label: "All", value: "all" },
           { label: "USD", value: "usd" },
         ],
-        selectedFromCurrencyValue: { label: "All", value: "all" },
-        toCurrencyOptions: [
-          { label: "USD", value: "usd" },
-          { label: "IND", value: "ind" },
+        selectedInterestForCurrencyValue: { label: "All", value: "all" },
+        currencyTypeOptions: [
+          { label: "All", value: "all" },
+          { label: "Libor", value: "libor" },
         ],
-        selectedToCurrencyValue: { label: "USD", value: "usd" },
+        selectedCurrencyTypeValue: { label: "All", value: "all" },
 
         statusOptions: [],
         selectedStatusValue: { label: "All", value: "all" },
@@ -154,6 +154,21 @@ class ErProvider extends Component {
           { field: "#", width: 40, suppressSizeToFit: true, flex: 0 },
 
           { headerName: "Currency", field: "currency", width: 90, flex: 0 },
+          { headerName: "Tenor", field: "tenor", width: 90, flex: 0 },
+          { headerName: "Type", field: "type", width: 90, flex: 0 },
+          {
+            headerName: "Day/Count basis",
+            field: "dayCountBasis",
+            width: 100,
+            flex: 0,
+          },
+          { headerName: "Fix/Float", field: "fixFloat", width: 100, flex: 0 },
+          {
+            headerName: "Payment Frequency",
+            field: "paymentFrequency",
+            width: 100,
+            flex: 0,
+          },
           {
             headerName: "Activity Date",
             field: "activityDate",
@@ -161,39 +176,14 @@ class ErProvider extends Component {
             flex: 0,
           },
           {
-            headerName: "Previous Date",
-            field: "prevDate",
-            width: 80,
-            flex: 0,
-          },
-          {
-            headerName: "Previous Reciprocal",
-            field: "prevReciprocal",
-            width: 90,
-            flex: 0,
-          },
-
-          {
-            headerName: "Vendor Exchange Rate",
-            field: "vendorExchangeRate",
+            headerName: "Previous Rate(%)",
+            field: "prevRate",
             width: 100,
             flex: 0,
           },
           {
-            headerName: "Vendor Reciprocal",
-            field: "vendorReciprocal",
-            width: 90,
-            flex: 0,
-          },
-          {
-            headerName: "Edited Exch Rate",
-            field: "editedExchRate",
-            width: 100,
-            flex: 0,
-          },
-          {
-            headerName: "Editted Reciprocal",
-            field: "edittedReciprocal",
+            headerName: "Vendor Rate(%)",
+            field: "vendorRate",
             width: 100,
             flex: 0,
           },
@@ -227,8 +217,40 @@ class ErProvider extends Component {
         lastImportTime: new Date(),
         lastPublishDate: new Date(),
       },
+      thresholdData: {
+        isThresholdModalOpen: false,
+      },
+      addInrData: {
+        isAddInrModalOpen: false,
+        currencyOptions: [
+          { label: "All", value: "all" },
+          { label: "USD", value: "usd" },
+        ],
+        selectedAddInrCurrencyValue: { label: "Select", value: "select" },
+      },
     };
   }
+  //=====Add New Inr Rate
+  onChangeAddInrCurrencyValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedAddInrCurrencyValue = selectedValue;
+    this.setState({ addInrData });
+  };
+  //================Threshold=========
+  toggleThresholdModal = () => {
+    let thresholdData = this.state.thresholdData;
+    thresholdData.isThresholdModalOpen = !thresholdData.isThresholdModalOpen;
+    this.setState({
+      thresholdData,
+    });
+  };
+  toggleAddInrModal = () => {
+    let addInrData = this.state.addInrData;
+    addInrData.isAddInrModalOpen = !addInrData.isAddInrModalOpen;
+    this.setState({
+      addInrData,
+    });
+  };
   //------------------FilterPanel Methods-------------------------------
 
   setFromDate = (date) => {
@@ -254,14 +276,14 @@ class ErProvider extends Component {
     let data = { ...filterPanelData, ...intialFilterPanelState };
     this.setState({ filterPanelData: data });
   };
-  onChangeFromCurrencyValue = (selectedValue) => {
+  onChangeInterestForCurrencyValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedFromCurrencyValue = selectedValue;
+    filterPanelData.selectedInterestForCurrencyValue = selectedValue;
     this.setState({ filterPanelData });
   };
-  onChangeToCurrencyValue = (selectedValue) => {
+  onChangeCurrencyTypeValue = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedToCurrencyValue = selectedValue;
+    filterPanelData.selectedCurrencyTypeValue = selectedValue;
     this.setState({ filterPanelData });
   };
   onChangeEdittedRates = (e) => {
@@ -297,27 +319,29 @@ class ErProvider extends Component {
       {
         id: 1,
         currency: "USA",
+        tenor: "1 year",
+        type: "Libor",
+        dayCountBasis: "ACT/365",
+        fixFloat: "Fix",
+        paymentFrequency: 2,
         activityDate: new Date(),
-        prevDate: new Date(),
-        prevReciprocal: "test",
-        vendorExchangeRate: "test",
-        vendorReciprocal: "test",
-        editedExchRate: "tets",
-        edittedReciprocal: "test",
+        prevRate: 1,
+        vendorRate: 2,
         published: "tets",
         status: "tets",
       },
       {
         id: 2,
         currency: "IND",
+        tenor: "2 year",
+        type: "Libor",
+        dayCountBasis: "ACT/365",
+        fixFloat: "Fix",
+        paymentFrequency: 2,
         activityDate: new Date(),
-        prevDate: new Date(),
-        prevReciprocal: "test1",
-        vendorExchangeRate: "test2",
-        vendorReciprocal: "test3",
-        editedExchRate: "tets4",
-        edittedReciprocal: "test5",
-        published: "tets4",
+        prevRate: 2,
+        vendorRate: 3,
+        published: "tets",
         status: "tets",
       },
     ];
@@ -444,8 +468,9 @@ class ErProvider extends Component {
           setToDate: (e) => this.setToDate(e),
           onClickReset: (e) => this.onClickReset(e),
           onClickFilter: (e) => this.onClickFilter(e),
-          onChangeFromCurrencyValue: (e) => this.onChangeFromCurrencyValue(e),
-          onChangeToCurrencyValue: (e) => this.onChangeToCurrencyValue(e),
+          onChangeInterestForCurrencyValue: (e) =>
+            this.onChangeInterestForCurrencyValue(e),
+          onChangeCurrencyTypeValue: (e) => this.onChangeCurrencyTypeValue(e),
           onChangeEdittedRates: (e) => this.onChangeEdittedRates(e),
           onChangeStatusValue: (e) => this.onChangeStatusValue(e),
           onChangeFlaggedEditsValue: (e) => this.onChangeFlaggedEditsValue(e),
@@ -461,6 +486,12 @@ class ErProvider extends Component {
           onBtPrint: this.onBtPrint,
           onCellValueChanged: this.onCellValueChanged,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          //====Threhold====
+          toggleThresholdModal: this.toggleThresholdModal,
+          toggleAddInrModal: this.toggleAddInrModal,
+          //=====Add NEw Inr
+          onChangeAddInrCurrencyValue: (e) =>
+            this.onChangeAddInrCurrencyValue(e),
         }}
       >
         {this.props.children}

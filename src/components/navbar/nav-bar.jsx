@@ -77,6 +77,11 @@ const NavBar = () => {
             ER
           </NavLink>
         </li>
+        <li className="pages">
+          <NavLink to="/ir" isActive={true}>
+            IR
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

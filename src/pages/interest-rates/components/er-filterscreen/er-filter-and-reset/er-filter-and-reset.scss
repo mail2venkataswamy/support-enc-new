@@ -1,0 +1,14 @@
+.irFilterAndResetButtonWrapper {
+  text-align: center;
+  position: absolute;
+  display: flex;
+  bottom: 13px;
+  left: 30%;
+}
+#irFilter-container {
+  display: inline-block;
+  margin-right: 10px !important;
+}
+#irReset-container {
+  display: inline-block;
+}
