@@ -6,6 +6,15 @@
   fieldset {
     border: none;
   }
+  .ag-theme-alpine .ag-row {
+    font-size: 11px;
+    background-color: #fff;
+    color: #000;
+    transform: none !important;
+    height: 22px !important;
+    position: relative;
+  }
+
   #erFilterscreen {
     width: 30%;
     float: left;

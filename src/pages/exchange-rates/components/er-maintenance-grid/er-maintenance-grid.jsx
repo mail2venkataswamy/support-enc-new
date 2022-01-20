@@ -59,9 +59,33 @@ const SymbolTranslationGrid = () => {
               id="setEdittedToPrev"
             ></Dropdown>
           </button>
-          <button>Thresholds</button>
-          <button>Publish</button>
-          <button>Import Vendor Data</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Thresholds
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Publish
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Import Vendor Data
+          </button>
         </div>
         <div className="erRighttHeaderSection">
           <button

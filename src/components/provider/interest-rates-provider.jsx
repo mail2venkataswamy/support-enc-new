@@ -71,6 +71,7 @@ class ErProvider extends Component {
         isEdittedChecked: false,
       },
       maintenanceScreenData: {
+        isDeleteGridRecordPromptModalOpen: false,
         setEdittedToPrevOptions: [
           { label: "Set Editted = Previous", value: "setEdittedToPrev" },
           { label: "All", value: "all" },
@@ -347,7 +348,13 @@ class ErProvider extends Component {
     ];
   }
   //===============AG-GRID=====================================
-
+  toggleDeletePromptModal = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isDeleteGridRecordPromptModalOpen = !maintenanceScreenData.isDeleteGridRecordPromptModalOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -486,6 +493,7 @@ class ErProvider extends Component {
           onBtPrint: this.onBtPrint,
           onCellValueChanged: this.onCellValueChanged,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          toggleDeletePromptModal: this.toggleDeletePromptModal,
           //====Threhold====
           toggleThresholdModal: this.toggleThresholdModal,
           toggleAddInrModal: this.toggleAddInrModal,

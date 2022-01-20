@@ -24,18 +24,18 @@ const SymbolTranslationGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    //selectedGridRows,
+    selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
     onDeleteSelectedRecords,
     isDeleteGridRecordPromptModalOpen,
-    toggleDeletePromptModal,
     onCellValueChanged,
     setEdittedToPrevOptions,
     selectedSetEdittedToPrevValue,
     onChangeSetEdittedToPrevValue,
     toggleThresholdModal,
     toggleAddInrModal,
+    toggleDeletePromptModal,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -63,11 +63,61 @@ const SymbolTranslationGrid = () => {
               id="setEdittedToPrev"
             ></Dropdown>
           </button>
-          <button onClick={toggleThresholdModal}>Thresholds</button>
-          <button onClick={toggleAddInrModal}>Add</button>
-          <button>Delete</button>
-          <button>Publish</button>
-          <button>Import Vendor Data</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? toggleThresholdModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Thresholds
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? toggleAddInrModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Add
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleDeletePromptModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+            /*        onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            } */
+          >
+            Delete
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Publish
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? () => {}
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Import Vendor Data
+          </button>
         </div>
         <div className="erRighttHeaderSection">
           <button
