@@ -71,6 +71,8 @@ class ErProvider extends Component {
         isEdittedChecked: false,
       },
       maintenanceScreenData: {
+        isInvalidPublishRateWarningModalOpen: false,
+        isDeleteGridRecordPromptModalOpen: false,
         setEdittedToPrevOptions: [
           { label: "Set Editted = Previous", value: "setEdittedToPrev" },
           { label: "All", value: "all" },
@@ -221,11 +223,15 @@ class ErProvider extends Component {
         },
         selectedGridData: [],
         isImportVendorDataModalOpen: false,
+        isVendorDataDownloadPromptModalOpen: false,
       },
       editDashboardData: {
         showEditDashboardGrid: true,
         lastImportTime: new Date(),
         lastPublishDate: new Date(),
+      },
+      thresholdData: {
+        isThresholdModalOpen: false,
       },
     };
   }
@@ -323,7 +329,38 @@ class ErProvider extends Component {
     ];
   }
   //===============AG-GRID=====================================
+  toggleInvalidPublishRateWarningModal = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isInvalidPublishRateWarningModalOpen = !maintenanceScreenData.isInvalidPublishRateWarningModalOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  onDeleteSelectedRecords = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isDeleteGridRecordPromptModalOpen = false;
 
+    maintenanceScreenData.maintenanceGridData = maintenanceScreenData.maintenanceGridData.filter(
+      (row) => !maintenanceScreenData.selectedGridRows.includes(row)
+    );
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  toggleVendorDataDownloadPromptModal = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isVendorDataDownloadPromptModalOpen = !maintenanceScreenData.isVendorDataDownloadPromptModalOpen;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
+  onConfirmVendorDataDownload = () => {
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.isVendorDataDownloadPromptModalOpen = false;
+    this.setState({
+      maintenanceScreenData,
+    });
+  };
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -434,6 +471,14 @@ class ErProvider extends Component {
       filterPanelData,
     });
   }
+  //================Threshold=========
+  toggleThresholdModal = () => {
+    let thresholdData = this.state.thresholdData;
+    thresholdData.isThresholdModalOpen = !thresholdData.isThresholdModalOpen;
+    this.setState({
+      thresholdData,
+    });
+  };
   render() {
     return (
       <MyContext.Provider
@@ -461,6 +506,14 @@ class ErProvider extends Component {
           onBtPrint: this.onBtPrint,
           onCellValueChanged: this.onCellValueChanged,
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
+          onDeleteSelectedRecords: this.onDeleteSelectedRecords,
+          onSelectionChanged: this.onSelectionChanged,
+          toggleInvalidPublishRateWarningModal: this
+            .toggleInvalidPublishRateWarningModal,
+          toggleVendorDataDownloadPromptModal: this
+            .toggleVendorDataDownloadPromptModal,
+          onConfirmVendorDataDownload: this.onConfirmVendorDataDownload,
+          toggleThresholdModal: this.toggleThresholdModal,
         }}
       >
         {this.props.children}

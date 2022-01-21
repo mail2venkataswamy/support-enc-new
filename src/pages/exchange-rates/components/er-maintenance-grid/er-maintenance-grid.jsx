@@ -5,6 +5,7 @@ import myContext from "../../../../components/context/exchange-rates-context.jsx
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 import Dropdown from "../../../../components/common/simple-dropdown/dropdown.jsx";
+import { ThresholdModal } from "./er-threshold/er-threshold.jsx";
 
 const SymbolTranslationGrid = () => {
   const context = useContext(myContext);
@@ -32,6 +33,12 @@ const SymbolTranslationGrid = () => {
     setEdittedToPrevOptions,
     selectedSetEdittedToPrevValue,
     onChangeSetEdittedToPrevValue,
+    isInvalidPublishRateWarningModalOpen,
+    toggleInvalidPublishRateWarningModal,
+    isVendorDataDownloadPromptModalOpen,
+    toggleVendorDataDownloadPromptModal,
+    onConfirmVendorDataDownload,
+    toggleThresholdModal,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -62,7 +69,7 @@ const SymbolTranslationGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? () => {}
+                ? toggleThresholdModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -71,7 +78,7 @@ const SymbolTranslationGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? () => {}
+                ? toggleInvalidPublishRateWarningModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -80,7 +87,7 @@ const SymbolTranslationGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? () => {}
+                ? toggleVendorDataDownloadPromptModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -117,6 +124,7 @@ const SymbolTranslationGrid = () => {
           </button>
         </div>
       </div>
+      <ThresholdModal></ThresholdModal>
       <div className="erGridWrapper"></div>
       <Aggrid
         rowData={maintenanceGridData}
@@ -154,6 +162,17 @@ const SymbolTranslationGrid = () => {
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>
+      <WarningModal
+        warningMessage="These are still invalid rates, Do you stil lwant to publish?"
+        isModalOpen={isInvalidPublishRateWarningModalOpen}
+        closeModal={toggleInvalidPublishRateWarningModal}
+      ></WarningModal>
+      <RecordMustBeSelected
+        isModalOpen={isVendorDataDownloadPromptModalOpen}
+        closeModal={toggleVendorDataDownloadPromptModal}
+        onConfirm={onConfirmVendorDataDownload}
+        warningMessage="Latest Vendor Data will be downloaded from Vendor, Continue?"
+      ></RecordMustBeSelected>
     </div>
   );
 };

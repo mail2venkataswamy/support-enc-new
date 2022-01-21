@@ -36,6 +36,11 @@ const SymbolTranslationGrid = () => {
     toggleThresholdModal,
     toggleAddInrModal,
     toggleDeletePromptModal,
+    isInvalidPublishRateWarningModalOpen,
+    toggleInvalidPublishRateWarningModal,
+    isVendorDataDownloadPromptModalOpen,
+    toggleVendorDataDownloadPromptModal,
+    onConfirmVendorDataDownload,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -92,18 +97,13 @@ const SymbolTranslationGrid = () => {
                       )
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
-            /*        onClick={
-              isGridPopulated
-                ? () => {}
-                : () => toggleWarningModal(!isWarningModalOpen)
-            } */
           >
             Delete
           </button>
           <button
             onClick={
               isGridPopulated
-                ? () => {}
+                ? toggleInvalidPublishRateWarningModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -112,7 +112,7 @@ const SymbolTranslationGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? () => {}
+                ? toggleVendorDataDownloadPromptModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -174,7 +174,7 @@ const SymbolTranslationGrid = () => {
         closeModal={toggleWarningModal}
       ></WarningModal>
       <WarningModal
-        warningMessage="Record must be selected"
+        warningMessage="Record must be selected to perform this action"
         isModalOpen={isRecordMustBeselectedModalOpen}
         closeModal={toggleRecordMustBeSelectedModal}
       ></WarningModal>
@@ -188,6 +188,17 @@ const SymbolTranslationGrid = () => {
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>
+      <WarningModal
+        warningMessage="These are still invalid rates, Do you stil lwant to publish?"
+        isModalOpen={isInvalidPublishRateWarningModalOpen}
+        closeModal={toggleInvalidPublishRateWarningModal}
+      ></WarningModal>
+      <RecordMustBeSelected
+        isModalOpen={isVendorDataDownloadPromptModalOpen}
+        closeModal={toggleVendorDataDownloadPromptModal}
+        onConfirm={onConfirmVendorDataDownload}
+        warningMessage="Latest Vendor Data will be downloaded from Vendor, Continue?"
+      ></RecordMustBeSelected>
     </div>
   );
 };
