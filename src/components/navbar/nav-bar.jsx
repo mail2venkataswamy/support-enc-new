@@ -84,6 +84,9 @@ const NavBar = () => {
           <NavLink to="/ir" isActive={true}>
             IR
           </NavLink>
+          <NavLink to="/did" isActive={true}>
+            DID
+          </NavLink>
         </li>
       </ul>
     </div>

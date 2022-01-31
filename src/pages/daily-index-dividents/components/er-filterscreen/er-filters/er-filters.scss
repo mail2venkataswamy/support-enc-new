@@ -1,0 +1,23 @@
+.erFiltersWrapper {
+  padding-left: 15px !important;
+  .erLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .dateRange {
+    display: block !important;
+  }
+  .erLabel {
+    width: 30%;
+  }
+  .erValue {
+    width: 60%;
+    input {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+  }
+}
