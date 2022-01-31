@@ -29,5 +29,7 @@ const Suggestions = (props) => {
     )
   );
 };
-
+Suggestions.defaultProps={
+  options:[]
+}
 export default Suggestions;

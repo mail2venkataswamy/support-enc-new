@@ -1,0 +1,44 @@
+.filtersWrapper {
+  padding-left: 15px !important;
+  .psLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .psLabel {
+    width: 30%;
+  }
+  .psValue {
+    width: 60%;
+  }
+  .psLabelAndValue input {
+    width: 100%;
+  }
+}
+@import "../../../../light.scss";
+.psDumpFilterscreenHeaderWrapper {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-left: 3%;
+  border: none;
+  margin: 13px !important;
+  .psDumpFilterscreenTitle {
+    width: 90%;
+    color: $black;
+  }
+  .psDumpToggle {
+    width: 10%;
+    color: $black;
+    font-size: 12px;
+    font-weight: bold;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #439bc1;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+  }
+}

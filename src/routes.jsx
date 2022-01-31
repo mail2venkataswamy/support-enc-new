@@ -16,6 +16,7 @@ import ViDump from "./pages/vi-dump/index.jsx";
 import St from "./pages/symbol-translation/index.jsx";
 import Pvsf from "./pages/pvsf/index.jsx";
 import Er from "./pages/exchange-rates/index.jsx";
+import Ps from "./pages/publishing-statistics/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -36,6 +37,7 @@ const AppRouter = () => {
         <Route path="/st" element={<St />} />
         <Route path="/pvsf" element={<Pvsf />} />
         <Route path="/er" element={<Er />} />
+        <Route path="/ps" element={<Ps />} />
       </Routes>
     </BrowserRouter>
   );
