@@ -1,6 +1,6 @@
 @import "../../../../light.scss";
-#mainEr {
-  .er-editDashboard {
+#mainDid {
+  .did-editDashboard {
     background: $white;
     border-radius: 30px;
     padding: 5px 20px;
@@ -22,7 +22,7 @@
       // }
     }
 
-    .er-mainscreenHeaderTitle {
+    .did-mainscreenHeaderTitle {
       display: inline-block;
       font-size: 14px;
       font-weight: bold;
@@ -39,7 +39,7 @@
       left: 0px !important;
       position: relative;
     }
-    .er-mainscreenTitleAndToggle {
+    .did-mainscreenTitleAndToggle {
       background: $white;
       position: relative;
     }
@@ -70,7 +70,7 @@
     }
   }
 }
-.er-toggle {
+.did-toggle {
   display: flex;
   color: $white;
   justify-content: flex-end;
@@ -83,6 +83,6 @@
   width: 2%;
 }
 
-.er-mainscreenTitleAndToggle {
+.did-mainscreenTitleAndToggle {
   display: flex;
 }

@@ -52,6 +52,7 @@ const colDefsMedalsIncluded = [
     headerName: "Currency",
     field: "currency",
     width: 120,
+    rowGroup:true
   },
 
   {

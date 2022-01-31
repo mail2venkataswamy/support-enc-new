@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Modal from "react-modal";
 import "./er-threshold.scss";
-import myContext from "../../../../../components/context/exchange-rates-context.jsx";
+import myContext from "../../../../../components/context/daily-index-dividend-context.jsx";
 import ThresholdGrid from "./er-threshold-grid/er-threshold-grid.jsx";
 const ThresholdModalContent = () => {
   const context = useContext(myContext);
@@ -30,7 +30,7 @@ const Threshold = () => {
     ...context.state.thresholdData,
   };
   return (
-    <div className="erAddSymbolTranslationsModalContentWrapper">
+    <div className="didAddSymbolTranslationsModalContentWrapper">
       <div className="headerWrapper">
         <div className="header">View Thresholds</div>
       </div>

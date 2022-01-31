@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PvsfContext from "../../../../../components/context/exchange-rates-context.jsx";
+import PvsfContext from "../../../../../components/context/daily-index-dividend-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import Daterangepicker from "../../../../../components/common/date-range-picker/date-range-picker.jsx";
 import "./er-filters.scss";
@@ -11,13 +11,6 @@ const filters = () => {
     fromDate,
     setToDate,
     setFromDate,
-    fromCurrencyOptions,
-    selectedFromCurrencyValue,
-    onChangeFromCurrencyValue,
-    toCurrencyOptions,
-    selectedToCurrencyValue,
-    onChangeToCurrencyValue,
-
     statusOptions,
     selectedStatusValue,
     onChangeStatusValue,
@@ -26,15 +19,33 @@ const filters = () => {
     onChangeFlaggedEditsValue,
     isEdittedChecked,
     onChangeEdittedRates,
+    symbolOptions,
+    selectedSymbolValue,
+    onChangeSymbolValue,
+    cusipOptions,
+    selectedCusipValue,
+    onChangeCusipValue,
+    tireOptions,
+    selectedTireValue,
+    onChangeTireValue,
+    fmsOptions,
+    selectedFmsValue,
+    onChangeFmsValue,
+    ediitedAmtFromRangeValue,
+    onChangeEdiitedAmtFromRangeValue,
+    ediitedAmtToRangeValue,
+    onChangeEdiitedAmtToRangeValue
+
+
   } = {
     ...context.state.filterPanelData,
     ...context,
   };
   return (
     <>
-      <fieldset className="erFiltersWrapper">
+      <fieldset className="didFiltersWrapper">
         <legend>Activity Date Range</legend>
-        <div className="erLabelAndValue dateRange">
+        <div className="didLabelAndValue dateRange">
           <Daterangepicker
             isFromAndStDisabled={false}
             toDate={toDate}
@@ -46,34 +57,70 @@ const filters = () => {
           ></Daterangepicker>
         </div>
       </fieldset>
-      <fieldset className="erFiltersWrapper">
-        <legend>Currency:</legend>
-        <div className="erLabelAndValue">
-          <div className="erLabel">From Currency:</div>
-          <div className="erValue">
-            <Dropdown
-              options={fromCurrencyOptions}
-              selectedValue={selectedFromCurrencyValue}
-              onChange={onChangeFromCurrencyValue}
+      <fieldset className="didFiltersWrapper">
+        <legend>Dividend:</legend>
+        <div className="didLabelAndValue">
+          <div className="didLabel">Symbol:</div>
+          <div className="didValue">
+          <Dropdown
+              options={symbolOptions}
+              selectedValue={selectedSymbolValue}
+              onChange={onChangeSymbolValue}
             ></Dropdown>
           </div>
-        </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">To Currency:</div>
-          <div className="erValue">
-            <Dropdown
-              options={toCurrencyOptions}
-              selectedValue={selectedToCurrencyValue}
-              onChange={onChangeToCurrencyValue}
+          </div>
+          <div className="didLabelAndValue">
+          <div className="didLabel">Cusip:</div>
+          <div className="didValue">
+          <Dropdown
+              options={cusipOptions}
+              selectedValue={selectedCusipValue}
+              onChange={onChangeCusipValue}
             ></Dropdown>
           </div>
-        </div>
+          </div>
+          <div className="didLabelAndValue">
+          <div className="didLabel">Tier:</div>
+          <div className="didValue">
+          <Dropdown
+              options={tireOptions}
+              selectedValue={selectedTireValue}
+              onChange={onChangeTireValue}
+            ></Dropdown>
+          </div>
+          </div>
+          <div className="didLabelAndValue">
+          <div className="didLabel">FMS Indicator:</div>
+          <div className="didValue">
+          <Dropdown
+              options={fmsOptions}
+              selectedValue={selectedFmsValue}
+              onChange={onChangeFmsValue}
+            ></Dropdown>
+          </div>
+          </div>
       </fieldset>
-      <fieldset className="erFiltersWrapper">
+      <fieldset className="didFiltersWrapper">
+        <legend>Editted Amount Range:</legend>
+        <div className="didLabelAndValue">
+          <div className="didLabel">From:</div>
+          <div className="didValue">
+            <input value={ediitedAmtFromRangeValue} onChange={onChangeEdiitedAmtFromRangeValue}></input>
+          
+          </div>
+          </div>
+          <div className="didLabelAndValue">
+          <div className="didLabel">To:</div>
+          <div className="didValue">
+          <input value={ediitedAmtToRangeValue} onChange={onChangeEdiitedAmtToRangeValue}></input>
+          </div>
+          </div>
+          </fieldset>
+      <fieldset className="didFiltersWrapper">
         <legend>Flags and status Filter:</legend>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Status:</div>
-          <div className="erValue">
+        <div className="didLabelAndValue">
+          <div className="didLabel">Status:</div>
+          <div className="didValue">
             <Dropdown
               options={statusOptions}
               selectedValue={selectedStatusValue}
@@ -81,9 +128,9 @@ const filters = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Flagged Edits:</div>
-          <div className="erValue">
+        <div className="didLabelAndValue">
+          <div className="didLabel">Flagged Edits:</div>
+          <div className="didValue">
             <Dropdown
               options={flaggedEditsOptions}
               selectedValue={selectedFlaggedEditsValue}
@@ -91,8 +138,8 @@ const filters = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Editted Rates:</div>
+        <div className="didLabelAndValue">
+          <div className="didLabel">Editted Rates:</div>
           <div className="editedRateValue">
             <input
               type="checkbox"

@@ -5,8 +5,8 @@ import Filters from "./er-filters/er-filters.jsx";
 const Filterscreen = () => {
   return (
     <>
-      <div className="erFilterscreenHeaderWrapper">
-        <div className="erFilterscreenTitle">Exchange Rates:</div>
+      <div className="didFilterscreenHeaderWrapper">
+        <div className="didFilterscreenTitle">Daily Index Dividends:</div>
       </div>
       <Filters></Filters>
       <FilterAndReset></FilterAndReset>

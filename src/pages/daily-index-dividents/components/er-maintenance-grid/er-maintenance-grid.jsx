@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./er-maintenance-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/exchange-rates-context.jsx";
+import myContext from "../../../../components/context/daily-index-dividend-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 import Dropdown from "../../../../components/common/simple-dropdown/dropdown.jsx";
 import { ThresholdModal } from "./er-threshold/er-threshold.jsx";
+import {AddInrModal} from "./add-interest-rate/add-interest-rate.jsx"
 
 const SymbolTranslationGrid = () => {
   const context = useContext(myContext);
@@ -23,7 +24,7 @@ const SymbolTranslationGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    //selectedGridRows,
+    selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
     onDeleteSelectedRecords,
@@ -39,6 +40,7 @@ const SymbolTranslationGrid = () => {
     toggleVendorDataDownloadPromptModal,
     onConfirmVendorDataDownload,
     toggleThresholdModal,
+    toggleAddInrModal
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -54,10 +56,10 @@ const SymbolTranslationGrid = () => {
   }, []);
   let isGridPopulated = maintenanceGridData && maintenanceGridData.length > 0;
   return (
-    <div className="erMaintGridWrapper">
-      <div className="erGridHeader">Maintenance Grid</div>
-      <div className="erHeaderActions">
-        <div className="erLeftHeaderSection">
+    <div className="didMaintGridWrapper">
+      <div className="didGridHeader">Maintenance Screen</div>
+      <div className="didHeaderActions">
+        <div className="didLeftHeaderSection">
           <button>
             <Dropdown
               options={setEdittedToPrevOptions}
@@ -78,6 +80,29 @@ const SymbolTranslationGrid = () => {
           <button
             onClick={
               isGridPopulated
+                ? toggleAddInrModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Add
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleDeletePromptModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Delete
+          </button>
+          <button
+            onClick={
+              isGridPopulated
                 ? toggleInvalidPublishRateWarningModal
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
@@ -94,7 +119,7 @@ const SymbolTranslationGrid = () => {
             Import Vendor Data
           </button>
         </div>
-        <div className="erRighttHeaderSection">
+        <div className="didRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -125,7 +150,8 @@ const SymbolTranslationGrid = () => {
         </div>
       </div>
       <ThresholdModal></ThresholdModal>
-      <div className="erGridWrapper"></div>
+      <AddInrModal></AddInrModal>
+      <div className="didGridWrapper"></div>
       <Aggrid
         rowData={maintenanceGridData}
         colDefsMedalsIncluded={colDefs}
@@ -158,12 +184,12 @@ const SymbolTranslationGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="erSaveAndCancelWrapper">
+      <div className="didSaveAndCancelWrapper">
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>
       <WarningModal
-        warningMessage="These are still invalid rates, Do you stil lwant to publish?"
+        warningMessage="All Daily Discrete Index Dividends will be Published. Do you want to continue?"
         isModalOpen={isInvalidPublishRateWarningModalOpen}
         closeModal={toggleInvalidPublishRateWarningModal}
       ></WarningModal>

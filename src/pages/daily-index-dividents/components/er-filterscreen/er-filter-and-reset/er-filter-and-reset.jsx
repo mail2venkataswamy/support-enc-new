@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Buttonwrapper from "../../../../../components/common/button/button.jsx";
 import "./er-filter-and-reset.scss";
-import MyContext from "../../../../../components/context/exchange-rates-context.jsx";
+import MyContext from "../../../../../components/context/daily-index-dividend-context.jsx";
 
 const filterAndReset = () => {
   const context = useContext(MyContext);
@@ -10,15 +10,15 @@ const filterAndReset = () => {
     ...context,
   };
   return (
-    <div className="erFilterAndResetButtonWrapper">
+    <div className="didFilterAndResetButtonWrapper">
       <Buttonwrapper
-        id="erFilter-container"
+        id="didFilter-container"
         label="Filter"
         onClick={onClickFilter}
       ></Buttonwrapper>
 
       <Buttonwrapper
-        id="erReset-container"
+        id="didReset-container"
         label="Reset"
         onClick={onClickReset}
       ></Buttonwrapper>

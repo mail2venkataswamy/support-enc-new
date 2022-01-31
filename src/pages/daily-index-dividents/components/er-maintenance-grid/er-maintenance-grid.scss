@@ -1,4 +1,4 @@
-.erGridHeader {
+.didGridHeader {
   font-size: 14px;
   font-weight: bold;
   color: #000;
@@ -6,7 +6,7 @@
   border: none;
   margin: 13px !important;
 }
-.erGridTitle {
+.didGridTitle {
   font-size: 12px;
   font-weight: bold;
   margin-left: 3%;
@@ -19,9 +19,9 @@
   cursor: pointer;
   font-size: 13px;
 }
-.erHeaderActions {
+.didHeaderActions {
   display: flex;
-  .erRighttHeaderSection {
+  .didRighttHeaderSection {
     justify-content: flex-end;
     flex: 1;
     display: flex;
@@ -37,7 +37,7 @@
     font-size: 13px;
   }
 }
-.erSaveAndCancelWrapper {
+.didSaveAndCancelWrapper {
   text-align: right;
   width: 100%;
   border: none;
@@ -46,7 +46,7 @@
     margin-left: 11px;
   }
 }
-.erHeaderActions {
+.didHeaderActions {
   .Dropdown-control {
     border: none !important;
     color: red;
