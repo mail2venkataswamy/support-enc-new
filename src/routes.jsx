@@ -17,6 +17,7 @@ import St from "./pages/symbol-translation/index.jsx";
 import Pvsf from "./pages/pvsf/index.jsx";
 import Er from "./pages/exchange-rates/index.jsx";
 import Ps from "./pages/publishing-statistics/index.jsx";
+import Ir from "./pages/interest-rates/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -38,6 +39,7 @@ const AppRouter = () => {
         <Route path="/pvsf" element={<Pvsf />} />
         <Route path="/er" element={<Er />} />
         <Route path="/ps" element={<Ps />} />
+        <Route path="/ir" element={<Ir />} />
       </Routes>
     </BrowserRouter>
   );

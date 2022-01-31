@@ -1,13 +1,13 @@
 @import "../../../../light.scss";
-#mainEr {
-  .er-editDashboard {
+#mainIr {
+  .ir-editDashboard {
     background: $white;
     border-radius: 30px;
     padding: 5px 20px;
     box-sizing: border-box;
     margin-top: 0.5em;
     /*  height: 228px; */
-    height: 35%;
+    height: 29%;
     border: none;
     .ag-theme-alpine {
       .ag-body-viewport.ag-layout-normal {
@@ -22,7 +22,7 @@
       // }
     }
 
-    .er-mainscreenHeaderTitle {
+    .ir-mainscreenHeaderTitle {
       display: inline-block;
       font-size: 14px;
       font-weight: bold;
@@ -39,7 +39,7 @@
       left: 0px !important;
       position: relative;
     }
-    .er-mainscreenTitleAndToggle {
+    .ir-mainscreenTitleAndToggle {
       background: $white;
       position: relative;
     }
@@ -70,7 +70,7 @@
     }
   }
 }
-.er-toggle {
+.ir-toggle {
   display: flex;
   color: $white;
   justify-content: flex-end;
@@ -83,6 +83,6 @@
   width: 2%;
 }
 
-.er-mainscreenTitleAndToggle {
+.ir-mainscreenTitleAndToggle {
   display: flex;
 }

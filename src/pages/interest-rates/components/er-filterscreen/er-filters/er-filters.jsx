@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import PvsfContext from "../../../../../components/context/exchange-rates-context.jsx";
+import PvsfContext from "../../../../../components/context/interest-rates-context.jsx";
 import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
 import Daterangepicker from "../../../../../components/common/date-range-picker/date-range-picker.jsx";
 import "./er-filters.scss";
@@ -11,13 +11,6 @@ const filters = () => {
     fromDate,
     setToDate,
     setFromDate,
-    fromCurrencyOptions,
-    selectedFromCurrencyValue,
-    onChangeFromCurrencyValue,
-    toCurrencyOptions,
-    selectedToCurrencyValue,
-    onChangeToCurrencyValue,
-
     statusOptions,
     selectedStatusValue,
     onChangeStatusValue,
@@ -26,15 +19,21 @@ const filters = () => {
     onChangeFlaggedEditsValue,
     isEdittedChecked,
     onChangeEdittedRates,
+    interestForOptions,
+    selectedInterestForCurrencyValue,
+    onChangeInterestForCurrencyValue,
+    currencyTypeOptions,
+    selectedCurrencyTypeValue,
+    onChangeCurrencyTypeValue,
   } = {
     ...context.state.filterPanelData,
     ...context,
   };
   return (
     <>
-      <fieldset className="erFiltersWrapper">
+      <fieldset className="irFiltersWrapper">
         <legend>Activity Date Range</legend>
-        <div className="erLabelAndValue dateRange">
+        <div className="irLabelAndValue dateRange">
           <Daterangepicker
             isFromAndStDisabled={false}
             toDate={toDate}
@@ -46,34 +45,34 @@ const filters = () => {
           ></Daterangepicker>
         </div>
       </fieldset>
-      <fieldset className="erFiltersWrapper">
+      <fieldset className="irFiltersWrapper">
         <legend>Currency:</legend>
-        <div className="erLabelAndValue">
-          <div className="erLabel">From Currency:</div>
-          <div className="erValue">
+        <div className="irLabelAndValue">
+          <div className="irLabel">Interest For Currency:</div>
+          <div className="irValue">
             <Dropdown
-              options={fromCurrencyOptions}
-              selectedValue={selectedFromCurrencyValue}
-              onChange={onChangeFromCurrencyValue}
+              options={interestForOptions}
+              selectedValue={selectedInterestForCurrencyValue}
+              onChange={onChangeInterestForCurrencyValue}
             ></Dropdown>
           </div>
         </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">To Currency:</div>
-          <div className="erValue">
+        <div className="irLabelAndValue">
+          <div className="irLabel">Type:</div>
+          <div className="irValue">
             <Dropdown
-              options={toCurrencyOptions}
-              selectedValue={selectedToCurrencyValue}
-              onChange={onChangeToCurrencyValue}
+              options={currencyTypeOptions}
+              selectedValue={selectedCurrencyTypeValue}
+              onChange={onChangeCurrencyTypeValue}
             ></Dropdown>
           </div>
         </div>
       </fieldset>
-      <fieldset className="erFiltersWrapper">
+      <fieldset className="irFiltersWrapper">
         <legend>Flags and status Filter:</legend>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Status:</div>
-          <div className="erValue">
+        <div className="irLabelAndValue">
+          <div className="irLabel">Status:</div>
+          <div className="irValue">
             <Dropdown
               options={statusOptions}
               selectedValue={selectedStatusValue}
@@ -81,9 +80,9 @@ const filters = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Flagged Edits:</div>
-          <div className="erValue">
+        <div className="irLabelAndValue">
+          <div className="irLabel">Flagged Edits:</div>
+          <div className="irValue">
             <Dropdown
               options={flaggedEditsOptions}
               selectedValue={selectedFlaggedEditsValue}
@@ -91,8 +90,8 @@ const filters = () => {
             ></Dropdown>
           </div>
         </div>
-        <div className="erLabelAndValue">
-          <div className="erLabel">Editted Rates:</div>
+        <div className="irLabelAndValue">
+          <div className="irLabel">Editted Rates:</div>
           <div className="editedRateValue">
             <input
               type="checkbox"

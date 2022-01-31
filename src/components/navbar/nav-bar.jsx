@@ -80,6 +80,9 @@ const NavBar = () => {
         <li className="pages">
           <NavLink to="/ps" isActive={true}>
             PS
+            </NavLink>
+          <NavLink to="/ir" isActive={true}>
+            IR
           </NavLink>
         </li>
       </ul>

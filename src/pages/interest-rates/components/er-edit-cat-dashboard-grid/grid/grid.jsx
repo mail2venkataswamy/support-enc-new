@@ -17,10 +17,15 @@ const rowData = [
     correctionsNeeded: 0,
   },
   {
-    exchangeRateEdits: "Total INvalid Exchange Rates",
+    exchangeRateEdits: "Min Max Spread Amount (OIS vis Libor)",
     vendorFlaggedRecords: 1,
     correctionsNeeded: 0,
   },
+  /*   {
+    exchangeRateEdits: "Total INvalid Exchange Rates",
+    vendorFlaggedRecords: 1,
+    correctionsNeeded: 0,
+  }, */
 ];
 const colDefs = [
   {

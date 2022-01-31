@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./er-maintenance-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/exchange-rates-context.jsx";
+import myContext from "../../../../components/context/interest-rates-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 import Dropdown from "../../../../components/common/simple-dropdown/dropdown.jsx";
-import { ThresholdModal } from "./er-threshold/er-threshold.jsx";
+import { ThresholdModal } from "./ir-threshold/ir-threshold.jsx";
+import { AddInrModal } from "./add-interest-rate/add-interest-rate.jsx";
 
 const SymbolTranslationGrid = () => {
   const context = useContext(myContext);
@@ -23,22 +24,23 @@ const SymbolTranslationGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    //selectedGridRows,
+    selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
     onDeleteSelectedRecords,
     isDeleteGridRecordPromptModalOpen,
-    toggleDeletePromptModal,
     onCellValueChanged,
     setEdittedToPrevOptions,
     selectedSetEdittedToPrevValue,
     onChangeSetEdittedToPrevValue,
+    toggleThresholdModal,
+    toggleAddInrModal,
+    toggleDeletePromptModal,
     isInvalidPublishRateWarningModalOpen,
     toggleInvalidPublishRateWarningModal,
     isVendorDataDownloadPromptModalOpen,
     toggleVendorDataDownloadPromptModal,
     onConfirmVendorDataDownload,
-    toggleThresholdModal,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -74,6 +76,29 @@ const SymbolTranslationGrid = () => {
             }
           >
             Thresholds
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? toggleAddInrModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Add
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleDeletePromptModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Delete
           </button>
           <button
             onClick={
@@ -125,6 +150,7 @@ const SymbolTranslationGrid = () => {
         </div>
       </div>
       <ThresholdModal></ThresholdModal>
+      <AddInrModal></AddInrModal>
       <div className="erGridWrapper"></div>
       <Aggrid
         rowData={maintenanceGridData}
@@ -148,7 +174,7 @@ const SymbolTranslationGrid = () => {
         closeModal={toggleWarningModal}
       ></WarningModal>
       <WarningModal
-        warningMessage="Record must be selected"
+        warningMessage="Record must be selected to perform this action"
         isModalOpen={isRecordMustBeselectedModalOpen}
         closeModal={toggleRecordMustBeSelectedModal}
       ></WarningModal>

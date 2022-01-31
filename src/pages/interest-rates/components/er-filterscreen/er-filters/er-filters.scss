@@ -1,0 +1,26 @@
+.irFiltersWrapper {
+  padding-left: 15px !important;
+  .irLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .dateRange {
+    display: block !important;
+  }
+  .irLabel {
+    width: 30%;
+  }
+  .irValue {
+    width: 60%;
+    input {
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+  }
+  .editedRateValue {
+    width: 1% !important;
+  }
+}

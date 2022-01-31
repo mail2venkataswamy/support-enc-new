@@ -1,0 +1,27 @@
+@import "../../../../light.scss";
+.irFilterscreenHeaderWrapper {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-left: 3%;
+  border: none;
+  margin: 13px !important;
+  .irFilterscreenTitle {
+    width: 90%;
+    color: $black;
+  }
+  .irfToggle {
+    width: 10%;
+    color: $black;
+    font-size: 12px;
+    font-weight: bold;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #439bc1;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+  }
+}
