@@ -1,0 +1,36 @@
+.psWrningWrapper {
+  text-align: center;
+}
+.psWrningWrapper .okButton {
+  position: relative;
+  top: 11px;
+}
+.psWrningWrapper .header {
+  display: none;
+  color: white;
+}
+.psWrningWrapper .header .closeIcon {
+  flex: 1;
+  justify-content: flex-end;
+  display: flex;
+}
+.psContentAndStopIconWrapper {
+  display: block;
+}
+button.cancelButton {
+  position: relative;
+  top: 11px;
+}
+button {
+  display: inline-block;
+  padding: 0.3em 1.2em;
+  border: 0.1em solid #ffffff;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}

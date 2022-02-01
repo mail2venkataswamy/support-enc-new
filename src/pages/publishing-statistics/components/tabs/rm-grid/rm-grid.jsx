@@ -5,12 +5,16 @@ import myContext from "../../../../../components/context/publishing-statistics-c
 import WarningModal from "../../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../../components/common/modal/prompt/prompt.jsx";
 import DatePicker from "../../../../../components/common/datepicker/datepicker.jsx";
+import { ValidationDetailModal } from "./validation-details/validation-details.jsx";
+import Prompt from "./release/prompt/prompt.jsx";
 
 const PsGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
-    useState(false);
+  const [
+    isRecordMustBeselectedModalOpen,
+    toggleRecordMustBeSelectedModal,
+  ] = useState(false);
 
   const {
     rowData,
@@ -23,7 +27,13 @@ const PsGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
-    getActiveTab
+    getActiveTab,
+    toggleValidationDetailModal,
+    isReleaseWarningModelOpen,
+    toggleReleasePromptModal,
+    onReleaseSelectedRecords,
+    openValidationDetails,
+    selectedGridRows,
   } = {
     ...context.state.releaseManagerData,
     ...context,
@@ -41,12 +51,17 @@ const PsGrid = () => {
   let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
-          <div className="psHeaderActions">
+      <div className="psHeaderActions">
         <div className="psLeftHeaderSection">
           <button
             onClick={
               isGridPopulated
-                ? ()=>{}
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleReleasePromptModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -55,7 +70,12 @@ const PsGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? ()=>{}
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleValidationDetailModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
@@ -64,11 +84,16 @@ const PsGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? ()=>{}
+                ? () => {}
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
-           <div className="dateLabelAndPicker"><div>Activity Date:</div><div><DatePicker selectedDate={new Date}></DatePicker></div></div> 
+            <div className="dateLabelAndPicker">
+              <div>Activity Date:</div>
+              <div>
+                <DatePicker selectedDate={new Date()}></DatePicker>
+              </div>
+            </div>
           </button>
         </div>
       </div>
@@ -89,6 +114,16 @@ const PsGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
       />
+      <ValidationDetailModal></ValidationDetailModal>
+      <Prompt
+        isModalOpen={isReleaseWarningModelOpen}
+        closeModal={toggleReleasePromptModal}
+        onConfirm={onReleaseSelectedRecords}
+        openValidationDetails={openValidationDetails}
+        warningMessage="All Expiring Index Option Underlying Risk Prices have not been published."
+        warningMessage1="You are about to certify that selected prices have been edited and published successfully. Do you
+        Wish to contnue?"
+      ></Prompt>
       <WarningModal
         warningMessage="Grid must be populated"
         isModalOpen={isWarningModalOpen}

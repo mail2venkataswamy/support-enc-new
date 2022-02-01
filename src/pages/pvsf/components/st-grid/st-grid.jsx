@@ -9,8 +9,10 @@ import RecordMustBeSelected from "../../../../components/common/modal/prompt/pro
 const SymbolTranslationGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
-    useState(false);
+  const [
+    isRecordMustBeselectedModalOpen,
+    toggleRecordMustBeSelectedModal,
+  ] = useState(false);
 
   const {
     priceSystemAlertStateRowData,
@@ -49,8 +51,34 @@ const SymbolTranslationGrid = () => {
       <div className="pvsfGridHeader">Primary Vendor Selection Grid</div>
       <div className="pvsfHeaderActions">
         <div className="pvsfLeftHeaderSection">
-          <button onClick={toggleAddPrimaryVendorSelectoionModal}>Add</button>
-          <button onClick={toggleModifyPvsfModal}>Modify</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? toggleAddPrimaryVendorSelectoionModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Add
+          </button>
+          <button
+            /*       onClick={
+              isGridPopulated
+                ? toggleModifyPvsfModal
+                : () => toggleWarningModal(!isWarningModalOpen)
+            } */
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? toggleModifyPvsfModal
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Modify
+          </button>
           <button
             onClick={
               isGridPopulated

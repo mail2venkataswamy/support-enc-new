@@ -18,10 +18,135 @@ class ViDumpProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab:"tab-0",
+      activeTab: "tab-0",
       initialPanelState: {},
       initialPicsThresholdDate: {},
       initialAddThresholdsData: {},
+      validationDetailsData: {
+        isvalidationDetailOpen: false,
+        rowData: [
+          {
+            priceType: "test",
+            productType: "test",
+            cusip: "test",
+            securityTier: "tets",
+            classification: "test",
+            subClass: "test",
+            expirationDate: "test",
+            contractDate: "test",
+            callOrPutCode: "tets",
+            strikePrice: "test",
+            price: "test",
+            volatility: "tets",
+            priceUpdateDate: "test",
+          },
+          {
+            priceType: "test",
+            productType: "test",
+            cusip: "test",
+            securityTier: "tets",
+            classification: "test",
+            subClass: "test",
+            expirationDate: "test",
+            contractDate: "test",
+            callOrPutCode: "tets",
+            strikePrice: "test",
+            price: "test",
+            volatility: "tets",
+            priceUpdateDate: "test",
+          },
+        ],
+        colDefs: [
+          {
+            headerName: "Price Type",
+            field: "priceType",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Product Type",
+            field: "productType",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Cusip",
+            field: "cusip",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Security Tier",
+            field: "securityTier",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Classification",
+            field: "classification",
+            width: 140,
+            flex: 0,
+          },
+          {
+            headerName: "SubClass",
+            field: "subClass",
+            width: 120,
+            flex: 0,
+          },
+          {
+            headerName: "Expiration Date",
+            field: "expirationDate",
+            width: 120,
+            flex: 0,
+          },
+          {
+            headerName: "Contract Date",
+            field: "contractDate",
+            width: 120,
+            flex: 0,
+          },
+          {
+            headerName: "call/Put Code",
+            field: "callOrPutCode",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Strike Price",
+            field: "strikePrice",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Price",
+            field: "price",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Volatility",
+            field: "volatility",
+            width: 110,
+            flex: 0,
+          },
+          {
+            headerName: "Price Update Date",
+            field: "priceUpdateDate",
+            width: 120,
+            flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        //onGridReady,
+        //onBtnExport,
+      },
       filterPanelData: {
         publishedBySearchValue: "",
         publishedByData: [
@@ -38,11 +163,10 @@ class ViDumpProvider extends Component {
         ],
         pusblishedBySuggestionResult: [],
         publishedByValue: "",
-        publishTypeOptions:[],
-        selectedPublishTypeValue:{},
+        publishTypeOptions: [],
+        selectedPublishTypeValue: {},
         isFilterScreenVisible: true,
-        selectedPricePublishDate:new Date()
-
+        selectedPricePublishDate: new Date(),
       },
       tabs: [
         {
@@ -54,7 +178,8 @@ class ViDumpProvider extends Component {
           Component: ReleaseManager,
         },
       ],
-      releaseManagerData:{
+      releaseManagerData: {
+        selectedGridRows: [],
         rowData: [],
         colDefs: [
           {
@@ -69,8 +194,7 @@ class ViDumpProvider extends Component {
             field: "group",
             width: 400,
             flex: 0,
-            rowGroup:true
-
+            rowGroup: true,
           },
           {
             headerName: "Process",
@@ -105,6 +229,7 @@ class ViDumpProvider extends Component {
           rowSelection: "multiple",
           flex: 1,
         },
+        isReleaseWarningModelOpen: false,
       },
       gridScreenData: {
         rowData: [],
@@ -183,7 +308,6 @@ class ViDumpProvider extends Component {
     };
   }
 
-
   onChangePublishedByValue = (e) => {
     let data = this.state.filterPanelData.publishedByData;
     let filterPanelData = this.state.filterPanelData;
@@ -213,20 +337,19 @@ class ViDumpProvider extends Component {
       filterPanelData,
     });
   };
-                    
-  onChangePricePublishDate=(date)=>{
+
+  onChangePricePublishDate = (date) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedPricePublishDate = date;
     this.setState({
       filterPanelData,
     });
-
-  }
-  onPublishTypeChange=(selectedValue)=>{
+  };
+  onPublishTypeChange = (selectedValue) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.selectedPublishTypeValue = selectedValue;
     this.setState({ filterPanelData });
-  }
+  };
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -245,8 +368,7 @@ class ViDumpProvider extends Component {
   };
   onToggleFilterScreen = () => {
     let filterPanelData = this.state.filterPanelData;
-    filterPanelData.isFilterScreenVisible =
-      !filterPanelData.isFilterScreenVisible;
+    filterPanelData.isFilterScreenVisible = !filterPanelData.isFilterScreenVisible;
     this.setState({ filterPanelData });
   };
   onClickReset = () => {
@@ -260,63 +382,65 @@ class ViDumpProvider extends Component {
   componentDidMount() {
     let filterPanelData = this.state.filterPanelData;
     let releaseManagerData = this.state.releaseManagerData;
-    releaseManagerData.rowData=[{
-      group:"Certified EOD Final Price Files",
-      process:"Equity Open Total Underlying Prices",
-      status:"INIT",
-      releasedBy:"test",
-      stDate:new Date()
-    },
-    {
-      group:"Certified EOD Final Price Files",
-      process:"Equity Open Total Underlying Prices",
-      status:"INIT",
-      releasedBy:"test1",
-      stDate:new Date()
-    },
-    {
-      group:"Cleared Futures",
-      process:"Cleared Option on Future/Option Mark",
-      status:"INIT",
-      releasedBy:"test2",
-      stDate:new Date()
-    },
-    {
-      group:"Cleared Futures",
-      process:"Cleared Future Contract Settlement Prices",
-      status:"INIT",
-      releasedBy:"test",
-      stDate:new Date()
-    },
-    {
-      group:"Equity/Index",
-      process:"Cleared Option on Future/Option Mark",
-      status:"INIT",
-      releasedBy:"test2",
-      stDate:new Date()
-    },
-    {
-      group:"Equity/Index",
-      process:"Cleared Future Contract Settlement Prices",
-      status:"INIT",
-      releasedBy:"test",
-      stDate:new Date()
-    },
-    {
-      group:"FMS",
-      process:"fms",
-      status:"INIT",
-      releasedBy:"test2",
-      stDate:new Date()
-    },
-    {
-      group:"FMS",
-      process:"fms",
-      status:"INIT",
-      releasedBy:"test",
-      stDate:new Date()
-    }];
-    let data = { ...filterPanelData};
+    releaseManagerData.rowData = [
+      {
+        group: "Certified EOD Final Price Files",
+        process: "Equity Open Total Underlying Prices",
+        status: "INIT",
+        releasedBy: "test",
+        stDate: new Date(),
+      },
+      {
+        group: "Certified EOD Final Price Files",
+        process: "Equity Open Total Underlying Prices",
+        status: "INIT",
+        releasedBy: "test1",
+        stDate: new Date(),
+      },
+      {
+        group: "Cleared Futures",
+        process: "Cleared Option on Future/Option Mark",
+        status: "INIT",
+        releasedBy: "test2",
+        stDate: new Date(),
+      },
+      {
+        group: "Cleared Futures",
+        process: "Cleared Future Contract Settlement Prices",
+        status: "INIT",
+        releasedBy: "test",
+        stDate: new Date(),
+      },
+      {
+        group: "Equity/Index",
+        process: "Cleared Option on Future/Option Mark",
+        status: "INIT",
+        releasedBy: "test2",
+        stDate: new Date(),
+      },
+      {
+        group: "Equity/Index",
+        process: "Cleared Future Contract Settlement Prices",
+        status: "INIT",
+        releasedBy: "test",
+        stDate: new Date(),
+      },
+      {
+        group: "FMS",
+        process: "fms",
+        status: "INIT",
+        releasedBy: "test2",
+        stDate: new Date(),
+      },
+      {
+        group: "FMS",
+        process: "fms",
+        status: "INIT",
+        releasedBy: "test",
+        stDate: new Date(),
+      },
+    ];
+    let data = { ...filterPanelData };
     this.setState({
       initialPanelState: data,
     });
@@ -360,27 +484,27 @@ class ViDumpProvider extends Component {
     return [
       {
         id: 1,
-        publishRequestId:"test1",
-        publishType:"test1",
-        requestTotal:"test1",
-        publishedTotal:"test1",
-        encoreTotal:"test1",
-        status:"test1",
-        publishedBy:"test1",
-        startTime:"test1",
-        endTime:"test1"        
+        publishRequestId: "test1",
+        publishType: "test1",
+        requestTotal: "test1",
+        publishedTotal: "test1",
+        encoreTotal: "test1",
+        status: "test1",
+        publishedBy: "test1",
+        startTime: "test1",
+        endTime: "test1",
       },
       {
         id: 2,
-        publishRequestId:"test2",
-        publishType:"test2",
-        requestTotal:"test2",
-        publishedTotal:"test2",
-        encoreTotal:"test2",
-        status:"test2",
-        publishedBy:"test2",
-        startTime:"test2",
-        endTime:"test2"          
+        publishRequestId: "test2",
+        publishType: "test2",
+        requestTotal: "test2",
+        publishedTotal: "test2",
+        encoreTotal: "test2",
+        status: "test2",
+        publishedBy: "test2",
+        startTime: "test2",
+        endTime: "test2",
       },
     ];
   }
@@ -409,19 +533,63 @@ class ViDumpProvider extends Component {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log("Grid Rows selected", selectedRows);
     let gridScreenData = this.state.gridScreenData;
+    let releaseManagerData = this.state.releaseManagerData;
     gridScreenData.selectedGridRows = selectedRows;
+    releaseManagerData.selectedGridRows = selectedRows;
     this.setState({
       gridScreenData,
+      releaseManagerData,
     });
   };
   onCellValueChanged = (params) => {
     const colId = params.column.getId();
   };
-  getActiveTab=(tab)=>{
-   this.setState({
-     activeTab:tab
-   })
-  }
+  getActiveTab = (tab) => {
+    this.setState({
+      activeTab: tab,
+    });
+  };
+  //==========VD Methods======
+  toggleValidationDetailModal = () => {
+    let validationDetailsData = this.state.validationDetailsData;
+    validationDetailsData.isvalidationDetailOpen = !validationDetailsData.isvalidationDetailOpen;
+    this.setState({
+      validationDetailsData,
+    });
+  };
+  //=========Release Methods====
+  toggleReleasePromptModal = () => {
+    let releaseManagerData = this.state.releaseManagerData;
+    releaseManagerData.isReleaseWarningModelOpen = !releaseManagerData.isReleaseWarningModelOpen;
+    this.setState({
+      releaseManagerData,
+    });
+  };
+  onReleaseSelectedRecords = () => {
+    let releaseManagerData = this.state.releaseManagerData;
+    releaseManagerData.isReleaseWarningModelOpen = !releaseManagerData.isReleaseWarningModelOpen;
+
+    releaseManagerData.rowData = releaseManagerData.rowData.filter(
+      (row) => !releaseManagerData.selectedGridRows.includes(row)
+    );
+    this.setState({
+      releaseManagerData,
+    });
+
+    this.setState({
+      releaseManagerData,
+    });
+  };
+  openValidationDetails = () => {
+    let validationDetailsData = this.state.validationDetailsData;
+    let releaseManagerData = this.state.releaseManagerData;
+    releaseManagerData.isReleaseWarningModelOpen = false;
+    validationDetailsData.isvalidationDetailOpen = !validationDetailsData.isvalidationDetailOpen;
+    this.setState({
+      validationDetailsData,
+      releaseManagerData,
+    });
+  };
 
   render() {
     return (
@@ -439,11 +607,15 @@ class ViDumpProvider extends Component {
           onSelectionChanged: this.onSelectionChanged,
           onCellValueChanged: this.onCellValueChanged,
           onChangePublishedByValue: (e) => this.onChangePublishedByValue(e),
-          onClickPublishedBySuggestionItem: (e) => this.onClickPublishedBySuggestionItem(e),
-          onChangePricePublishDate:e=>this.onChangePricePublishDate(e),
-          onPublishTypeChange:e=>this.onPublishTypeChange(e),
-          getActiveTab:this.getActiveTab
-
+          onClickPublishedBySuggestionItem: (e) =>
+            this.onClickPublishedBySuggestionItem(e),
+          onChangePricePublishDate: (e) => this.onChangePricePublishDate(e),
+          onPublishTypeChange: (e) => this.onPublishTypeChange(e),
+          getActiveTab: this.getActiveTab,
+          toggleValidationDetailModal: this.toggleValidationDetailModal,
+          toggleReleasePromptModal: this.toggleReleasePromptModal,
+          onReleaseSelectedRecords: this.onReleaseSelectedRecords,
+          openValidationDetails: this.openValidationDetails,
         }}
       >
         {this.props.children}
