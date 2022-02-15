@@ -10,6 +10,23 @@ const AddInrModalContent = () => {
     currencyOptions,
     selectedAddInrCurrencyValue,
     onChangeAddInrCurrencyValue,
+
+    tenorOptions,
+    selectedTenorValue,
+    addTypeOptions,
+    selectedAddTypeValue,
+    dayCountBasisOptions,
+    selectedDayCountBasicValue,
+    fixFloatOptions,
+    selectedFixFloatValue,
+    yearlyPaymentFrequencyOptions,
+    selectedYearlyPaymentFrequencyValue,
+
+    onChangeTenorValue,
+    onChangeAddTypeValue,
+    onChangeDayCountBasisValue,
+    onChangeFixFloatValue,
+    onChangeYearlyPaymentFrequencyValue,
   } = {
     ...context.state.addInrData,
     ...context,
@@ -32,31 +49,51 @@ const AddInrModalContent = () => {
         <div className="irLabelAndValue">
           <div className="irLabel">Tenor:</div>
           <div className="irValue">
-            <Dropdown></Dropdown>
+            <Dropdown
+              options={tenorOptions}
+              selectedValue={selectedTenorValue}
+              onChange={onChangeTenorValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="irLabelAndValue">
           <div className="irLabel">Type:</div>
           <div className="irValue">
-            <Dropdown></Dropdown>
+            <Dropdown
+              options={addTypeOptions}
+              selectedValue={selectedAddTypeValue}
+              onChange={onChangeAddTypeValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="irLabelAndValue">
           <div className="irLabel">Day Count Basis:</div>
           <div className="irValue">
-            <Dropdown></Dropdown>
+            <Dropdown
+              options={dayCountBasisOptions}
+              selectedValue={selectedDayCountBasicValue}
+              onChange={onChangeDayCountBasisValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="irLabelAndValue">
           <div className="irLabel">Fix/Float:</div>
           <div className="irValue">
-            <Dropdown></Dropdown>
+            <Dropdown
+              options={fixFloatOptions}
+              selectedValue={selectedFixFloatValue}
+              onChange={onChangeFixFloatValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="irLabelAndValue">
           <div className="irLabel">Yearly Payment Frequency:</div>
           <div className="irValue">
-            <Dropdown></Dropdown>
+            <Dropdown
+              options={yearlyPaymentFrequencyOptions}
+              selectedValue={selectedYearlyPaymentFrequencyValue}
+              onChange={onChangeYearlyPaymentFrequencyValue}
+            ></Dropdown>
           </div>
         </div>
         <div className="irLabelAndValue">
@@ -86,7 +123,7 @@ const Inr = () => {
   return (
     <div className="irAddInrModalContentWrapper">
       <div className="headerWrapper">
-        <div className="header">Add New Interesr Rate</div>
+        <div className="header">Add New Interest Rate</div>
       </div>
       <div className="body">
         <AddInrModalContent></AddInrModalContent>

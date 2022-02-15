@@ -189,7 +189,7 @@ const SymbolTranslationGrid = () => {
         <button className="mtCancel secondary">Cancel</button>
       </div>
       <WarningModal
-        warningMessage="These are still invalid rates, Do you stil lwant to publish?"
+        warningMessage="These are still invalid rates, Do you still want to publish?"
         isModalOpen={isInvalidPublishRateWarningModalOpen}
         closeModal={toggleInvalidPublishRateWarningModal}
       ></WarningModal>

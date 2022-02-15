@@ -230,6 +230,34 @@ class ErProvider extends Component {
           { label: "USD", value: "usd" },
         ],
         selectedAddInrCurrencyValue: { label: "Select", value: "select" },
+        tenorOptions: [
+          { label: "Test1", value: "test1" },
+          { label: "Test2", value: "test2" },
+        ],
+        selectedTenorValue: { label: "Select", value: "select" },
+        addTypeOptions: [
+          { label: "Test1", value: "test1" },
+          { label: "Test2", value: "test2" },
+        ],
+        selectedAddTypeValue: { label: "Select", value: "select" },
+        dayCountBasisOptions: [
+          { label: "Test1", value: "test1" },
+          { label: "Test2", value: "test2" },
+        ],
+        selectedDayCountBasicValue: { label: "Select", value: "select" },
+        fixFloatOptions: [
+          { label: "Test1", value: "test1" },
+          { label: "Test2", value: "test2" },
+        ],
+        selectedFixFloatValue: { label: "Select", value: "select" },
+        yearlyPaymentFrequencyOptions: [
+          { label: "Test1", value: "test1" },
+          { label: "Test2", value: "test2" },
+        ],
+        selectedYearlyPaymentFrequencyValue: {
+          label: "Select",
+          value: "select",
+        },
       },
     };
   }
@@ -239,6 +267,32 @@ class ErProvider extends Component {
     addInrData.selectedAddInrCurrencyValue = selectedValue;
     this.setState({ addInrData });
   };
+  onChangeTenorValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedTenorValue = selectedValue;
+    this.setState({ addInrData });
+  };
+  onChangeAddTypeValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedAddTypeValue = selectedValue;
+    this.setState({ addInrData });
+  };
+  onChangeDayCountBasisValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedDayCountBasicValue = selectedValue;
+    this.setState({ addInrData });
+  };
+  onChangeYearlyPaymentFrequencyValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedYearlyPaymentFrequencyValue = selectedValue;
+    this.setState({ addInrData });
+  };
+  onChangeFixFloatValue = (selectedValue) => {
+    let addInrData = this.state.addInrData;
+    addInrData.selectedFixFloatValue = selectedValue;
+    this.setState({ addInrData });
+  };
+
   //================Threshold=========
   toggleThresholdModal = () => {
     let thresholdData = this.state.thresholdData;
@@ -541,6 +595,13 @@ class ErProvider extends Component {
           toggleVendorDataDownloadPromptModal: this
             .toggleVendorDataDownloadPromptModal,
           onConfirmVendorDataDownload: this.onConfirmVendorDataDownload,
+
+          onChangeTenorValue: (e) => this.onChangeTenorValue(e),
+          onChangeAddTypeValue: (e) => this.onChangeAddTypeValue(e),
+          onChangeDayCountBasisValue: (e) => this.onChangeDayCountBasisValue(e),
+          onChangeFixFloatValue: (e) => this.onChangeFixFloatValue(e),
+          onChangeYearlyPaymentFrequencyValue: (e) =>
+            this.onChangeYearlyPaymentFrequencyValue(e),
         }}
       >
         {this.props.children}

@@ -6,7 +6,7 @@ import WarningModal from "../../../../components/common/modal/warning/warning-mo
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 import Dropdown from "../../../../components/common/simple-dropdown/dropdown.jsx";
 import { ThresholdModal } from "./er-threshold/er-threshold.jsx";
-import {AddInrModal} from "./add-interest-rate/add-interest-rate.jsx"
+import { AddInrModal } from "./add-interest-rate/add-interest-rate.jsx";
 
 const SymbolTranslationGrid = () => {
   const context = useContext(myContext);
@@ -40,7 +40,7 @@ const SymbolTranslationGrid = () => {
     toggleVendorDataDownloadPromptModal,
     onConfirmVendorDataDownload,
     toggleThresholdModal,
-    toggleAddInrModal
+    toggleAddInrModal,
   } = {
     ...context.state.maintenanceScreenData,
     ...context,
@@ -185,8 +185,8 @@ const SymbolTranslationGrid = () => {
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
       <div className="didSaveAndCancelWrapper">
-        <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
+        <button className="mtSave primary">Save</button>
       </div>
       <WarningModal
         warningMessage="All Daily Discrete Index Dividends will be Published. Do you want to continue?"

@@ -159,11 +159,11 @@ const SymbolTranslationGrid = () => {
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
       <div className="erSaveAndCancelWrapper">
-        <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
+        <button className="mtSave primary">Save</button>
       </div>
       <WarningModal
-        warningMessage="These are still invalid rates, Do you stil lwant to publish?"
+        warningMessage="These are still invalid rates, Do you still want to publish?"
         isModalOpen={isInvalidPublishRateWarningModalOpen}
         closeModal={toggleInvalidPublishRateWarningModal}
       ></WarningModal>
