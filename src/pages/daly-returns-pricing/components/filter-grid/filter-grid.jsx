@@ -27,10 +27,8 @@ const FilterGrid = () => {
           colDefsMedalsIncluded={colDefs}
           defaultColDef={defaultColDef}
           gridHeight={160}
-          gridWidth={"80%"}
+          gridWidth={"100%"}
           rowSelection="multiple"
-          //pagination={true}
-          //paginationPageSize={100}
           rowHeight={22}
           headerHeight={33}
           onGridReady={onGridReady}

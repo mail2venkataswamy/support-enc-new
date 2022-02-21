@@ -22,11 +22,13 @@ class PraProvider extends Component {
         rowData: [],
         colDefs: [
           {
-            headerName: "Tier Level",
+            //headerName: "Tier Level",
             field: "tierLevel",
             width: 80,
             flex: 0,
             //cellStyle: staticCellStyle,
+            rowGroup: true,
+            hide: false,
           },
           {
             headerName: "Symbol",
@@ -52,6 +54,7 @@ class PraProvider extends Component {
             field: "missingReturn",
             width: 100,
             flex: 0,
+            aggFunc: "sum",
           },
           {
             headerName: "Low Volume",
@@ -64,7 +67,10 @@ class PraProvider extends Component {
             field: "precisionMismatch",
             width: 130,
             flex: 0,
-            rowGroup:true
+            //rowGroup: true,
+            //hide: true,
+            aggFunc: "sum",
+            enableValue: true,
           },
           {
             headerName: "Review Needed",
@@ -89,7 +95,7 @@ class PraProvider extends Component {
             field: "totalReturns",
             width: 110,
             flex: 0,
-            editable:true,
+            editable: true,
             cellStyle: staticCellStyle,
           },
         ],
@@ -104,10 +110,9 @@ class PraProvider extends Component {
         selectedGridRowData: [],
         selectedGridRows: [],
       },
-      dailyReturnsPricingState:{
+      dailyReturnsPricingState: {
         rowData: [],
         colDefs: [
-
           {
             headerName: "Tier Level",
             field: "tierLevel",
@@ -296,7 +301,6 @@ class PraProvider extends Component {
         selectedGridRowData: [],
         selectedGridRows: [],
       },
-      
     };
   }
 
@@ -320,12 +324,12 @@ class PraProvider extends Component {
   componentDidMount() {
     let dailyReturnsPricingState = this.state.dailyReturnsPricingState;
     dailyReturnsPricingState.rowData = dailyReturnsPricingData.rows;
-    
+
     let filterGridState = this.state.filterGridState;
     filterGridState.rowData = dailyReturnsFilterData.rows;
     this.setState({
       dailyReturnsPricingState,
-      filterGridState
+      filterGridState,
     });
   }
 

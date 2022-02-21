@@ -6,4 +6,10 @@
   box-sizing: border-box;
   border: none;
   margin-bottom: 10px;
+  .ag-theme-alpine .ag-row {
+    font-size: 11px;
+    background-color: #fff;
+    color: #000;
+    height: 22px !important;
+  }
 }
