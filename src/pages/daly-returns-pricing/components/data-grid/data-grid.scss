@@ -1,0 +1,23 @@
+.drpDailyReturnsPricingWrapper {
+  height: 70%;
+  background: #fff;
+  border-radius: 30px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  border: none;
+  .titleText {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    border: none;
+    margin: 13px !important;
+  }
+  .ag-theme-alpine .ag-row {
+    font-size: 11px;
+    background-color: #fff;
+    color: #000;
+    transform: none !important;
+    height: 22px !important;
+    position: relative;
+  }
+}

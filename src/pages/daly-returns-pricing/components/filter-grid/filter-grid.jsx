@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./st-grid.scss";
+import "./filter-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/drp-context.jsx";
 
@@ -7,7 +7,7 @@ const FilterGrid = () => {
   const context = useContext(myContext);
 
   const {
-    filterRowData,
+    rowData,
     colDefs,
     defaultColDef,
     onGridReady,
@@ -15,7 +15,7 @@ const FilterGrid = () => {
     onSelectionChanged,
     onCellValueChanged,
   } = {
-    ...context.state.filterScreenState,
+    ...context.state.filterGridState,
     ...context,
   };
   useEffect(() => {}, []);
@@ -23,14 +23,14 @@ const FilterGrid = () => {
     <>
       <div className="drpFilterGridWrapper">
         <Aggrid
-          rowData={filterRowData}
+          rowData={rowData}
           colDefsMedalsIncluded={colDefs}
           defaultColDef={defaultColDef}
-          gridHeight={150}
-          gridWidth={"auto"}
+          gridHeight={160}
+          gridWidth={"80%"}
           rowSelection="multiple"
-          pagination={true}
-          paginationPageSize={100}
+          //pagination={true}
+          //paginationPageSize={100}
           rowHeight={22}
           headerHeight={33}
           onGridReady={onGridReady}

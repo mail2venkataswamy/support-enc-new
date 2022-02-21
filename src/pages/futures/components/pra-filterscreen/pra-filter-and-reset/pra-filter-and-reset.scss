@@ -1,0 +1,14 @@
+.praFilterAndResetButtonWrapper {
+  text-align: center;
+  position: absolute;
+  display: flex;
+  bottom: 13px;
+  left: 30%;
+}
+#praFilter-container {
+  display: inline-block;
+  margin-right: 10px !important;
+}
+#praReset-container {
+  display: inline-block;
+}

@@ -81,11 +81,20 @@ const NavBar = () => {
           <NavLink to="/ps" isActive={true}>
             PS
             </NavLink>
+            </li>
+            <li className="pages">
           <NavLink to="/ir" isActive={true}>
             IR
           </NavLink>
+          </li>
+          <li className="pages">
           <NavLink to="/did" isActive={true}>
             DID
+          </NavLink>
+        </li>
+        <li className="pages">
+          <NavLink to="/drp" isActive={true}>
+            DRP
           </NavLink>
         </li>
       </ul>

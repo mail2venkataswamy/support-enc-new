@@ -1,0 +1,24 @@
+.productWrapper {
+  padding-left: 15px !important;
+  .praProductTypeLabelAndValue,
+  .praCuspinLabelAndValue,
+  .praSymbolToLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+  }
+  .praProductTypeLabel,
+  .praCuspinLabel,
+  .praSymbolToLabel {
+    width: 30%;
+  }
+  .praProductTypeValue,
+  .praCuspinValue,
+  .praSymbolToValue {
+    width: 60%;
+  }
+  .praCuspinLabelAndValue input,
+  .praSymbolToLabelAndValue input {
+    width: 100%;
+  }
+}

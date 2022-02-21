@@ -1,0 +1,54 @@
+import React, { useContext } from "react";
+import TaContext from "../../../../../components/context/pra-context.jsx";
+import propTypes from "prop-types";
+import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.jsx";
+import "./pra-price-source.scss";
+
+const PriceSource = () => {
+  const context = useContext(TaContext);
+  const {
+    vendorOptins,
+    onChangeVendorValue,
+    selectedVendorValue,
+    exchangeOptions,
+    onChangeExchangeValue,
+    selectedExchangeValue,
+  } = {
+    ...context.state.filterPanelData,
+    ...context,
+  };
+  return (
+    <>
+      <fieldset className="priceSourceWrapper">
+        <legend>Price Source</legend>
+        <div className="praVendorLabelAndValueWrapper">
+          <div className="praVendorLabel">Vendor:</div>
+          <div className="praVendorValue">
+            <Dropdown
+              type="single"
+              options={vendorOptins}
+              onChange={onChangeVendorValue}
+              selectedValue={selectedVendorValue}
+            ></Dropdown>
+          </div>
+        </div>
+        <div className="praExchangeLabelAndValueWrapper">
+          <div className="praExchangeLabel">Exchange:</div>
+          <div className="praExchangeValue">
+            <Dropdown
+              type="single"
+              options={exchangeOptions}
+              onChange={onChangeExchangeValue}
+              selectedValue={selectedExchangeValue}
+            ></Dropdown>
+          </div>
+        </div>
+      </fieldset>
+    </>
+  );
+};
+
+export default PriceSource;
+
+PriceSource.propTypes = {};
+PriceSource.defaultProps = {};

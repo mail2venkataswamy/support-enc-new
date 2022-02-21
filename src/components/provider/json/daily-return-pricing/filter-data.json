@@ -1,0 +1,57 @@
+{
+    "success": true,
+    "rows": [
+      {
+          "tierLevel":1,
+          "symbol":"",
+          "cusip":"",
+          "securityType":"",
+          "missingReturn":1,
+          "lowVolume":0,
+          "precisionMismatch":0,
+          "reviewNeeded":1,
+          "secondaryReviewNeeded":0,
+          "totalFlagged":2,
+          "totalReturns":1
+      },
+      {
+        "tierLevel":2,
+        "symbol":"",
+        "cusip":"",
+        "securityType":"",
+        "missingReturn":1,
+        "lowVolume":0,
+        "precisionMismatch":1,
+        "reviewNeeded":1,
+        "secondaryReviewNeeded":0,
+        "totalFlagged":2,
+        "totalReturns":1
+    },
+    {
+        "tierLevel":3,
+        "symbol":"",
+        "cusip":"",
+        "securityType":"",
+        "missingReturn":1,
+        "lowVolume":0,
+        "precisionMismatch":2,
+        "reviewNeeded":1,
+        "secondaryReviewNeeded":0,
+        "totalFlagged":2,
+        "totalReturns":1
+    },
+    {
+        "tierLevel":4,
+        "symbol":"",
+        "cusip":"",
+        "securityType":"",
+        "missingReturn":1,
+        "lowVolume":0,
+        "precisionMismatch":0,
+        "reviewNeeded":1,
+        "secondaryReviewNeeded":0,
+        "totalFlagged":2,
+        "totalReturns":1
+    }
+    ]
+}

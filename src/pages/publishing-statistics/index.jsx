@@ -10,7 +10,7 @@ const PubishingStatistics = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
   return (
     <PsProvider>
-<PsContainer></PsContainer>
+    <PsContainer></PsContainer>
     </PsProvider>
   );
 };
