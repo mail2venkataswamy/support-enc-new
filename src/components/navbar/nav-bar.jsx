@@ -80,14 +80,14 @@ const NavBar = () => {
         <li className="pages">
           <NavLink to="/ps" isActive={true}>
             PS
-            </NavLink>
-            </li>
-            <li className="pages">
+          </NavLink>
+        </li>
+        <li className="pages">
           <NavLink to="/ir" isActive={true}>
             IR
           </NavLink>
-          </li>
-          <li className="pages">
+        </li>
+        <li className="pages">
           <NavLink to="/did" isActive={true}>
             DID
           </NavLink>
@@ -95,6 +95,11 @@ const NavBar = () => {
         <li className="pages">
           <NavLink to="/drp" isActive={true}>
             DRP
+          </NavLink>
+        </li>
+        <li className="pages">
+          <NavLink to="/peo" isActive={true}>
+            PEO
           </NavLink>
         </li>
       </ul>

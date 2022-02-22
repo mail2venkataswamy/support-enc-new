@@ -1,12 +1,12 @@
-@import "../../light.scss";
-#mainSt {
+@import "../../../light.scss";
+#mainPeo {
   display: flex;
   height: 740px;
   width: 99%;
   fieldset {
     border: none;
   }
-  #stFilterscreen {
+  #peoFilterscreen {
     width: 30%;
     float: left;
     background: white;
@@ -16,7 +16,16 @@
     position: relative;
     height: 96%;
   }
-  #stThresholdGrid {
+  #peoDerivativeGrid {
+    width: 98%;
+    height: 96%;
+    background: $white;
+    border-radius: 30px;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    border: none;
+  }
+  #peoPlaceHolderGrid {
     width: 98%;
     height: 96%;
     background: $white;
@@ -85,7 +94,7 @@
     text-align: center;
     transition: all 0.2s;
   }
-  .stFilterPanelToggle {
+  .peoFilterPanelToggle {
     position: relative;
     right: 55px;
     top: 20px;
@@ -93,25 +102,25 @@
     height: 30px;
     width: 1px;
   }
-  .stFilterPanelToggle p {
+  .peoFilterPanelToggle p {
     color: #6fabce;
     font-weight: bold;
   }
-  .stFilterPanelUnToggle {
+  .peoFilterPanelUnToggle {
     position: relative;
     top: 20px;
     width: 15px;
     height: 647px;
     background: #99bccf;
   }
-  .stFilterPanelUnToggleWrapper {
+  .peoFilterPanelUnToggleWrapper {
     height: 100%;
     width: 20px;
     cursor: pointer;
     color: black;
     font-weight: bold;
   }
-  .stFilterPanelUnToggle p {
+  .peoFilterPanelUnToggle p {
     writing-mode: vertical-rl;
     text-orientation: mixed;
     position: relative;

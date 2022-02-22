@@ -1,6 +1,6 @@
 import React from "react";
 import Suggestions from "../../../../components/common/suggestions/suggestions.jsx";
-import "./st-input-suggestions.scss";
+import "./peo-input-suggestions.scss";
 import PropTypes from "prop-types";
 const InputSuggestion = (props) => {
   return (

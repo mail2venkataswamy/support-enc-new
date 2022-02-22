@@ -1,26 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./st-grid.scss";
+import "./peo-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/st-context.jsx";
-import { AddOrModifySt } from "./add-st/add-st.jsx";
+import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
-    useState(false);
+  const [
+    isRecordMustBeselectedModalOpen,
+    toggleRecordMustBeSelectedModal,
+  ] = useState(false);
 
   const {
-    priceSystemAlertStateRowData,
+    rowData,
     colDefs,
     defaultColDef,
     onBtPrint,
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    toggleAddStModal,
     selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
@@ -29,8 +29,9 @@ const ThresholdGrid = () => {
     toggleDeletePromptModal,
     onCellValueChanged,
     toggleModifyStModal,
+    showPlaceHolderScreen,
   } = {
-    ...context.state.gridScreenData,
+    ...context.state.gridState,
     ...context,
   };
   useEffect(() => {
@@ -38,35 +39,46 @@ const ThresholdGrid = () => {
     var div = document.createElement("div");
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
-    div1.innerHTML = `<div class="noOfRecs">Total number of records:${priceSystemAlertStateRowData.length}</div>`;
+    div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
     ele.append(div);
     ele.append(div1);
   }, []);
-  let isGridPopulated =
-    priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
+  let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
-      <div className="stGridHeader">Symbol Translation Grid</div>
-      <div className="stHeaderActions">
-        <div className="stLeftHeaderSection">
-          <button onClick={toggleAddStModal}>Add</button>
-          <button onClick={toggleModifyStModal}>Modify</button>
-          <button
-            onClick={
-              isGridPopulated
-                ? selectedGridRows && selectedGridRows.length > 0
-                  ? toggleDeletePromptModal
-                  : () =>
-                      toggleRecordMustBeSelectedModal(
-                        !isRecordMustBeselectedModalOpen
-                      )
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Delete
-          </button>
+      <div className="peoGridHeader">Derivative</div>
+      <div className="messageAndNavigationWrapper">
+        <div className="title">Messages</div>
+        <div className="close">
+          <button onClick={showPlaceHolderScreen}>X</button>
         </div>
-        <div className="stRighttHeaderSection">
+      </div>
+      <div className="peoHeaderActions">
+        <div className="peoLeftHeaderSection">
+          <div className="peoLabelAndValue">
+            <div className="peoLabel"></div>
+            <label for="ca">Corporate Action</label>
+            <div className="peoValue">
+              <input
+              //checked={isCorporateActionChecked}
+              //onChange={onChangeCorporateAction}
+              ></input>
+            </div>
+          </div>
+          <button>Asssociated Products</button>
+          <button>Devidend Info</button>
+          <button>Exchange Info</button>
+          <button>SOO Info</button>
+          <button>Save</button>
+          <button>Cancel</button>
+          <button>Init VI Capture</button>
+          <button>Export Derivative</button>
+          <button>Review Final</button>
+          <button>Review Contracts</button>
+          <button>Review Risk</button>
+          <button>Borrow Cost Limit</button>
+        </div>
+        <div className="peoRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -96,9 +108,9 @@ const ThresholdGrid = () => {
           </button>
         </div>
       </div>
-      <div className="stGridWrapper"></div>
+      <div className="peoGridWrapper"></div>
       <Aggrid
-        rowData={priceSystemAlertStateRowData}
+        rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
         gridHeight={590}
@@ -113,7 +125,6 @@ const ThresholdGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
       />
-      <AddOrModifySt></AddOrModifySt>
       <WarningModal
         warningMessage="Grid must be populated"
         isModalOpen={isWarningModalOpen}
@@ -130,7 +141,7 @@ const ThresholdGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="stSaveAndCancelWrapper">
+      <div className="peoSaveAndCancelWrapper">
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>

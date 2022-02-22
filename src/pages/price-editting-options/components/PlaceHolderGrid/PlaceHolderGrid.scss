@@ -1,0 +1,17 @@
+.actionHoldergridContainer {
+  position: relative;
+  height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  justify-content: flex-start;
+  height: 40px;
+  width: 100%;
+  background-color: #d6e4f2;
+  button {
+    background-color: transparent;
+    border: none !important;
+    outline: none;
+  }
+}
