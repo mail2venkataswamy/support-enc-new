@@ -1,26 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./pra-threshold-grid.scss";
+import "./peo-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/pra-context.jsx";
-import { AddThresholdsModal } from "./pra-add-thresholds/pra-add-thresholds.jsx";
+import myContext from "../../../../components/context/futures-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
-    useState(false);
+  const [
+    isRecordMustBeselectedModalOpen,
+    toggleRecordMustBeSelectedModal,
+  ] = useState(false);
 
   const {
-    priceSystemAlertStateRowData,
+    rowData,
     colDefs,
     defaultColDef,
     onBtPrint,
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    toggleAddThresholdsModal,
     selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
@@ -28,8 +28,10 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
+    toggleModifyStModal,
+    showPlaceHolderScreen,
   } = {
-    ...context.state.gridScreenData,
+    ...context.state.gridState,
     ...context,
   };
   useEffect(() => {
@@ -37,34 +39,49 @@ const ThresholdGrid = () => {
     var div = document.createElement("div");
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
-    div1.innerHTML = `<div class="noOfRecs">Total number of records:${priceSystemAlertStateRowData.length}</div>`;
+    div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
     ele.append(div);
     ele.append(div1);
   }, []);
-  let isGridPopulated =
-    priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
+  let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
-      <div className="praGridHeader">Repository Price Adjustments</div>
-      <div className="praHeaderActions">
-        <div className="praLeftHeaderSection">
-          <button onClick={toggleAddThresholdsModal}>Add</button>
-          <button
-            onClick={
-              isGridPopulated
-                ? selectedGridRows && selectedGridRows.length > 0
-                  ? toggleDeletePromptModal
-                  : () =>
-                      toggleRecordMustBeSelectedModal(
-                        !isRecordMustBeselectedModalOpen
-                      )
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Delete
+      <div className="futuresGridHeader">Future Contracts</div>
+      <div className="messageAndNavigationWrapper">
+        <div className="title">Messages</div>
+        <div className="close">
+          <button onClick={showPlaceHolderScreen} className="closeButton">
+            X
           </button>
         </div>
-        <div className="praRighttHeaderSection">
+      </div>
+      <div className="futuresHeaderActions">
+        <div className="futuresLeftHeaderSection">
+          <div className="futuresLabelAndValue">
+            <div className="futuresLabel"></div>
+            <label for="ca">Symbol:</label>
+            <div className="futuresValue">
+              <input
+              //checked={isCorporateActionChecked}
+              //onChange={onChangeCorporateAction}
+              ></input>
+            </div>
+          </div>
+          <button>Deliverables</button>
+          <button>Devidend Info</button>
+          <button>Exchange Info</button>
+          <button>Save</button>
+          <button>Cancel</button>
+          <button>Init VI Capture</button>
+          <button>Export Derivative</button>
+          <button>Review Futures</button>
+          <button>Review OOF</button>
+          <button>Decimal Format</button>
+          <button>Implied Format</button>
+          <button>Ignore Missing Exch Flag</button>
+          <button>Flag Missing Exch Flag</button>
+        </div>
+        <div className="futuresRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -94,12 +111,12 @@ const ThresholdGrid = () => {
           </button>
         </div>
       </div>
-      <div className="praGridWrapper"></div>
+      <div className="futuresGridWrapper"></div>
       <Aggrid
-        rowData={priceSystemAlertStateRowData}
+        rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={590}
+        gridHeight={553}
         gridWidth={"auto"}
         rowSelection="multiple"
         pagination={true}
@@ -111,7 +128,6 @@ const ThresholdGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
       />
-      <AddThresholdsModal></AddThresholdsModal>
       <WarningModal
         warningMessage="Grid must be populated"
         isModalOpen={isWarningModalOpen}
@@ -128,7 +144,7 @@ const ThresholdGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="praSaveAndCancelWrapper">
+      <div className="futuresSaveAndCancelWrapper">
         <button className="mtSave primary">Save</button>
         <button className="mtCancel secondary">Cancel</button>
       </div>

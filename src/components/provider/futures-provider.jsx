@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
-import MyContext from "../context/pra-context.jsx";
+import MyContext from "../context/futures-context.jsx";
+import PeoData from "./json/futures/futures.json";
+import EditCatData from "./json/futures/edit-cat-dashboard.json";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -12,136 +14,38 @@ function setNormal(api) {
 }
 const staticCellStyle = { "background-color": "yellow" };
 
-class PraProvider extends Component {
+class StProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
       initialPanelState: {},
-      initialPicsThresholdDate: {},
-      initialAddThresholdsData: {},
-      filterPanelData: {
-        vendorOptins: [
-          { label: "IDSI", value: "idsi" },
-          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
-          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
-          { label: "Exchange Files", value: "Exchange Files" },
-          { label: "ICE Data Services", value: "iceDataServices" },
-        ],
-        selectedVendorValue: { label: "All", value: "all" },
-        exchangeOptions: [
-          { label: "CBOE Cboe options Exchange", value: "cboe" },
-          { label: "CBT Chicago Board of Trade", value: "CBT" },
-          { label: "CME Chicago Mercantile Exchange", value: "CME" },
-          { label: "CMPST Composite Exchange", value: "CMPST" },
-        ],
-        selectedExchangeValue: { label: "All", value: "all" },
-        symbolToSearchValue: "",
-        symbolToData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        symbolToSuggestionResult: [],
-        symbolToValue: "",
-        cuspinSearchValue: "",
-        cuspinData: [
-          { id: 1, value: "AA001200" },
-          { id: 2, value: "AA001201" },
-          { id: 3, value: "AA001202" },
-          { id: 4, value: "AA001203" },
-          { id: 5, value: "AB001204" },
-          { id: 6, value: "BB001205" },
-          { id: 7, value: "BA001206" },
-          { id: 8, value: "CC001207" },
-          { id: 9, value: "BC001208" },
-          { id: 10, value: "CA001209" },
-        ],
-        cuspinSuggestionResult: [],
-        cuspinValue: "",
-        selectedProductTypeValue: { label: "Select", value: "Select" },
-        productTypeOptions: [
-          { label: "Debt", value: "debt" },
-          { label: "Future", value: "future" },
-          { label: "Option", value: "option" },
-        ],
-        isFilterScreenVisible: true,
-        classificationOptions: [
-          { label: "Equity", value: "equity" },
-          { label: "Currency", value: "currency" },
-          { label: "Future", value: "future" },
-          { label: "Index/Other", value: "indexOrOther" },
-        ],
-        selectedClassificationValue: { label: "Select", value: "Select" },
+      showDerivativeGrid: false,
+      showEditGridDashBoard: false,
+      showPlaceHolderGrid: true,
+      showDeliverablePriceEditGrid: false,
+      tasksData: {
+        isTasksModalOpen: false,
       },
-      gridScreenData: {
-        priceSystemAlertStateRowData: [],
+      deliverablePriceEditState: {
+        rowData: EditCatData.rows,
         colDefs: [
           {
-            width: 60,
-            headerCheckboxSelection: true,
-            headerCheckboxSelectionFilteredOnly: true,
-            checkboxSelection: true,
+            headerName: "Rule",
+            field: "rule",
+            width: "auto",
             flex: 0,
           },
           {
-            headerName: "#",
-            field: "#",
-            width: 40,
-            flex: 0,
+            headerName: "Final vendor Flagged",
+            field: "finalvendorFlagged",
+            width: "auto",
+            //flex: 0,
           },
           {
-            headerName: "Symbol",
-            field: "symbol",
-            width: 100,
-            flex: 0,
-          },
-          {
-            headerName: "Symbol Description",
-            field: "symbolDesc",
-            width: 150,
-            flex: 0,
-          },
-
-          {
-            headerName: "Cusip",
-            field: "cusip",
-            width: 100,
-            flex: 0,
-          },
-          {
-            headerName: "Product Type",
-            field: "productType",
-            width: 120,
-            flex: 0,
-          },
-          {
-            headerName: "Classification",
-            field: "classification",
-            width: 130,
-            flex: 0,
-          },
-          {
-            headerName: "Vendor",
-            field: "vendor",
-            width: 90,
-            flex: 0,
-          },
-          { headerName: "Exchange", field: "exchange", width: 90, flex: 0 },
-
-          {
-            headerName: "Price Adjustor",
-            field: "priceAdjustor",
-            width: 130,
-            flex: 0,
-            editable: true,
-            cellStyle: staticCellStyle,
+            headerName: "Final Review Needed",
+            field: "finalReviewNeeded",
+            width: "auto",
+            //flex: 0,
           },
         ],
         defaultColDef: {
@@ -152,60 +56,43 @@ class PraProvider extends Component {
           rowSelection: "multiple",
           flex: 1,
         },
-
-        disableFromDate: new Date(),
-        disableFromTimeOptions: [
-          { label: "01:00", value: "01:00" },
-          { label: "02:00", value: "02:00" },
-        ],
-        disableToDate: new Date(),
-        disableToTimeOptions: [
-          { label: "01:00", value: "01:00" },
-          { label: "02:00", value: "02:00" },
-        ],
-        selectedToTime: { label: "00:00", value: "00:00" },
-        selectedFromTime: { label: "00:00", value: "00:00" },
-        isDisablePicsModalOpen: false,
         selectedGridRowData: [],
         selectedGridRows: [],
-        isDeleteGridRecordPromptModalOpen: false,
       },
-      addThresholdsData: {
-        isAddThresholdsModalOpen: false,
-        vendorOptins: [
-          { label: "IDSI", value: "idsi" },
-          { label: "Thomson Reuters Corp.", value: "Thomson Reuters Corp." },
+      editCatDashboardState: {
+        rowData: EditCatData.rows,
+        colDefs: [
           {
-            label: "Markit Financial Information Services",
-            value: "Markit Financial Information Services",
+            headerName: "Rule",
+            field: "rule",
+            width: "auto",
+            flex: 0,
           },
           {
-            label: "Miami International Securities Exchange",
-            value: "Miami International Securities Exchange",
+            headerName: "Final vendor Flagged",
+            field: "finalvendorFlagged",
+            width: "auto",
+            //flex: 0,
           },
-          { label: "Bloomberg Finance L.P.", value: "Bloomberg Finance L.P." },
-          { label: "Fidessa Group plc", value: "Fidessa Group plc" },
-          { label: "CE DATA SERVICES", value: "CE DATA SERVICES" },
-          { label: "Exchange Files", value: "Exchange Files" },
-          { label: "BBG/IDC Vendor Group", value: "BBG/IDC Vendor Group" },
-          { label: "SunGard ORM", value: "SunGard ORM" },
           {
-            label: "Customized Options Pricing Service",
-            value: "Customized Options Pricing Service",
+            headerName: "Final Review Needed",
+            field: "finalReviewNeeded",
+            width: "auto",
+            //flex: 0,
           },
-          { label: "Bloomberg Polarlake", value: "Bloomberg Polarlake" },
-          { label: "CBOE Indicative Price", value: "CBOE Indicative Price" },
-          { label: "GTreasury SS, LLC", value: "GTreasury SS, LLC" },
-          { label: "Baton Systems Inc.", value: "Baton Systems Inc." },
         ],
-        selectedVendorValue: { label: "All", value: "all" },
-        exchangeOptions: [
-          { label: "CBOE Cboe options Exchange", value: "cboe" },
-          { label: "CBT Chicago Board of Trade", value: "CBT" },
-          { label: "CME Chicago Mercantile Exchange", value: "CME" },
-          { label: "CMPST Composite Exchange", value: "CMPST" },
-        ],
-        selectedExchangeValue: { label: "All", value: "all" },
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
+      filtersState: {
         symbolToSearchValue: "",
         symbolToData: [
           { id: 1, value: "AA001200" },
@@ -221,8 +108,40 @@ class PraProvider extends Component {
         ],
         symbolToSuggestionResult: [],
         symbolToValue: "",
-        cuspinSearchValue: "",
-        cuspinData: [
+
+        selectedProductTypeValue: { label: "Select", value: "Select" },
+        productTypeOptions: [
+          { label: "Currency", value: "currency" },
+          { label: "Equity", value: "equity" },
+          { label: "Index/Other", value: "indexOrOther" },
+          { label: "OTC Options", value: "otcOptions" },
+          { label: "Debt", value: "debt" },
+          { label: "Future", value: "future" },
+          { label: "Option", value: "option" },
+          { label: "Warrant", value: "warrant" },
+        ],
+        isFilterScreenVisible: true,
+        classificationOptions: [
+          { label: "Equity", value: "equity" },
+          { label: "Currency", value: "currency" },
+          { label: "Future", value: "future" },
+          { label: "Index/Other", value: "indexOrOther" },
+        ],
+        selectedClassificationValue: { label: "Select", value: "Select" },
+        SubClassificationOptions: [
+          { label: "Flex", value: "flex" },
+          { label: "Standard", value: "standard" },
+        ],
+        selectedSubClassificationValue: { label: "Select", value: "Select" },
+
+        activityOptions: [
+          { label: "CURRENT", value: "curr" },
+          { label: "HISTORICAL", value: "hist" },
+        ],
+        activityValue: { label: "CURRENT", value: "curr" },
+        selectedActivityDate: new Date(),
+        exchangeSearchValue: "",
+        exchangeData: [
           { id: 1, value: "AA001200" },
           { id: 2, value: "AA001201" },
           { id: 3, value: "AA001202" },
@@ -234,120 +153,283 @@ class PraProvider extends Component {
           { id: 9, value: "BC001208" },
           { id: 10, value: "CA001209" },
         ],
-        cuspinSuggestionResult: [],
-        cuspinValue: "",
-        selectedProductTypeValue: { label: "Select", value: "Select" },
-        productTypeOptions: [
-          { label: "Equity", value: "equity" },
-          { label: "Currency", value: "currency" },
-          { label: "Debt", value: "debt" },
-          { label: "Future", value: "future" },
-          { label: "Index/Other", value: "indexOrOther" },
-          { label: "Money Markey Mutual Funds", value: "mmmf" },
-          { label: "Option", value: "option" },
-          { label: "Warrant", value: "warrant" },
+        exchangeSuggestionResult: [],
+        exchangeValue: "",
+        isFmsChecked: false,
+        isCorporateActionChecked: false,
+        isLateSeriesChecked: false,
+        clearedOptions: [
+          { label: "Cleared", value: "cleared" },
+          { label: "Not Cleared", value: "notCleared" },
         ],
-        changeCountOptions: [
-          { label: "Y", value: "Y" },
-          { label: "N", value: "N" },
+        selectedClearedValue: { label: "Select", value: "select" },
+        statusOptions: [],
+        categoryLevelOptions: [],
+        reviewNeededOptions: [],
+        selectedStatusValue: { label: "Select", value: "select" },
+        selectedCategoryLevelValue: { label: "Select", value: "select" },
+        selectedReviewNeededValue: { label: "Select", value: "select" },
+      },
+      gridState: {
+        rowData: [],
+        colDefs: [
+          {
+            width: 60,
+            headerCheckboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
+            flex: 0,
+          },
+          {
+            headerName: "Ignore Missing",
+            field: "ignoreMissing",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Symbol",
+            field: "symbol",
+            width: 80,
+            flex: 0,
+          },
+          {
+            headerName: "Description",
+            field: "description",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "Delivery Class",
+            field: "deliveryClass",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Contract Date",
+            field: "contractDate",
+            width: 100,
+            flex: 0,
+          },
+
+          {
+            headerName: "Expiration Date",
+            field: "expirationDate",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Currency",
+            field: "currency",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Refinitiv Price",
+            field: "refinitivPrice",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Price",
+            field: "bloombergePrice",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Price",
+            field: "icePrice",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Exchange Name",
+            field: "exchangeName",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Exchange Price",
+            field: "exchangePrice",
+            width: 90,
+            flex: 0,
+          },
+          {
+            headerName: "Previous Dirty price",
+            field: "previousDirtyprice",
+            width: 90,
+            flex: 0,
+          },
+
+          {
+            headerName: "EOD Override Price",
+            field: "eodOverridePrice",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Final Price",
+            field: "eodFinalPrice",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Timestamp",
+            field: "eodTimestamp",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Final Adjusted Dirty Price",
+            field: "eodFinalAdjustedDirtyPrice",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "EOD User Id",
+            field: "eodUserid",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "prev CTD Cusip",
+            field: "prevCtdCusip",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Futures",
+            field: "futures",
+            width: 100,
+            flex: 0,
+          },
         ],
-        selectedChangeCountValue: { label: "Y", value: "Y" },
-        preMarketThresholdValue: "",
-        postMarketThresholdValue: "",
-        MarketThresholdValue: "",
-        classificationOptions: [
-          { label: "Equity", value: "equity" },
-          { label: "Currency", value: "currency" },
-          { label: "Future", value: "future" },
-          { label: "Index/Other", value: "indexOrOther" },
-        ],
-        selectedClassificationValue: { label: "Select", value: "Select" },
-        selectedLpafValue: "",
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
       },
     };
   }
-  onChangeDisableFromDate = (date) => {
-    let gridScreenData = this.state.gridScreenData;
-    console.log(gridScreenData.disableFromDate);
-    gridScreenData.disableFromDate = date;
+  toggleTasksModal = () => {
+    let tasksData = this.state.tasksData;
+    tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
     this.setState({
-      gridScreenData,
+      tasksData,
     });
   };
-  onChangeDisableFromTime = (time) => {
-    let gridScreenData = this.state.gridScreenData;
-    console.log(gridScreenData.selectedFromTime);
-    gridScreenData.selectedFromTime = time;
+  onClickEditDashBoardGrid = () => {
     this.setState({
-      gridScreenData,
+      showEditGridDashBoard: true,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
     });
   };
-  onChangeDisableToDate = (date) => {
-    let gridScreenData = this.state.gridScreenData;
-    console.log(gridScreenData.disableToDate);
-    gridScreenData.disableToDate = date;
-    this.setState({
-      gridScreenData,
-    });
-  };
-  onChangeDisableToTime = (time) => {
-    let gridScreenData = this.state.gridScreenData;
-    console.log(gridScreenData.selectedToTime);
-    gridScreenData.selectedToTime = time;
-    this.setState({
-      gridScreenData,
-    });
-  };
-  toggleDisablePicsModal = () => {
-    let gridScreenData = this.state.gridScreenData;
-    gridScreenData.isDisablePicsModalOpen =
-      !gridScreenData.isDisablePicsModalOpen;
-    this.setState({
-      gridScreenData,
-    });
-  };
-  onChangeExchangeValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedExchangeValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeVendorValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedVendorValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeCuspinValue = (e) => {
-    let data = this.state.filterPanelData.cuspinData;
-    let filterPanelData = this.state.filterPanelData;
 
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    filterPanelData.cuspinSuggestionResult = result;
-    filterPanelData.cuspinSearchValue = e.target.value;
-    filterPanelData.cuspinValue = e.target.value;
-
+  showPlaceHolderScreen = () => {
     this.setState({
-      filterPanelData,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showEditGridDashBoard: false,
     });
   };
-  onClickCuspinSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.cuspinValue = selectedValue;
-    filterPanelData.cuspinSearchValue = "";
+  onClickFutureContracts = () => {
     this.setState({
-      filterPanelData,
+      showDerivativeGrid: true,
+      showPlaceHolderGrid: false,
+      showDeliverablePriceEditGrid: false,
+    });
+  };
+  onClickDeliverablePriceEditGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDeliverablePriceEditGrid: true,
+    });
+  };
+
+  onCloseEditcatDashboard = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDeliverablePriceEditGrid: false,
+    });
+  };
+  onCloseDeliverablePriceEditGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDeliverablePriceEditGrid: false,
+    });
+  };
+  onChangeStatusValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedStatusValue = selectedValue;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeCategoryLevelValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedCategoryLevelValue = selectedValue;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeReviewNeededValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedReviewNeededValue = selectedValue;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeClearedValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedClearedValue = selectedValue;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeFms = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isFmsChecked = !filtersState.isFmsChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeCorporateAction = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isCorporateActionChecked = !filtersState.isCorporateActionChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeLateSeries = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isLateSeriesChecked = !filtersState.isLateSeriesChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+
+  onChangeActivityValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.activityValue = selectedValue;
+    this.setState({
+      filtersState,
     });
   };
   onChangeSymbolToValue = (e) => {
-    let data = this.state.filterPanelData.symbolToData;
-    let filterPanelData = this.state.filterPanelData;
+    let data = this.state.filtersState.symbolToData;
+    let filtersState = this.state.filtersState;
 
     let result =
       e.target.value &&
@@ -358,23 +440,113 @@ class PraProvider extends Component {
           .includes(e.target.value.trim().toLowerCase());
       });
     console.log(result);
-    filterPanelData.symbolToSuggestionResult = result;
-    filterPanelData.symbolToSearchValue = e.target.value;
-    filterPanelData.symbolToValue = e.target.value;
+    filtersState.symbolToSuggestionResult = result;
+    filtersState.symbolToSearchValue = e.target.value;
+    filtersState.symbolToValue = e.target.value;
 
     this.setState({
-      filterPanelData,
+      filtersState,
     });
   };
   onClickSymbolToSuggestionItem = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.symbolToValue = selectedValue;
-    filterPanelData.symbolToSearchValue = "";
+    let filtersState = this.state.filtersState;
+    filtersState.symbolToValue = selectedValue;
+    filtersState.symbolToSearchValue = "";
     this.setState({
-      filterPanelData,
+      filtersState,
+    });
+  };
+  onChangeExchangeValue = (e) => {
+    let data = this.state.filtersState.exchangeData;
+    let filtersState = this.state.filtersState;
+
+    let result =
+      e.target.value &&
+      data &&
+      data.filter((item) => {
+        return item.value
+          .toLowerCase()
+          .includes(e.target.value.trim().toLowerCase());
+      });
+    filtersState.exchangeSuggestionResult = result;
+    filtersState.exchangeSearchValue = e.target.value;
+    filtersState.exchangeValue = e.target.value;
+
+    this.setState({
+      filtersState,
+    });
+  };
+  onClickExchangeSuggestionItem = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.exchangeValue = selectedValue;
+    filtersState.exchangeSearchValue = "";
+    this.setState({
+      filtersState,
     });
   };
 
+  onToggleFilterScreen = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isFilterScreenVisible = !filtersState.isFilterScreenVisible;
+    this.setState({ filtersState });
+  };
+  onClickReset = () => {
+    let filtersState = this.state.filtersState;
+    let initialPanelState = this.state.initialPanelState;
+    let data = { ...filtersState, ...initialPanelState };
+    console.log("final object is", data);
+    this.setState({ filtersState: data });
+  };
+  onChangeProductTypeValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedProductTypeValue = selectedValue;
+    if (selectedValue.value !== "option") {
+      filtersState.isCallPutDisabled = true;
+    } else {
+      filtersState.isCallPutDisabled = false;
+    }
+    this.setState({ filtersState });
+  };
+  onChangeClassificationValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedClassificationValue = selectedValue;
+    this.setState({ filtersState });
+  };
+  onChangeSubClassificationValue = (selectedValue) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedSubClassificationValue = selectedValue;
+    this.setState({ filtersState });
+  };
+  onClickFiler = () => {
+    let gridState = this.state.gridState;
+    let rowData = this.getFilteredGridData();
+    gridState.rowData = rowData;
+    this.onClickFutureContracts();
+    this.setState({
+      gridState,
+    });
+  };
+  onRefreshMaintenanceGridData = () => {
+    let gridState = this.state.gridState;
+    gridState.rowData = [];
+    this.setState({
+      gridState,
+    });
+
+    setTimeout(() => {
+      this.loadDataOnRefresh();
+    }, 3000);
+  };
+
+  setActivityDate = (date) => {
+    let filtersState = this.state.filtersState;
+    filtersState.selectedActivityDate = date;
+    this.setState({
+      filtersState,
+    });
+  };
+
+  //Ag grid
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -391,105 +563,15 @@ class PraProvider extends Component {
   onBtnExport = () => {
     this.gridApi.exportDataAsCsv();
   };
-  onToggleFilterScreen = () => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.isFilterScreenVisible =
-      !filterPanelData.isFilterScreenVisible;
-    this.setState({ filterPanelData });
-  };
-  onClickReset = () => {
-    let filterPanelData = this.state.filterPanelData;
-    let initialPanelState = this.state.initialPanelState;
-    let data = { ...filterPanelData, ...initialPanelState };
-    console.log("final object is", data);
-    this.setState({ filterPanelData: data });
-  };
-  onChangeProductTypeValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedProductTypeValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeClassificationValue = (selectedValue) => {
-    let filterPanelData = this.state.filterPanelData;
-    filterPanelData.selectedClassificationValue = selectedValue;
-    this.setState({ filterPanelData });
-  };
-  onChangeAddClassificationValue = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedClassificationValue = selectedValue;
-    this.setState({ addThresholdsData });
-  };
-  componentDidMount() {
-    let filterPanelData = this.state.filterPanelData;
-
-    let filterObject = {
-      selectedVendorValue: filterPanelData.selectedVendorValue,
-      selectedExchangeValue: filterPanelData.selectedExchangeValue,
-      selectedProductTypeValue: filterPanelData.selectedProductTypeValue,
-      cuspinValue: filterPanelData.cuspinValue,
-      symbolToValue: filterPanelData.symbolToValue,
-    };
-    let data = { ...filterPanelData, ...filterObject };
-    let gridScreenData = this.state.gridScreenData;
-    let addThresholdsData = this.state.addThresholdsData;
-    //let initialPicsThresholdDate = this.state.initialPicsThresholdDate;
-    let obj = {
-      selectedToTime: gridScreenData.selectedToTime,
-      selectedFromTime: gridScreenData.selectedFromTime,
-      disableFromDate: gridScreenData.disableFromDate,
-      disableToDate: gridScreenData.disableToDate,
-    };
-    let tempAddThresholdsObj = {
-      selectedVendorValue: addThresholdsData.selectedVendorValue,
-      selectedExchangeValue: addThresholdsData.selectedExchangeValue,
-      selectedProductTypeValue: addThresholdsData.selectedProductTypeValue,
-      cuspinValue: addThresholdsData.cuspinValue,
-      symbolToValue: addThresholdsData.symbolToValue,
-      selectedChangeCountValue: addThresholdsData.selectedChangeCountValue,
-      preMarketThresholdValue: addThresholdsData.preMarketThresholdValue,
-      postMarketThresholdValue: addThresholdsData.postMarketThresholdValue,
-      MarketThresholdValue: addThresholdsData.MarketThresholdValue,
-      selectedClassificationValue:
-        addThresholdsData.selectedClassificationValue,
-      selectedLpafValue: addThresholdsData.selectedLpafValue,
-    };
-    let picsDisableData = { ...gridScreenData, ...obj };
-    let addThresholdData = { ...addThresholdsData, ...tempAddThresholdsObj };
-
-    this.setState({
-      initialPanelState: data,
-      initialPicsThresholdDate: picsDisableData,
-      initialAddThresholdsData: addThresholdData,
-    });
-  }
-  onClickFiler = () => {
-    let gridScreenData = this.state.gridScreenData;
-    let priceSystemAlertStateRowData = this.getFilteredGridData();
-    gridScreenData.priceSystemAlertStateRowData = priceSystemAlertStateRowData;
-    this.setState({
-      gridScreenData,
-    });
-  };
-  onRefreshMaintenanceGridData = () => {
-    let gridScreenData = this.state.gridScreenData;
-    gridScreenData.priceSystemAlertStateRowData = [];
-    this.setState({
-      gridScreenData,
-    });
-
-    setTimeout(() => {
-      this.loadDataOnRefresh();
-    }, 3000);
-  };
   loadDataOnRefresh() {
     this.showLoading();
-    let gridScreenData = this.state.gridScreenData;
+    let gridState = this.state.gridState;
     let data = this.getFilteredGridData();
     console.log(data);
-    gridScreenData.priceSystemAlertStateRowData = data;
+    gridState.rowData = data;
     setTimeout(() => {
       this.setState({
-        gridScreenData,
+        gridState,
       });
     }, 1000);
   }
@@ -498,301 +580,90 @@ class PraProvider extends Component {
     ele.innerText = "loading...";
   }
   getFilteredGridData() {
-    return [
-      {
-        id: 1,
-        symbol: "test3",
-        symbolDesc: "tetv",
-        cusip: "test1",
-        productType: "test2",
-        classification: "test2",
-        vendor: "test1",
-        exchange: "test",
-        priceAdjustor: "123",
-      },
-      {
-        id: 2,
-        symbol: "test3",
-        symbolDesc: "test",
-        cusip: "test1",
-        productType: "test2",
-        classification: "test2",
-        vendor: "test1",
-        exchange: "test",
-        priceAdjustor: "123",
-      },
-    ];
+    return PeoData.rows;
   }
-  onResetDisablePics = () => {
-    let gridScreenData = this.state.gridScreenData;
-    let initialPicsThresholdDate = this.state.initialPicsThresholdDate;
-    let data = { ...gridScreenData, ...initialPicsThresholdDate };
-    data.isDisablePicsModalOpen = true;
-    this.setState({
-      gridScreenData: data,
-    });
-  };
   getSelectedRowData = () => {
-    alert();
-    let gridScreenData = this.state.gridScreenData;
+    let gridState = this.state.gridState;
     let selectedNodes = this.gridApi.getSelectedNodes();
     let selectedData = selectedNodes.map((node) => node.data);
     alert(`Selected Nodes:\n${JSON.stringify(selectedData)}`);
-    gridScreenData.selectedGridRowData = selectedData;
+    gridState.selectedGridRowData = selectedData;
     this.setState({
-      gridScreenData,
+      gridState,
     });
   };
   onSelectionChanged = () => {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log("Grid Rows selected", selectedRows);
-    let gridScreenData = this.state.gridScreenData;
-    gridScreenData.selectedGridRows = selectedRows;
+    let gridState = this.state.gridState;
+    gridState.selectedGridRows = selectedRows;
     this.setState({
-      gridScreenData,
+      gridState,
     });
   };
   onCellValueChanged = (params) => {
     const colId = params.column.getId();
   };
-  //================Add Threshold Methods=========
-  onChangeAddExchangeValue = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedExchangeValue = selectedValue;
-    this.setState({ addThresholdsData });
-  };
-  onChangeAddVendorValue = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedVendorValue = selectedValue;
-    this.setState({ addThresholdsData });
-  };
-  onChangeAddCuspinValue = (e) => {
-    let data = this.state.addThresholdsData.cuspinData;
-    let addThresholdsData = this.state.addThresholdsData;
+  //----------------
+  componentDidMount() {
+    let filtersState = this.state.filtersState;
 
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addThresholdsData.cuspinSuggestionResult = result;
-    addThresholdsData.cuspinSearchValue = e.target.value;
-    addThresholdsData.cuspinValue = e.target.value;
-
-    this.setState({
-      addThresholdsData,
-    });
-  };
-  onClickAddCuspinSuggestionItem = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.cuspinValue = selectedValue;
-    addThresholdsData.cuspinSearchValue = "";
-    this.setState({
-      addThresholdsData,
-    });
-  };
-  onChangeAddSymbolToValue = (e) => {
-    let data = this.state.addThresholdsData.symbolToData;
-    let addThresholdsData = this.state.addThresholdsData;
-
-    let result =
-      e.target.value &&
-      data &&
-      data.filter((item) => {
-        return item.value
-          .toLowerCase()
-          .includes(e.target.value.trim().toLowerCase());
-      });
-    console.log(result);
-    addThresholdsData.symbolToSuggestionResult = result;
-    addThresholdsData.symbolToSearchValue = e.target.value;
-    addThresholdsData.symbolToValue = e.target.value;
-
-    this.setState({
-      addThresholdsData,
-    });
-  };
-  onClickAddSymbolToSuggestionItem = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.symbolToValue = selectedValue;
-    addThresholdsData.symbolToSearchValue = "";
-    this.setState({
-      addThresholdsData,
-    });
-  };
-  toggleAddThresholdsModal = () => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.isAddThresholdsModalOpen =
-      !addThresholdsData.isAddThresholdsModalOpen;
-    this.setState({
-      addThresholdsData,
-    });
-  };
-  onChangeAddCountValue = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedChangeCountValue = selectedValue;
-    this.setState({ addThresholdsData });
-  };
-  onChangePreMarketThreshold = (e) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.preMarketThresholdValue = e.target.value;
-    this.setState({ addThresholdsData });
-  };
-  onChangeMarketThreshold = (e) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.MarketThresholdValue = e.target.value;
-    this.setState({ addThresholdsData });
-  };
-  onChangePostMarketThreshold = (e) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.postMarketThresholdValue = e.target.value;
-    this.setState({ addThresholdsData });
-  };
-
-  onResetAddThresholds = () => {
-    let addThresholdsData = this.state.addThresholdsData;
-    let initialAddThresholdsData = this.state.initialAddThresholdsData;
-    let data = { ...addThresholdsData, ...initialAddThresholdsData };
-    data.isAddThresholdsModalOpen = true;
-    this.setState({
-      addThresholdsData: data,
-    });
-  };
-  onChangeAddProductTypeValue = (selectedValue) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedProductTypeValue = selectedValue;
-    this.setState({ addThresholdsData });
-  };
-  onSaveAddThresholds = () => {
-    let addThresholdsData = this.state.addThresholdsData;
-    let gridScreenData = this.state.gridScreenData;
-
-    let itemToSave = {
-      vendor: addThresholdsData.selectedVendorValue.value,
-      exchange: addThresholdsData.selectedExchangeValue.value,
-      productType: addThresholdsData.selectedProductTypeValue.value,
-      cusip: addThresholdsData.cuspinValue,
-      symbol: addThresholdsData.symbolToValue,
-      changeCount: addThresholdsData.selectedChangeCountValue.value,
-      preMarketThresholds: addThresholdsData.preMarketThresholdValue,
-      postMarketThresholds: addThresholdsData.postMarketThresholdValue,
-      marketThresholds: addThresholdsData.MarketThresholdValue,
-      priceAdjustor: addThresholdsData.selectedLpafValue,
+    let filterObject = {
+      selectedProductTypeValue: filtersState.selectedProductTypeValue,
+      symbolToValue: filtersState.symbolToValue,
     };
-    gridScreenData.priceSystemAlertStateRowData = [
-      ...gridScreenData.priceSystemAlertStateRowData,
-      itemToSave,
-    ];
-    addThresholdsData.isAddThresholdsModalOpen =
-      !addThresholdsData.isAddThresholdsModalOpen;
-    addThresholdsData.selectedVendorValue = { label: "All", value: "all" };
-    addThresholdsData.selectedExchangeValue = { label: "All", value: "all" };
-    addThresholdsData.selectedProductTypeValue = {
-      label: "Select",
-      value: "select",
-    };
-    addThresholdsData.cuspinValue = "";
-    addThresholdsData.symbolToValue = "";
-    addThresholdsData.selectedChangeCountValue = { label: "Y", value: "Y" };
-    addThresholdsData.preMarketThresholdValue = "";
-    addThresholdsData.postMarketThresholdValue = "";
-    addThresholdsData.MarketThresholdValue = "";
+    let data = { ...filtersState, ...filterObject };
 
     this.setState({
-      gridScreenData,
-      addThresholdsData,
+      initialPanelState: data,
     });
-  };
-  //==========================================
-  onDeleteSelectedRecords = (isConfirmed) => {
-    let gridScreenData = this.state.gridScreenData;
-    gridScreenData.isDeleteGridRecordPromptModalOpen = false;
-
-    gridScreenData.priceSystemAlertStateRowData =
-      gridScreenData.priceSystemAlertStateRowData.filter(
-        (row) => !gridScreenData.selectedGridRows.includes(row)
-      );
-    this.setState({
-      gridScreenData,
-    });
-  };
-  toggleDeletePromptModal = (isConfirmed) => {
-    let gridScreenData = this.state.gridScreenData;
-    gridScreenData.isDeleteGridRecordPromptModalOpen =
-      !gridScreenData.isDeleteGridRecordPromptModalOpen;
-    this.setState({
-      gridScreenData,
-    });
-  };
-  onChanglpafValue = (e) => {
-    let addThresholdsData = this.state.addThresholdsData;
-    addThresholdsData.selectedLpafValue = e.target.value;
-    this.setState({
-      addThresholdsData,
-    });
-  };
+  }
 
   render() {
     return (
       <MyContext.Provider
         value={{
           state: this.state,
-          onChangeExchangeValue: (e) => this.onChangeExchangeValue(e),
-          onChangeVendorValue: (e) => this.onChangeVendorValue(e),
-          onChangeCuspinValue: (e) => this.onChangeCuspinValue(e),
-          onClickCuspinSuggestionItem: (e) =>
-            this.onClickCuspinSuggestionItem(e),
+          //Filters Methods
           onChangeSymbolToValue: (e) => this.onChangeSymbolToValue(e),
           onClickSymbolToSuggestionItem: (e) =>
             this.onClickSymbolToSuggestionItem(e),
-
+          onChangeProductTypeValue: (e) => this.onChangeProductTypeValue(e),
+          onChangeClassificationValue: (e) =>
+            this.onChangeClassificationValue(e),
+          onChangeSubClassificationValue: (e) =>
+            this.onChangeSubClassificationValue(e),
+          onChangeAddClassificationValue: (e) =>
+            this.onChangeAddClassificationValue(e),
+          setActivityDate: (e) => this.setActivityDate(e),
+          onClickReset: this.onClickReset,
+          onClickFiler: this.onClickFiler,
+          onToggleFilterScreen: this.onToggleFilterScreen,
+          onChangeActivityValue: (e) => this.onChangeActivityValue(e),
+          onClickExchangeSuggestionItem: (e) =>
+            this.onClickExchangeSuggestionItem(e),
+          onChangeExchangeValue: (e) => this.onChangeExchangeValue(e),
+          onChangeFms: this.onChangeFms,
+          onChangeCorporateAction: this.onChangeCorporateAction,
+          onChangeLateSeries: this.onChangeLateSeries,
+          onChangeClearedValue: (e) => this.onChangeClearedValue(e),
+          onChangeStatusValue: (e) => this.onChangeStatusValue(e),
+          onChangeCategoryLevelValue: (e) => this.onChangeCategoryLevelValue(e),
+          onChangeReviewNeededValue: (e) => this.onChangeReviewNeededValue(e),
+          showPlaceHolderScreen: this.showPlaceHolderScreen,
+          onClickFutureContracts: this.onClickFutureContracts,
+          onClickEditDashBoardGrid: this.onClickEditDashBoardGrid,
+          onCloseEditcatDashboard: this.onCloseEditcatDashboard,
+          onClickDeliverablePriceEditGrid: this.onClickDeliverablePriceEditGrid,
+          toggleTasksModal: this.toggleTasksModal,
+          //Ag grid methods
+          onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,
           onBtPrint: this.onBtPrint,
           onBtnExport: this.onBtnExport,
-          onToggleFilterScreen: this.onToggleFilterScreen,
-          onChangeProductTypeValue: (e) => this.onChangeProductTypeValue(e),
-          onClickReset: this.onClickReset,
-          onClickFiler: this.onClickFiler,
-          onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
-          onChangeDisableFromDate: (e) => this.onChangeDisableFromDate(e),
-          onChangeDisableFromTime: (e) => this.onChangeDisableFromTime(e),
-          onChangeDisableToDate: (e) => this.onChangeDisableToDate(e),
-          onChangeDisableToTime: (e) => this.onChangeDisableToTime(e),
-          toggleDisablePicsModal: this.toggleDisablePicsModal,
-          onResetDisablePics: this.onResetDisablePics,
-
-          onChangeAddExchangeValue: (e) => this.onChangeAddExchangeValue(e),
-          onChangeAddVendorValue: (e) => this.onChangeAddVendorValue(e),
-          onChangeAddCuspinValue: (e) => this.onChangeAddCuspinValue(e),
-          onClickAddCuspinSuggestionItem: (e) =>
-            this.onClickAddCuspinSuggestionItem(e),
-          onChangeAddSymbolToValue: (e) => this.onChangeAddSymbolToValue(e),
-          onClickAddSymbolToSuggestionItem: (e) =>
-            this.onClickAddSymbolToSuggestionItem(e),
-          toggleAddThresholdsModal: this.toggleAddThresholdsModal,
-          onChangeAddCountValue: this.onChangeAddCountValue,
-          onChangePreMarketThreshold: (e) => this.onChangePreMarketThreshold(e),
-          onChangeMarketThreshold: (e) => this.onChangeMarketThreshold(e),
-          onChangePostMarketThreshold: (e) =>
-            this.onChangePostMarketThreshold(e),
-          onResetAddThresholds: this.onResetAddThresholds,
-          onChangeAddProductTypeValue: (e) =>
-            this.onChangeAddProductTypeValue(e),
-          onSaveAddThresholds: (e) => this.onSaveAddThresholds(e),
           getSelectedRowData: this.getSelectedRowData,
           onSelectionChanged: this.onSelectionChanged,
-          onDeleteSelectedRecords: this.onDeleteSelectedRecords,
-          toggleDeletePromptModal: this.toggleDeletePromptModal,
           onCellValueChanged: this.onCellValueChanged,
-          onChangeClassificationValue: (e) =>
-            this.onChangeClassificationValue(e),
-          onChangeAddClassificationValue: (e) =>
-            this.onChangeAddClassificationValue(e),
-          onChanglpafValue: (e) => this.onChanglpafValue(e),
         }}
       >
         {this.props.children}
@@ -801,4 +672,4 @@ class PraProvider extends Component {
   }
 }
 
-export default PraProvider;
+export default StProvider;

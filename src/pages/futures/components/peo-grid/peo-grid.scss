@@ -1,4 +1,4 @@
-.peoGridHeader {
+.futuresGridHeader {
   font-size: 14px;
   font-weight: bold;
   color: #000;
@@ -6,7 +6,7 @@
   border: none;
   margin: 13px !important;
 }
-.peoGridTitle {
+.futuresGridTitle {
   font-size: 12px;
   font-weight: bold;
   margin-left: 3%;
@@ -38,11 +38,11 @@
     }
   }
 }
-.peoHeaderActions {
+.futuresHeaderActions {
   display: flex;
-  .peoLeftHeaderSection {
+  .futuresLeftHeaderSection {
     display: flex;
-    .peoLabelAndValue {
+    .futuresLabelAndValue {
       display: flex;
       padding-top: 10px;
       background: transparent;
@@ -54,10 +54,10 @@
       cursor: pointer;
       font-size: 13px;
     }
-    .peoLabel {
+    .futuresLabel {
       //width: 30%;
     }
-    .peoValue {
+    .futuresValue {
       //width: 40%;
       input {
         width: 100%;
@@ -67,7 +67,7 @@
       }
     }
   }
-  .peoRighttHeaderSection {
+  .futuresRighttHeaderSection {
     justify-content: flex-end;
     flex: 1;
     display: flex;
@@ -83,7 +83,7 @@
     font-size: 13px;
   }
 }
-.peoSaveAndCancelWrapper {
+.futuresSaveAndCancelWrapper {
   text-align: right;
   width: 100%;
   border: none;

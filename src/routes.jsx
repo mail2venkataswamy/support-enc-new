@@ -21,6 +21,7 @@ import Ir from "./pages/interest-rates/index.jsx";
 import Did from "./pages/daily-index-dividents/index.jsx";
 import Drp from "./pages/daly-returns-pricing/index.jsx";
 import Peo from "./pages/price-editting-options/index.jsx";
+import Futures from "./pages/futures/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -46,6 +47,7 @@ const AppRouter = () => {
         <Route path="/did" element={<Did />} />
         <Route path="/drp" element={<Drp />} />
         <Route path="/peo" element={<Peo />} />
+        <Route path="/futures" element={<Futures />} />
       </Routes>
     </BrowserRouter>
   );

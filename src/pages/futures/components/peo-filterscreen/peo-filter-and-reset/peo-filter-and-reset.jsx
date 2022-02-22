@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Buttonwrapper from "../../../../../components/common/button/button.jsx";
-import "./pra-filter-and-reset.scss";
-import MyContext from "../../../../../components/context/pra-context.jsx";
+import "./peo-filter-and-reset.scss";
+import MyContext from "../../../../../components/context/futures-context.jsx";
 
 const filterAndReset = () => {
   const context = useContext(MyContext);
@@ -10,15 +10,15 @@ const filterAndReset = () => {
     ...context,
   };
   return (
-    <div className="praFilterAndResetButtonWrapper">
+    <div className="peoFilterAndResetButtonWrapper">
       <Buttonwrapper
-        id="praFilter-container"
+        id="peoFilter-container"
         label="Filter"
         onClick={onClickFiler}
       ></Buttonwrapper>
 
       <Buttonwrapper
-        id="praReset-container"
+        id="peoReset-container"
         label="Reset"
         onClick={onClickReset}
       ></Buttonwrapper>

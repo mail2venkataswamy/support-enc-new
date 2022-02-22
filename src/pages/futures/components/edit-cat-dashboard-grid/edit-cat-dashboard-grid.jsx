@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./peo-grid.scss";
+import "./edit-cat-dashboard-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal";
-import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
+import myContext from "../../../../components/context/futures-context.jsx";
+import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
 
-const ThresholdGrid = () => {
+const EditcatGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [
-    isRecordMustBeselectedModalOpen,
-    toggleRecordMustBeSelectedModal,
-  ] = useState(false);
 
   const {
     rowData,
@@ -21,19 +16,16 @@ const ThresholdGrid = () => {
     onGridReady,
     onBtnExport,
     onRefreshMaintenanceGridData,
-    selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
-    onDeleteSelectedRecords,
-    isDeleteGridRecordPromptModalOpen,
-    toggleDeletePromptModal,
     onCellValueChanged,
-    toggleModifyStModal,
-    showPlaceHolderScreen,
+    onCloseEditcatDashboard,
+    // getActiveTab,
   } = {
-    ...context.state.gridState,
+    ...context.state.editCatDashboardState,
     ...context,
   };
+
   useEffect(() => {
     let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div = document.createElement("div");
@@ -42,45 +34,21 @@ const ThresholdGrid = () => {
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
     ele.append(div);
     ele.append(div1);
+    //getActiveTab("tab-0");
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
-      <div className="peoGridHeader">Derivative</div>
       <div className="messageAndNavigationWrapper">
-        <div className="title">Messages</div>
+        <div className="title">Edit Category Dashboard</div>
         <div className="close">
-          <button onClick={showPlaceHolderScreen} className="closeButton">
+          <button onClick={onCloseEditcatDashboard} className="closeButton">
             X
           </button>
         </div>
       </div>
-      <div className="peoHeaderActions">
-        <div className="peoLeftHeaderSection">
-          <div className="peoLabelAndValue">
-            <div className="peoLabel"></div>
-            <label for="ca">Corporate Action</label>
-            <div className="peoValue">
-              <input
-              //checked={isCorporateActionChecked}
-              //onChange={onChangeCorporateAction}
-              ></input>
-            </div>
-          </div>
-          <button>Asssociated Products</button>
-          <button>Devidend Info</button>
-          <button>Exchange Info</button>
-          <button>SOO Info</button>
-          <button>Save</button>
-          <button>Cancel</button>
-          <button>Init VI Capture</button>
-          <button>Export Derivative</button>
-          <button>Review Final</button>
-          <button>Review Contracts</button>
-          <button>Review Risk</button>
-          <button>Borrow Cost Limit</button>
-        </div>
-        <div className="peoRighttHeaderSection">
+      <div className="fEditCatHeaderActions">
+        <div className="fEditCatRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -110,16 +78,16 @@ const ThresholdGrid = () => {
           </button>
         </div>
       </div>
-      <div className="peoGridWrapper"></div>
+      <div className="fEditCatGridWrapper"></div>
       <Aggrid
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={553}
+        gridHeight={635}
         gridWidth={"auto"}
         rowSelection="multiple"
-        pagination={true}
-        paginationPageSize={100}
+        //pagination={true}
+        //paginationPageSize={100}
         rowHeight={22}
         headerHeight={33}
         onGridReady={onGridReady}
@@ -132,23 +100,8 @@ const ThresholdGrid = () => {
         isModalOpen={isWarningModalOpen}
         closeModal={toggleWarningModal}
       ></WarningModal>
-      <WarningModal
-        warningMessage="Record must be selected"
-        isModalOpen={isRecordMustBeselectedModalOpen}
-        closeModal={toggleRecordMustBeSelectedModal}
-      ></WarningModal>
-      <RecordMustBeSelected
-        isModalOpen={isDeleteGridRecordPromptModalOpen}
-        closeModal={toggleDeletePromptModal}
-        onConfirm={onDeleteSelectedRecords}
-        warningMessage="Are you sure to delete the record?"
-      ></RecordMustBeSelected>
-      <div className="peoSaveAndCancelWrapper">
-        <button className="mtSave primary">Save</button>
-        <button className="mtCancel secondary">Cancel</button>
-      </div>
     </>
   );
 };
 
-export default ThresholdGrid;
+export default EditcatGrid;

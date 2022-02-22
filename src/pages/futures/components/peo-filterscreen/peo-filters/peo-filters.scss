@@ -1,0 +1,26 @@
+.filtersContianer {
+  overflow: scroll;
+  min-height: 612px;
+  max-height: 605px;
+
+  .futuresFiltersWrapper {
+    padding-left: 15px !important;
+    .futuresLabelAndValue {
+      width: 100%;
+      display: flex;
+      padding-top: 10px;
+    }
+    .futuresLabel {
+      width: 30%;
+    }
+    .futuresValue {
+      width: 60%;
+      input {
+        width: 100%;
+      }
+      input[type="checkbox"] {
+        width: 5%;
+      }
+    }
+  }
+}

@@ -102,6 +102,11 @@ const NavBar = () => {
             PEO
           </NavLink>
         </li>
+        <li className="pages">
+          <NavLink to="/futures" isActive={true}>
+            FUTURES
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
