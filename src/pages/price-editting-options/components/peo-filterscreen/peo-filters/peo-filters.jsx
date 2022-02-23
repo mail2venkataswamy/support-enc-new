@@ -56,6 +56,10 @@ const ProductInfo = () => {
     onChangeStatusValue,
     onChangeCategoryLevelValue,
     onChangeReviewNeededValue,
+    isEdittedRecordsChecked,
+    onChangeEdittedRecords,
+    isSpotPriceRecordsChecked,
+    onChangeSpotPriceRecords,
   } = {
     ...context.state.filtersState,
     ...context,
@@ -231,8 +235,8 @@ const ProductInfo = () => {
             <input
               type="checkbox"
               name="ls"
-              checked={isLateSeriesChecked}
-              onChange={onChangeLateSeries}
+              checked={isEdittedRecordsChecked}
+              onChange={onChangeEdittedRecords}
             ></input>
             <label lateSeries="ls">Editted Records</label>
           </div>
@@ -243,8 +247,8 @@ const ProductInfo = () => {
             <input
               type="checkbox"
               name="ls"
-              checked={isLateSeriesChecked}
-              onChange={onChangeLateSeries}
+              checked={isSpotPriceRecordsChecked}
+              onChange={onChangeSpotPriceRecords}
             ></input>
             <label lateSeries="ls">Theo Spot Price Records</label>
           </div>

@@ -158,6 +158,8 @@ class StProvider extends Component {
         isFmsChecked: false,
         isCorporateActionChecked: false,
         isLateSeriesChecked: false,
+        isEdittedRecordsChecked: false,
+        isNegativePriceFuturesChecked: false,
         clearedOptions: [
           { label: "Cleared", value: "cleared" },
           { label: "Not Cleared", value: "notCleared" },
@@ -316,6 +318,21 @@ class StProvider extends Component {
       },
     };
   }
+  onChangeEdittedRecords = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isEdittedRecordsChecked = !filtersState.isEdittedRecordsChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeNegativePriceFuturesRecords = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isNegativePriceFuturesChecked = !filtersState.isNegativePriceFuturesChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+
   toggleTasksModal = () => {
     let tasksData = this.state.tasksData;
     tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
@@ -656,6 +673,9 @@ class StProvider extends Component {
           onCloseEditcatDashboard: this.onCloseEditcatDashboard,
           onClickDeliverablePriceEditGrid: this.onClickDeliverablePriceEditGrid,
           toggleTasksModal: this.toggleTasksModal,
+          onChangeEdittedRecords: this.onChangeEdittedRecords,
+          onChangeNegativePriceFuturesRecords: this
+            .onChangeNegativePriceFuturesRecords,
           //Ag grid methods
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,

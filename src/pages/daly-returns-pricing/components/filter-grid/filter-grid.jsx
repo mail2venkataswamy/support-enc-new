@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
 import "./filter-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/drp-context.jsx";
@@ -14,11 +14,14 @@ const FilterGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
+    getFocusedCell,
+    onCellClicked,
+    autoGroupColumnDef,
   } = {
     ...context.state.filterGridState,
     ...context,
   };
-  useEffect(() => {}, []);
+
   return (
     <>
       <div className="drpFilterGridWrapper">
@@ -26,7 +29,7 @@ const FilterGrid = () => {
           rowData={rowData}
           colDefsMedalsIncluded={colDefs}
           defaultColDef={defaultColDef}
-          gridHeight={160}
+          gridHeight={129}
           gridWidth={"100%"}
           rowSelection="multiple"
           rowHeight={22}
@@ -35,6 +38,8 @@ const FilterGrid = () => {
           getSelectedRowData={getSelectedRowData}
           onSelectionChanged={onSelectionChanged}
           onCellValueChanged={onCellValueChanged}
+          onCellClicked={onCellClicked}
+          autoGroupColumnDef={autoGroupColumnDef}
         />
       </div>
     </>

@@ -19,25 +19,16 @@ const ProductInfo = () => {
     classificationOptions,
     selectedClassificationValue,
     onChangeClassificationValue,
-    activityData,
-
     activityOptions,
     activityValue,
     onChangeActivityValue,
     setActivityDate,
     selectedActivityDate,
-    SubClassificationOptions,
-    selectedSubClassificationValue,
-    onChangeSubClassificationValue,
-
     onChangeExchangeValue,
     onClickExchangeSuggestionItem,
     exchangeSuggestionResult,
     exchangeValue,
     exchangeSearchValue,
-
-    isFmsChecked,
-    onChangeFms,
     isCorporateActionChecked,
     onChangeCorporateAction,
     isLateSeriesChecked,
@@ -45,17 +36,16 @@ const ProductInfo = () => {
     onChangeClearedValue,
     clearedOptions,
     selectedClearedValue,
-
     statusOptions,
-    categoryLevelOptions,
     reviewNeededOptions,
     selectedStatusValue,
-    selectedCategoryLevelValue,
     selectedReviewNeededValue,
-
     onChangeStatusValue,
-    onChangeCategoryLevelValue,
     onChangeReviewNeededValue,
+    isEdittedRecordsChecked,
+    onChangeEdittedRecords,
+    isNegativePriceFuturesChecked,
+    onChangeNegativePriceFuturesRecords,
   } = {
     ...context.state.filtersState,
     ...context,
@@ -199,8 +189,8 @@ const ProductInfo = () => {
             <input
               type="checkbox"
               name="ls"
-              checked={isLateSeriesChecked}
-              onChange={onChangeLateSeries}
+              checked={isEdittedRecordsChecked}
+              onChange={onChangeEdittedRecords}
             ></input>
             <label lateSeries="ls">Editted Records</label>
           </div>
@@ -211,8 +201,8 @@ const ProductInfo = () => {
             <input
               type="checkbox"
               name="ls"
-              checked={isLateSeriesChecked}
-              onChange={onChangeLateSeries}
+              checked={isNegativePriceFuturesChecked}
+              onChange={onChangeNegativePriceFuturesRecords}
             ></input>
             <label lateSeries="ls">Negative Price Futures</label>
           </div>

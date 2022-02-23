@@ -35,6 +35,8 @@ const Aggrid = (props) => {
         //frameworkComponents={{ customTooltip: CustomTooltip }}
         rowHeight={props.rowHeight}
         headerHeight={props.headerHeight}
+        onCellClicked={props.onCellClicked}
+        autoGroupColumnDef={props.autoGroupColumnDef}
       ></AgGridReact>
     </div>
   );

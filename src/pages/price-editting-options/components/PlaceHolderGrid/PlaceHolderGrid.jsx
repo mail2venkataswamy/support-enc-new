@@ -14,8 +14,7 @@ const PlaceHoldergrid = () => {
     <div className="actionHoldergridContainer">
       <div className="footer">
         <button>Master File Upd</button>
-        <button>Smoothing Upd</button>
-        <button>Tasks</button>
+        <button>Smoothing Upd</button>|<button>Tasks</button>
       </div>
     </div>
   );

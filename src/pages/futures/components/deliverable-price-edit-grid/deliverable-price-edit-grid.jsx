@@ -40,7 +40,7 @@ const EditcatGrid = () => {
   return (
     <>
       <div className="messageAndNavigationWrapper">
-        <div className="title">Edit Category Dashboard</div>
+        <div className="title">Deliverable - price Editting</div>
         <div className="close">
           <button
             onClick={onCloseDeliverablePriceEditGrid}

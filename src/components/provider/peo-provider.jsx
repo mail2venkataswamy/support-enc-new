@@ -85,6 +85,8 @@ class StProvider extends Component {
         isFmsChecked: false,
         isCorporateActionChecked: false,
         isLateSeriesChecked: false,
+        isEdittedRecordsChecked: false,
+        isSpotPriceRecordsChecked: false,
         clearedOptions: [
           { label: "Cleared", value: "cleared" },
           { label: "Not Cleared", value: "notCleared" },
@@ -170,7 +172,7 @@ class StProvider extends Component {
           {
             headerName: "Final Monotonicity Violation Count",
             field: "finalMonotonicityViolationCount",
-            width: 120,
+            width: 150,
             flex: 0,
           },
           {
@@ -206,13 +208,13 @@ class StProvider extends Component {
           {
             headerName: "Previous Dirty price",
             field: "previousDirtyprice",
-            width: 90,
+            width: 110,
             flex: 0,
           },
           {
             headerName: "Previous Adjustment Dirty price",
             field: "previousAdjustmentDirtyprice",
-            width: 150,
+            width: 170,
             flex: 0,
           },
           {
@@ -358,7 +360,20 @@ class StProvider extends Component {
       filtersState,
     });
   };
-
+  onChangeEdittedRecords = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isEdittedRecordsChecked = !filtersState.isEdittedRecordsChecked;
+    this.setState({
+      filtersState,
+    });
+  };
+  onChangeSpotPriceRecords = () => {
+    let filtersState = this.state.filtersState;
+    filtersState.isSpotPriceRecordsChecked = !filtersState.isSpotPriceRecordsChecked;
+    this.setState({
+      filtersState,
+    });
+  };
   onChangeActivityValue = (selectedValue) => {
     let filtersState = this.state.filtersState;
     filtersState.activityValue = selectedValue;
@@ -591,6 +606,8 @@ class StProvider extends Component {
           onChangeCategoryLevelValue: (e) => this.onChangeCategoryLevelValue(e),
           onChangeReviewNeededValue: (e) => this.onChangeReviewNeededValue(e),
           showPlaceHolderScreen: this.showPlaceHolderScreen,
+          onChangeEdittedRecords: this.onChangeEdittedRecords,
+          onChangeSpotPriceRecords: this.onChangeSpotPriceRecords,
           //Ag grid methods
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,
