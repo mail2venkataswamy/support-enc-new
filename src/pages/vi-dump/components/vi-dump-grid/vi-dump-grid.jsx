@@ -8,8 +8,10 @@ import RecordMustBeSelected from "../../../../components/common/modal/prompt/pro
 const ViDumpGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
-    useState(false);
+  const [
+    isRecordMustBeselectedModalOpen,
+    toggleRecordMustBeSelectedModal,
+  ] = useState(false);
 
   const {
     rowData,
@@ -35,7 +37,7 @@ const ViDumpGrid = () => {
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
-    ele.append(div);
+    ele && ele.append(div);
     ele.append(div1);
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;

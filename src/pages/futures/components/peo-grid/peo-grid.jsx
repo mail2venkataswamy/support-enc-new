@@ -30,6 +30,9 @@ const ThresholdGrid = () => {
     onCellValueChanged,
     toggleModifyStModal,
     showPlaceHolderScreen,
+    onClickDeliverablePriceEditGrid,
+    onClickDividendInfo,
+    onClickExchangeInfo,
   } = {
     ...context.state.gridState,
     ...context,
@@ -40,7 +43,7 @@ const ThresholdGrid = () => {
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
-    ele.append(div);
+    ele && ele.append(div);
     ele.append(div1);
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
@@ -67,19 +70,164 @@ const ThresholdGrid = () => {
               ></input>
             </div>
           </div>
-          <button>Deliverables</button>
-          <button>Devidend Info</button>
-          <button>Exchange Info</button>
-          <button>Save</button>
-          <button>Cancel</button>
-          <button>Init VI Capture</button>
-          <button>Export Derivative</button>
-          <button>Review Futures</button>
-          <button>Review OOF</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickDeliverablePriceEditGrid
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Deliverables
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickDividendInfo
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Devidend Info
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickExchangeInfo
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Exchange Info
+          </button>
+          <button
+            id="save"
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Save
+          </button>
+          <button
+            id="cancel"
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Cancel
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Init VI Capture
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Export Derivative
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Review Futures
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Review OOF
+          </button>
           <button>Decimal Format</button>
           <button>Implied Format</button>
-          <button>Ignore Missing Exch Flag</button>
-          <button>Flag Missing Exch Flag</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Ignore Missing Exch Flag
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? () => {}
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Flag Missing Exch Flag
+          </button>
         </div>
         <div className="futuresRighttHeaderSection">
           <button
@@ -116,7 +264,7 @@ const ThresholdGrid = () => {
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={553}
+        gridHeight={465}
         gridWidth={"auto"}
         rowSelection="multiple"
         pagination={true}
@@ -144,10 +292,6 @@ const ThresholdGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="futuresSaveAndCancelWrapper">
-        <button className="mtSave primary">Save</button>
-        <button className="mtCancel secondary">Cancel</button>
-      </div>
     </>
   );
 };

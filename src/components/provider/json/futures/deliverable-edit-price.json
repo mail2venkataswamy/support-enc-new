@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "rows": [
+    {
+      "symbol": "AUD",
+      "productType": "CURR",
+      "refinitivPrice": 0.0,
+      "bloombergePrice": 0.0,
+      "icePrice": 0.0,
+      "exchangePrice": 0.0,
+      "contractQuantity": "1000",
+      "eodFinalPrice": 0.0,
+      "intraDayPrice": 0.0,
+      "cusip": "123"
+    }
+  ]
+}

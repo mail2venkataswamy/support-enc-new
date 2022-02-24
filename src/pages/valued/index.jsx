@@ -470,8 +470,7 @@ class Valued extends Component {
   onSelectEditedRecordValue = (e) => {
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.editedRecordValue = e.target.value;
-    filterPanelData.isEditedRecordChecked =
-      !filterPanelData.isEditedRecordChecked;
+    filterPanelData.isEditedRecordChecked = !filterPanelData.isEditedRecordChecked;
     this.setState({ filterPanelData });
   };
 
@@ -521,16 +520,14 @@ class Valued extends Component {
   onClickPriceRollOverrideButton = (selectedGridRows) => {
     console.log(selectedGridRows);
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceRollOverrideModalOpen =
-      !maintenanceScreenData.isPriceRollOverrideModalOpen;
+    maintenanceScreenData.isPriceRollOverrideModalOpen = !maintenanceScreenData.isPriceRollOverrideModalOpen;
     this.setState({
       maintenanceScreenData,
     });
   };
   closePriceRollOverrideWarningModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceRollOverrideWarningModalOpen =
-      !maintenanceScreenData.isPriceRollOverrideWarningModalOpen;
+    maintenanceScreenData.isPriceRollOverrideWarningModalOpen = !maintenanceScreenData.isPriceRollOverrideWarningModalOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -551,8 +548,7 @@ class Valued extends Component {
   };
   toggleGridMustBePopulateddModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isGridMustPopulatedModalOpen =
-      !maintenanceScreenData.isGridMustPopulatedModalOpen;
+    maintenanceScreenData.isGridMustPopulatedModalOpen = !maintenanceScreenData.isGridMustPopulatedModalOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -639,8 +635,7 @@ class Valued extends Component {
       return (tire.isChecked = event.target.checked);
     });
     maintenanceScreenData.publishTireData = publishTireData;
-    maintenanceScreenData.isAllPublishTireChecked =
-      !maintenanceScreenData.isAllPublishTireChecked;
+    maintenanceScreenData.isAllPublishTireChecked = !maintenanceScreenData.isAllPublishTireChecked;
     this.setState({ maintenanceScreenData });
   };
   onSelectPublishTireCheckbox = (event) => {
@@ -689,8 +684,7 @@ class Valued extends Component {
       return (type.isChecked = event.target.checked);
     });
     maintenanceScreenData.publishTypeData = publishTypeData;
-    maintenanceScreenData.isAllPublishTypeChecked =
-      !maintenanceScreenData.isAllPublishTypeChecked;
+    maintenanceScreenData.isAllPublishTypeChecked = !maintenanceScreenData.isAllPublishTypeChecked;
     this.setState({ maintenanceScreenData });
   };
   onResetPublish = () => {
@@ -715,10 +709,9 @@ class Valued extends Component {
 
   closePriceRollOverrideModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    let isPriceRollOverrideModalOpen =
-      this.state.maintenanceScreenData.isPriceRollOverrideModalOpen;
-    maintenanceScreenData.isPriceRollOverrideModalOpen =
-      !isPriceRollOverrideModalOpen;
+    let isPriceRollOverrideModalOpen = this.state.maintenanceScreenData
+      .isPriceRollOverrideModalOpen;
+    maintenanceScreenData.isPriceRollOverrideModalOpen = !isPriceRollOverrideModalOpen;
     this.setState({ maintenanceScreenData });
   };
   onChangePriceOverrideValue = (e) => {
@@ -754,8 +747,7 @@ class Valued extends Component {
   };
   togglePriceOverrideConfirmModalOpen = (isConfirmed) => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isPriceOverrideConfirmModalOpen =
-      !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
+    maintenanceScreenData.isPriceOverrideConfirmModalOpen = !maintenanceScreenData.isPriceOverrideConfirmModalOpen;
     maintenanceScreenData.isPriceOverrideConfirmed = isConfirmed;
     if (maintenanceScreenData.isPriceOverrideConfirmed) {
       maintenanceScreenData.isPriceRollOverrideModalOpen = false;
@@ -766,21 +758,20 @@ class Valued extends Component {
   };
   onAllSuspendRestartTireChecked = (event) => {
     alert();
-    let suspendRestartTireData =
-      this.state.maintenanceScreenData.suspendRestartTireData;
+    let suspendRestartTireData = this.state.maintenanceScreenData
+      .suspendRestartTireData;
     let maintenanceScreenData = this.state.maintenanceScreenData;
 
     suspendRestartTireData.forEach((tire) => {
       return (tire.isChecked = event.target.checked);
     });
     maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked =
-      !maintenanceScreenData.isAllSuspendRestartTireChecked;
+    maintenanceScreenData.isAllSuspendRestartTireChecked = !maintenanceScreenData.isAllSuspendRestartTireChecked;
     this.setState({ maintenanceScreenData });
   };
   onSelectSuspendRestartTireCheckbox = (event) => {
-    let suspendRestartTireData =
-      this.state.maintenanceScreenData.suspendRestartTireData;
+    let suspendRestartTireData = this.state.maintenanceScreenData
+      .suspendRestartTireData;
     let maintenanceScreenData = this.state.maintenanceScreenData;
     let isAllSuspendRestartTireChecked = false;
     let selectionCount = 0;
@@ -795,14 +786,12 @@ class Valued extends Component {
         selectionCount === suspendRestartTireData.length ? true : false;
     });
     maintenanceScreenData.suspendRestartTireData = suspendRestartTireData;
-    maintenanceScreenData.isAllSuspendRestartTireChecked =
-      isAllSuspendRestartTireChecked;
+    maintenanceScreenData.isAllSuspendRestartTireChecked = isAllSuspendRestartTireChecked;
     this.setState({ maintenanceScreenData });
   };
   toggleRecordMustSelectedPopupWarningModal = () => {
     let maintenanceScreenData = this.state.maintenanceScreenData;
-    maintenanceScreenData.isRecordMustSelectedPopupOpen =
-      !maintenanceScreenData.isRecordMustSelectedPopupOpen;
+    maintenanceScreenData.isRecordMustSelectedPopupOpen = !maintenanceScreenData.isRecordMustSelectedPopupOpen;
     this.setState({
       maintenanceScreenData,
     });
@@ -810,8 +799,8 @@ class Valued extends Component {
   //=========================Edit Dashboard Methods======================================
   toggleEditDashboardGrid = () => {
     let editDashboardData = this.state.editDashboardData;
-    editDashboardData.showEditDashboardGrid =
-      !this.state.editDashboardData.showEditDashboardGrid;
+    editDashboardData.showEditDashboardGrid = !this.state.editDashboardData
+      .showEditDashboardGrid;
     this.setState({
       editDashboardData,
     });
@@ -858,10 +847,10 @@ class Valued extends Component {
       filterPanelData,
     });
 
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
+    /*     let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>500</option></select> Records Per Page</div></div>`;
-    ele.append(div);
+    ele && ele.append(div);; */
   }
 
   getFilteredGridData() {

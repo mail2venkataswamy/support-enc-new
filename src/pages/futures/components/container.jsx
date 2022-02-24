@@ -6,6 +6,8 @@ import PlaceHolderGrid from "./PlaceHolderGrid/PlaceHolderGrid.jsx";
 import MyContext from "../../../components/context/futures-context.jsx";
 import EditCatDahsboard from "./edit-cat-dashboard-grid/edit-cat-dashboard-grid.jsx";
 import DeliverablePriceEditGrid from "./deliverable-price-edit-grid/deliverable-price-edit-grid.jsx";
+import DividendInfoGrid from "./dividend-info-grid/dividend-info-grid.jsx";
+import ExchangeInfoGrid from "./exchange-info-grid/exchange-info-grid.jsx";
 
 const Futures = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
@@ -15,6 +17,8 @@ const Futures = () => {
     showEditGridDashBoard,
     showPlaceHolderGrid,
     showDeliverablePriceEditGrid,
+    showDividendInfoGrid,
+    showExchangeInfogrid,
   } = {
     ...context.state,
   };
@@ -75,7 +79,21 @@ const Futures = () => {
       )}
       {showDeliverablePriceEditGrid ? (
         <div id="futuresPlaceHolderGrid">
-          <EditCatDahsboard></EditCatDahsboard>{" "}
+          <DeliverablePriceEditGrid></DeliverablePriceEditGrid>{" "}
+        </div>
+      ) : (
+        <></>
+      )}
+      {showDividendInfoGrid ? (
+        <div id="futuresPlaceHolderGrid">
+          <DividendInfoGrid></DividendInfoGrid>{" "}
+        </div>
+      ) : (
+        <></>
+      )}
+      {showExchangeInfogrid ? (
+        <div id="futuresPlaceHolderGrid">
+          <ExchangeInfoGrid></ExchangeInfoGrid>{" "}
         </div>
       ) : (
         <></>

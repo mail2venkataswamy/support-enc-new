@@ -14,11 +14,11 @@
     box-sizing: border-box;
     border: none;
     position: relative;
-    height: 96%;
+    height: 79%;
   }
   #peoDerivativeGrid {
     width: 98%;
-    height: 96%;
+    height: 79%;
     background: $white;
     border-radius: 30px;
     padding: 5px 20px;
@@ -27,7 +27,7 @@
   }
   #peoPlaceHolderGrid {
     width: 98%;
-    height: 96%;
+    height: 79%;
     background: $white;
     border-radius: 30px;
     padding: 5px 20px;
@@ -152,6 +152,14 @@
   }
   .ag-popup-editor.ag-ltr.ag-popup-child {
     width: 100px;
+  }
+  .ag-theme-alpine .ag-row {
+    font-size: 11px;
+    background-color: #fff;
+    color: #000;
+    transform: none !important;
+    height: 22px !important;
+    position: relative;
   }
 }
 @media print {

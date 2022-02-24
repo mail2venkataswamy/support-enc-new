@@ -31,7 +31,7 @@ const FilterGrid = () => {
           defaultColDef={defaultColDef}
           gridHeight={129}
           gridWidth={"100%"}
-          rowSelection="multiple"
+          //rowSelection="multiple"
           rowHeight={22}
           headerHeight={33}
           onGridReady={onGridReady}

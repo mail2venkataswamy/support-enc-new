@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "rows": [
+    {
+      "security": "AUD",
+      "dividendType": "YIELD",
+      "publishedExDate": "",
+      "publishedFrequency": 0,
+      "unitQuantity": 10000,
+      "publishedAmount": 0.0,
+      "publishedYield": 0.0,
+      "dividendCurrency": "AUD"
+    }
+  ]
+}

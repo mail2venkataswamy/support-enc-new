@@ -111,7 +111,6 @@ class PraProvider extends Component {
             field: "missingReturn",
             width: 120,
             flex: 0,
-            aggFunc: "sum",
             filter: "agMultiColumnFilter",
             filterParams: {
               filters: numberFilters(),
@@ -138,7 +137,6 @@ class PraProvider extends Component {
             flex: 0,
             //rowGroup: true,
             //hide: true,
-            aggFunc: "sum",
             enableValue: true,
             filter: "agMultiColumnFilter",
             filterParams: {
@@ -205,12 +203,6 @@ class PraProvider extends Component {
           filter: true,
           flex: 1,
           menuTabs: ["filterMenuTab"],
-        },
-        autoGroupColumnDef: {
-          headerName: "tire",
-          field: "tierLevel",
-          minWidth: 250,
-          cellRenderer: "agGroupCellRenderer",
         },
         selectedGridRowData: [],
         selectedGridRows: [],

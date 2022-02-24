@@ -32,15 +32,17 @@ const EditcatGrid = () => {
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
-    ele.append(div);
+    ele && ele.append(div);
     ele.append(div1);
     //getActiveTab("tab-0");
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
+  let [showAllColumns, setShowAllColumns] = useState(false);
+
   return (
     <>
       <div className="messageAndNavigationWrapper">
-        <div className="title">Deliverable - price Editting</div>
+        <div className="title">Deliverable - Price Editting</div>
         <div className="close">
           <button
             onClick={onCloseDeliverablePriceEditGrid}
@@ -52,6 +54,9 @@ const EditcatGrid = () => {
       </div>
       <div className="fEditCatHeaderActions">
         <div className="fEditCatRighttHeaderSection">
+          <button onClick={() => setShowAllColumns(!showAllColumns)}>
+            {showAllColumns ? "Show Default Columns" : "Show All Columns"}
+          </button>
           <button
             onClick={
               isGridPopulated
@@ -86,7 +91,7 @@ const EditcatGrid = () => {
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={635}
+        gridHeight={"89%"}
         gridWidth={"auto"}
         rowSelection="multiple"
         //pagination={true}

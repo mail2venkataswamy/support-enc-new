@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import MyContext from "../context/futures-context.jsx";
 import PeoData from "./json/futures/futures.json";
 import EditCatData from "./json/futures/edit-cat-dashboard.json";
+import DeliverablePriceEditData from "./json/futures/deliverable-edit-price.json";
+import DividendInfo from "./json/futures/dividend-info-data.json";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -23,28 +25,188 @@ class StProvider extends Component {
       showEditGridDashBoard: false,
       showPlaceHolderGrid: true,
       showDeliverablePriceEditGrid: false,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
       tasksData: {
         isTasksModalOpen: false,
       },
-      deliverablePriceEditState: {
-        rowData: EditCatData.rows,
+      exchangeInfoGridState: {
+        rowData: [],
         colDefs: [
           {
-            headerName: "Rule",
-            field: "rule",
+            headerName: "Underlying Symbol",
+            field: "underlyingSymbol",
             width: "auto",
             flex: 0,
           },
           {
-            headerName: "Final vendor Flagged",
-            field: "finalvendorFlagged",
+            headerName: "Exchange Name",
+            field: "exchangeName",
             width: "auto",
             //flex: 0,
           },
           {
-            headerName: "Final Review Needed",
-            field: "finalReviewNeeded",
+            headerName: "ExchangePrice",
+            field: "exchangePrice",
             width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Last Recieved Timestamp",
+            field: "lastRecievedTimestamp",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Unit Quantiity",
+            field: "unitQuantity",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
+      dividendInfoGridState: {
+        rowData: DividendInfo.rows,
+        colDefs: [
+          {
+            headerName: "Security",
+            field: "security",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Dividend Type",
+            field: "dividendType",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Ex-Date",
+            field: "publishedExDate",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Frequency",
+            field: "publishedFrequency",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Unit Quantiity",
+            field: "unitQuantity",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Amount",
+            field: "publishedAmount",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Yield",
+            field: "publishedYield",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Dividend Currency",
+            field: "dividendCurrency",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
+      deliverablePriceEditState: {
+        rowData: DeliverablePriceEditData.rows,
+        colDefs: [
+          {
+            headerName: "Delivery Component Symbol",
+            field: "symbol",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Product Type",
+            field: "productType",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Refinitiv Price",
+            field: "refinitivPrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Bloomberg Price",
+            field: "bloombergePrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "ICE Price",
+            field: "icePrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Exchange Name",
+            field: "exchangeName",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Exchange Price",
+            field: "exchangePrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Contract Quality",
+            field: "contractQuantity",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Intraday Price",
+            field: "intraDayPrice",
+            width: "auto",
+            //flex: 0,
+            hide: true,
+          },
+          {
+            headerName: "EOD Price",
+            field: "eodFinalPrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Cusip",
+            field: "cusip",
+            width: "auto",
+            hide: true,
             //flex: 0,
           },
         ],
@@ -183,9 +345,9 @@ class StProvider extends Component {
             flex: 0,
           },
           {
-            headerName: "Ignore Missing",
+            headerName: "Ignore Missing Price Flag",
             field: "ignoreMissing",
-            width: 90,
+            width: 120,
             flex: 0,
           },
           {
@@ -318,6 +480,47 @@ class StProvider extends Component {
       },
     };
   }
+  onClickExchangeInfo = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: true,
+    });
+  };
+  onCloseExchangeInfoGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
+    });
+  };
+  onCloseDividendInfoGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDividendInfoGrid: false,
+    });
+  };
+  onClickDividendInfo = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDividendInfoGrid: true,
+    });
+  };
+  onCloseDeliverablePriceEditGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+    });
+  };
   onChangeEdittedRecords = () => {
     let filtersState = this.state.filtersState;
     filtersState.isEdittedRecordsChecked = !filtersState.isEdittedRecordsChecked;
@@ -676,6 +879,11 @@ class StProvider extends Component {
           onChangeEdittedRecords: this.onChangeEdittedRecords,
           onChangeNegativePriceFuturesRecords: this
             .onChangeNegativePriceFuturesRecords,
+          onCloseDeliverablePriceEditGrid: this.onCloseDeliverablePriceEditGrid,
+          onCloseDividendInfoGrid: this.onCloseDividendInfoGrid,
+          onClickDividendInfo: this.onClickDividendInfo,
+          onCloseExchangeInfoGrid: this.onCloseExchangeInfoGrid,
+          onClickExchangeInfo: this.onClickExchangeInfo,
           //Ag grid methods
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,

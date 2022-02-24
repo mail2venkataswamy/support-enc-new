@@ -40,8 +40,20 @@
 }
 .futuresHeaderActions {
   display: flex;
+  height: 36px;
   .futuresLeftHeaderSection {
     display: flex;
+    input {
+      width: 44px;
+    }
+    button {
+      width: 70px;
+      padding-right: 2px;
+    }
+    #save,
+    #cancel {
+      width: 40px;
+    }
     .futuresLabelAndValue {
       display: flex;
       padding-top: 10px;
@@ -59,12 +71,12 @@
     }
     .futuresValue {
       //width: 40%;
-      input {
+      /*      input {
         width: 100%;
       }
       input[type="checkbox"] {
         width: 5%;
-      }
+      } */
     }
   }
   .futuresRighttHeaderSection {

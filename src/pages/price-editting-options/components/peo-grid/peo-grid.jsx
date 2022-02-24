@@ -40,7 +40,7 @@ const ThresholdGrid = () => {
     var div1 = document.createElement("div");
     div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
-    ele.append(div);
+    ele && ele.append(div);
     ele.append(div1);
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
@@ -115,7 +115,7 @@ const ThresholdGrid = () => {
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={553}
+        gridHeight={465}
         gridWidth={"auto"}
         rowSelection="multiple"
         pagination={true}
@@ -143,10 +143,6 @@ const ThresholdGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <div className="peoSaveAndCancelWrapper">
-        <button className="mtSave primary">Save</button>
-        <button className="mtCancel secondary">Cancel</button>
-      </div>
     </>
   );
 };

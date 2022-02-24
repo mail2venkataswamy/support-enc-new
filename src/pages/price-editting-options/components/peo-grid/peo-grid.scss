@@ -40,6 +40,7 @@
 }
 .peoHeaderActions {
   display: flex;
+  height: 36px;
   .peoLeftHeaderSection {
     display: flex;
     .peoLabelAndValue {
@@ -59,12 +60,23 @@
     }
     .peoValue {
       //width: 40%;
-      input {
+      /*       input {
         width: 100%;
       }
       input[type="checkbox"] {
         width: 5%;
-      }
+      } */
+    }
+    input {
+      width: 44px;
+    }
+    button {
+      width: 70px;
+      padding-right: 2px;
+    }
+    #save,
+    #cancel {
+      width: 40px;
     }
   }
   .peoRighttHeaderSection {

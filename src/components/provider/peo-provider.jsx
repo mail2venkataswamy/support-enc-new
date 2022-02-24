@@ -112,7 +112,7 @@ class StProvider extends Component {
           {
             headerName: "SOO",
             field: "sso",
-            width: 60,
+            width: 70,
             flex: 0,
           },
           {
