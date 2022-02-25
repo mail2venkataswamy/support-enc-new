@@ -16,7 +16,7 @@ function setNormal(api) {
 }
 const staticCellStyle = { "background-color": "yellow" };
 
-class StProvider extends Component {
+class FuturesProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -823,6 +823,7 @@ class StProvider extends Component {
   };
   onCellValueChanged = (params) => {
     const colId = params.column.getId();
+    console.log(colId);
   };
   //----------------
   componentDidMount() {
@@ -899,5 +900,7 @@ class StProvider extends Component {
     );
   }
 }
-
-export default StProvider;
+FuturesProvider.propTypes = {
+  children: PropTypes.any,
+};
+export default FuturesProvider;

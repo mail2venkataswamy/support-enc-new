@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./PlaceHolderGrid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/futures-context.jsx";
 import { TasksModal } from "./tasks-modal/tasks-modal.jsx";
 

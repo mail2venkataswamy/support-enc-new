@@ -34,6 +34,10 @@ const Futures = () => {
               onClick={() => toggleFilterPanel(!isFilterPanelVisble)}
               className="futuresFilterPanelToggle"
               title="Hide Filter Panel"
+              onKeyDown={() => toggleFilterPanel(!isFilterPanelVisble)}
+              role="button"
+              tabIndex={0}
+              id="futuresFilterPanelToggle"
             >
               <p>{"<<"}</p>
             </div>
@@ -50,6 +54,10 @@ const Futures = () => {
               <div
                 className="futuresFilterPanelUnToggle"
                 title="Show Filter Panel"
+                onKeyDown={() => toggleFilterPanel(!isFilterPanelVisble)}
+                role="button"
+                tabIndex={0}
+                id="futuresFilterPanelToggle"
               >
                 <div className="toggleIndicator">{">"}</div>
                 <p>FILTER PANEL</p>

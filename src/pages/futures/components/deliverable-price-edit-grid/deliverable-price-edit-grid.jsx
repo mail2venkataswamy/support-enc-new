@@ -15,7 +15,6 @@ const EditcatGrid = () => {
     onBtPrint,
     onGridReady,
     onBtnExport,
-    onRefreshMaintenanceGridData,
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
@@ -60,12 +59,12 @@ const EditcatGrid = () => {
           <button
             onClick={
               isGridPopulated
-                ? onRefreshMaintenanceGridData
+                ? () => {}
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
             Refresh
-          </button>
+          </button>{" "}
           <button
             onClick={
               isGridPopulated
