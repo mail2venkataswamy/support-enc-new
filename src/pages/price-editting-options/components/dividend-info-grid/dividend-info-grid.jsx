@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./edit-cat-dashboard-grid.scss";
+import "./dividend-info-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/futures-context.jsx";
+import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
@@ -19,10 +19,11 @@ const EditcatGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseEditcatDashboard,
+    onCloseDividendInfoGrid,
+
     // getActiveTab,
   } = {
-    ...context.state.editCatDashboardState,
+    ...context.state.dividendInfoGridState,
     ...context,
   };
 
@@ -37,18 +38,23 @@ const EditcatGrid = () => {
     //getActiveTab("tab-0");
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
+  let [showAllColumns, setShowAllColumns] = useState(false);
+
   return (
     <>
       <div className="messageAndNavigationWrapper">
-        <div className="title">Edit Category Dashboard</div>
+        <div className="title">Dividend Info</div>
         <div className="close">
-          <button onClick={onCloseEditcatDashboard} className="closeButton">
+          <button onClick={onCloseDividendInfoGrid} className="closeButton">
             X
           </button>
         </div>
       </div>
       <div className="fEditCatHeaderActions">
         <div className="fEditCatRighttHeaderSection">
+          {/*           <button onClick={() => setShowAllColumns(!showAllColumns)}>
+            {showAllColumns ? "Show Default Columns" : "Show All Columns"}
+          </button>
           <button
             onClick={
               isGridPopulated
@@ -57,7 +63,7 @@ const EditcatGrid = () => {
             }
           >
             Refresh
-          </button>
+          </button> 
           <button
             onClick={
               isGridPopulated
@@ -66,7 +72,7 @@ const EditcatGrid = () => {
             }
           >
             Print
-          </button>
+          </button>*/}
           <button
             onClick={
               isGridPopulated
@@ -83,7 +89,7 @@ const EditcatGrid = () => {
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={510}
+        gridHeight={"89%"}
         gridWidth={"auto"}
         rowSelection="multiple"
         //pagination={true}

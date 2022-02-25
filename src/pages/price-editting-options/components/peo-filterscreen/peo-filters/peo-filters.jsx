@@ -253,6 +253,18 @@ const ProductInfo = () => {
             <label lateSeries="ls">Theo Spot Price Records</label>
           </div>
         </div>
+        <div className="peoLabelAndValue">
+          <div className="peoLabel"></div>
+          <div className="peoValue">
+            <input
+              type="checkbox"
+              name="ls"
+              //checked={isSpotPriceRecordsChecked}
+              //onChange={onChangeSpotPriceRecords}
+            ></input>
+            <label lateSeries="ls">SOO Records</label>
+          </div>
+        </div>
       </fieldset>
     </div>
   );

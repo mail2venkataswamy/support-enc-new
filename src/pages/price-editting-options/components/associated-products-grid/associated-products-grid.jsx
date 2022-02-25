@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./edit-cat-dashboard-grid.scss";
+import "./associated-products-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/futures-context.jsx";
+import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
@@ -19,10 +19,10 @@ const EditcatGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseEditcatDashboard,
+    onCloseAssociatedProductsGrid,
     // getActiveTab,
   } = {
-    ...context.state.editCatDashboardState,
+    ...context.state.associatedProductsState,
     ...context,
   };
 
@@ -40,33 +40,18 @@ const EditcatGrid = () => {
   return (
     <>
       <div className="messageAndNavigationWrapper">
-        <div className="title">Edit Category Dashboard</div>
+        <div className="title">Associated Products</div>
         <div className="close">
-          <button onClick={onCloseEditcatDashboard} className="closeButton">
+          <button
+            onClick={onCloseAssociatedProductsGrid}
+            className="closeButton"
+          >
             X
           </button>
         </div>
       </div>
       <div className="fEditCatHeaderActions">
         <div className="fEditCatRighttHeaderSection">
-          <button
-            onClick={
-              isGridPopulated
-                ? onRefreshMaintenanceGridData
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Refresh
-          </button>
-          <button
-            onClick={
-              isGridPopulated
-                ? onBtPrint
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Print
-          </button>
           <button
             onClick={
               isGridPopulated

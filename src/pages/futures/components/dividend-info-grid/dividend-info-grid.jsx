@@ -52,7 +52,7 @@ const EditcatGrid = () => {
       </div>
       <div className="fEditCatHeaderActions">
         <div className="fEditCatRighttHeaderSection">
-          <button onClick={() => setShowAllColumns(!showAllColumns)}>
+          {/*           <button onClick={() => setShowAllColumns(!showAllColumns)}>
             {showAllColumns ? "Show Default Columns" : "Show All Columns"}
           </button>
           <button
@@ -63,7 +63,7 @@ const EditcatGrid = () => {
             }
           >
             Refresh
-          </button>
+          </button> 
           <button
             onClick={
               isGridPopulated
@@ -72,7 +72,7 @@ const EditcatGrid = () => {
             }
           >
             Print
-          </button>
+          </button>*/}
           <button
             onClick={
               isGridPopulated

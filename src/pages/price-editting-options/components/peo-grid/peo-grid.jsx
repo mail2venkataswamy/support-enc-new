@@ -28,8 +28,10 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
-    toggleModifyStModal,
     showPlaceHolderScreen,
+    onClickExchangeInfo,
+    onClickDividendInfo,
+    onClickAssociatedProductsGrid,
   } = {
     ...context.state.gridState,
     ...context,
@@ -67,9 +69,48 @@ const ThresholdGrid = () => {
               ></input>
             </div>
           </div>
-          <button>Asssociated Products</button>
-          <button>Devidend Info</button>
-          <button>Exchange Info</button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickAssociatedProductsGrid
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Asssociated Products
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickDividendInfo
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Devidend Info
+          </button>
+          <button
+            onClick={
+              isGridPopulated
+                ? selectedGridRows && selectedGridRows.length > 0
+                  ? onClickExchangeInfo
+                  : () =>
+                      toggleRecordMustBeSelectedModal(
+                        !isRecordMustBeselectedModalOpen
+                      )
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Exchange Info
+          </button>
           <button>SOO Info</button>
           <button>Save</button>
           <button>Cancel</button>

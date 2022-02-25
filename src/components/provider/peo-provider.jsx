@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 import MyContext from "../context/peo-context.jsx";
 import PeoData from "./json/price-editing-options/price-editing-options.json";
+import EditCatData from "./json/futures/edit-cat-dashboard.json";
+import DividendInfo from "./json/futures/dividend-info-data.json";
+import AssociatedProductsData from "./json/price-editing-options/associated-products-info.json";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -19,6 +22,82 @@ class StProvider extends Component {
     this.state = {
       initialPanelState: {},
       showDerivativeGrid: false,
+      showEditGridDashBoard: false,
+      showPlaceHolderGrid: true,
+      //showDeliverablePriceEditGrid: false,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
+      showAssociatedProductsGrid: false,
+      associatedProductsState: {
+        rowData: AssociatedProductsData.rows,
+        colDefs: [
+          {
+            headerName: "#",
+            field: "index",
+            width: "auto",
+            flex: 0,
+            width: 60,
+          },
+          {
+            headerName: "Symbol",
+            field: "symbol",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Description",
+            field: "description",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
+      tasksData: {
+        isTasksModalOpen: false,
+      },
+      editCatDashboardState: {
+        rowData: EditCatData.rows,
+        colDefs: [
+          {
+            headerName: "Rule",
+            field: "rule",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Final vendor Flagged",
+            field: "finalvendorFlagged",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Final Review Needed",
+            field: "finalReviewNeeded",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
       filtersState: {
         symbolToSearchValue: "",
         symbolToData: [
@@ -92,9 +171,30 @@ class StProvider extends Component {
           { label: "Not Cleared", value: "notCleared" },
         ],
         selectedClearedValue: { label: "Select", value: "select" },
-        statusOptions: [],
-        categoryLevelOptions: [],
-        reviewNeededOptions: [],
+        statusOptions: [
+          { label: "Not Published", value: "notPublished" },
+          { label: "Not Suspended", value: "notSuspended" },
+          { label: "Published", value: "published" },
+          { label: "Suspend", value: "suspend" },
+        ],
+        categoryLevelOptions: [
+          { label: "Product", value: "product" },
+          { label: "Contract", value: "contract" },
+        ],
+        reviewNeededOptions: [
+          {
+            label: "Final - Large Difference Vs Vender",
+            value: "Final - Large Difference Vs Vender",
+          },
+          {
+            label: "Final - Large varience Vs previous",
+            value: "Final - Large varience Vs previous",
+          },
+          {
+            label: "Final - Missing or Zero Final Price",
+            value: "Final - Missing or Zero Final Price",
+          },
+        ],
         selectedStatusValue: { label: "Select", value: "select" },
         selectedCategoryLevelValue: { label: "Select", value: "select" },
         selectedReviewNeededValue: { label: "Select", value: "select" },
@@ -302,8 +402,192 @@ class StProvider extends Component {
         selectedGridRowData: [],
         selectedGridRows: [],
       },
+      exchangeInfoGridState: {
+        rowData: [],
+        colDefs: [
+          {
+            headerName: "Underlying Symbol",
+            field: "underlyingSymbol",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Exchange Name",
+            field: "exchangeName",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "ExchangePrice",
+            field: "exchangePrice",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Last Recieved Timestamp",
+            field: "lastRecievedTimestamp",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Unit Quantiity",
+            field: "unitQuantity",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
+      dividendInfoGridState: {
+        rowData: DividendInfo.rows,
+        colDefs: [
+          {
+            headerName: "Security",
+            field: "security",
+            width: "auto",
+            flex: 0,
+          },
+          {
+            headerName: "Dividend Type",
+            field: "dividendType",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Ex-Date",
+            field: "publishedExDate",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Frequency",
+            field: "publishedFrequency",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Unit Quantiity",
+            field: "unitQuantity",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Amount",
+            field: "publishedAmount",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Published Yield",
+            field: "publishedYield",
+            width: "auto",
+            //flex: 0,
+          },
+          {
+            headerName: "Dividend Currency",
+            field: "dividendCurrency",
+            width: "auto",
+            //flex: 0,
+          },
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
     };
   }
+  onCloseAssociatedProductsGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
+      showAssociatedProductsGrid: false,
+    });
+  };
+  onClickAssociatedProductsGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
+      showAssociatedProductsGrid: true,
+    });
+  };
+  onClickExchangeInfo = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: true,
+    });
+  };
+  onCloseExchangeInfoGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDividendInfoGrid: false,
+      showExchangeInfogrid: false,
+    });
+  };
+  onCloseDividendInfoGrid = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      showDividendInfoGrid: false,
+    });
+  };
+  onClickDividendInfo = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+      showDividendInfoGrid: true,
+    });
+  };
+  onCloseEditcatDashboard = () => {
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: true,
+      //showDeliverablePriceEditGrid: false,
+    });
+  };
+  toggleTasksModal = () => {
+    let tasksData = this.state.tasksData;
+    tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
+    this.setState({
+      tasksData,
+    });
+  };
+  onClickEditDashBoardGrid = () => {
+    this.setState({
+      showEditGridDashBoard: true,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid: false,
+    });
+  };
 
   showPlaceHolderScreen = () => {
     this.setState({
@@ -608,6 +892,15 @@ class StProvider extends Component {
           showPlaceHolderScreen: this.showPlaceHolderScreen,
           onChangeEdittedRecords: this.onChangeEdittedRecords,
           onChangeSpotPriceRecords: this.onChangeSpotPriceRecords,
+          onClickEditDashBoardGrid: this.onClickEditDashBoardGrid,
+          toggleTasksModal: this.toggleTasksModal,
+          onCloseEditcatDashboard: this.onCloseEditcatDashboard,
+          onCloseDividendInfoGrid: this.onCloseDividendInfoGrid,
+          onClickDividendInfo: this.onClickDividendInfo,
+          onCloseExchangeInfoGrid: this.onCloseExchangeInfoGrid,
+          onClickExchangeInfo: this.onClickExchangeInfo,
+          onCloseAssociatedProductsGrid: this.onCloseAssociatedProductsGrid,
+          onClickAssociatedProductsGrid: this.onClickAssociatedProductsGrid,
           //Ag grid methods
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,

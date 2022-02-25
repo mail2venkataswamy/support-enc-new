@@ -1,0 +1,4 @@
+{
+  "success": true,
+  "rows": [{ "symbol": 123, "description": "test" }]
+}

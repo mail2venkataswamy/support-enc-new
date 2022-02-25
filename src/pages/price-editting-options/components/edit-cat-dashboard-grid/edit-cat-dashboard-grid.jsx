@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./edit-cat-dashboard-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/futures-context.jsx";
+import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
