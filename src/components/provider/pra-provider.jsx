@@ -1,3 +1,4 @@
+import { GridApi } from "ag-grid-community";
 import React, { Component } from "react";
 
 import MyContext from "../context/pra-context.jsx";
@@ -735,7 +736,11 @@ class PraProvider extends Component {
       addThresholdsData,
     });
   };
-
+  onPageSizeChanged=()=>{
+    var value = document.getElementById('page-size').value;
+    //gridRef.current.api.paginationSetPageSize(Number(value));
+    this.gridApi.paginationSetPageSize(Number(value));
+  }
   render() {
     return (
       <MyContext.Provider
@@ -793,6 +798,7 @@ class PraProvider extends Component {
           onChangeAddClassificationValue: (e) =>
             this.onChangeAddClassificationValue(e),
           onChanglpafValue: (e) => this.onChanglpafValue(e),
+          onPageSizeChanged:this.onPageSizeChanged
         }}
       >
         {this.props.children}

@@ -10,7 +10,9 @@ const PlaceHoldergrid = () => {
     onClickEditDashBoardGrid,
     onClickDeliverablePriceEditGrid,
     toggleTasksModal,
+    showTasks
   } = {
+    ...context.state,
     ...context,
   };
 
@@ -20,13 +22,13 @@ const PlaceHoldergrid = () => {
         <button>Master File Upd</button>
         <button>Smoothing Upd</button>|
         <button onClick={toggleTasksModal}>Tasks</button>
-        <button onClick={onClickFutureContracts}>Future Contracts</button>
+        {showTasks?(<><button onClick={onClickFutureContracts}>Future Contracts</button>
         <button onClick={onClickEditDashBoardGrid}>
           Edit Category Dashboard
         </button>
-        <button onClick={onClickDeliverablePriceEditGrid}>
+        <button onClick={()=>onClickDeliverablePriceEditGrid("main")}>
           Deliverable - Price Editing
-        </button>
+        </button></>):<></>}
       </div>
       <TasksModal></TasksModal>
     </div>

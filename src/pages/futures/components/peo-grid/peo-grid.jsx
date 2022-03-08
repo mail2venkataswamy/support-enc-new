@@ -67,6 +67,8 @@ const ThresholdGrid = () => {
               <input
               //checked={isCorporateActionChecked}
               //onChange={onChangeCorporateAction}
+              type="text"
+              className="symbol"
               ></input>
             </div>
           </div>
@@ -74,7 +76,7 @@ const ThresholdGrid = () => {
             onClick={
               isGridPopulated
                 ? selectedGridRows && selectedGridRows.length > 0
-                  ? onClickDeliverablePriceEditGrid
+                  ? ()=>onClickDeliverablePriceEditGrid("nonMain")
                   : () =>
                       toggleRecordMustBeSelectedModal(
                         !isRecordMustBeselectedModalOpen
@@ -168,7 +170,7 @@ const ThresholdGrid = () => {
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
           >
-            Export Derivative
+            Export Future Contract
           </button>
           <button
             onClick={

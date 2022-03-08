@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useCallback,useRef } from "react";
 import "./pra-threshold-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/pra-context.jsx";
@@ -8,6 +8,8 @@ import RecordMustBeSelected from "../../../../components/common/modal/prompt/pro
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
+  const gridRef = useRef();
+  const paginationOptions=[{value:50},{value:100},{value:500},{value:1000}];
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
   const [
     isRecordMustBeselectedModalOpen,
@@ -30,19 +32,18 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
+    onPageSizeChanged
   } = {
     ...context.state.gridScreenData,
     ...context,
   };
-  useEffect(() => {
+
+   useEffect(() => {
     let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
     var div1 = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${priceSystemAlertStateRowData.length}</div>`;
-    ele && ele.append(div);
     ele.append(div1);
-  }, []);
+  }, []); 
   let isGridPopulated =
     priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
   return (
@@ -98,6 +99,7 @@ const ThresholdGrid = () => {
       </div>
       <div className="praGridWrapper"></div>
       <Aggrid
+        ref={gridRef}
         rowData={priceSystemAlertStateRowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
@@ -105,7 +107,7 @@ const ThresholdGrid = () => {
         gridWidth={"auto"}
         rowSelection="multiple"
         pagination={true}
-        paginationPageSize={100}
+        paginationPageSize={1}
         rowHeight={22}
         headerHeight={33}
         onGridReady={onGridReady}
@@ -113,6 +115,22 @@ const ThresholdGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
       />
+      <div id="page-size">
+      <div> <p>Display</p></div>
+        <div>
+        <select onChange={onPageSizeChanged} id="page-size">
+          {
+            paginationOptions.map((option)=>{
+              return <option value={option.value}>{option.value}</option>
+            })
+          }
+        
+          </select>
+        </div>
+        <div> <p>Records Per Page</p></div>
+    
+          </div>
+        
       <AddThresholdsModal></AddThresholdsModal>
       <WarningModal
         warningMessage="Grid must be populated"

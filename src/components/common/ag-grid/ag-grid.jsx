@@ -12,6 +12,7 @@ const Aggrid = (props) => {
       style={{ height: props.gridHeight, width: props.gridWidth }}
     >
       <AgGridReact
+        ref={props.gridRef}
         rowData={props.rowData}
         columnDefs={props.colDefsMedalsIncluded}
         defaultColDef={props.defaultColDef}

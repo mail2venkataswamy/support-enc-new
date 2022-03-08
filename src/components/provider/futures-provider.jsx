@@ -5,6 +5,7 @@ import PeoData from "./json/futures/futures.json";
 import EditCatData from "./json/futures/edit-cat-dashboard.json";
 import DeliverablePriceEditData from "./json/futures/deliverable-edit-price.json";
 import DividendInfo from "./json/futures/dividend-info-data.json";
+import PropTypes from "prop-types";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -27,6 +28,8 @@ class FuturesProvider extends Component {
       showDeliverablePriceEditGrid: false,
       showDividendInfoGrid: false,
       showExchangeInfogrid: false,
+      showTasks:false,
+      deliverablesPage:"",
       tasksData: {
         isTasksModalOpen: false,
       },
@@ -327,12 +330,30 @@ class FuturesProvider extends Component {
           { label: "Not Cleared", value: "notCleared" },
         ],
         selectedClearedValue: { label: "Select", value: "select" },
-        statusOptions: [],
         categoryLevelOptions: [],
-        reviewNeededOptions: [],
         selectedStatusValue: { label: "Select", value: "select" },
         selectedCategoryLevelValue: { label: "Select", value: "select" },
         selectedReviewNeededValue: { label: "Select", value: "select" },
+        statusOptions: [
+            { label: "Not Published", value: "notPublished" },
+            { label: "Not Suspended", value: "notSuspended" },
+            { label: "Published", value: "published" },
+            { label: "Suspend", value: "suspend" },
+          ],
+          reviewNeededOptions: [
+            {
+              label: "Final - Large Difference Vs Vender",
+              value: "Final - Large Difference Vs Vender",
+            },
+            {
+              label: "Final - Large varience Vs previous",
+              value: "Final - Large varience Vs previous",
+            },
+            {
+              label: "Final - Missing or Zero Final Price",
+              value: "Final - Missing or Zero Final Price",
+            },
+          ],
       },
       gridState: {
         rowData: [],
@@ -492,8 +513,8 @@ class FuturesProvider extends Component {
   onCloseExchangeInfoGrid = () => {
     this.setState({
       showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
+      showDerivativeGrid: true,
+      showPlaceHolderGrid: false,
       showDividendInfoGrid: false,
       showExchangeInfogrid: false,
     });
@@ -501,8 +522,8 @@ class FuturesProvider extends Component {
   onCloseDividendInfoGrid = () => {
     this.setState({
       showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
+      showDerivativeGrid: true,
+      showPlaceHolderGrid: false,
       showDividendInfoGrid: false,
     });
   };
@@ -512,15 +533,16 @@ class FuturesProvider extends Component {
       showDerivativeGrid: false,
       showPlaceHolderGrid: false,
       showDividendInfoGrid: true,
+      
     });
   };
-  onCloseDeliverablePriceEditGrid = () => {
+/*   onCloseDeliverablePriceEditGrid = () => {
     this.setState({
       showEditGridDashBoard: false,
       showDerivativeGrid: false,
       showPlaceHolderGrid: true,
     });
-  };
+  }; */
   onChangeEdittedRecords = () => {
     let filtersState = this.state.filtersState;
     filtersState.isEdittedRecordsChecked = !filtersState.isEdittedRecordsChecked;
@@ -565,15 +587,30 @@ class FuturesProvider extends Component {
       showDeliverablePriceEditGrid: false,
     });
   };
-  onClickDeliverablePriceEditGrid = () => {
+  onClickDeliverablePriceEditGrid = (page) => {
+      console.log("onClickDeliverablePriceEditGrid",page);
     this.setState({
       showEditGridDashBoard: false,
       showDerivativeGrid: false,
       showPlaceHolderGrid: false,
       showDeliverablePriceEditGrid: true,
+      deliverablesPage:page
     });
   };
+  onCloseDeliverablePriceEditGrid = (page) => {
+    console.log("onCloseDeliverablePriceEditGrid",page);
+   let  showPlaceHolderGrid=false;
+   let showDeliverablePriceEditGrid=false;
+    this.state.deliverablesPage==="main"?showPlaceHolderGrid=true:showDeliverablePriceEditGrid=true;
+    this.setState({
+      showEditGridDashBoard: false,
+      showDerivativeGrid: false,
+      showPlaceHolderGrid,
+      showDeliverablePriceEditGrid,
+      deliverablesPage:page
 
+    });
+  };
   onCloseEditcatDashboard = () => {
     this.setState({
       showEditGridDashBoard: false,
@@ -582,14 +619,14 @@ class FuturesProvider extends Component {
       showDeliverablePriceEditGrid: false,
     });
   };
-  onCloseDeliverablePriceEditGrid = () => {
+/*   onCloseDeliverablePriceEditGrid = () => {
     this.setState({
       showEditGridDashBoard: false,
       showDerivativeGrid: false,
       showPlaceHolderGrid: true,
       showDeliverablePriceEditGrid: false,
     });
-  };
+  }; */
   onChangeStatusValue = (selectedValue) => {
     let filtersState = this.state.filtersState;
     filtersState.selectedStatusValue = selectedValue;
@@ -744,6 +781,7 @@ class FuturesProvider extends Component {
     this.onClickFutureContracts();
     this.setState({
       gridState,
+      showTasks:true
     });
   };
   onRefreshMaintenanceGridData = () => {

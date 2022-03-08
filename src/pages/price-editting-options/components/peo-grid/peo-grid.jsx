@@ -66,6 +66,7 @@ const ThresholdGrid = () => {
               <input
               //checked={isCorporateActionChecked}
               //onChange={onChangeCorporateAction}
+              className="corporateAction"
               ></input>
             </div>
           </div>
