@@ -115,7 +115,7 @@ const ThresholdGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
       />
-      <div id="page-size">
+      <div id="page-size-container">
       <div> <p>Display</p></div>
         <div>
         <select onChange={onPageSizeChanged} id="page-size">
@@ -124,7 +124,6 @@ const ThresholdGrid = () => {
               return <option value={option.value}>{option.value}</option>
             })
           }
-        
           </select>
         </div>
         <div> <p>Records Per Page</p></div>

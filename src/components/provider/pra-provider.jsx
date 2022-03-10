@@ -738,7 +738,6 @@ class PraProvider extends Component {
   };
   onPageSizeChanged=()=>{
     var value = document.getElementById('page-size').value;
-    //gridRef.current.api.paginationSetPageSize(Number(value));
     this.gridApi.paginationSetPageSize(Number(value));
   }
   render() {
