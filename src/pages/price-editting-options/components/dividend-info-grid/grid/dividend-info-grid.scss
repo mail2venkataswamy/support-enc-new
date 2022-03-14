@@ -1,4 +1,4 @@
-.fEditCatGridHeader {
+.peoDividendInfoCatGridHeader {
   font-size: 14px;
   font-weight: bold;
   color: #000;
@@ -6,7 +6,8 @@
   border: none;
   margin: 13px !important;
 }
-.fEditCatGridTitle {
+
+.peoDividendInfoCatGridTitle {
   font-size: 12px;
   font-weight: bold;
   margin-left: 3%;
@@ -19,13 +20,16 @@
   cursor: pointer;
   font-size: 13px;
 }
-.fEditCatHeaderActions {
+
+.peoDividendInfoCatHeaderActions {
   display: flex;
-  .fEditCatRighttHeaderSection {
+
+  .peoDividendInfoCatRighttHeaderSection {
     justify-content: flex-end;
     flex: 1;
     display: flex;
   }
+
   button {
     background: transparent;
     background: transparent;
@@ -37,12 +41,14 @@
     font-size: 13px;
   }
 }
-.fEditCatSaveAndCancelWrapper {
+
+.peoDividendInfoCatSaveAndCancelWrapper {
   text-align: right;
   width: 100%;
   border: none;
 
   background: #fff;
+
   button.mtCancel {
     margin-left: 11px;
   }

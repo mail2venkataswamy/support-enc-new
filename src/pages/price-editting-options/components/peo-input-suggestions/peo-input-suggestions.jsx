@@ -9,6 +9,7 @@ const InputSuggestion = (props) => {
         onChange={props.onChange}
         value={props.value}
         disabled={props.disabled}
+        type={props.type}
       ></input>
       <Suggestions
         results={props.results}

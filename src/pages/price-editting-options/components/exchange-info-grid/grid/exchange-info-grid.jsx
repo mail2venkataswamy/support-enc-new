@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./associated-products-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
+import "./exchange-info-grid.scss";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
   const context = useContext(myContext);
@@ -12,17 +12,15 @@ const EditcatGrid = () => {
     rowData,
     colDefs,
     defaultColDef,
-    onBtPrint,
+    //onBtPrint,
     onGridReady,
     onBtnExport,
-    onRefreshMaintenanceGridData,
+    //onRefreshMaintenanceGridData,
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseAssociatedProductsGrid,
-    // getActiveTab,
   } = {
-    ...context.state.associatedProductsState,
+    ...context.state.exchangeInfoGridState,
     ...context,
   };
 
@@ -37,19 +35,10 @@ const EditcatGrid = () => {
     //getActiveTab("tab-0");
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
+  //let [showAllColumns, setShowAllColumns] = useState(false);
+
   return (
     <>
-      <div className="messageAndNavigationWrapper">
-        <div className="title">Associated Products</div>
-        <div className="close">
-          <button
-            onClick={onCloseAssociatedProductsGrid}
-            className="closeButton"
-          >
-            X
-          </button>
-        </div>
-      </div>
       <div className="fEditCatHeaderActions">
         <div className="fEditCatRighttHeaderSection">
           <button
@@ -68,7 +57,7 @@ const EditcatGrid = () => {
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={510}
+        gridHeight={500}
         gridWidth={"auto"}
         rowSelection="multiple"
         //pagination={true}

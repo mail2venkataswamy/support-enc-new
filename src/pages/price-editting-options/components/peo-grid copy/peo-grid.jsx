@@ -4,9 +4,9 @@ import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
-import {AssociatedProducts} from "../../components/associated-products-grid/grid-modal.jsx";
-import {DividendInfoModal} from "../../components/dividend-info-grid/grid-modal.jsx";
-import {ExchangeInfoModal} from "../../components/exchange-info-grid/grid-modal.jsx";
+import {AssociatedProducts} from "../associated-products-grid/grid-modal.jsx";
+import {DividendInfoModal} from "../dividend-info-grid/grid-modal.jsx";
+import {ExchangeInfoModal} from "../exchange-info-grid/grid-modal.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);

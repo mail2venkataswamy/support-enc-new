@@ -5,6 +5,7 @@ import PeoData from "./json/price-editing-options/price-editing-options.json";
 import EditCatData from "./json/futures/edit-cat-dashboard.json";
 import DividendInfo from "./json/futures/dividend-info-data.json";
 import AssociatedProductsData from "./json/price-editing-options/associated-products-info.json";
+import ContractPriceEditData from "./json/price-editing-options/contract-price-editing.json";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -21,14 +22,234 @@ class StProvider extends Component {
     super(props);
     this.state = {
       initialPanelState: {},
-      showDerivativeGrid: false,
-      showEditGridDashBoard: false,
-      showPlaceHolderGrid: true,
-      //showDeliverablePriceEditGrid: false,
-      showDividendInfoGrid: false,
-      showExchangeInfogrid: false,
-      showAssociatedProductsGrid: false,
+      agGridState:{
+        selectedGridRows:[],
+      },
+      
+      
+      editPricingState:{
+        isExcludeModalOpen:false,
+        isSubstituteModalOpen:false,
+        selectedSymbolValue:'',
+        isEditPriceOpen:false,
+        rowData: ContractPriceEditData.rows,
+        colDefs: [
+          {
+            width: 40,
+            headerCheckboxSelection: true,
+            headerCheckboxSelectionFilteredOnly: true,
+            checkboxSelection: true,
+            flex: 0,
+          },
+          {
+            headerName: "Intraday Call Excl /Subs/ Lock",
+            field: "intraDayCallExclSubsLock",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Final Call Excl /Subs/ Lock",
+            field: "finalCallExclSubsLock",
+            width: 140,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Call Monotonicil Violation",
+            field: "eodCallMonotonicilViolation",
+            width: 160,
+            flex: 0,
+          },
+          {
+            headerName: "Final Call Outside NBBO Range",
+            field: "FinalCallOutsideNbboRange",
+            width: 140,
+            flex: 0,
+          },
+          {
+            headerName: "Refinitive Call Price",
+            field: "refinitiveCallPrice",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Call Price",
+            field: "bloombergCallPrice",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Call Price",
+            field: "iceCallPrice",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Call Bid",
+            field: "bloombergCallBid",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Call Bid",
+            field: "iceCallBid",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Final Call Mark Price",
+            field: "eodFinalCallMarkPrice",
+            width: 140,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Call Ask",
+            field: "bloombergCallAsk",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Call Ask",
+            field: "iceCallAsk",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Previous Final Call Volatility",
+            field: "previousFinalCallVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "Primary Vendor Call Volatility",
+            field: "primaryVendorCallVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Vendor Call Volatility",
+            field: "eodVendorCallVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Override Call Volatility",
+            field: "eodOverrideCallVolatility",
+            width: 150,
+            flex: 0,
+            cellStyle:staticCellStyle
+          },
+          {
+            headerName: "EOD Call User ID",
+            field: "eodCallUserId",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Call Price Variance",
+            field: "eodCallPriceVariance",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Series Date",
+            field: "seriesDate",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Div Yield",
+            field: "divYield",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "Strike",
+            field: "strike",
+            width: 80,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Put Price Variance",
+            field: "eodPutPriceVariance",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Put user ID",
+            field: "eodPutUserid",
+            width: 100,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Override Put Volatility",
+            field: "eodOverridePutVolatility",
+            width: 150,
+            flex: 0,
+            cellStyle:staticCellStyle
+          },
+          {
+            headerName: "EOD Override Final Volatility",
+            field: "eodOverrideFinalVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "Primary Vendor Put Volatility",
+            field: "primaryVendorPutVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "Previous Final Put Volatility",
+            field: "previousFinalPutVolatility",
+            width: 150,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Put Price",
+            field: "bloombergPutPrice",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Put Price",
+            field: "icePutPrice",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "Bloomberg Put bid",
+            field: "bloombergPutBid",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "ICE Put bid",
+            field: "icePutBid",
+            width: 130,
+            flex: 0,
+          },
+          {
+            headerName: "EOD Final Put Mark Price",
+            field: "eodFinalPutMarkPrice",
+            width: 150,
+            flex: 0,
+          },
+  
+        ],
+        defaultColDef: {
+          initialWidth: "auto",
+          sortable: true,
+          resizable: true,
+          filter: true,
+          rowSelection: "multiple",
+          flex: 1,
+        },
+        selectedGridRowData: [],
+        selectedGridRows: [],
+      },
       associatedProductsState: {
+        isAssociatedProductsModalOpen:false,
         rowData: AssociatedProductsData.rows,
         colDefs: [
           {
@@ -403,6 +624,7 @@ class StProvider extends Component {
         selectedGridRows: [],
       },
       exchangeInfoGridState: {
+        isExchangeInfoModalOpen:false,
         rowData: [],
         colDefs: [
           {
@@ -448,6 +670,7 @@ class StProvider extends Component {
         selectedGridRows: [],
       },
       dividendInfoGridState: {
+        isDividendInfoModalOpen:false,
         rowData: DividendInfo.rows,
         colDefs: [
           {
@@ -512,73 +735,84 @@ class StProvider extends Component {
       },
     };
   }
-  onCloseAssociatedProductsGrid = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
-      showDividendInfoGrid: false,
-      showExchangeInfogrid: false,
-      showAssociatedProductsGrid: false,
-    });
-  };
-  onClickAssociatedProductsGrid = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: false,
-      showDividendInfoGrid: false,
-      showExchangeInfogrid: false,
-      showAssociatedProductsGrid: true,
-    });
-  };
-  onClickExchangeInfo = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: false,
-      showDividendInfoGrid: false,
-      showExchangeInfogrid: true,
-    });
-  };
-  onCloseExchangeInfoGrid = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
-      showDividendInfoGrid: false,
-      showExchangeInfogrid: false,
-    });
-  };
-  onCloseDividendInfoGrid = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
-      showDividendInfoGrid: false,
-    });
-  };
-  onClickDividendInfo = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: false,
-      showDividendInfoGrid: true,
-    });
-  };
-  onCloseEditcatDashboard = () => {
-    this.setState({
-      showEditGridDashBoard: false,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: true,
-      //showDeliverablePriceEditGrid: false,
-    });
-  };
+  
   toggleTasksModal = () => {
     let tasksData = this.state.tasksData;
     tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
     this.setState({
       tasksData,
+    });
+  };
+  toggleAssociatedProductsModal=()=>{
+    let associatedProductsState = this.state.associatedProductsState;
+    associatedProductsState.isAssociatedProductsModalOpen = !associatedProductsState.isAssociatedProductsModalOpen;
+    this.setState({
+      associatedProductsState,
+    });
+  }
+  toggleDividendInfoModalOpenModal=()=>{
+    
+    let dividendInfoGridState = this.state.dividendInfoGridState;
+    dividendInfoGridState.isDividendInfoModalOpen = !dividendInfoGridState.isDividendInfoModalOpen;
+    this.setState({
+      dividendInfoGridState,
+    });
+  }
+  toggleExchangeInfoGridModal=()=>{   
+    let exchangeInfoGridState = this.state.exchangeInfoGridState;
+    exchangeInfoGridState.isExchangeInfoModalOpen = !exchangeInfoGridState.isExchangeInfoModalOpen;
+    this.setState({
+      exchangeInfoGridState,
+    });
+  }
+  toggleContractEditModal=()=>{  
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isEditPriceOpen = !editPricingState.isEditPriceOpen;
+    this.setState({
+      editPricingState,
+    });
+  }
+  toggleExcludeModal=()=>{
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isExcludeModalOpen = !editPricingState.isExcludeModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  }
+  toggleSubstituteModal=()=>{
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isSubstituteModalOpen = !editPricingState.isSubstituteModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  }
+  onCellClicked = (e) => {
+    let editPricingState = this.state.editPricingState;
+    console.log(e);
+    console.log(e.value);
+    console.log(e.rowIndex);
+    console.log(e.data);
+    console.log("column key", e.column.colId);
+    /*    console.log(e);
+    console.log(e.value);
+    console.log(e.rowIndex);
+    console.log(e.data);
+    console.log("column key", e.column.colId); 
+    dailyReturnsPricingState.rowData = dailyReturnsPricingJsonData.rows;
+    const data = dailyReturnsPricingState.rowData.filter(
+      (row) =>
+        row[e.column.colId] &&
+        row[e.column.colId].toString() === e.value.toString()
+    );
+    dailyReturnsPricingState.rowData = data;*/
+    if(e.column.colId && e.column.colId.toLowerCase()==='symbol')
+    {
+      alert(e.column.colId);
+      editPricingState.selectedSymbolValue=e.value.toString();
+    }
+   this.toggleContractEditModal();
+    this.setState({
+      editPricingState,
     });
   };
   onClickEditDashBoardGrid = () => {
@@ -776,6 +1010,36 @@ class StProvider extends Component {
       this.loadDataOnRefresh();
     }, 3000);
   };
+  onRefreshEditContractPriceGridData=()=>{
+    let editPricingState = this.state.editPricingState;
+    editPricingState.rowData = [];
+    this.setState({
+      editPricingState,
+    });
+
+    setTimeout(() => {
+      this.loadDataOnRefreshForContractEditPrice();
+    }, 3000);
+  }
+
+  loadDataOnRefreshForContractEditPrice() {
+    this.showLoading();
+    let editPricingState = this.state.editPricingState;
+    let data = this.getFilteredGridDataForContractEditPrice();
+    editPricingState.rowData = data;
+    setTimeout(() => {
+      this.setState({
+        editPricingState,
+      });
+    }, 1000);
+  }
+  showLoading() {
+    let ele = document.getElementsByClassName("ag-overlay-no-rows-center")[0];
+    ele.innerText = "loading...";
+  }
+  getFilteredGridDataForContractEditPrice() {
+    return ContractPriceEditData.rows;
+  }
 
   setActivityDate = (date) => {
     let filtersState = this.state.filtersState;
@@ -814,10 +1078,7 @@ class StProvider extends Component {
       });
     }, 1000);
   }
-  showLoading() {
-    let ele = document.getElementsByClassName("ag-overlay-no-rows-center")[0];
-    ele.innerText = "loading...";
-  }
+
   getFilteredGridData() {
     return PeoData.rows;
   }
@@ -835,9 +1096,12 @@ class StProvider extends Component {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log("Grid Rows selected", selectedRows);
     let gridState = this.state.gridState;
+    let agGridState = this.state.agGridState;
     gridState.selectedGridRows = selectedRows;
+    agGridState.selectedGridRows = selectedRows;
     this.setState({
       gridState,
+      agGridState
     });
   };
   onCellValueChanged = (params) => {
@@ -894,13 +1158,6 @@ class StProvider extends Component {
           onChangeSpotPriceRecords: this.onChangeSpotPriceRecords,
           onClickEditDashBoardGrid: this.onClickEditDashBoardGrid,
           toggleTasksModal: this.toggleTasksModal,
-          onCloseEditcatDashboard: this.onCloseEditcatDashboard,
-          onCloseDividendInfoGrid: this.onCloseDividendInfoGrid,
-          onClickDividendInfo: this.onClickDividendInfo,
-          onCloseExchangeInfoGrid: this.onCloseExchangeInfoGrid,
-          onClickExchangeInfo: this.onClickExchangeInfo,
-          onCloseAssociatedProductsGrid: this.onCloseAssociatedProductsGrid,
-          onClickAssociatedProductsGrid: this.onClickAssociatedProductsGrid,
           //Ag grid methods
           onRefreshMaintenanceGridData: this.onRefreshMaintenanceGridData,
           onGridReady: this.onGridReady,
@@ -909,6 +1166,14 @@ class StProvider extends Component {
           getSelectedRowData: this.getSelectedRowData,
           onSelectionChanged: this.onSelectionChanged,
           onCellValueChanged: this.onCellValueChanged,
+          toggleAssociatedProductsModal:this.toggleAssociatedProductsModal,
+          toggleDividendInfoModalOpenModal:this.toggleDividendInfoModalOpenModal,
+          toggleExchangeInfoGridModal:this.toggleExchangeInfoGridModal,
+          onCellClicked:this.onCellClicked,
+          toggleContractEditModal:this.toggleContractEditModal,
+          onRefreshEditContractPriceGridData:this.onRefreshEditContractPriceGridData,
+          toggleExcludeModal:this.toggleExcludeModal,
+          toggleSubstituteModal:this.toggleSubstituteModal
         }}
       >
         {this.props.children}

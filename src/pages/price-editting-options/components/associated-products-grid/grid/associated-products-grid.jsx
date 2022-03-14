@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./dividend-info-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
+import "./associated-products-grid.scss";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
   const context = useContext(myContext);
@@ -19,11 +19,11 @@ const EditcatGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseDividendInfoGrid,
-
+    onCloseAssociatedProductsGrid,
+    toggleAssociatedProductsModal
     // getActiveTab,
   } = {
-    ...context.state.dividendInfoGridState,
+    ...context.state.associatedProductsState,
     ...context,
   };
 
@@ -38,41 +38,10 @@ const EditcatGrid = () => {
     //getActiveTab("tab-0");
   }, []);
   let isGridPopulated = rowData && rowData.length > 0;
-  let [showAllColumns, setShowAllColumns] = useState(false);
-
   return (
     <>
-      <div className="messageAndNavigationWrapper">
-        <div className="title">Dividend Info</div>
-        <div className="close">
-          <button onClick={onCloseDividendInfoGrid} className="closeButton">
-            X
-          </button>
-        </div>
-      </div>
-      <div className="fEditCatHeaderActions">
-        <div className="fEditCatRighttHeaderSection">
-          {/*           <button onClick={() => setShowAllColumns(!showAllColumns)}>
-            {showAllColumns ? "Show Default Columns" : "Show All Columns"}
-          </button>
-          <button
-            onClick={
-              isGridPopulated
-                ? onRefreshMaintenanceGridData
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Refresh
-          </button> 
-          <button
-            onClick={
-              isGridPopulated
-                ? onBtPrint
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
-          >
-            Print
-          </button>*/}
+      <div className="peoAPCatHeaderActions">
+        <div className="peoAPCatRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
@@ -84,18 +53,18 @@ const EditcatGrid = () => {
           </button>
         </div>
       </div>
-      <div className="fEditCatGridWrapper"></div>
+      <div className="peoAPCatGridWrapper"></div>
       <Aggrid
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={"89%"}
+        gridHeight={500}
         gridWidth={"auto"}
         rowSelection="multiple"
         //pagination={true}
         //paginationPageSize={100}
         rowHeight={22}
-        headerHeight={33}
+        headerHeight={30}
         onGridReady={onGridReady}
         getSelectedRowData={getSelectedRowData}
         onSelectionChanged={onSelectionChanged}

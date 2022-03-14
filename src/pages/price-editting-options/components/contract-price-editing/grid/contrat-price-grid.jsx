@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./peo-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal";
-import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
-import {AssociatedProducts} from "../../components/associated-products-grid/grid-modal.jsx";
-import {DividendInfoModal} from "../../components/dividend-info-grid/grid-modal.jsx";
-import {ExchangeInfoModal} from "../../components/exchange-info-grid/grid-modal.jsx";
-
+import "./contrat-price-grid.scss";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal";
+import RecordMustBeSelected from "../../../../../components/common/modal/prompt/prompt.jsx";
+import {ExcludeModal} from "./exclude/exclude.jsx";
+import {SubstituteModal} from "./substitute/substitute.jsx";
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
@@ -20,10 +18,10 @@ const ThresholdGrid = () => {
     rowData,
     colDefs,
     defaultColDef,
-    onBtPrint,
+    //onBtPrint,
     onGridReady,
-    onBtnExport,
-    onRefreshMaintenanceGridData,
+    //onBtnExport,
+    onRefreshEditContractPriceGridData,
     selectedGridRows,
     getSelectedRowData,
     onSelectionChanged,
@@ -31,13 +29,12 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
-    toggleAssociatedProductsModal,
-    toggleDividendInfoModalOpenModal,
-    toggleExchangeInfoGridModal,
-    onCellClicked
+    toggleExcludeModal,
+    toggleSubstituteModal
   } = {
-    ...context.state.gridState,
+    ...context.state.editPricingState,
     ...context,
+    ...context.state.agGridState
   };
   useEffect(() => {
     let ele = document.getElementsByClassName("ag-paging-panel")[0];
@@ -51,44 +48,37 @@ const ThresholdGrid = () => {
   let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
-      <div className="peoGridHeader">Derivative</div>
+   {/*    <div className="peoPriceEditGridHeader">Derivative</div> */}
       <div className="messageAndNavigationWrapper">
-        <div className="title">Messages</div>
+{/*         <div className="title">Messages</div> */}
       </div>
-      <div className="peoHeaderActions">
-        <div className="peoLeftHeaderSection">
-          <div className="peoLabelAndValue">
-            <div className="peoLabel"></div>
-            <label for="ca">Corporate Action</label>
-            <div className="peoValue">
-              <input
-              //checked={isCorporateActionChecked}
-              //onChange={onChangeCorporateAction}
-              className="corporateAction"
-              ></input>
-            </div>
-          </div>
+      <div className="peoPriceEditHeaderActions">
+        <div className="peoPriceEditLeftHeaderSection">
           <button
-            onClick={
-              isGridPopulated
-                ? selectedGridRows && selectedGridRows.length > 0
-                  ?   toggleAssociatedProductsModal
-
-                  : () =>
-                      toggleRecordMustBeSelectedModal(
-                        !isRecordMustBeselectedModalOpen
-                      )
-                : () => toggleWarningModal(!isWarningModalOpen)
-            }
+         onClick={
+          isGridPopulated
+            ? onRefreshEditContractPriceGridData
+            : () => toggleWarningModal(!isWarningModalOpen)
+        }
             id="big"
           >
-            Asssociated Products
+            Previous Derivative
+          </button>
+          <button
+           onClick={
+            isGridPopulated
+              ? onRefreshEditContractPriceGridData
+              : () => toggleWarningModal(!isWarningModalOpen)
+          }
+            id="big"
+          >
+            Previous Derivative
           </button>
           <button
             onClick={
               isGridPopulated
                 ? selectedGridRows && selectedGridRows.length > 0
-                  ? toggleDividendInfoModalOpenModal
+                  ? toggleExcludeModal
                   : () =>
                       toggleRecordMustBeSelectedModal(
                         !isRecordMustBeselectedModalOpen
@@ -97,45 +87,39 @@ const ThresholdGrid = () => {
             }
             id="medium"
           >
-            Devidend Info
+            Exclude
           </button>
-          <button
-            onClick={
+          <button id="medium"    onClick={
               isGridPopulated
                 ? selectedGridRows && selectedGridRows.length > 0
-                  ? toggleExchangeInfoGridModal
+                  ? toggleSubstituteModal
                   : () =>
                       toggleRecordMustBeSelectedModal(
                         !isRecordMustBeselectedModalOpen
                       )
                 : () => toggleWarningModal(!isWarningModalOpen)
-            }
-            id="medium"
-          >
-            Exchange Info
-          </button>
-          <button id="medium">SOO Info</button>
-          <button id="small">Save</button>
-          <button id="small">Cancel</button>
-          <button id="big">Init VI Capture</button>
-          <button id="big">Export Derivative</button>
-          <button id="big">Review Final</button>
-          <button id="big">Review Contracts</button>
-          <button id="medium">Review Risk</button>
-          <button id="big">Borrow Cost Limit</button>
+            }>Substitute</button>
+          <button id="medium">Lock Volatility</button>
+          <button id="small">Calculate</button>
+          <button id="big">Volatility Override</button>
+          <button id="big">Borrow Cost Override</button>
+          <button id="big">Save-Smoothing</button>
+          <button id="big">Save-No Smoothing</button>
+          <button id="medium">Cancel</button>
+{/*           <button id="big">Refresh</button> */}
         </div>
-        <div className="peoRighttHeaderSection">
+        <div className="peoPriceEditRighttHeaderSection">
           <button
             onClick={
               isGridPopulated
-                ? onRefreshMaintenanceGridData
+                ? onRefreshEditContractPriceGridData
                 : () => toggleWarningModal(!isWarningModalOpen)
             }
             id="small"
           >
             Refresh
           </button>
-          <button
+{/*           <button
             onClick={
               isGridPopulated
                 ? onBtPrint
@@ -154,10 +138,10 @@ const ThresholdGrid = () => {
             id="small"
           >
             Export
-          </button>
+          </button> */}
         </div>
       </div>
-      <div className="peoGridWrapper"></div>
+      <div className="peoPriceEditGridWrapper"></div>
       <Aggrid
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
@@ -173,7 +157,6 @@ const ThresholdGrid = () => {
         getSelectedRowData={getSelectedRowData}
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
-        onCellClicked={onCellClicked}
       />
       <WarningModal
         warningMessage="Grid must be populated"
@@ -191,9 +174,8 @@ const ThresholdGrid = () => {
         onConfirm={onDeleteSelectedRecords}
         warningMessage="Are you sure to delete the record?"
       ></RecordMustBeSelected>
-      <AssociatedProducts></AssociatedProducts>
-      <DividendInfoModal></DividendInfoModal>
-      <ExchangeInfoModal></ExchangeInfoModal>
+      <ExcludeModal></ExcludeModal>
+      <SubstituteModal></SubstituteModal>
     </>
   );
 };

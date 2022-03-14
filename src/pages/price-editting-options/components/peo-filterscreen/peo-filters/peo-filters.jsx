@@ -131,6 +131,7 @@ const ProductInfo = () => {
               value={symbolToValue}
               keySearch={symbolToSearchValue}
               //disabled={isSymbolToDisabled}
+              type="textbox"
             ></Inputsuggestion>
           </div>
         </div>
@@ -144,6 +145,7 @@ const ProductInfo = () => {
               value={exchangeValue}
               keySearch={exchangeSearchValue}
               //disabled={isSymbolToDisabled}
+              type="textbox"
             ></Inputsuggestion>
           </div>
         </div>

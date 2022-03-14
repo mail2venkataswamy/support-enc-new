@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./exchange-info-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
+import "./dividend-info-grid.scss";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
   const context = useContext(myContext);
@@ -19,9 +19,12 @@ const EditcatGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseExchangeInfoGrid,
+    onCloseDividendInfoGrid,
+    toggleDividendInfoModalOpenModal
+
+    // getActiveTab,
   } = {
-    ...context.state.exchangeInfoGridState,
+    ...context.state.dividendInfoGridState,
     ...context,
   };
 
@@ -40,16 +43,29 @@ const EditcatGrid = () => {
 
   return (
     <>
-      <div className="messageAndNavigationWrapper">
-        <div className="title">Exchange Info</div>
-        <div className="close">
-          <button onClick={onCloseExchangeInfoGrid} className="closeButton">
-            X
+      <div className="peoDividendInfoCatHeaderActions">
+        <div className="peoDividendInfoCatRighttHeaderSection">
+          {/*           <button onClick={() => setShowAllColumns(!showAllColumns)}>
+            {showAllColumns ? "Show Default Columns" : "Show All Columns"}
           </button>
-        </div>
-      </div>
-      <div className="fEditCatHeaderActions">
-        <div className="fEditCatRighttHeaderSection">
+          <button
+            onClick={
+              isGridPopulated
+                ? onRefreshMaintenanceGridData
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Refresh
+          </button> 
+          <button
+            onClick={
+              isGridPopulated
+                ? onBtPrint
+                : () => toggleWarningModal(!isWarningModalOpen)
+            }
+          >
+            Print
+          </button>*/}
           <button
             onClick={
               isGridPopulated
@@ -61,12 +77,12 @@ const EditcatGrid = () => {
           </button>
         </div>
       </div>
-      <div className="fEditCatGridWrapper"></div>
+      <div className="peoDividendInfoCatGridWrapper"></div>
       <Aggrid
         rowData={rowData}
         colDefsMedalsIncluded={colDefs}
         defaultColDef={defaultColDef}
-        gridHeight={"89%"}
+        gridHeight={500}
         gridWidth={"auto"}
         rowSelection="multiple"
         //pagination={true}
