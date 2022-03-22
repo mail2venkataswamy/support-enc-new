@@ -46,7 +46,6 @@ const getCurrentDateTime = () => {
   return datetime;
 };
 
-
 class GovProvider extends Component {
   constructor(props) {
     super(props);
@@ -203,7 +202,7 @@ class GovProvider extends Component {
         isAllCurrencyChecked: false,
       },
       maintenanceScreenData: {
-        rowData:[],
+        rowData: [],
         isPriceRollOverrideModalOpen: false,
         PriceRollOverrideMModalWarningMessage:
           "A record must be selected to perform this action",
@@ -1345,10 +1344,6 @@ class GovProvider extends Component {
   //=============================================================================
   componentDidMount() {
     this.getData();
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>1000</option></select> Records Per Page</div></div>`;
-    ele.append(div);
     let filterPanelData = this.state.filterPanelData;
     filterPanelData.isFromAndStDisabled = true;
 
@@ -1381,10 +1376,10 @@ class GovProvider extends Component {
     //const data = this.getData();
     //console.log("filtered data", this.state.maintenanceScreenData.rowData);
     let filteredData = this.state.maintenanceScreenData.rowData;
-    return filteredData.map((row)=>{
+    return filteredData.map((row) => {
       return {
         "#": "",
-        activityDate:  row['Activity Date'],
+        activityDate: row["Activity Date"],
         revalAdjFlag: 0,
         cusip: "test",
         tier: 1,
@@ -1413,11 +1408,11 @@ class GovProvider extends Component {
         fnlReviewNeeded: "test",
         fnlPrimaryReviewerUserId: "test",
         fnlSecondaryReviewerUserId: "test",
-      }
-    })
-    console.log("api json data",filteredData);
+      };
+    });
+    console.log("api json data", filteredData);
 
-  /*   return [
+    /*   return [
       {
         "#": "",
         activityDate: "test",
@@ -1970,7 +1965,7 @@ class GovProvider extends Component {
     console.log("updated  grid rows", maintenanceScreenData.edittedRowsData);
   };
   //-----------------------------------
-   getData = async () => {
+  getData = async () => {
     const date = new Date();
     let businessDate = [
       date.getFullYear(),
@@ -1984,7 +1979,7 @@ class GovProvider extends Component {
       0
     );
     const finalData = Object.keys(response.data).map((key) => {
-       const jsonObj = JSON.parse(response.data[key]);
+      const jsonObj = JSON.parse(response.data[key]);
       // return {
       //   id: index + 1,
       //   configurationName: jsonObj.configurationName,
@@ -1995,10 +1990,10 @@ class GovProvider extends Component {
       return jsonObj;
     });
     console.log("final result from didmount", finalData);
-   let maintenanceScreenData = this.state.maintenanceScreenData;
-   maintenanceScreenData.rowData=finalData;
+    let maintenanceScreenData = this.state.maintenanceScreenData;
+    maintenanceScreenData.rowData = finalData;
     this.setState({
-      maintenanceScreenData
+      maintenanceScreenData,
     });
   };
   render() {
@@ -2096,4 +2091,3 @@ GovProvider.propTypes = {
   children: PropTypes.any,
 };
 export default GovProvider;
-

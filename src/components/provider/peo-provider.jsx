@@ -6,6 +6,8 @@ import EditCatData from "./json/futures/edit-cat-dashboard.json";
 import DividendInfo from "./json/futures/dividend-info-data.json";
 import AssociatedProductsData from "./json/price-editing-options/associated-products-info.json";
 import ContractPriceEditData from "./json/price-editing-options/contract-price-editing.json";
+//import DerivativeGridColDefs from "./json/price-editing-options/Ag-Grid-Defs/Derivative-Grid/col-defs.json";
+import CustomTooltip from "../../pages/price-editting-options/components/peo-custom-tooltip/peo-custom-tooltip.jsx";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -17,21 +19,39 @@ function setNormal(api) {
 }
 const staticCellStyle = { "background-color": "yellow" };
 
+const dynamicCellStyle = (params) => {
+  console.log("params.node.data.symbol", params.node.data.symbol);
+  if (params.node.data.symbol === "IAAL") {
+    return { color: "red", backgroundColor: "yellow" };
+  }
+  return null;
+};
+const getRowStyle = (params) => {
+  if (params.node.data.symbol === "IAAL") {
+    return { color: "red" };
+  }
+};
+
 class StProvider extends Component {
   constructor(props) {
     super(props);
     this.state = {
       initialPanelState: {},
-      agGridState:{
-        selectedGridRows:[],
+      agGridState: {
+        selectedGridRows: [],
       },
-      
-      
-      editPricingState:{
-        isExcludeModalOpen:false,
-        isSubstituteModalOpen:false,
-        selectedSymbolValue:'',
-        isEditPriceOpen:false,
+      CustomTooltip: CustomTooltip,
+      editPricingState: {
+        isCalculateModalOpen: false,
+        isWithoutSmoothingPromptModalOpen: false,
+        isSmoothingPromptModalOpen: false,
+        isBorrowCostOverrideModalOpen: false,
+        isExcludeModalOpen: false,
+        isSubstituteModalOpen: false,
+        isLockVolatilityModalOpen: false,
+        isVolatalityOverrideModalOpen: false,
+        selectedSymbolValue: "",
+        isEditPriceOpen: false,
         rowData: ContractPriceEditData.rows,
         colDefs: [
           {
@@ -136,7 +156,7 @@ class StProvider extends Component {
             field: "eodOverrideCallVolatility",
             width: 150,
             flex: 0,
-            cellStyle:staticCellStyle
+            cellStyle: staticCellStyle,
           },
           {
             headerName: "EOD Call User ID",
@@ -185,7 +205,7 @@ class StProvider extends Component {
             field: "eodOverridePutVolatility",
             width: 150,
             flex: 0,
-            cellStyle:staticCellStyle
+            cellStyle: staticCellStyle,
           },
           {
             headerName: "EOD Override Final Volatility",
@@ -235,7 +255,6 @@ class StProvider extends Component {
             width: 150,
             flex: 0,
           },
-  
         ],
         defaultColDef: {
           initialWidth: "auto",
@@ -244,12 +263,13 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
+          tooltipComponent: "customTooltip",
         },
-        selectedGridRowData: [],
-        selectedGridRows: [],
+        /*         selectedGridRowData: [],
+        selectedGridRows: [], */
       },
       associatedProductsState: {
-        isAssociatedProductsModalOpen:false,
+        isAssociatedProductsModalOpen: false,
         rowData: AssociatedProductsData.rows,
         colDefs: [
           {
@@ -264,6 +284,7 @@ class StProvider extends Component {
             field: "symbol",
             width: "auto",
             flex: 0,
+            cellStyle: dynamicCellStyle,
           },
           {
             headerName: "Description",
@@ -279,6 +300,7 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
+          tooltipComponent: "customTooltip",
         },
         selectedGridRowData: [],
         selectedGridRows: [],
@@ -421,6 +443,7 @@ class StProvider extends Component {
         selectedReviewNeededValue: { label: "Select", value: "select" },
       },
       gridState: {
+        paginationPageSize: 50,
         rowData: [],
         colDefs: [
           {
@@ -453,6 +476,8 @@ class StProvider extends Component {
             field: "description",
             width: 150,
             flex: 0,
+            cellStyle: dynamicCellStyle,
+            tooltipField: "description",
           },
           {
             headerName: "Underlying Symbol",
@@ -619,12 +644,13 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
+          tooltipComponent: "customTooltip",
         },
         selectedGridRowData: [],
         selectedGridRows: [],
       },
       exchangeInfoGridState: {
-        isExchangeInfoModalOpen:false,
+        isExchangeInfoModalOpen: false,
         rowData: [],
         colDefs: [
           {
@@ -670,7 +696,7 @@ class StProvider extends Component {
         selectedGridRows: [],
       },
       dividendInfoGridState: {
-        isDividendInfoModalOpen:false,
+        isDividendInfoModalOpen: false,
         rowData: DividendInfo.rows,
         colDefs: [
           {
@@ -735,7 +761,7 @@ class StProvider extends Component {
       },
     };
   }
-  
+
   toggleTasksModal = () => {
     let tasksData = this.state.tasksData;
     tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
@@ -743,49 +769,117 @@ class StProvider extends Component {
       tasksData,
     });
   };
-  toggleAssociatedProductsModal=()=>{
+  toggleAssociatedProductsModal = () => {
     let associatedProductsState = this.state.associatedProductsState;
-    associatedProductsState.isAssociatedProductsModalOpen = !associatedProductsState.isAssociatedProductsModalOpen;
+    associatedProductsState.isAssociatedProductsModalOpen =
+      !associatedProductsState.isAssociatedProductsModalOpen;
     this.setState({
       associatedProductsState,
     });
-  }
-  toggleDividendInfoModalOpenModal=()=>{
-    
+  };
+  toggleDividendInfoModalOpenModal = () => {
     let dividendInfoGridState = this.state.dividendInfoGridState;
-    dividendInfoGridState.isDividendInfoModalOpen = !dividendInfoGridState.isDividendInfoModalOpen;
+    dividendInfoGridState.isDividendInfoModalOpen =
+      !dividendInfoGridState.isDividendInfoModalOpen;
     this.setState({
       dividendInfoGridState,
     });
-  }
-  toggleExchangeInfoGridModal=()=>{   
+  };
+  toggleExchangeInfoGridModal = () => {
     let exchangeInfoGridState = this.state.exchangeInfoGridState;
-    exchangeInfoGridState.isExchangeInfoModalOpen = !exchangeInfoGridState.isExchangeInfoModalOpen;
+    exchangeInfoGridState.isExchangeInfoModalOpen =
+      !exchangeInfoGridState.isExchangeInfoModalOpen;
     this.setState({
       exchangeInfoGridState,
     });
-  }
-  toggleContractEditModal=()=>{  
+  };
+  toggleContractEditModal = () => {
     let editPricingState = this.state.editPricingState;
     editPricingState.isEditPriceOpen = !editPricingState.isEditPriceOpen;
     this.setState({
       editPricingState,
     });
-  }
-  toggleExcludeModal=()=>{
+  };
+  toggleExcludeModal = () => {
     let editPricingState = this.state.editPricingState;
     editPricingState.isExcludeModalOpen = !editPricingState.isExcludeModalOpen;
     this.setState({
       editPricingState,
     });
-  }
-  toggleSubstituteModal=()=>{
+  };
+  toggleSubstituteModal = () => {
     let editPricingState = this.state.editPricingState;
-    editPricingState.isSubstituteModalOpen = !editPricingState.isSubstituteModalOpen;
+    editPricingState.isSubstituteModalOpen =
+      !editPricingState.isSubstituteModalOpen;
     this.setState({
       editPricingState,
     });
-  }
+  };
+  toggleLockVolatilityModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isLockVolatilityModalOpen =
+      !editPricingState.isLockVolatilityModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  toggleVolatalityOverrideModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isVolatalityOverrideModalOpen =
+      !editPricingState.isVolatalityOverrideModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  toggleBorrowCostOverrideModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isBorrowCostOverrideModalOpen =
+      !editPricingState.isBorrowCostOverrideModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  toggleSmoothingPromptModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isSmoothingPromptModalOpen =
+      !editPricingState.isSmoothingPromptModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  onConfirmSmoothingPropmt = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isWithoutSmoothingPromptModalOpen =
+      !editPricingState.isWithoutSmoothingPromptModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  toggleWithoutSmoothingPromptModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isWithoutSmoothingPromptModalOpen =
+      !editPricingState.isWithoutSmoothingPromptModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  onConfirmWithoutSmoothingPropmt = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isSmoothingPromptModalOpen =
+      !editPricingState.isSmoothingPromptModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+  toggleCalculateModal = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.isCalculateModalOpen =
+      !editPricingState.isCalculateModalOpen;
+    this.setState({
+      editPricingState,
+    });
+  };
+
   onCellClicked = (e) => {
     let editPricingState = this.state.editPricingState;
     console.log(e);
@@ -805,12 +899,11 @@ class StProvider extends Component {
         row[e.column.colId].toString() === e.value.toString()
     );
     dailyReturnsPricingState.rowData = data;*/
-    if(e.column.colId && e.column.colId.toLowerCase()==='symbol')
-    {
-      alert(e.column.colId);
-      editPricingState.selectedSymbolValue=e.value.toString();
+    if (e.column.colId && e.column.colId.toLowerCase() === "symbol") {
+      editPricingState.selectedSymbolValue = e.value.toString();
+      this.toggleContractEditModal();
     }
-   this.toggleContractEditModal();
+
     this.setState({
       editPricingState,
     });
@@ -866,7 +959,8 @@ class StProvider extends Component {
   };
   onChangeCorporateAction = () => {
     let filtersState = this.state.filtersState;
-    filtersState.isCorporateActionChecked = !filtersState.isCorporateActionChecked;
+    filtersState.isCorporateActionChecked =
+      !filtersState.isCorporateActionChecked;
     this.setState({
       filtersState,
     });
@@ -880,14 +974,16 @@ class StProvider extends Component {
   };
   onChangeEdittedRecords = () => {
     let filtersState = this.state.filtersState;
-    filtersState.isEdittedRecordsChecked = !filtersState.isEdittedRecordsChecked;
+    filtersState.isEdittedRecordsChecked =
+      !filtersState.isEdittedRecordsChecked;
     this.setState({
       filtersState,
     });
   };
   onChangeSpotPriceRecords = () => {
     let filtersState = this.state.filtersState;
-    filtersState.isSpotPriceRecordsChecked = !filtersState.isSpotPriceRecordsChecked;
+    filtersState.isSpotPriceRecordsChecked =
+      !filtersState.isSpotPriceRecordsChecked;
     this.setState({
       filtersState,
     });
@@ -1010,17 +1106,20 @@ class StProvider extends Component {
       this.loadDataOnRefresh();
     }, 3000);
   };
-  onRefreshEditContractPriceGridData=()=>{
+  onRefreshEditContractPriceGridData = () => {
     let editPricingState = this.state.editPricingState;
+    let agGridState = this.state.agGridState;
     editPricingState.rowData = [];
+    agGridState.selectedGridRows = [];
     this.setState({
       editPricingState,
+      agGridState,
     });
 
     setTimeout(() => {
       this.loadDataOnRefreshForContractEditPrice();
     }, 3000);
-  }
+  };
 
   loadDataOnRefreshForContractEditPrice() {
     this.showLoading();
@@ -1096,12 +1195,18 @@ class StProvider extends Component {
     const selectedRows = this.gridApi.getSelectedRows();
     console.log("Grid Rows selected", selectedRows);
     let gridState = this.state.gridState;
-    let agGridState = this.state.agGridState;
     gridState.selectedGridRows = selectedRows;
-    agGridState.selectedGridRows = selectedRows;
     this.setState({
       gridState,
-      agGridState
+    });
+  };
+  onSelectionChangedForContractPriceEdit = () => {
+    const selectedRows = this.gridApi.getSelectedRows();
+    console.log("Grid Rows selected c", selectedRows);
+    let agGridState = this.state.agGridState;
+    agGridState.selectedGridRows = selectedRows;
+    this.setState({
+      agGridState,
     });
   };
   onCellValueChanged = (params) => {
@@ -1121,6 +1226,15 @@ class StProvider extends Component {
       initialPanelState: data,
     });
   }
+  onPageSizeChanged = () => {
+    var value = document.getElementById("page-size").value;
+    this.gridApi.paginationSetPageSize(Number(value));
+    let gridState = this.state.gridState;
+    gridState.paginationPageSize = Number(value);
+    this.setState({
+      gridState,
+    });
+  };
 
   render() {
     return (
@@ -1166,14 +1280,28 @@ class StProvider extends Component {
           getSelectedRowData: this.getSelectedRowData,
           onSelectionChanged: this.onSelectionChanged,
           onCellValueChanged: this.onCellValueChanged,
-          toggleAssociatedProductsModal:this.toggleAssociatedProductsModal,
-          toggleDividendInfoModalOpenModal:this.toggleDividendInfoModalOpenModal,
-          toggleExchangeInfoGridModal:this.toggleExchangeInfoGridModal,
-          onCellClicked:this.onCellClicked,
-          toggleContractEditModal:this.toggleContractEditModal,
-          onRefreshEditContractPriceGridData:this.onRefreshEditContractPriceGridData,
-          toggleExcludeModal:this.toggleExcludeModal,
-          toggleSubstituteModal:this.toggleSubstituteModal
+          toggleAssociatedProductsModal: this.toggleAssociatedProductsModal,
+          toggleDividendInfoModalOpenModal:
+            this.toggleDividendInfoModalOpenModal,
+          toggleExchangeInfoGridModal: this.toggleExchangeInfoGridModal,
+          onCellClicked: this.onCellClicked,
+          toggleContractEditModal: this.toggleContractEditModal,
+          onRefreshEditContractPriceGridData:
+            this.onRefreshEditContractPriceGridData,
+          toggleExcludeModal: this.toggleExcludeModal,
+          toggleSubstituteModal: this.toggleSubstituteModal,
+          toggleLockVolatilityModal: this.toggleLockVolatilityModal,
+          onSelectionChangedForContractPriceEdit:
+            this.onSelectionChangedForContractPriceEdit,
+          toggleVolatalityOverrideModal: this.toggleVolatalityOverrideModal,
+          toggleBorrowCostOverrideModal: this.toggleBorrowCostOverrideModal,
+          toggleSmoothingPromptModal: this.toggleSmoothingPromptModal,
+          onConfirmSmoothingPropmt: this.onConfirmSmoothingPropmt,
+          toggleWithoutSmoothingPromptModal:
+            this.toggleWithoutSmoothingPromptModal,
+          onConfirmWithoutSmoothingPropmt: this.onConfirmWithoutSmoothingPropmt,
+          toggleCalculateModal: this.toggleCalculateModal,
+          onPageSizeChanged: this.onPageSizeChanged,
         }}
       >
         {this.props.children}

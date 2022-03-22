@@ -62,3 +62,17 @@
 .ag-theme-alpine .ag-header {
     border: none;
 }
+
+.peoLabelAndValue {
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+}
+
+.peoLabel {
+    width: 30%;
+}
+
+.peoValue {
+    width: 70%;
+}

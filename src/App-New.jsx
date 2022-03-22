@@ -5,7 +5,7 @@ import Routes from "./routes";
 const NewApp = () => {
   return (
     <div className="app">
-      <div className="Nav">
+      <div className="Nav" style={{ display: "block" }}>
         <Routes />
       </div>
     </div>

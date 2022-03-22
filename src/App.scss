@@ -1,63 +1,86 @@
 @import "./light.scss";
 @import "./dark.scss";
+
+.tableWrapper {
+  .table {
+    justify-content: flex-start;
+    display: flex;
+    flex: 0;
+    vertical-align: baseline;
+  }
+}
+
 #mainVS,
 #mainGov,
 #mainVsv,
 #mainPrs {
   display: flex;
   height: 768px;
+
   fieldset {
     border: none;
     margin-top: 7px;
     padding-left: 12px;
   }
 }
+
 #editMaint,
 #prsEditMaint {
   width: 98%;
   height: 90%;
 }
+
 h2 {
   color: #000;
 }
+
 * {
   margin: 0;
   padding: 0;
 }
+
 .Dropdown-disabled,
 input:disabled {
   cursor: default;
   background: #ccc;
   border-color: rgba(118, 118, 118, 0.3);
 }
+
 @media print {
   body * {
     visibility: hidden;
   }
+
   #myGrid,
   #myGrid * {
     visibility: visible;
   }
+
   #myGrid {
     position: absolute;
     left: 0;
     top: 0;
   }
 }
+
 .ag-theme-alpine .ag-cell,
 .ag-theme-alpine .ag-full-width-row .ag-cell-wrapper.ag-row-group {
   padding-left: 0px;
 }
+
 .ag-theme-alpine .ag-header-cell,
 .ag-theme-alpine .ag-header-group-cell {
   padding-left: 0px;
 }
+
 .ag-theme-alpine .ag-root-wrapper {
   border: none !important;
 }
+
 .ag-theme-alpine .ag-row:nth-of-type(odd) {
   background-color: #f3f3f3;
 }
+
 button {
   display: inline-block;
   padding: 0.3em 1.2em;
@@ -79,9 +102,40 @@ button {
   border: none !important;
   padding: 0px 12px !important;
 }
+
 .secondary {
   color: $btn_primary !important;
   border: none !important;
   padding: 8px !important;
   background-color: #2199f300 !important;
+}
+
+.flexible-modal {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+.flexible-modal-resizer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: se-resize;
+  margin: 5px;
+  border-bottom: solid 2px #333;
+  border-right: solid 2px #333;
+}
+
+.flexible-modal-drag-area {
+  background: rgba(0, 0, 0, 0.2);
+  height: 50px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: move;
+}
+
+.flexible-modal-mask {
+  position: relative;
 }

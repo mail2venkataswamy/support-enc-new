@@ -38,6 +38,8 @@ const Aggrid = (props) => {
         headerHeight={props.headerHeight}
         onCellClicked={props.onCellClicked}
         autoGroupColumnDef={props.autoGroupColumnDef}
+        suppressScrollLag={true}
+        rowBuffer={props.rowBuffer}
       ></AgGridReact>
     </div>
   );

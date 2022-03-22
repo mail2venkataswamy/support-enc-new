@@ -18,18 +18,18 @@ const Suggestions = (props) => {
         </div>
       );
     });
-  return (
-    options && (
-      <div
-        className="suggestionsWrapper"
-        style={{ display: keySearch !== "" ? "block" : "none" }}
-      >
-        <ul>{options}</ul>
-      </div>
-    )
+  return options ? (
+    <div
+      className="suggestionsWrapper"
+      style={{ display: keySearch !== "" ? "block" : "none" }}
+    >
+      <ul>{options}</ul>
+    </div>
+  ) : (
+    <></>
   );
 };
-Suggestions.defaultProps={
-  options:[]
-}
+Suggestions.defaultProps = {
+  options: [],
+};
 export default Suggestions;

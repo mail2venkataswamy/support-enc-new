@@ -4,17 +4,21 @@ import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/peo-context.jsx";
 import WarningModal from "../../../../components/common/modal/warning/warning-modal";
 import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
-import {AssociatedProducts} from "../../components/associated-products-grid/grid-modal.jsx";
-import {DividendInfoModal} from "../../components/dividend-info-grid/grid-modal.jsx";
-import {ExchangeInfoModal} from "../../components/exchange-info-grid/grid-modal.jsx";
+import { AssociatedProducts } from "../../components/associated-products-grid/grid-modal.jsx";
+import { DividendInfoModal } from "../../components/dividend-info-grid/grid-modal.jsx";
+import { ExchangeInfoModal } from "../../components/exchange-info-grid/grid-modal.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [
-    isRecordMustBeselectedModalOpen,
-    toggleRecordMustBeSelectedModal,
-  ] = useState(false);
+  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
+    useState(false);
+  const paginationOptions = [
+    { value: 50 },
+    { value: 100 },
+    { value: 500 },
+    { value: 1000 },
+  ];
 
   const {
     rowData,
@@ -34,20 +38,15 @@ const ThresholdGrid = () => {
     toggleAssociatedProductsModal,
     toggleDividendInfoModalOpenModal,
     toggleExchangeInfoGridModal,
-    onCellClicked
+    onCellClicked,
+    onPageSizeChanged,
+    CustomTooltip,
+    paginationPageSize,
   } = {
     ...context.state.gridState,
     ...context,
   };
-  useEffect(() => {
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
-    var div1 = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
-    div1.innerHTML = `<div class="noOfRecs">Total number of records:${rowData.length}</div>`;
-    ele && ele.append(div);
-    ele.append(div1);
-  }, []);
+
   let isGridPopulated = rowData && rowData.length > 0;
   return (
     <>
@@ -62,9 +61,9 @@ const ThresholdGrid = () => {
             <label for="ca">Corporate Action</label>
             <div className="peoValue">
               <input
-              //checked={isCorporateActionChecked}
-              //onChange={onChangeCorporateAction}
-              className="corporateAction"
+                //checked={isCorporateActionChecked}
+                //onChange={onChangeCorporateAction}
+                className="corporateAction"
               ></input>
             </div>
           </div>
@@ -72,8 +71,7 @@ const ThresholdGrid = () => {
             onClick={
               isGridPopulated
                 ? selectedGridRows && selectedGridRows.length > 0
-                  ?   toggleAssociatedProductsModal
-
+                  ? toggleAssociatedProductsModal
                   : () =>
                       toggleRecordMustBeSelectedModal(
                         !isRecordMustBeselectedModalOpen
@@ -166,7 +164,7 @@ const ThresholdGrid = () => {
         gridWidth={"auto"}
         rowSelection="multiple"
         pagination={true}
-        paginationPageSize={100}
+        paginationPageSize={paginationPageSize}
         rowHeight={22}
         headerHeight={33}
         onGridReady={onGridReady}
@@ -174,7 +172,26 @@ const ThresholdGrid = () => {
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
         onCellClicked={onCellClicked}
+        CustomTooltip={CustomTooltip}
+        rowBuffer={paginationPageSize}
       />
+      <div id="page-size-container">
+        <div>
+          {" "}
+          <p>Display</p>
+        </div>
+        <div>
+          <select onChange={onPageSizeChanged} id="page-size">
+            {paginationOptions.map((option) => {
+              return <option value={option.value}>{option.value}</option>;
+            })}
+          </select>
+        </div>
+        <div>
+          {" "}
+          <p>Records Per Page</p>
+        </div>
+      </div>
       <WarningModal
         warningMessage="Grid must be populated"
         isModalOpen={isWarningModalOpen}

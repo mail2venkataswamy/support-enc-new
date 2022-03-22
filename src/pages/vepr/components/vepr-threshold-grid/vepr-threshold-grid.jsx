@@ -10,10 +10,8 @@ import { ModifyPriceRestriction } from "./modify-price-restriction/modify-price-
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [
-    isRecordMustBeselectedModalOpen,
-    toggleRecordMustBeSelectedModal,
-  ] = useState(false);
+  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
+    useState(false);
 
   const {
     priceSystemAlertStateRowData,
@@ -36,15 +34,7 @@ const ThresholdGrid = () => {
     ...context.state.gridScreenData,
     ...context,
   };
-  useEffect(() => {
-    let ele = document.getElementsByClassName("ag-paging-panel")[0];
-    var div = document.createElement("div");
-    var div1 = document.createElement("div");
-    div.innerHTML = `<div><div class="displayLabel">Display <select><option>10</option><option>50</option><option>100</option><option>150</option><option>200</option><option>500</option><option>1000</option></select> Records Per Page</div></div>`;
-    div1.innerHTML = `<div class="noOfRecs">Total number of records:${priceSystemAlertStateRowData.length}</div>`;
-    ele && ele.append(div);
-    ele.append(div1);
-  }, []);
+
   let isGridPopulated =
     priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
   return (
