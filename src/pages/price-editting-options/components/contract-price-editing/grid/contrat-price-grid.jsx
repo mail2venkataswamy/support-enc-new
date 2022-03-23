@@ -12,6 +12,7 @@ import { BorrowCostOverrideModal } from "./borrow-cost-override/borrow-cost-over
 import SmoothingPrompt from "../../../../../components/common/modal/prompt/prompt.jsx";
 import WithoutSmoothingPrompt from "../../../../../components/common/modal/prompt/prompt.jsx";
 import { CalculateModal } from "./calculate/calculate.jsx";
+
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
@@ -46,6 +47,9 @@ const ThresholdGrid = () => {
     toggleWithoutSmoothingPromptModal,
     onConfirmWithoutSmoothingPropmt,
     toggleCalculateModal,
+    showContractPriceEditingGrid,
+    toggleContractPriceEditingGrid,
+    selectedSymbolValue,
   } = {
     ...context.state.editPricingState,
     ...context,
@@ -53,9 +57,54 @@ const ThresholdGrid = () => {
   };
 
   let isGridPopulated = rowData && rowData.length > 0;
+  const minimizeModal = () => {
+    const flexible_modal = document.getElementsByClassName(
+      "contractPriceEditingGrid"
+    )[0];
+    flexible_modal.setAttribute("style", "width:400px;height:50px");
+    console.log(flexible_modal);
+  };
+  const [isMax, setMinOrMax] = useState(false);
+  const maximizeModal = () => {
+    const flexible_modal = document.getElementsByClassName(
+      "contractPriceEditingGrid"
+    )[0];
+    flexible_modal.setAttribute(
+      "style",
+      `${
+        isMax
+          ? "width: 400px; height: 200px; top: 159px; left: 725px;"
+          : "top: 32px; left: 12px; width: 99%; height: 584px;"
+      }`
+    );
+
+    console.log(flexible_modal);
+  };
   return (
-    <>
+    <div className="cpdContainer">
       {/*    <div className="peoPriceEditGridHeader">Derivative</div> */}
+      <div className="header">
+        <div className="title">
+          Contract Price Editing - {selectedSymbolValue}
+        </div>
+        <div className="rightSection">
+          <div className="minButton">
+            <button onClick={minimizeModal}>-</button>
+          </div>
+          <div className="maxButton">
+            <button
+              onClick={() => {
+                maximizeModal(), setMinOrMax(!isMax);
+              }}
+            >
+              {isMax ? "[[]]" : "[]"}
+            </button>
+          </div>
+          <div className="closeButton">
+            <button onClick={toggleContractPriceEditingGrid}>X</button>
+          </div>
+        </div>
+      </div>
       <div className="messageAndNavigationWrapper">
         {/*         <div className="title">Messages</div> */}
       </div>
@@ -297,7 +346,7 @@ const ThresholdGrid = () => {
       <VolatalityOverrideModal></VolatalityOverrideModal>
       <BorrowCostOverrideModal></BorrowCostOverrideModal>
       <CalculateModal></CalculateModal>
-    </>
+    </div>
   );
 };
 

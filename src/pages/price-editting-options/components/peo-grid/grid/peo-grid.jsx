@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./peo-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal";
-import RecordMustBeSelected from "../../../../components/common/modal/prompt/prompt.jsx";
-import { AssociatedProducts } from "../../components/associated-products-grid/grid-modal.jsx";
-import { DividendInfoModal } from "../../components/dividend-info-grid/grid-modal.jsx";
-import { ExchangeInfoModal } from "../../components/exchange-info-grid/grid-modal.jsx";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal";
+import RecordMustBeSelected from "../../../../../components/common/modal/prompt/prompt.jsx";
+import { AssociatedProducts } from "../../associated-products-grid/grid-modal.jsx";
+import { DividendInfoModal } from "../../dividend-info-grid/grid-modal.jsx";
+import { ExchangeInfoModal } from "../../exchange-info-grid/grid-modal.jsx";
 
 const ThresholdGrid = () => {
   const context = useContext(myContext);
@@ -42,18 +42,64 @@ const ThresholdGrid = () => {
     onPageSizeChanged,
     CustomTooltip,
     paginationPageSize,
+    toggleDerivativeGrid,
+    showContractPriceEditingGrid,
+    toggleContractPriceEditingGrid,
   } = {
     ...context.state.gridState,
     ...context,
   };
 
   let isGridPopulated = rowData && rowData.length > 0;
+  const minimizeModal = () => {
+    const flexible_modal = document.getElementsByClassName("flexible-modal")[0];
+    flexible_modal.setAttribute("style", "width:400px;height:50px");
+    console.log(flexible_modal);
+  };
+  const [isMax, setMinOrMax] = useState(false);
+  const maximizeModal = () => {
+    const flexible_modal = document.getElementsByClassName("derivativeGrid")[0];
+    flexible_modal.setAttribute(
+      "style",
+      `${
+        isMax
+          ? "width: 400px; height: 200px; top: 37px; left: 446px;"
+          : "top: 32px; left: 12px; width: 99%; height: 584px;"
+      }`
+    );
+
+    console.log(flexible_modal);
+  };
+  /*   useEffect(() => {
+    const flexible_modal = document.getElementsByClassName("flexible-modal")[0];
+    flexible_modal.classList.add("derivative");
+  }, []); */
   return (
-    <>
-      <div className="peoGridHeader">Derivative</div>
-      <div className="messageAndNavigationWrapper">
-        <div className="title">Messages</div>
+    <div className="peoDerivativeGridContainer">
+      <div className="header">
+        <div className="title">Derivative</div>
+        <div className="rightSection">
+          <div className="minButton">
+            <button onClick={minimizeModal}>-</button>
+          </div>
+          <div className="maxButton">
+            <button
+              onClick={() => {
+                maximizeModal(), setMinOrMax(!isMax);
+              }}
+            >
+              {isMax ? "[[]]" : "[]"}
+            </button>
+          </div>
+          <div className="closeButton">
+            <button onClick={toggleDerivativeGrid}>X</button>
+          </div>
+        </div>
       </div>
+
+      {/*       <div className="messageAndNavigationWrapper">
+        <div className="title">Messages</div>
+      </div> */}
       <div className="peoHeaderActions">
         <div className="peoLeftHeaderSection">
           <div className="peoLabelAndValue">
@@ -211,7 +257,7 @@ const ThresholdGrid = () => {
       <AssociatedProducts></AssociatedProducts>
       <DividendInfoModal></DividendInfoModal>
       <ExchangeInfoModal></ExchangeInfoModal>
-    </>
+    </div>
   );
 };
 

@@ -42,6 +42,7 @@ class StProvider extends Component {
       },
       CustomTooltip: CustomTooltip,
       editPricingState: {
+        showContractPriceEditingGrid: false,
         isCalculateModalOpen: false,
         isWithoutSmoothingPromptModalOpen: false,
         isSmoothingPromptModalOpen: false,
@@ -443,6 +444,7 @@ class StProvider extends Component {
         selectedReviewNeededValue: { label: "Select", value: "select" },
       },
       gridState: {
+        showDerivativeGrid: false,
         paginationPageSize: 50,
         rowData: [],
         colDefs: [
@@ -793,13 +795,6 @@ class StProvider extends Component {
       exchangeInfoGridState,
     });
   };
-  toggleContractEditModal = () => {
-    let editPricingState = this.state.editPricingState;
-    editPricingState.isEditPriceOpen = !editPricingState.isEditPriceOpen;
-    this.setState({
-      editPricingState,
-    });
-  };
   toggleExcludeModal = () => {
     let editPricingState = this.state.editPricingState;
     editPricingState.isExcludeModalOpen = !editPricingState.isExcludeModalOpen;
@@ -901,7 +896,8 @@ class StProvider extends Component {
     dailyReturnsPricingState.rowData = data;*/
     if (e.column.colId && e.column.colId.toLowerCase() === "symbol") {
       editPricingState.selectedSymbolValue = e.value.toString();
-      this.toggleContractEditModal();
+      //this.toggleContractEditModal();
+      editPricingState.showContractPriceEditingGrid = true;
     }
 
     this.setState({
@@ -911,14 +907,6 @@ class StProvider extends Component {
   onClickEditDashBoardGrid = () => {
     this.setState({
       showEditGridDashBoard: true,
-      showDerivativeGrid: false,
-      showPlaceHolderGrid: false,
-    });
-  };
-
-  showPlaceHolderScreen = () => {
-    this.setState({
-      showDerivativeGrid: false,
     });
   };
 
@@ -1090,9 +1078,24 @@ class StProvider extends Component {
     let gridState = this.state.gridState;
     let rowData = this.getFilteredGridData();
     gridState.rowData = rowData;
+    gridState.showDerivativeGrid = true;
     this.setState({
       gridState,
-      showDerivativeGrid: true,
+    });
+  };
+  toggleDerivativeGrid = () => {
+    let gridState = this.state.gridState;
+    gridState.showDerivativeGrid = !gridState.showDerivativeGrid;
+    this.setState({
+      gridState,
+    });
+  };
+  toggleContractPriceEditingGrid = () => {
+    let editPricingState = this.state.editPricingState;
+    editPricingState.showContractPriceEditingGrid =
+      !editPricingState.showContractPriceEditingGrid;
+    this.setState({
+      editPricingState,
     });
   };
   onRefreshMaintenanceGridData = () => {
@@ -1267,7 +1270,6 @@ class StProvider extends Component {
           onChangeStatusValue: (e) => this.onChangeStatusValue(e),
           onChangeCategoryLevelValue: (e) => this.onChangeCategoryLevelValue(e),
           onChangeReviewNeededValue: (e) => this.onChangeReviewNeededValue(e),
-          showPlaceHolderScreen: this.showPlaceHolderScreen,
           onChangeEdittedRecords: this.onChangeEdittedRecords,
           onChangeSpotPriceRecords: this.onChangeSpotPriceRecords,
           onClickEditDashBoardGrid: this.onClickEditDashBoardGrid,
@@ -1285,7 +1287,6 @@ class StProvider extends Component {
             this.toggleDividendInfoModalOpenModal,
           toggleExchangeInfoGridModal: this.toggleExchangeInfoGridModal,
           onCellClicked: this.onCellClicked,
-          toggleContractEditModal: this.toggleContractEditModal,
           onRefreshEditContractPriceGridData:
             this.onRefreshEditContractPriceGridData,
           toggleExcludeModal: this.toggleExcludeModal,
@@ -1302,6 +1303,8 @@ class StProvider extends Component {
           onConfirmWithoutSmoothingPropmt: this.onConfirmWithoutSmoothingPropmt,
           toggleCalculateModal: this.toggleCalculateModal,
           onPageSizeChanged: this.onPageSizeChanged,
+          toggleDerivativeGrid: this.toggleDerivativeGrid,
+          toggleContractPriceEditingGrid: this.toggleContractPriceEditingGrid,
         }}
       >
         {this.props.children}

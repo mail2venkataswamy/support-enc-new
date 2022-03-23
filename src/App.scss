@@ -110,11 +110,18 @@ button {
   background-color: #2199f300 !important;
 }
 
+//React Draggable & Resizable CSS
 .flexible-modal {
   position: absolute;
   z-index: 1;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(187, 183, 183);
   background: white;
+  background: #fff;
+  border-radius: 30px;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  border: none;
+  overflow: scroll;
 }
 
 .flexible-modal-resizer {
@@ -128,14 +135,24 @@ button {
 }
 
 .flexible-modal-drag-area {
-  background: rgba(0, 0, 0, 0.2);
+  background: transparent !important;
   height: 50px;
   position: absolute;
   right: 0;
   top: 0;
   cursor: move;
+  height: 20% !important;
+  width: 90% !important;
+  justify-content: flex-start;
+  display: flex;
+  flex: 0;
+  margin-right: 195px;
 }
 
 .flexible-modal-mask {
-  position: relative;
+  position: relative !important;
+}
+
+iframe {
+  position: relative !important;
 }

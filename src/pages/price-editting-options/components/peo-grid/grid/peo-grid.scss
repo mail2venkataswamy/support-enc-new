@@ -1,4 +1,5 @@
-.cpdContainer {
+.peoDerivativeGridContainer {
+
   .header {
     display: flex;
 
@@ -22,16 +23,7 @@
     }
   }
 
-  .peoPriceEditGridHeader {
-    font-size: 14px;
-    font-weight: bold;
-    color: #000;
-    margin-left: 3%;
-    border: none;
-    margin: 13px !important;
-  }
-
-  .peoPriceEditGridTitle {
+  .peoGridTitle {
     font-size: 12px;
     font-weight: bold;
     margin-left: 3%;
@@ -67,7 +59,7 @@
     }
   }
 
-  .peoPriceEditHeaderActions {
+  .peoHeaderActions {
     display: flex;
     height: 36px;
 
@@ -83,21 +75,22 @@
     }
 
     #medium {
-      width: 70px;
+      width: 50px;
     }
 
     #big {
-      width: 115px;
+      width: 73px;
     }
 
-    .peoPriceEditLeftHeaderSection {
+    .peoLeftHeaderSection {
       display: flex;
 
       #small {
-        width: 45px;
+        width: 30px;
       }
 
-      .peoPriceEditLabelAndValue {
+      .peoLabelAndValue {
+        width: 130px;
         display: flex;
         padding-top: 10px;
         background: transparent;
@@ -114,14 +107,14 @@
     }
 
     .corporateAction {
-      width: 60px;
+      width: 50px;
       display: inline-block;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
     }
 
-    .peoPriceEditRighttHeaderSection {
+    .peoRighttHeaderSection {
       justify-content: flex-end;
       flex: 1;
       display: flex;
@@ -134,7 +127,7 @@
     }
   }
 
-  .peoPriceEditSaveAndCancelWrapper {
+  .peoSaveAndCancelWrapper {
     text-align: right;
     width: 100%;
     border: none;
