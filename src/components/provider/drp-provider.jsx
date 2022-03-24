@@ -612,6 +612,28 @@ class PraProvider extends Component {
       dailyReturnsPricingState,
     });
   };
+  navigateToNextCell = (params) => {
+    const suggestedNextCell = params.nextCellPosition;
+    alert();
+    // this is some code
+    const KEY_UP = "ArrowUp";
+    const KEY_DOWN = 40;
+    console.log(params.key);
+
+    const noUpOrDownKeyPressed =
+      params.key !== KEY_DOWN && params.key !== KEY_UP;
+    if (noUpOrDownKeyPressed) {
+      return suggestedNextCell;
+    }
+
+    params.api.forEachNode((node) => {
+      if (node.rowIndex === suggestedNextCell.rowIndex) {
+        node.setSelected(true);
+      }
+    });
+
+    return suggestedNextCell;
+  };
   render() {
     return (
       <MyContext.Provider
@@ -625,6 +647,7 @@ class PraProvider extends Component {
           onCellValueChanged: this.onCellValueChanged,
           getFocusedCell: (e) => this.getFocusedCell(e),
           onCellClicked: (e) => this.onCellClicked(e),
+          //navigateToNextCell: (e) => this.navigateToNextCell(e),
         }}
       >
         {this.props.children}

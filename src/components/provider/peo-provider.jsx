@@ -7,7 +7,7 @@ import DividendInfo from "./json/futures/dividend-info-data.json";
 import AssociatedProductsData from "./json/price-editing-options/associated-products-info.json";
 import ContractPriceEditData from "./json/price-editing-options/contract-price-editing.json";
 //import DerivativeGridColDefs from "./json/price-editing-options/Ag-Grid-Defs/Derivative-Grid/col-defs.json";
-import CustomTooltip from "../../pages/price-editting-options/components/peo-custom-tooltip/peo-custom-tooltip.jsx";
+//import CustomTooltip from "../../pages/price-editting-options/components/peo-custom-tooltip/peo-custom-tooltip.jsx";
 function setPrinterFriendly(api) {
   api.setDomLayout("print");
 }
@@ -18,7 +18,7 @@ function setNormal(api) {
   api.setDomLayout(null);
 }
 const staticCellStyle = { "background-color": "yellow" };
-
+/* 
 const dynamicCellStyle = (params) => {
   console.log("params.node.data.symbol", params.node.data.symbol);
   if (params.node.data.symbol === "IAAL") {
@@ -30,7 +30,7 @@ const getRowStyle = (params) => {
   if (params.node.data.symbol === "IAAL") {
     return { color: "red" };
   }
-};
+}; */
 
 class StProvider extends Component {
   constructor(props) {
@@ -40,7 +40,6 @@ class StProvider extends Component {
       agGridState: {
         selectedGridRows: [],
       },
-      CustomTooltip: CustomTooltip,
       editPricingState: {
         showContractPriceEditingGrid: false,
         isCalculateModalOpen: false,
@@ -264,7 +263,6 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
-          tooltipComponent: "customTooltip",
         },
         /*         selectedGridRowData: [],
         selectedGridRows: [], */
@@ -285,7 +283,6 @@ class StProvider extends Component {
             field: "symbol",
             width: "auto",
             flex: 0,
-            cellStyle: dynamicCellStyle,
           },
           {
             headerName: "Description",
@@ -301,7 +298,6 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
-          tooltipComponent: "customTooltip",
         },
         selectedGridRowData: [],
         selectedGridRows: [],
@@ -478,7 +474,6 @@ class StProvider extends Component {
             field: "description",
             width: 150,
             flex: 0,
-            cellStyle: dynamicCellStyle,
             tooltipField: "description",
           },
           {
@@ -646,7 +641,6 @@ class StProvider extends Component {
           filter: true,
           rowSelection: "multiple",
           flex: 1,
-          tooltipComponent: "customTooltip",
         },
         selectedGridRowData: [],
         selectedGridRows: [],

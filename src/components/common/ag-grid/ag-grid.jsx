@@ -40,6 +40,7 @@ const Aggrid = (props) => {
         autoGroupColumnDef={props.autoGroupColumnDef}
         suppressScrollLag={true}
         rowBuffer={props.rowBuffer}
+        navigateToNextCell={props.navigateToNextCell}
       ></AgGridReact>
     </div>
   );

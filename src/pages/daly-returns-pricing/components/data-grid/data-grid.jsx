@@ -14,6 +14,7 @@ const DataGrid = () => {
     //getSelectedRowData,
     //onSelectionChanged,
     //onCellValueChanged,
+    navigateToNextCell,
   } = {
     ...context.state.dailyReturnsPricingState,
     ...context,
@@ -37,6 +38,7 @@ const DataGrid = () => {
           //getSelectedRowData={getSelectedRowData}
           //onSelectionChanged={onSelectionChanged}
           //onCellValueChanged={onCellValueChanged}
+          navigateToNextCell={navigateToNextCell}
         />
       </div>
     </>
