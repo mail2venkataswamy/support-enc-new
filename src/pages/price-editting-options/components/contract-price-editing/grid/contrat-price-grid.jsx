@@ -47,9 +47,9 @@ const ThresholdGrid = () => {
     toggleWithoutSmoothingPromptModal,
     onConfirmWithoutSmoothingPropmt,
     toggleCalculateModal,
-    showContractPriceEditingGrid,
     toggleContractPriceEditingGrid,
     selectedSymbolValue,
+    toggleMinimizeContractPriceEditingGrid,
   } = {
     ...context.state.editPricingState,
     ...context,
@@ -57,13 +57,6 @@ const ThresholdGrid = () => {
   };
 
   let isGridPopulated = rowData && rowData.length > 0;
-  const minimizeModal = () => {
-    const flexible_modal = document.getElementsByClassName(
-      "contractPriceEditingGrid"
-    )[0];
-    flexible_modal.setAttribute("style", "width:400px;height:50px");
-    console.log(flexible_modal);
-  };
   const [isMax, setMinOrMax] = useState(false);
   const maximizeModal = () => {
     const flexible_modal = document.getElementsByClassName(
@@ -73,8 +66,8 @@ const ThresholdGrid = () => {
       "style",
       `${
         isMax
-          ? "width: 400px; height: 200px; top: 159px; left: 725px;"
-          : "top: 32px; left: 12px; width: 99%; height: 584px;"
+          ? "width: 400px; height: 200px; top: 180px; left: 447px; z-index: 1;"
+          : "top: 32px; left: 12px; width: 99%; height: 584px;z-index:2"
       }`
     );
 
@@ -89,7 +82,7 @@ const ThresholdGrid = () => {
         </div>
         <div className="rightSection">
           <div className="minButton">
-            <button onClick={minimizeModal}>-</button>
+            <button onClick={toggleMinimizeContractPriceEditingGrid}>-</button>
           </div>
           <div className="maxButton">
             <button

@@ -5,8 +5,18 @@ import { TasksModal } from "./tasks-modal/tasks-modal.jsx";
 
 const PlaceHoldergrid = () => {
   const context = useContext(myContext);
-  const { onClickEditDashBoardGrid, toggleTasksModal } = {
+  const {
+    onClickEditDashBoardGrid,
+    toggleTasksModal,
+    toggleMinimizeDerivativeGrid,
+    showDerivativeGrid,
+    showContractPriceEditingGrid,
+    toggleMinimizeContractPriceEditingGrid,
+    toggleEditDashboardGrid,
+  } = {
     ...context,
+    ...context.state.gridState,
+    ...context.state.editPricingState,
   };
 
   return (
@@ -15,7 +25,19 @@ const PlaceHoldergrid = () => {
         <button>Master File Upd</button>
         <button>Smoothing Upd</button>|
         <button onClick={toggleTasksModal}>Tasks</button>
-        <button onClick={onClickEditDashBoardGrid}>
+        {showDerivativeGrid ? (
+          <button onClick={toggleMinimizeDerivativeGrid}>Derivative</button>
+        ) : (
+          <></>
+        )}
+        {showContractPriceEditingGrid ? (
+          <button onClick={toggleMinimizeContractPriceEditingGrid}>
+            Contract Price Editing
+          </button>
+        ) : (
+          <></>
+        )}
+        <button onClick={toggleEditDashboardGrid}>
           Edit Category Dashboard
         </button>
       </div>

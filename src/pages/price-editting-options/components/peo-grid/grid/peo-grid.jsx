@@ -43,19 +43,13 @@ const ThresholdGrid = () => {
     CustomTooltip,
     paginationPageSize,
     toggleDerivativeGrid,
-    showContractPriceEditingGrid,
-    toggleContractPriceEditingGrid,
+    toggleMinimizeDerivativeGrid,
   } = {
     ...context.state.gridState,
     ...context,
   };
 
   let isGridPopulated = rowData && rowData.length > 0;
-  const minimizeModal = () => {
-    const flexible_modal = document.getElementsByClassName("flexible-modal")[0];
-    flexible_modal.setAttribute("style", "width:400px;height:50px");
-    console.log(flexible_modal);
-  };
   const [isMax, setMinOrMax] = useState(false);
   const maximizeModal = () => {
     const flexible_modal = document.getElementsByClassName("derivativeGrid")[0];
@@ -63,12 +57,10 @@ const ThresholdGrid = () => {
       "style",
       `${
         isMax
-          ? "width: 400px; height: 200px; top: 37px; left: 446px;"
-          : "top: 32px; left: 12px; width: 99%; height: 584px;"
+          ? "width: 400px; height: 200px; top: 37px; left: 446px;z-index:1"
+          : "top: 32px; left: 12px; width: 99%; height: 584px;z-index:2"
       }`
     );
-
-    console.log(flexible_modal);
   };
   /*   useEffect(() => {
     const flexible_modal = document.getElementsByClassName("flexible-modal")[0];
@@ -80,7 +72,7 @@ const ThresholdGrid = () => {
         <div className="title">Derivative</div>
         <div className="rightSection">
           <div className="minButton">
-            <button onClick={minimizeModal}>-</button>
+            <button onClick={toggleMinimizeDerivativeGrid}>-</button>
           </div>
           <div className="maxButton">
             <button

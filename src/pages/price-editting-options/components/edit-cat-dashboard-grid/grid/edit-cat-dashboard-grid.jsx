@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./edit-cat-dashboard-grid.scss";
-import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
-import myContext from "../../../../components/context/peo-context.jsx";
-import WarningModal from "../../../../components/common/modal/warning/warning-modal.jsx";
+import Aggrid from "../../../../../components/common/ag-grid/ag-grid.jsx";
+import myContext from "../../../../../components/context/peo-context.jsx";
+import WarningModal from "../../../../../components/common/modal/warning/warning-modal.jsx";
 
 const EditcatGrid = () => {
   const context = useContext(myContext);
@@ -19,7 +19,8 @@ const EditcatGrid = () => {
     getSelectedRowData,
     onSelectionChanged,
     onCellValueChanged,
-    onCloseEditcatDashboard,
+    toggleMinimizeEditDashboardGridGrid,
+    toggleEditDashboardGrid,
     // getActiveTab,
   } = {
     ...context.state.editCatDashboardState,
@@ -27,14 +28,39 @@ const EditcatGrid = () => {
   };
 
   let isGridPopulated = rowData && rowData.length > 0;
+  const [isMax, setMinOrMax] = useState(false);
+  const maximizeModal = () => {
+    const flexible_modal =
+      document.getElementsByClassName("editDashboardGrid")[0];
+    flexible_modal.setAttribute(
+      "style",
+      `${
+        isMax
+          ? "width: 400px; height: 200px; top: 33px; left: 861px; z-index: 0;"
+          : "top: 32px; left: 12px; width: 99%; height: 584px;z-index:3"
+      }`
+    );
+  };
   return (
-    <>
-      <div className="messageAndNavigationWrapper">
+    <div className="editDashboardContainer">
+      <div className="header">
         <div className="title">Edit Category Dashboard</div>
-        <div className="close">
-          <button onClick={onCloseEditcatDashboard} className="closeButton">
-            X
-          </button>
+        <div className="rightSection">
+          <div className="minButton">
+            <button onClick={toggleMinimizeEditDashboardGridGrid}>-</button>
+          </div>
+          <div className="maxButton">
+            <button
+              onClick={() => {
+                maximizeModal(), setMinOrMax(!isMax);
+              }}
+            >
+              {isMax ? "[[]]" : "[]"}
+            </button>
+          </div>
+          <div className="closeButton">
+            <button onClick={toggleEditDashboardGrid}>X</button>
+          </div>
         </div>
       </div>
       <div className="fEditCatHeaderActions">
@@ -90,7 +116,7 @@ const EditcatGrid = () => {
         isModalOpen={isWarningModalOpen}
         closeModal={toggleWarningModal}
       ></WarningModal>
-    </>
+    </div>
   );
 };
 

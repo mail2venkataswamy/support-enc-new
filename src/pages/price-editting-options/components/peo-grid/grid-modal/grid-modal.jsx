@@ -5,10 +5,11 @@ import "./grid-modal.scss";
 import myContext from "../../../../../components/context/peo-context.jsx";
 const PeoGridModal = () => {
   const context = useContext(myContext);
-  const { showDerivativeGrid, toggleDerivativeGrid } = {
+  const { showDerivativeGrid, toggleDerivativeGrid, savegridPosition } = {
     ...context.state.gridState,
     ...context,
   };
+
   return (
     <ReactModal
       initWidth={400}
@@ -18,6 +19,7 @@ const PeoGridModal = () => {
       top={37}
       left={446}
       className="derivativeGrid"
+      onFocus={() => savegridPosition("derivativeGrid")}
     >
       <Peogrid />
     </ReactModal>

@@ -40,6 +40,11 @@ class StProvider extends Component {
       agGridState: {
         selectedGridRows: [],
       },
+      placeHolderState: {
+        isDerivativeGridMinimized: false,
+        isContractPriceEditingGridMinimized: false,
+        isEditGridDashBoardMinimized: false,
+      },
       editPricingState: {
         showContractPriceEditingGrid: false,
         isCalculateModalOpen: false,
@@ -306,6 +311,7 @@ class StProvider extends Component {
         isTasksModalOpen: false,
       },
       editCatDashboardState: {
+        showEditDashboardGrid: false,
         rowData: EditCatData.rows,
         colDefs: [
           {
@@ -757,7 +763,71 @@ class StProvider extends Component {
       },
     };
   }
-
+  toggleMinimizeDerivativeGrid = () => {
+    const placeHolderState = this.state.placeHolderState;
+    placeHolderState.isDerivativeGridMinimized =
+      !placeHolderState.isDerivativeGridMinimized;
+    const flexible_modal = document.getElementsByClassName(
+      "derivativeGridWrapper"
+    )[0];
+    flexible_modal.setAttribute(
+      "style",
+      `display:${placeHolderState.isDerivativeGridMinimized ? "none" : "block"}`
+    );
+    this.setState({
+      placeHolderState,
+    });
+  };
+  toggleMinimizeContractPriceEditingGrid = () => {
+    const placeHolderState = this.state.placeHolderState;
+    placeHolderState.isContractPriceEditingGridMinimized =
+      !placeHolderState.isContractPriceEditingGridMinimized;
+    const flexible_modal = document.getElementsByClassName(
+      "contractPriceEditingWrapper"
+    )[0];
+    flexible_modal.setAttribute(
+      "style",
+      `display:${
+        placeHolderState.isContractPriceEditingGridMinimized ? "none" : "block"
+      }`
+    );
+    this.setState({
+      placeHolderState,
+    });
+  };
+  toggleMinimizeEditDashboardGridGrid = () => {
+    const placeHolderState = this.state.placeHolderState;
+    placeHolderState.isEditGridDashBoardMinimized =
+      !placeHolderState.isEditGridDashBoardMinimized;
+    const flexible_modal = document.getElementsByClassName(
+      "EditDashboardGridWrapper"
+    )[0];
+    flexible_modal.setAttribute(
+      "style",
+      `display:${
+        placeHolderState.isEditGridDashBoardMinimized ? "none" : "block"
+      }`
+    );
+    this.setState({
+      placeHolderState,
+    });
+  };
+  toggleEditDashboardGrid = () => {
+    let editCatDashboardState = this.state.editCatDashboardState;
+    editCatDashboardState.showEditDashboardGrid =
+      !editCatDashboardState.showEditDashboardGrid;
+    const flexible_modal = document.getElementsByClassName(
+      "EditDashboardGridWrapper"
+    )[0];
+    flexible_modal.setAttribute(
+      "style",
+      `display:"block"
+        }`
+    );
+    this.setState({
+      editCatDashboardState,
+    });
+  };
   toggleTasksModal = () => {
     let tasksData = this.state.tasksData;
     tasksData.isTasksModalOpen = !tasksData.isTasksModalOpen;
@@ -1073,15 +1143,20 @@ class StProvider extends Component {
     let rowData = this.getFilteredGridData();
     gridState.rowData = rowData;
     gridState.showDerivativeGrid = true;
+
     this.setState({
       gridState,
     });
   };
   toggleDerivativeGrid = () => {
     let gridState = this.state.gridState;
+    //const placeHolderState = this.state.placeHolderState;
     gridState.showDerivativeGrid = !gridState.showDerivativeGrid;
+    //placeHolderState.isShowDerivativeGridMinimized = true;
+
     this.setState({
       gridState,
+      //placeHolderState,
     });
   };
   toggleContractPriceEditingGrid = () => {
@@ -1233,6 +1308,24 @@ class StProvider extends Component {
     });
   };
 
+  savegridPosition = (gridName) => {
+    let derivativeGrid = document.getElementsByClassName(gridName)[0];
+    let gridPositions = JSON.parse(localStorage.getItem("gridPositions")) || [];
+    gridPositions =
+      gridPositions &&
+      gridPositions.filter((item) => {
+        return item.grid !== gridName;
+      });
+
+    gridPositions &&
+      gridPositions.push({
+        grid: gridName,
+        position: derivativeGrid.getAttribute("style"),
+      });
+
+    localStorage.setItem("gridPositions", JSON.stringify(gridPositions));
+    console.log(JSON.parse(localStorage.getItem("gridPositions")));
+  };
   render() {
     return (
       <MyContext.Provider
@@ -1299,6 +1392,13 @@ class StProvider extends Component {
           onPageSizeChanged: this.onPageSizeChanged,
           toggleDerivativeGrid: this.toggleDerivativeGrid,
           toggleContractPriceEditingGrid: this.toggleContractPriceEditingGrid,
+          toggleMinimizeDerivativeGrid: this.toggleMinimizeDerivativeGrid,
+          toggleMinimizeContractPriceEditingGrid:
+            this.toggleMinimizeContractPriceEditingGrid,
+          toggleEditDashboardGrid: this.toggleEditDashboardGrid,
+          toggleMinimizeEditDashboardGridGrid:
+            this.toggleMinimizeEditDashboardGridGrid,
+          savegridPosition: this.savegridPosition,
         }}
       >
         {this.props.children}
