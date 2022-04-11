@@ -1,0 +1,55 @@
+.peoDividendInfoCatGridHeader {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-left: 3%;
+  border: none;
+  margin: 13px !important;
+}
+
+.peoDividendInfoCatGridTitle {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 3%;
+  margin: 13px !important;
+  background: transparent;
+  outline: none;
+  border: none;
+  color: #439bc1;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.peoDividendInfoCatHeaderActions {
+  display: flex;
+
+  .peoDividendInfoCatRighttHeaderSection {
+    justify-content: flex-end;
+    flex: 1;
+    display: flex;
+  }
+
+  button {
+    background: transparent;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #439bc1 !important;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 13px;
+  }
+}
+
+.peoDividendInfoCatSaveAndCancelWrapper {
+  text-align: right;
+  width: 100%;
+  border: none;
+
+  background: #fff;
+
+  button.mtCancel {
+    margin-left: 11px;
+  }
+}
