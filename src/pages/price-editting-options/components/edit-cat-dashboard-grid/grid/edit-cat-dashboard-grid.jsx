@@ -22,6 +22,7 @@ const EditcatGrid = () => {
     toggleMinimizeEditDashboardGridGrid,
     toggleEditDashboardGrid,
     // getActiveTab,
+    savegridPosition,
   } = {
     ...context.state.editCatDashboardState,
     ...context,
@@ -40,6 +41,7 @@ const EditcatGrid = () => {
           : "top: 32px; left: 12px; width: 99%; height: 584px;z-index:3"
       }`
     );
+    savegridPosition("editDashboardGrid");
   };
   return (
     <div className="editDashboardContainer">

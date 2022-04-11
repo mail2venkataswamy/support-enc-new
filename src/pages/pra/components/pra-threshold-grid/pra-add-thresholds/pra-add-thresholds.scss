@@ -1,6 +1,37 @@
 @import "../../../../../light.scss";
-.mtAddThresholdsModalContentWrapper {
+
+.praAddThresholdsModalContentWrapper {
   width: 560px;
+
+  .headerWrapper {
+    background-color: #0a7dc0;
+    height: 25px;
+    display: flex;
+    width: 107.4%;
+    margin-left: -21px;
+    margin-top: 0px;
+
+    .header {
+      color: $white
+    }
+
+    .xMarkCloseButton {
+      justify-content: flex-end;
+      flex: 1;
+      display: flex;
+      border: none;
+      outline: none;
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: $white;
+        margin-top: -3px;
+        margin-right: -12px;
+      }
+    }
+  }
+
   .priceSourceWrapper {
     padding-left: 15px !important;
 
@@ -10,39 +41,53 @@
       width: 100%;
       display: flex;
     }
+
     .praVendorLabel,
     .praExchangeLabel,
     .praLpafLabel {
       width: 30%;
+
+      .text {
+        justify-content: flex-end;
+        flex: 1;
+        display: flex;
+      }
     }
+
     .praExchangeValue,
     .praVendorValue,
     .praLpafValue {
       width: 60%;
     }
+
     .praLpafValue input {
       width: 100%;
     }
   }
+
   .productWrapper {
     padding-left: 15px !important;
     margin-top: 20px;
+
     .praProductTypeLabelAndValue,
     .praCuspinLabelAndValue,
     .praSymbolToLabelAndValue {
       width: 100%;
       display: flex;
     }
+
     .praProductTypeLabel,
     .praCuspinLabel,
     .praSymbolToLabel {
       width: 30%;
     }
+
     .praProductTypeValue,
     .praCuspinValue,
     .praSymbolToValue {
       width: 60%;
     }
+
     .praCuspinLabelAndValue input,
     .praSymbolToLabelAndValue input {
       width: 100%;
@@ -53,11 +98,13 @@
     text-align: center;
     padding-top: 15px;
   }
+
   .header {
     color: $black;
     font-weight: bold;
     margin-bottom: 10px;
   }
+
   button {
     display: inline-block;
     padding: 0.3em 1.2em;
@@ -71,20 +118,33 @@
     text-align: center;
     transition: all 0.2s;
   }
+
+  button:hover {
+    background-color: #7ecbf1;
+
+  }
+
   textarea {
     resize: none;
   }
+
   textarea.ta10em {
     height: 10em;
   }
+
   legend {
-    color: #7c8da6;
+    color: #124faa;
     font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
   }
+
   * {
     margin-top: 1px;
     padding-top: 1px;
   }
+}
+
+.ReactModal__Content.ReactModal__Content--after-open {
+  padding: 0px 20px 20px 20px !important
 }

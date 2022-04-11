@@ -223,3 +223,9 @@
     top: 0;
   }
 }
+
+.flexible-modal-drag-area-left,
+.flexible-modal-drag-area-bottom,
+.flexible-modal-drag-area-right {
+  display: none;
+}

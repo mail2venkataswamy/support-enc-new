@@ -46,7 +46,9 @@ const AddThresholdsModalContent = () => {
       <fieldset className="productWrapper">
         <legend>Product</legend>
         <div className="praProductTypeLabelAndValue">
-          <div className="praProductTypeLabel">Product Type:</div>
+          <div className="praProductTypeLabel">
+            <div className="text">Product Type:</div>
+          </div>
           <div className="praProductTypeValue">
             <Dropdown
               options={productTypeOptions}
@@ -57,7 +59,9 @@ const AddThresholdsModalContent = () => {
         </div>
 
         <div className="praProductTypeLabelAndValue">
-          <div className="praProductTypeLabel">Classification:</div>
+          <div className="praProductTypeLabel">
+            <div className="text">Classification:</div>
+          </div>
           <div className="praProductTypeValue">
             <Dropdown
               options={classificationOptions}
@@ -155,9 +159,12 @@ const AddThresholds = () => {
     ...context,
   };
   return (
-    <div className="mtAddThresholdsModalContentWrapper">
+    <div className="praAddThresholdsModalContentWrapper">
       <div className="headerWrapper">
         <div className="header">Add Thresholds</div>
+        <div className="xMarkCloseButton">
+          <button onClick={toggleAddThresholdsModal}>X</button>
+        </div>
       </div>
       <div className="body">
         <AddThresholdsModalContent></AddThresholdsModalContent>

@@ -16,7 +16,7 @@ const vepr = () => {
   const context = useContext(MyContext);
   const { isDerivativeGridMinimized } = {
     ...context,
-    ...context.state.placeHolderState,
+    //...context.state.placeHolderState,
   };
   return (
     <div id="mainPeo">

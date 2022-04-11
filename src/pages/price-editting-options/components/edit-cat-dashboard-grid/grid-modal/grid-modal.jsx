@@ -1,14 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactModal from "react-modal-resizable-draggable";
 import EditDashboardGrid from "../grid/edit-cat-dashboard-grid.jsx";
 import "./grid-modal.scss";
 import myContext from "../../../../../components/context/peo-context.jsx";
 const EditDashboardGridModal = () => {
   const context = useContext(myContext);
-  const { showEditDashboardGrid, toggleEditDashboardGrid, savegridPosition } = {
+  const {
+    showEditDashboardGrid,
+    toggleEditDashboardGrid,
+    savegridPosition,
+    setgridPosition,
+  } = {
     ...context.state.editCatDashboardState,
     ...context,
   };
+  useEffect(() => {
+    setgridPosition();
+  }, [showEditDashboardGrid]);
   return (
     <ReactModal
       initWidth={400}

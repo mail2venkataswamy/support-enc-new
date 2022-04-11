@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactModal from "react-modal-resizable-draggable";
 import Contractgrid from "./grid/contrat-price-grid.jsx";
 import "./grid-modal.scss";
@@ -9,10 +9,14 @@ const ContractPriceEditingGridModal = () => {
     showContractPriceEditingGrid,
     toggleContractPriceEditingGrid,
     savegridPosition,
+    setgridPosition,
   } = {
     ...context.state.editPricingState,
     ...context,
   };
+  useEffect(() => {
+    setgridPosition();
+  }, [showContractPriceEditingGrid]);
   return (
     <ReactModal
       initWidth={400}

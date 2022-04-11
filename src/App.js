@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactModal from "react-modal-resizable-draggable";
 import "./App.scss";
+
 class MySidebar extends Component {
   constructor(props) {
     super(props);

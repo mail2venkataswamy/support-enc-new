@@ -1297,6 +1297,12 @@ class StProvider extends Component {
     this.setState({
       initialPanelState: data,
     });
+
+    //this.setgridPosition();
+    console.log(JSON.parse(localStorage.getItem("gridPositions")));
+
+    //? "width: 400px; height: 200px; top: 37px; left: 446px;"
+    // : "top: 32px; left: 12px; width: 99%; height: 584px;"
   }
   onPageSizeChanged = () => {
     var value = document.getElementById("page-size").value;
@@ -1309,6 +1315,7 @@ class StProvider extends Component {
   };
 
   savegridPosition = (gridName) => {
+    console.log("savegridPosition");
     let derivativeGrid = document.getElementsByClassName(gridName)[0];
     let gridPositions = JSON.parse(localStorage.getItem("gridPositions")) || [];
     gridPositions =
@@ -1326,6 +1333,17 @@ class StProvider extends Component {
     localStorage.setItem("gridPositions", JSON.stringify(gridPositions));
     console.log(JSON.parse(localStorage.getItem("gridPositions")));
   };
+  setgridPosition() {
+    let gridPositions = JSON.parse(localStorage.getItem("gridPositions"));
+    //const element = document.getElementsByClassName("derivativeGrid")[0];
+    //element && element.setAttribute("style", `${gridPositions[2].position}`)
+    if (gridPositions) {
+      for (const item of gridPositions) {
+        const element = document.getElementsByClassName(item.grid)[0];
+        element && element.setAttribute("style", `${item.position}`);
+      }
+    }
+  }
   render() {
     return (
       <MyContext.Provider
@@ -1399,6 +1417,7 @@ class StProvider extends Component {
           toggleMinimizeEditDashboardGridGrid:
             this.toggleMinimizeEditDashboardGridGrid,
           savegridPosition: this.savegridPosition,
+          setgridPosition: this.setgridPosition,
         }}
       >
         {this.props.children}

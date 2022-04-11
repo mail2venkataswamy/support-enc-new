@@ -13,6 +13,7 @@ const PlaceHoldergrid = () => {
     showContractPriceEditingGrid,
     toggleMinimizeContractPriceEditingGrid,
     toggleEditDashboardGrid,
+    setgridPosition,
   } = {
     ...context,
     ...context.state.gridState,
