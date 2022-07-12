@@ -172,8 +172,12 @@ const AddThresholds = () => {
   return (
     <div className="mtAddThresholdsModalContentWrapper">
       <div className="headerWrapper">
-        <div className="header">Add Thresholds</div>
+        <div className="header">Add Threshold</div>
+        <div className="xMarkCloseButton">
+          <button onClick={toggleAddThresholdsModal}>X</button>
+        </div>
       </div>
+
       <div className="body">
         <AddThresholdsModalContent></AddThresholdsModalContent>
       </div>

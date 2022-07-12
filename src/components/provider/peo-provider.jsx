@@ -345,6 +345,60 @@ class StProvider extends Component {
         selectedGridRows: [],
       },
       filtersState: {
+        productTypeData: [
+          {
+            label: "Option",
+            value: "option",
+            isSelected: false,
+          },
+          {
+            label: "Over The Counter",
+            value: "overTheCounter",
+            isSelected: false,
+          },
+          {
+            label: "Warrant",
+            value: "warrant",
+            isSelected: false,
+          },
+        ],
+        classificationData: [
+          {
+            label: "Equity",
+            value: "equity",
+            isSelected: false,
+          },
+          {
+            label: "Index",
+            value: "index",
+            isSelected: false,
+          },
+        ],
+        subClassificationData: [
+          {
+            label: "Flex",
+            value: "flex",
+            isSelected: false,
+          },
+          {
+            label: "Standard",
+            value: "standard",
+            isSelected: false,
+          },
+        ],
+        clearedData: [
+          {
+            label: "Cleared",
+            value: "cleared",
+            isSelected: false,
+          },
+          {
+            label: "Non Cleared",
+            value: "nonCleared",
+            isSelected: false,
+          },
+        ],
+        productTypeResults: [],
         symbolToSearchValue: "",
         symbolToData: [
           { id: 1, value: "AA001200" },
@@ -1344,6 +1398,62 @@ class StProvider extends Component {
       }
     }
   }
+  onSelectDeSelectProductTypeOption = (selectedItem) => {
+    console.log("selected item", selectedItem);
+    let filtersState = this.state.filtersState;
+    let options = this.state.filtersState.productTypeData;
+    for (const option of options) {
+      if (selectedItem.value === option.value) {
+        option.isSelected = !option.isSelected;
+      }
+    }
+    this.setState({
+      filtersState,
+    });
+    console.log(this.state.filtersState.productTypeData);
+  };
+  onSelectDeSelectClassificationOption = (selectedItem) => {
+    console.log("selected item", selectedItem);
+    let filtersState = this.state.filtersState;
+    let options = this.state.filtersState.classificationData;
+    for (const option of options) {
+      if (selectedItem.value === option.value) {
+        option.isSelected = !option.isSelected;
+      }
+    }
+    this.setState({
+      filtersState,
+    });
+    console.log(this.state.filtersState.classificationData);
+  };
+  onSelectDeSelectSubClassificationOption = (selectedItem) => {
+    console.log("selected item", selectedItem);
+    let filtersState = this.state.filtersState;
+    let options = this.state.filtersState.subClassificationData;
+    for (const option of options) {
+      if (selectedItem.value === option.value) {
+        option.isSelected = !option.isSelected;
+      }
+    }
+    this.setState({
+      filtersState,
+    });
+    console.log(this.state.filtersState.subClassificationData);
+  };
+  onSelectDeSelectClearedOption = (selectedItem) => {
+    console.log("selected item", selectedItem);
+    let filtersState = this.state.filtersState;
+    let options = this.state.filtersState.clearedData;
+    for (const option of options) {
+      if (selectedItem.value === option.value) {
+        option.isSelected = !option.isSelected;
+      }
+    }
+    this.setState({
+      filtersState,
+    });
+    console.log(this.state.filtersState.subClassificationData);
+  };
   render() {
     return (
       <MyContext.Provider
@@ -1418,6 +1528,13 @@ class StProvider extends Component {
             this.toggleMinimizeEditDashboardGridGrid,
           savegridPosition: this.savegridPosition,
           setgridPosition: this.setgridPosition,
+          onSelectDeSelectProductTypeOption:
+            this.onSelectDeSelectProductTypeOption,
+          onSelectDeSelectSubClassificationOption:
+            this.onSelectDeSelectSubClassificationOption,
+          onSelectDeSelectClassificationOption:
+            this.onSelectDeSelectClassificationOption,
+          onSelectDeSelectClearedOption: this.onSelectDeSelectClearedOption,
         }}
       >
         {this.props.children}

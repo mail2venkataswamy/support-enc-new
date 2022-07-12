@@ -379,6 +379,8 @@ class PraProvider extends Component {
   onGridReady = (params) => {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    let filterModel = params.api.getFilterModel();
+    console.log("filterModel", filterModel);
   };
 
   onBtPrint = () => {
@@ -736,9 +738,33 @@ class PraProvider extends Component {
       addThresholdsData,
     });
   };
-  onPageSizeChanged=()=>{
-    var value = document.getElementById('page-size').value;
+  onPageSizeChanged = () => {
+    var value = document.getElementById("page-size").value;
     this.gridApi.paginationSetPageSize(Number(value));
+  };
+  onFilterChanged = (params) => {
+    let filterModel = params.api.getFilterModel();
+    localStorage.setItem("filterModel", JSON.stringify(filterModel));
+    console.log(filterModel);
+    //this.props.actions.saveGridFilterModel(this.props.id, filterModel);
+  };
+  onSaveGridColumnState = (e) => {
+    let columnState = this.gridColumnApi?.getColumnState();
+    localStorage.setItem("columnState", JSON.stringify(columnState));
+    console.log("columnState", columnState);
+  };
+  onFirstDataRendered(params) {
+    let filterModel = JSON.parse(localStorage.getItem("filterModel"));
+    let columnState = JSON.parse(localStorage.getItem("columnState"));
+    // JSON.parse(localStorage.getItem("gridPositions"))
+    console.log("onFirstDataRendered", filterModel);
+    console.log("columnState", columnState);
+    if (filterModel) {
+      this.gridApi.setFilterModel(filterModel);
+    }
+    if (columnState) {
+      this.gridColumnApi.setColumnState(columnState);
+    }
   }
   render() {
     return (
@@ -797,7 +823,13 @@ class PraProvider extends Component {
           onChangeAddClassificationValue: (e) =>
             this.onChangeAddClassificationValue(e),
           onChanglpafValue: (e) => this.onChanglpafValue(e),
-          onPageSizeChanged:this.onPageSizeChanged
+          onPageSizeChanged: this.onPageSizeChanged,
+          onFilterChanged: (e) => this.onFilterChanged(e),
+          onColumnVisible: (e) => this.onSaveGridColumnState(e),
+          onColumnResized: (e) => this.onSaveGridColumnState(e),
+          onColumnMoved: (e) => this.onSaveGridColumnState(e),
+          onColumnPinned: (e) => this.onSaveGridColumnState(e),
+          onFirstDataRendered: (e) => this.onFirstDataRendered(e),
         }}
       >
         {this.props.children}

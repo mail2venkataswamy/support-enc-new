@@ -107,11 +107,6 @@ const NavBar = () => {
             FUTURES
           </NavLink>
         </li>
-        <li className="pages">
-          <NavLink to="/futures1" isActive={true}>
-            FUTURES1
-          </NavLink>
-        </li>
       </ul>
     </div>
   );

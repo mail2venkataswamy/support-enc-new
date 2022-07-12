@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState,useCallback,useRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+} from "react";
 import "./pra-threshold-grid.scss";
 import Aggrid from "../../../../components/common/ag-grid/ag-grid.jsx";
 import myContext from "../../../../components/context/pra-context.jsx";
@@ -9,12 +15,15 @@ import RecordMustBeSelected from "../../../../components/common/modal/prompt/pro
 const ThresholdGrid = () => {
   const context = useContext(myContext);
   const gridRef = useRef();
-  const paginationOptions=[{value:50},{value:100},{value:500},{value:1000}];
+  const paginationOptions = [
+    { value: 50 },
+    { value: 100 },
+    { value: 500 },
+    { value: 1000 },
+  ];
   const [isWarningModalOpen, toggleWarningModal] = useState(false);
-  const [
-    isRecordMustBeselectedModalOpen,
-    toggleRecordMustBeSelectedModal,
-  ] = useState(false);
+  const [isRecordMustBeselectedModalOpen, toggleRecordMustBeSelectedModal] =
+    useState(false);
 
   const {
     priceSystemAlertStateRowData,
@@ -32,18 +41,24 @@ const ThresholdGrid = () => {
     isDeleteGridRecordPromptModalOpen,
     toggleDeletePromptModal,
     onCellValueChanged,
-    onPageSizeChanged
+    onPageSizeChanged,
+    onFilterChanged,
+    onColumnVisible,
+    onColumnPinned,
+    onColumnResized,
+    onColumnMoved,
+    onFirstDataRendered,
   } = {
     ...context.state.gridScreenData,
     ...context,
   };
 
-   useEffect(() => {
+  useEffect(() => {
     let ele = document.getElementsByClassName("ag-paging-panel")[0];
     var div1 = document.createElement("div");
     div1.innerHTML = `<div class="noOfRecs">Total number of records:${priceSystemAlertStateRowData.length}</div>`;
     ele.append(div1);
-  }, []); 
+  }, []);
   let isGridPopulated =
     priceSystemAlertStateRowData && priceSystemAlertStateRowData.length > 0;
   return (
@@ -114,22 +129,31 @@ const ThresholdGrid = () => {
         getSelectedRowData={getSelectedRowData}
         onSelectionChanged={onSelectionChanged}
         onCellValueChanged={onCellValueChanged}
+        onFilterChanged={onFilterChanged}
+        onColumnVisible={onColumnVisible}
+        onColumnPinned={onColumnPinned}
+        onColumnResized={onColumnResized}
+        onColumnMoved={onColumnMoved}
+        onFirstDataRendered={onFirstDataRendered}
       />
       <div id="page-size-container">
-      <div> <p>Display</p></div>
         <div>
-        <select onChange={onPageSizeChanged} id="page-size">
-          {
-            paginationOptions.map((option)=>{
-              return <option value={option.value}>{option.value}</option>
-            })
-          }
+          {" "}
+          <p>Display</p>
+        </div>
+        <div>
+          <select onChange={onPageSizeChanged} id="page-size">
+            {paginationOptions.map((option) => {
+              return <option value={option.value}>{option.value}</option>;
+            })}
           </select>
         </div>
-        <div> <p>Records Per Page</p></div>
-    
-          </div>
-        
+        <div>
+          {" "}
+          <p>Records Per Page</p>
+        </div>
+      </div>
+
       <AddThresholdsModal></AddThresholdsModal>
       <WarningModal
         warningMessage="Grid must be populated"

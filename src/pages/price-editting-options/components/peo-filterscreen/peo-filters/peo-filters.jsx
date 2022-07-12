@@ -4,55 +4,38 @@ import Dropdown from "../../../../../components/common/simple-dropdown/dropdown.
 import Inputsuggestion from "../../peo-input-suggestions/peo-input-suggestions.jsx";
 import Datepicker from "../../../../../components/common/datepicker/datepicker.jsx";
 import "./peo-filters.scss";
+import MultiSelectBox from "../../../../../components/common/multi-select-box/multi-select-box.jsx";
 
 const ProductInfo = () => {
   const context = useContext(PeoContext);
   const {
-    productTypeOptions,
-    selectedProductTypeValue,
-    onChangeProductTypeValue,
     onChangeSymbolToValue,
     onClickSymbolToSuggestionItem,
     symbolToSuggestionResult,
     symbolToValue,
     symbolToSearchValue,
-    classificationOptions,
-    selectedClassificationValue,
-    onChangeClassificationValue,
-    activityData,
-
     activityOptions,
     activityValue,
     onChangeActivityValue,
     setActivityDate,
     selectedActivityDate,
-    SubClassificationOptions,
-    selectedSubClassificationValue,
-    onChangeSubClassificationValue,
-
     onChangeExchangeValue,
     onClickExchangeSuggestionItem,
     exchangeSuggestionResult,
     exchangeValue,
     exchangeSearchValue,
-
     isFmsChecked,
     onChangeFms,
     isCorporateActionChecked,
     onChangeCorporateAction,
     isLateSeriesChecked,
     onChangeLateSeries,
-    onChangeClearedValue,
-    clearedOptions,
-    selectedClearedValue,
-
     statusOptions,
     categoryLevelOptions,
     reviewNeededOptions,
     selectedStatusValue,
     selectedCategoryLevelValue,
     selectedReviewNeededValue,
-
     onChangeStatusValue,
     onChangeCategoryLevelValue,
     onChangeReviewNeededValue,
@@ -60,6 +43,14 @@ const ProductInfo = () => {
     onChangeEdittedRecords,
     isSpotPriceRecordsChecked,
     onChangeSpotPriceRecords,
+    productTypeData,
+    onSelectDeSelectProductTypeOption,
+    classificationData,
+    onSelectDeSelectClassificationOption,
+    subClassificationData,
+    onSelectDeSelectSubClassificationOption,
+    onSelectDeSelectClearedOption,
+    clearedData,
   } = {
     ...context.state.filtersState,
     ...context,
@@ -94,31 +85,29 @@ const ProductInfo = () => {
         <div className="peoLabelAndValue">
           <div className="peoLabel">Product Type:</div>
           <div className="peoValue">
-            <Dropdown
-              options={productTypeOptions}
-              selectedValue={selectedProductTypeValue}
-              onChange={onChangeProductTypeValue}
-            ></Dropdown>
+            <MultiSelectBox
+              data={productTypeData}
+              toggleSelection={onSelectDeSelectProductTypeOption}
+            ></MultiSelectBox>
           </div>
         </div>
         <div className="peoLabelAndValue">
           <div className="peoLabel">Classification:</div>
           <div className="peoValue">
-            <Dropdown
-              options={classificationOptions}
-              selectedValue={selectedClassificationValue}
-              onChange={onChangeClassificationValue}
-            ></Dropdown>
+            <MultiSelectBox
+              data={classificationData}
+              toggleSelection={onSelectDeSelectClassificationOption}
+            ></MultiSelectBox>
           </div>
         </div>
         <div className="peoLabelAndValue">
           <div className="peoLabel">Sub Class:</div>
           <div className="peoValue">
-            <Dropdown
-              options={SubClassificationOptions}
-              selectedValue={selectedSubClassificationValue}
-              onChange={onChangeSubClassificationValue}
-            ></Dropdown>
+            <MultiSelectBox
+              data={subClassificationData}
+              toggleSelection={onSelectDeSelectSubClassificationOption}
+              sd
+            ></MultiSelectBox>
           </div>
         </div>
         <div className="peoLabelAndValue">
@@ -191,11 +180,10 @@ const ProductInfo = () => {
         <div className="peoLabelAndValue">
           <div className="peoLabel">Cleared:</div>
           <div className="peoValue">
-            <Dropdown
-              options={clearedOptions}
-              selectedValue={selectedClearedValue}
-              onChange={onChangeClearedValue}
-            ></Dropdown>
+            <MultiSelectBox
+              data={clearedData}
+              toggleSelection={onSelectDeSelectClearedOption}
+            ></MultiSelectBox>
           </div>
         </div>
       </fieldset>

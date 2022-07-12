@@ -41,6 +41,12 @@ const Aggrid = (props) => {
         suppressScrollLag={true}
         rowBuffer={props.rowBuffer}
         navigateToNextCell={props.navigateToNextCell}
+        onFilterChanged={props.onFilterChanged}
+        onColumnVisible={props.onColumnVisible}
+        onColumnPinned={props.onColumnPinned}
+        onColumnResized={props.onColumnResized}
+        onColumnMoved={props.onColumnMoved}
+        onFirstDataRendered={props.onFirstDataRendered}
       ></AgGridReact>
     </div>
   );

@@ -1,6 +1,47 @@
 @import "../../../../../light.scss";
+
 .mtAddThresholdsModalContentWrapper {
+  legend {
+    color: #124faa !important;
+  }
+
   width: 560px;
+
+  .headerWrapper {
+    display: flex;
+    background-color: #0a7dc0;
+    color: #fff;
+    height: 25px;
+    width: 602px;
+    margin-left: -22px;
+    overflow: hidden;
+
+    .header {
+      color: white;
+      margin-left: 7px;
+      font-size: 15px;
+      margin-top: -1px;
+    }
+
+    .xMarkCloseButton {
+      justify-content: flex-end;
+      flex: 1;
+      display: flex;
+      border: none;
+      outline: none;
+      margin-top: -1px;
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: white;
+        margin-top: -3px;
+        margin-right: -9px;
+      }
+    }
+  }
+
+
   .priceSourceWrapper {
     padding-left: 15px !important;
 
@@ -9,34 +50,41 @@
       width: 100%;
       display: flex;
     }
+
     .ptVendorLabel,
     .ptExchangeLabel {
       width: 30%;
     }
+
     .ptExchangeValue,
     .ptVendorValue {
       width: 60%;
     }
   }
+
   .productWrapper {
     padding-left: 15px !important;
     margin-top: 20px;
+
     .ptProductTypeLabelAndValue,
     .ptCuspinLabelAndValue,
     .ptSymbolToLabelAndValue {
       width: 100%;
       display: flex;
     }
+
     .ptProductTypeLabel,
     .ptCuspinLabel,
     .ptSymbolToLabel {
       width: 30%;
     }
+
     .ptProductTypeValue,
     .ptCuspinValue,
     .ptSymbolToValue {
       width: 60%;
     }
+
     .ptCuspinLabelAndValue input,
     .ptSymbolToLabelAndValue input {
       width: 100%;
@@ -47,11 +95,13 @@
     text-align: center;
     padding-top: 15px;
   }
+
   .header {
     color: $black;
     font-weight: bold;
     margin-bottom: 10px;
   }
+
   button {
     display: inline-block;
     padding: 0.3em 1.2em;
@@ -65,18 +115,22 @@
     text-align: center;
     transition: all 0.2s;
   }
+
   textarea {
     resize: none;
   }
+
   textarea.ta10em {
     height: 10em;
   }
+
   legend {
     color: #7c8da6;
     font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
   }
+
   * {
     margin-top: 1px;
     padding-top: 1px;

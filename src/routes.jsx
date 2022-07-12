@@ -22,7 +22,7 @@ import Did from "./pages/daily-index-dividents/index.jsx";
 import Drp from "./pages/daly-returns-pricing/index.jsx";
 import Peo from "./pages/price-editting-options/index.jsx";
 import Futures from "./pages/futures/index.jsx";
-import Futures1 from "./pages/futures1/index.jsx";
+//import Futures1 from "./pages/futures1/index.jsx";
 
 const AppRouter = () => {
   return (
@@ -48,7 +48,7 @@ const AppRouter = () => {
         <Route path="/did" element={<Did />} />
         <Route path="/drp" element={<Drp />} />
         <Route path="/peo" element={<Peo />} />
-        <Route path="/Futures1" element={<Futures1 />} />
+        <Route path="/Futures" element={<Futures />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,9 +10,17 @@ const PlaceHoldergrid = () => {
     onClickEditDashBoardGrid,
     onClickDeliverablePriceEditGrid,
     toggleTasksModal,
-    showTasks
+    showTasks,
+    toggleMinimizeDerivativeGrid,
+    showDerivativeGrid,
+    toggleEditCatDashboardGrid,
+    showContractPriceEditingGrid,
   } = {
     ...context.state,
+    ...context.state.gridState,
+    ...context.state.dividendInfoGridState,
+    ...context.state.editCatDashboardState,
+    ...context.state.editPricingState,
     ...context,
   };
 
@@ -22,13 +30,34 @@ const PlaceHoldergrid = () => {
         <button>Master File Upd</button>
         <button>Smoothing Upd</button>|
         <button onClick={toggleTasksModal}>Tasks</button>
-        {showTasks?(<><button onClick={onClickFutureContracts}>Future Contracts</button>
-        <button onClick={onClickEditDashBoardGrid}>
+        {showDerivativeGrid ? (
+          <button onClick={toggleMinimizeDerivativeGrid}>
+            Future Contracts
+          </button>
+        ) : (
+          <></>
+        )}
+        <button onClick={toggleEditCatDashboardGrid}>
           Edit Category Dashboard
         </button>
-        <button onClick={()=>onClickDeliverablePriceEditGrid("main")}>
-          Deliverable - Price Editing
-        </button></>):<></>}
+        {showContractPriceEditingGrid ? (
+          <button>Option on Future Series - Price Editing</button>
+        ) : (
+          <></>
+        )}
+        {showTasks ? (
+          <>
+            <button onClick={onClickFutureContracts}>Future Contracts</button>
+            <button onClick={onClickEditDashBoardGrid}>
+              Edit Category Dashboard
+            </button>
+            <button onClick={() => onClickDeliverablePriceEditGrid("main")}>
+              Deliverable - Price Editing
+            </button>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
       <TasksModal></TasksModal>
     </div>

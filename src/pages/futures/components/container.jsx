@@ -1,25 +1,19 @@
 import React, { useContext, useState } from "react";
 import "./styles.scss";
 import FilterPanel from "./peo-filterscreen/peo-filterscreen.jsx";
-import PeoGrid from "./peo-grid/peo-grid.jsx";
+import PeoGrid from "../components/peo-grid/grid-modal/grid-modal.jsx";
 import PlaceHolderGrid from "./PlaceHolderGrid/PlaceHolderGrid.jsx";
 import MyContext from "../../../components/context/futures-context.jsx";
-import EditCatDahsboard from "./edit-cat-dashboard-grid/edit-cat-dashboard-grid.jsx";
-import DeliverablePriceEditGrid from "./deliverable-price-edit-grid/deliverable-price-edit-grid.jsx";
-import DividendInfoGrid from "./dividend-info-grid/dividend-info-grid.jsx";
-import ExchangeInfoGrid from "./exchange-info-grid/exchange-info-grid.jsx";
+import EditCatDahsboard from "../components/edit-cat-dashboard-grid/grid-modal/grid-modal.jsx";
+import DeliverablePriceEditGrid from "../components/deliverable-price-edit-grid/grid-modal/grid-modal.jsx";
+import DividendInfoGrid from "../components/dividend-info-grid/grid-modal/grid-modal.jsx";
+import ExchangeInfoGrid from "../components/exchange-info-grid/grid-modal/grid-modal.jsx";
+import ContractPriceEditing from "./contract-price-editing/grid-modal.jsx";
 
 const Futures = () => {
   const [isFilterPanelVisble, toggleFilterPanel] = useState(true);
   const context = useContext(MyContext);
-  const {
-    showDerivativeGrid,
-    showEditGridDashBoard,
-    showPlaceHolderGrid,
-    showDeliverablePriceEditGrid,
-    showDividendInfoGrid,
-    showExchangeInfogrid,
-  } = {
+  const { showPlaceHolderGrid } = {
     ...context.state,
   };
   return (
@@ -41,9 +35,6 @@ const Futures = () => {
             >
               <p>{"<<"}</p>
             </div>
-            <div id="futuresPlaceHolderGrid">
-              <PlaceHolderGrid />
-            </div>
           </>
         ) : (
           <>
@@ -63,49 +54,20 @@ const Futures = () => {
                 <p>FILTER PANEL</p>
               </div>
             </div>
-            <div id="futuresPlaceHolderGrid">
-              <PlaceHolderGrid />
-            </div>
           </>
         )
       ) : (
         <></>
       )}
-      {showDerivativeGrid ? (
-        <div id="futuresDerivativeGrid">
-          <PeoGrid />
-        </div>
-      ) : (
-        <></>
-      )}
-      {showEditGridDashBoard ? (
-        <div id="futuresPlaceHolderGrid">
-          <EditCatDahsboard></EditCatDahsboard>{" "}
-        </div>
-      ) : (
-        <></>
-      )}
-      {showDeliverablePriceEditGrid ? (
-        <div id="futuresPlaceHolderGrid">
-          <DeliverablePriceEditGrid></DeliverablePriceEditGrid>{" "}
-        </div>
-      ) : (
-        <></>
-      )}
-      {showDividendInfoGrid ? (
-        <div id="futuresPlaceHolderGrid">
-          <DividendInfoGrid></DividendInfoGrid>{" "}
-        </div>
-      ) : (
-        <></>
-      )}
-      {showExchangeInfogrid ? (
-        <div id="futuresPlaceHolderGrid">
-          <ExchangeInfoGrid></ExchangeInfoGrid>{" "}
-        </div>
-      ) : (
-        <></>
-      )}
+      <div id="futuresPlaceHolderGrid">
+        <PlaceHolderGrid />
+      </div>
+      <PeoGrid />
+      <DividendInfoGrid></DividendInfoGrid>
+      <DeliverablePriceEditGrid></DeliverablePriceEditGrid>
+      <ExchangeInfoGrid></ExchangeInfoGrid>
+      <EditCatDahsboard></EditCatDahsboard>
+      <ContractPriceEditing />
     </div>
   );
 };
